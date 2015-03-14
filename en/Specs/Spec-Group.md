@@ -648,9 +648,9 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 |[createdAt](#FASGroupMessage.createdAt)|Group message creation date and time |
 |[updatedAt](#FASGroupMessage.updatedAt)|Group message updated date and time |
 |[user](#FASGroupMessage.user)|User who is a sender of the message |
+|[video](#FASGroupMessage.video)|Video object |
 |[image](#FASGroupMessage.image)|Image message data. Only stored when it is sending |
-|[videoUrl](#FASGroupMessage.videoUrl)|VideoMessage URL |
-|[videoThumbnailUrl](#FASGroupMessage.videoThumbnailUrl)|Thumbnailed VideoMessage URL |
+
 
 ##### <a name="FASGroupMessage.groupMessageId"> groupMessageId </a>
 Group message ID
@@ -687,26 +687,20 @@ Group message updated date and time
 
 @property (nonatomic, readonly) NSDate *updatedAt;
 
-##### <a name="FASGroupMember.user"> user </a>
-User who is a sender of the message. [FASUser](#FASUser) Object
+##### <a name="FASGroupMessage.user"> user </a>
+User who send a message.[FASUser](Spec-User.md#FASUser)Object.
 
 @property (nonatomic, readonly) FASUser *user;
+
+##### <a name="FASGroupMessage.video"> video </a>
+[FASVideo](Spec-PlayMovie.md#FASVideo)Object.
+
+@property (nonatomic, readonly) FASVideo *video;
 
 ##### <a name="FASGroupMessage.image"> image </a>
 Image message data. Only stored when it is sending
 
 @property (nonatomic, readonly) UIImage *image;
-
-##### <a name="FASGroupMessage.videoUrl"> videoUrl </a>
-VideoMessage URL
-
-@property (nonatomic, readonly) NSString *videoUrl;
-
-##### <a name="FASGroupMessage.videoThumbnailUrl"> videoThumbnailUrl </a>
-Thumbnailed VideoMessage URL
-
-@property (nonatomic, readonly) NSString *videoThumbnailUrl;
-
 
 #### Class Method
 

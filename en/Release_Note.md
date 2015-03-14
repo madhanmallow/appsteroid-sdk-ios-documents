@@ -2,6 +2,18 @@
 
 ---
 
+### 0.5.0
+- New Feature
+	- Violation report. Users can tap & hold an inappropriate comment on the forum to report it as a violation. 
+	- Favorite button on video player. Also, play count and favorite count is now displayed.  
+	- Friend invitation on matchmaking.
+
+- Performance Improvements
+	- If an user receives a friend request, direct message or group message on the AppSteroid GUI, it will now dynamically add count on the related badge.
+
+- Fixed
+	- Continuous sound play even after closing the video player.
+
 ### 0.4.1
 - New Feature
 	- Enable URL link on Forum and GroupChat.

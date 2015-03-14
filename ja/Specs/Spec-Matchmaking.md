@@ -119,6 +119,8 @@ typedef void (^ FASMatchesCompletionHandler)(NSArray *matches, FASPagingMeta *me
 |------|-----|
 |[matchId](#FASMatch.matchId)|マッチID |
 |[status](#FASMatch.status)|マッチの状態 |
+|[currentMinPlayers](#FASMatch.currentMinPlayers)|現在の最小プレイヤー数 |
+|[currentMaxPlayers](#FASMatch.currentMaxPlayers)|現在の最大プレイヤー数 |
 |[createdAt](#FASMatch.createdAt)|マッチが作成された時刻 |
 |[updatedAt](#FASMatch.updatedAt)|マッチが更新された時刻 |
 |[players](#FASMatch.players)|マッチに参加中のプレイヤー |
@@ -133,6 +135,16 @@ typedef void (^ FASMatchesCompletionHandler)(NSArray *matches, FASPagingMeta *me
 マッチの状態
 
 @property (nonatomic, readonly) FASMatchStatus status;
+
+##### <a name="FASMatch.currentMinPlayers"> currentMinPlayers </a>
+現在の最小プレイヤー数
+
+@property (nonatomic, readonly) NSUInteger currentMinPlayers;
+
+##### <a name="FASMatch.currentMaxPlayers"> currentMaxPlayers </a>
+現在の最大プレイヤー数
+
+@property (nonatomic, readonly) NSUInteger currentMaxPlayers;
 
 ##### <a name="FASMatch.createdAt"> createdAt </a>
 マッチが作成された時刻
@@ -163,6 +175,7 @@ typedef void (^ FASMatchesCompletionHandler)(NSArray *matches, FASPagingMeta *me
 |[fetchMatchesWithPage:status:completion:](#FASMatch.fetchMatchesWithPagestatuscompletion) |指定したステータスのマッチを取得します。 |
 |[joinMatchWithMatchId:completion:](#FASMatch.joinMatchWithMatchIdcompletion) |指定したマッチIDのマッチに参加します。 |
 |[desposeMatchWithMatchId:completion:](#FASMatch.desposeMatchWithMatchIdcompletion) |指定したマッチIDのマッチを破棄します。 |
+|[completeMatchWithMatchId:completion:](#FASMatch.completeMatchWithMatchIdcompletion) |指定したマッチIDのマッチを完了させます。 |
 
 
 ##### <a name="FASMatch.fetchMatchWithMatchIdcompletion"> fetchMatchWithMatchId:completion: </a>
@@ -322,6 +335,19 @@ Sample
 }
 ```
 
+##### <a name="FASMatch.completeMatchWithMatchIdcompletion"> completeMatchWithMatchId:completion: </a>
+指定したマッチIDのマッチを完了させます。  
+必要人数に達していた場合は[FASMatchStatus](#FASMatch.FASMatchStatus)が`FASMatchStatusComplete`の状態になり、達していなかった場合は`FASMatchStatusDisposed`の状態になります。
+
+\+ (void)completeMatchWithMatchId:(NSString *)matchId
+                       completion:(FASMatchCompletionHandler)completion;
+
+* Parameters
+	* matchId
+		* マッチID
+	* completion  
+		* 処理が完了した時に実行されるブロックオブジェクト
+
 ### <a name="FASMatchRequest"> FASMatchRequest </a>
 マッチリクエストモデルクラス。マッチしたいときにリクエストを作成します。
 
@@ -372,6 +398,8 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 |[requestId](#FASMatchRequest.requestId)|マッチリクエストID |
 |[status](#FASMatchRequest.status)|マッチリクエストの状態 |
 |[segment](#FASMatchRequest.segment)|マッチのセグメント。同じセグメントを持っているユーザーとのみマッチします。 |
+|[minNumberOfPlayers](#FASMatchRequest.minNumberOfPlayers)|リクエストした最小プレイヤー数 |
+|[maxNumberOfPlayers](#FASMatchRequest.maxNumberOfPlayers)|リクエストした最大プレイヤー数 |
 |[user](#FASMatchRequest.user)|マッチリクエストを作成したユーザー |
 |[match](#FASMatchRequest.match)|マッチした際に取得出来るマッチオブジェクト |
 |[invitations](#FASMatchRequest.invitations)|マッチの招待 |
@@ -392,6 +420,16 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 マッチのセグメント。同じセグメントを持っているユーザーとのみマッチします。
 
 @property (nonatomic, readonly) NSString *segment;
+
+##### <a name="FASMatchRequest.minNumberOfPlayers"> minNumberOfPlayers </a>
+リクエストした最小プレイヤー数
+
+@property (nonatomic, readonly) NSUInteger minNumberOfPlayers;
+
+##### <a name="FASMatchRequest.maxNumberOfPlayers"> maxNumberOfPlayers </a>
+リクエストした最大プレイヤー数
+
+@property (nonatomic, readonly) NSUInteger maxNumberOfPlayers;
 
 ##### <a name="FASMatchRequest.user"> user </a>
 マッチリクエストを作成したユーザー
@@ -643,8 +681,12 @@ Sample
 typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
 {
     FASMatchPlayerStatusInvalid = -1,
-    FASMatchPlayerStatusMatching,
-    FASMatchPlayerStatusMatched
+    FASMatchPlayerStatusInvited,
+    FASMatchPlayerStatusAccepted,
+    FASMatchPlayerStatusMatched,
+    FASMatchPlayerStatusDeclined,
+    FASMatchPlayerStatusExpired,
+    FASMatchPlayerStatusMatching
 };
 ```
 
@@ -652,11 +694,23 @@ typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
 ###### FASMatchPlayerStatusInvalid
 不正なステータスが返却された際に利用されます。
 
-###### FASMatchPlayerStatusMatching
-マッチを探している状態
+###### FASMatchPlayerStatusInvited
+マッチの招待を受け取った状態
+
+###### FASMatchPlayerStatusAccepted
+マッチの招待を承認した状態
 
 ###### FASMatchPlayerStatusMatched
 マッチしている状態
+
+###### FASMatchPlayerStatusDeclined
+マッチの招待を拒否した状態
+
+###### FASMatchPlayerStatusExpired
+マッチリクエストが時間切れになった状態
+
+###### FASMatchPlayerStatusMatching
+マッチを探している状態
 
 #### Properties
 
@@ -678,75 +732,34 @@ typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
 ### <a name="FASMatchInvitation"> FASMatchInvitation </a>
 マッチ招待モデルクラス。マッチリクエストからプレイヤーを招待した際に作成されます。
 
-
-#### Constants
-
-|Constant|Description|
-|------|-----|
-|[FASMatchInvitationStatus](#FASMatchInvitation.FASMatchInvitationStatus)|マッチの招待の状態 |
-
-##### <a name="FASMatchInvitation.FASMatchInvitationStatus"> FASMatchInvitationStatus </a>
-マッチの招待の状態
-
-```
-typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
-{
-    FASMatchInvitationStatusInvalid = -1,
-    FASMatchInvitationStatusInvited,
-    FASMatchInvitationStatusAccepted,
-    FASMatchInvitationStatusMatched,
-    FASMatchInvitationStatusDeclined,
-    FASMatchInvitationStatusExpired
-};
-```
-
-###### Constants
-###### FASMatchInvitationStatusInvalid
-不正なステータスが返却された際に利用されます。
-
-###### FASMatchInvitationStatusInvited
-招待された状態
-
-###### FASMatchInvitationStatusAccepted
-招待を承認した状態
-
-###### FASMatchInvitationStatusMatched
-招待を承認してマッチが確立した状態
-
-###### FASMatchInvitationStatusDeclined
-招待を辞退した状態
-
-###### FASMatchInvitationStatusExpired
-招待の有効期限が切れた状態
-
 #### Properties
 
 |Properties|Description|
 |------|-----|
 |[requestId](#FASMatchInvitation.requestId)|マッチリクエストID |
-|[status](#FASMatchInvitation.status)|マッチの招待の状態 |
+|[player](#FASMatchInvitation.player)|招待を受け取ったプレイヤー |
 |[invitationMessage](#FASMatchInvitation.invitationMessage)|招待のメッセージ |
-|[user](#FASMatchInvitation.user)|招待を受けたユーザー |
+|[invitingUser](#FASMatchInvitation.invitingUser)|招待したユーザー |
 
 ##### <a name="FASMatchInvitation.requestId"> requestId </a>
 マッチリクエストID
 
 @property (nonatomic, readonly) NSString *requestId;
 
-##### <a name="FASMatchInvitation.status"> status </a>
-マッチの招待の状態
+##### <a name="FASMatchInvitation.player"> player </a>
+招待を受けたプレイヤー
 
-@property (nonatomic, readonly) FASMatchInvitationStatus status;
+@property (nonatomic, readonly) FASMatchPlayer *player;
 
 ##### <a name="FASMatchInvitation.invitationMessage"> invitationMessage </a>
 招待のメッセージ
 
 @property (nonatomic, readonly) NSString *invitationMessage;
 
-##### <a name="FASMatchInvitation.user"> user </a>
-招待を受けたユーザー
+##### <a name="FASMatchInvitation.invitingUser"> invitingUser </a>
+招待したユーザー
 
-@property (nonatomic, readonly) FASUser *user;
+@property (nonatomic, readonly) FASUser *invitingUser;
 
 ### <a name="FASGameContext"> FASGameContext </a>
 ゲームコンテキストモデルクラス。マッチメイクが成立した際に自動で作成されるオブジェクトで、ゲーム情報を格納しユーザー感で共有する為に利用されます。

@@ -195,7 +195,12 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 |[bytesize](#FASVideo.bytesize)|ビデオのバイトサイズ |
 |[videoUrl](#FASVideo.videoUrl)|ビデオURL |
 |[thumbnailUrl](#FASVideo.thumbnailUrl)|ビデオのサムネイル画像URL |
+|[duration](#FASVideo.duration)|ビデオの再生時間 |
+|[playbackCount](#FASVideo.playbackCount)|再生回数 |
+|[likesCount](#FASVideo.likesCount)|お気に入り数 |
+|[liked](#FASVideo.liked)|現在のログインユーザーがお気に入りしたかどうか |
 |[createdAt](#FASVideo.createdAt)|ビデオがアップロードされた時刻 |
+|[updatedAt](#FASVideo.updatedAt)|ビデオが更新された時刻 |
 |[user](#FASVideo.user)|ビデオをアップロードしたユーザーの[FASUser](Spec-User.md#FASUser)オブジェクト |
 
 ##### <a name="FASVideo.videoId"> videoId </a>
@@ -223,6 +228,31 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 
 @property (nonatomic, readonly) NSString *thumbnailUrl;
 
+##### <a name="FASVideo.duration"> duration </a>
+ビデオの再生時間
+
+@property (nonatomic, readonly) float duration;
+
+##### <a name="FASVideo.playbackCount"> playbackCount </a>
+再生回数
+
+@property (nonatomic, readonly) NSUInteger playbackCount;
+
+##### <a name="FASVideo.likesCount"> likesCount </a>　
+お気に入り数
+
+@property (nonatomic, readonly) NSUInteger likesCount;
+
+##### <a name="FASVideo.liked"> liked </a>　
+現在のログインユーザーがお気に入りしたかどうか
+
+@property (nonatomic, readonly) BOOL liked;
+
+##### <a name="FASVideo.updatedAt"> updatedAt </a>　
+ビデオが更新された時刻
+
+@property (nonatomic, readonly) NSDate *updatedAt;
+
 ##### <a name="FASVideo.createdAt"> createdAt </a>
 ビデオがアップロードされた時刻
 
@@ -242,6 +272,9 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 |[fetchAllVideosWithPage:completion:](#FASVideo.fetchAllVideosWithPagecompletion)|全ユーザーがアップロードしたビデオを取得します。 |
 |[fetchMyVideosWithPage:completion:](#FASVideo.fetchMyVideosWithPagecompletion)|ログインユーザーがアップロードしたビデオを取得します。 |
 |[deleteVideoWithVideoId:completion:](#FASVideo.deleteVideoWithVideoIdcompletion)|ビデオを削除します。 |
+|[likeVideoWithVideoId:completion:](#FASVideo.likeVideoWithVideoIdcompletion)|ビデオをお気に入りします。 |
+|[unlikeVideoWithVideoId:completion:](#FASVideo.unlikeVideoWithVideoIdcompletion)|ビデオのお気に入りを解除します。 |
+|[incrementPlaybackCountWithVideoId:completion:](#FASVideo.incrementPlaybackCountWithVideoIdcompletion)|ビデオの閲覧回数を１つ増やします。 |
 
 ##### <a name="FASVideo.uploadVideoWithDatacompletion"> uploadVideoWithData:completion: </a>
 ビデオをアップロードして[FASVideo](#FASVideo)を返却します。
@@ -363,3 +396,21 @@ Sample
     }];
 }
 ```
+
+##### <a name="FASVideo.likeVideoWithVideoIdcompletion"> likeVideoWithVideoId:completion: </a>
+ビデオをお気に入りします。
+
+\+ (void)likeVideoWithVideoId:(NSString *)videoId
+                   completion:(FASVideoCompletionHandler)completion;
+                     
+##### <a name="FASVideo.unlikeVideoWithVideoIdcompletion"> unlikeVideoWithVideoId:completion: </a>
+ビデオのお気に入りを解除します。
+
+\+ (void)unlikeVideoWithVideoId:(NSString *)videoId
+                     completion:(FASVideoCompletionHandler)completion;
+                     
+##### <a name="FASVideo.incrementPlaybackCountWithVideoIdcompletion"> incrementPlaybackCountWithVideoId:completion: </a>
+ビデオの閲覧数を１つ増やします。
+
+\+ (void)incrementPlaybackCountWithVideoId:(NSString *)videoId
+                                completion:(FASVideoCompletionHandler)completion;

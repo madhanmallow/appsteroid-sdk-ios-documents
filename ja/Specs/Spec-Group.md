@@ -651,9 +651,8 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 |[createdAt](#FASGroupMessage.createdAt)|グループメッセージ作成時刻 |
 |[updatedAt](#FASGroupMessage.updatedAt)|グループメッセージ更新時刻 |
 |[user](#FASGroupMessage.user)|メッセージを送信したユーザー |
+|[video](#FASGroupMessage.video)|ビデオオブジェクト |
 |[image](#FASGroupMessage.image)|画像メッセージのデータ。送信時のみ格納されています。 |
-|[videoUrl](#FASGroupMessage.videoUrl)|ビデオメッセージのURL |
-|[videoThumbnailUrl](#FASGroupMessage.videoThumbnailUrl)|サムネイル化されたビデオメッセージのURL |
 
 ##### <a name="FASGroupMessage.groupMessageId"> groupMessageId </a>
 グループメッセージID
@@ -690,25 +689,20 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 
 @property (nonatomic, readonly) NSDate *updatedAt;
 
-##### <a name="FASGroupMember.user"> user </a>
-メッセージを送信したユーザー。[FASUser](#FASUser)オブジェクト。
+##### <a name="FASGroupMessage.user"> user </a>
+メッセージを送信したユーザー。[FASUser](Spec-User.md#FASUser)オブジェクト。
 
 @property (nonatomic, readonly) FASUser *user;
+
+##### <a name="FASGroupMessage.video"> video </a>
+[FASVideo](Spec-PlayMovie.md#FASVideo)オブジェクト。
+
+@property (nonatomic, readonly) FASVideo *video;
 
 ##### <a name="FASGroupMessage.image"> image </a>
 画像メッセージのデータ。送信時のみ格納されています。
 
 @property (nonatomic, readonly) UIImage *image;
-
-##### <a name="FASGroupMessage.videoUrl"> videoUrl </a>
-ビデオメッセージのURL
-
-@property (nonatomic, readonly) NSString *videoUrl;
-
-##### <a name="FASGroupMessage.videoThumbnailUrl"> videoThumbnailUrl </a>
-サムネイル化されたビデオメッセージのURL
-
-@property (nonatomic, readonly) NSString *videoThumbnailUrl;
 
 #### Class Method
 

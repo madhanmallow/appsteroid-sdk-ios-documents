@@ -22,6 +22,30 @@ Specifications for play movie capture.
 ## APIs
 ### <a name="FASMovieMaker"> FASMovieMaker </a>
 Class for handling functions to recored game screen.
+Maximum recording time is 30 second.
+
+#### Delegates
+
+|Delegate|Description|
+|------|-----|
+|[FASMovieMakerDelegate](#FASMovieMaker.FASMovieMakerDelegate)|Handle the notification for ending recording. |
+
+##### <a name="FASMovieMaker.FASMovieMakerDelegate"> FASMovieMakerDelegate </a>
+
+|Method|Description|
+|------|-----|
+|[recordingWillFinish](#FASMovieMaker.FASMovieMakerDelegate.recordingWillFinish)|Call back right before the recording finish. |
+|[recordingDidFinish:](#FASMovieMaker.FASMovieMakerDelegate.recordingDidFinish)|Call back when the video data is created after the recording completes. |
+
+##### <a name="FASMovieMaker.FASMovieMakerDelegate.recordingWillFinish"> recordingWillFinish </a>
+Called right before the recording finish.
+
+\- (void)recordingWillFinish;
+
+##### <a name="FASMovieMaker.FASMovieMakerDelegate.recordingDidFinish"> recordingDidFinish </a>
+Call back when the video data is created after the recording completes.
+
+\- (void)recordingDidFinish:(NSData *)videoData;
 
 #### Constants
 
@@ -70,6 +94,7 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 |[bitRate](#FASMovieMaker.bitRate)|Select a bit rate |
 |[fps](#FASMovieMaker.fps)|Select a FPS value on `FASPlayMovieRecorderFPS` to decide which FPS to use for recording. |
 |[videoData](#FASMovieMaker.videoData)|Recorded videos are stored |
+|[delegate](#FASMovieMaker.delegate)|Handle the notification for ending recording. |
 
 ##### <a name="FASMovieMaker.bitRate"> bitRate </a>
 Select a bit rate. Default value is `1Mb`.
@@ -85,6 +110,11 @@ Select a FPS value on `FASMovieMakerFPS` to decide which FPS to use for recordin
 Recorded videos are stored
 
 @property (nonatomic, readonly) NSData *videoData;
+
+##### <a name="FASMovieMaker.delegate"> delegate </a>
+Handle the notification for ending recording.
+
+@property (weak, nonatomic) id <FASMovieMakerDelegate> delegate;
 
 #### Instance Methods
 
@@ -165,6 +195,11 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 |[bytesize](#FASVideo.bytesize)|Video byte size |
 |[videoUrl](#FASVideo.videoUrl)|Video URL |
 |[thumbnailUrl](#FASVideo.thumbnailUrl)|Video thumbnail URL |
+|[duration](#FASVideo.duration)|Playback time of the video |
+|[playbackCount](#FASVideo.playbackCount)|Playback count |
+|[likesCount](#FASVideo.likesCount)|Favorite count |
+|[liked](#FASVideo.liked)|Whether the logged in user add the video to their favorite or not |
+|[updatedAt](#FASVideo.updatedAt)|Date/time when the video was updated |
 |[createdAt](#FASVideo.createdAt)|Uploaded time of video |
 |[user](#FASVideo.user)|[FASUser](Spec-User.md#FASUser) object of user who uploaded the video |
 
@@ -193,6 +228,31 @@ Video thumbnail URL
 
 @property (nonatomic, readonly) NSString *thumbnailUrl;
 
+##### <a name="FASVideo.duration"> duration </a>
+Playback time of the video
+
+@property (nonatomic, readonly) float duration;
+
+##### <a name="FASVideo.playbackCount"> playbackCount </a>
+Playback count
+
+@property (nonatomic, readonly) NSUInteger playbackCount;
+
+##### <a name="FASVideo.likesCount"> likesCount </a>
+Favorite count
+
+@property (nonatomic, readonly) NSUInteger likesCount;
+
+##### <a name="FASVideo.liked"> liked </a>
+Whether the logged in user add the video to their favorite or not
+
+@property (nonatomic, readonly) BOOL liked;
+
+##### <a name="FASVideo.updatedAt"> updatedAt </a>
+Date/time when the video was updated
+
+@property (nonatomic, readonly) NSDate *updatedAt;
+
 ##### <a name="FASVideo.createdAt"> createdAt </a>
 Uploaded time of video
 
@@ -212,6 +272,9 @@ Uploaded time of video
 |[fetchAllVideosWithPage:completion:](#FASVideo.fetchAllVideosWithPagecompletion)|All users will get uploaded video |
 |[fetchMyVideosWithPage:completion:](#FASVideo.fetchMyVideosWithPagecompletion)|Logged in user will get uploaded video |
 |[deleteVideoWithVideoId:completion:](#FASVideo.deleteVideoWithVideoIdcompletion)|Delete video |
+|[likeVideoWithVideoId:completion:](#FASVideo.likeVideoWithVideoIdcompletion)|Add video to favorite |
+|[unlikeVideoWithVideoId:completion:](#FASVideo.unlikeVideoWithVideoIdcompletion)|Remove video from favorite |
+|[incrementPlaybackCountWithVideoId:completion:](#FASVideo.incrementPlaybackCountWithVideoIdcompletion)|Increment playback count for the video |
 
 ##### <a name="FASVideo.uploadVideoWithDatacompletion"> uploadVideoWithData:completion: </a>
 Upload video and return [FASVideo](#FASVideo)
@@ -333,3 +396,21 @@ Sample
     }];
 }
 ```
+
+##### <a name="FASVideo.likeVideoWithVideoIdcompletion"> likeVideoWithVideoId:completion: </a>
+Add video to favorite
+
+\+ (void)likeVideoWithVideoId:(NSString *)videoId
+                   completion:(FASVideoCompletionHandler)completion;
+                     
+##### <a name="FASVideo.unlikeVideoWithVideoIdcompletion"> unlikeVideoWithVideoId:completion: </a>
+Remove video from favorite
+
+\+ (void)unlikeVideoWithVideoId:(NSString *)videoId
+                     completion:(FASVideoCompletionHandler)completion;
+                     
+##### <a name="FASVideo.incrementPlaybackCountWithVideoIdcompletion"> incrementPlaybackCountWithVideoId:completion: </a>
+Increment playback count for the video
+
+\+ (void)incrementPlaybackCountWithVideoId:(NSString *)videoId
+                                completion:(FASVideoCompletionHandler)completion;
