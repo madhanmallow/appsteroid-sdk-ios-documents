@@ -652,6 +652,7 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 |[updatedAt](#FASGroupMessage.updatedAt)|グループメッセージ更新時刻 |
 |[user](#FASGroupMessage.user)|メッセージを送信したユーザー |
 |[video](#FASGroupMessage.video)|ビデオオブジェクト |
+|[videoStatus](#FASGroupMessage.videoStatus)|ビデオの状態 |
 |[image](#FASGroupMessage.image)|画像メッセージのデータ。送信時のみ格納されています。 |
 
 ##### <a name="FASGroupMessage.groupMessageId"> groupMessageId </a>
@@ -698,6 +699,11 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 [FASVideo](Spec-PlayMovie.md#FASVideo)オブジェクト。
 
 @property (nonatomic, readonly) FASVideo *video;
+
+##### <a name="FASGroupMessage.videoStatus"> videoStatus </a>
+[FASVideoStatus](Spec-PlayMovie.md#FASVideo.FASVideoStatus)の値
+
+@property (nonatomic, readonly) FASVideoStatus videoStatus;
 
 ##### <a name="FASGroupMessage.image"> image </a>
 画像メッセージのデータ。送信時のみ格納されています。

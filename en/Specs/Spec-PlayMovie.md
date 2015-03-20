@@ -159,6 +159,38 @@ Class to operate recorded play movie.
 
 |Constant|Description|
 |------|-----|
+|[FASVideoStatus](#FASVideo.FASVideoStatus)|Video status |
+
+##### <a name="FASVideo.FASVideoStatus"> FASVideoStatus </a>
+Video status
+
+```
+typedef NS_ENUM(NSInteger, FASVideoStatus)
+{
+    FASVideoStatusInvalid,
+    FASVideoStatusRemoved,
+    FASVideoStatusNa,
+    FASVideoStatusReady,
+};
+```
+
+###### Constants
+###### FASVideoStatusInvalid
+Status is invalid
+
+###### FASVideoStatusRemoved
+Status showing that video was removed
+
+###### FASVideoStatusNa
+Status showing that video does not exist
+
+###### FASVideoStatusReady
+Status showing that video is ready to play
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
 |[FASVideoCompletionHandler](#FASVideo.FASVideoCompletionHandler)|Block object used when carrying out the process to get video upload. |
 |[FASVideosCompletionHandler](#FASVideo.FASVideosCompletionHandler)|Block object used when carrying out the process to get multiple videos. |
 

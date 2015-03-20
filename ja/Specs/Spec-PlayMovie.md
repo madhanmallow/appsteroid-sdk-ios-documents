@@ -159,6 +159,38 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 
 |Constant|Description|
 |------|-----|
+|[FASVideoStatus](#FASVideo.FASVideoStatus)|ビデオの状態 |
+
+##### <a name="FASVideo.FASVideoStatus"> FASVideoStatus </a>
+ビデオの状態
+
+```
+typedef NS_ENUM(NSInteger, FASVideoStatus)
+{
+    FASVideoStatusInvalid,
+    FASVideoStatusRemoved,
+    FASVideoStatusNa,
+    FASVideoStatusReady,
+};
+```
+
+###### Constants
+###### FASVideoStatusInvalid
+不明な状態
+
+###### FASVideoStatusRemoved
+ビデオが削除された状態
+
+###### FASVideoStatusNa
+ビデオが無い状態
+
+###### FASVideoStatusReady
+ビデオが再生可能な状態
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
 |[FASVideoCompletionHandler](#FASVideo.FASVideoCompletionHandler)|ビデオアップロードの取得処理を行った際に利用されるブロックオブジェクト |
 |[FASVideosCompletionHandler](#FASVideo.FASVideosCompletionHandler)|複数のビデオ取得処理を行った際に利用されるブロックオブジェクト |
 

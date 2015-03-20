@@ -2,6 +2,16 @@
 
 ---
 
+### 0.5.1
+- Performance Improvements
+	- Show play count, like count and playback time on the video list.
+
+- Fixed
+	- Thumbnail image and text overlaps if the text on the forum is too long.
+	- Does not contain video URL when sharing the video to SNS from the playback screen. 
+	- Deletion thumbnail does not show up after deleting the posted video.
+	- Layout bug on iPad.
+  
 ### 0.5.0
 - New Feature
 	- Violation report. Users can tap & hold an inappropriate comment on the forum to report it as a violation. 

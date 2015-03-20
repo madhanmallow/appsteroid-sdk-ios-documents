@@ -649,6 +649,7 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 |[updatedAt](#FASGroupMessage.updatedAt)|Group message updated date and time |
 |[user](#FASGroupMessage.user)|User who is a sender of the message |
 |[video](#FASGroupMessage.video)|Video object |
+|[videoStatus](#FASGroupMessage.videoStatus)|Video status |
 |[image](#FASGroupMessage.image)|Image message data. Only stored when it is sending |
 
 
@@ -696,6 +697,11 @@ User who send a message.[FASUser](Spec-User.md#FASUser)Object.
 [FASVideo](Spec-PlayMovie.md#FASVideo)Object.
 
 @property (nonatomic, readonly) FASVideo *video;
+
+##### <a name="FASGroupMessage.videoStatus"> videoStatus </a>
+[FASVideoStatus](Spec-PlayMovie.md#FASVideo.FASVideoStatus)の値
+
+@property (nonatomic, readonly) FASVideoStatus videoStatus;
 
 ##### <a name="FASGroupMessage.image"> image </a>
 Image message data. Only stored when it is sending
