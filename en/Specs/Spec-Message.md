@@ -29,7 +29,7 @@ Block object used when carrying out the process to receive direct message
 typedef void (^FASDirectMessageCompletionHandler)(FASDirectMessage *directMessage, NSError *error);
 
 * Parameters
-	* message
+	* directMessage
 		* [FASDirectMessage](#FASDirectMessage) is stored.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
@@ -37,11 +37,11 @@ typedef void (^FASDirectMessageCompletionHandler)(FASDirectMessage *directMessag
 ##### <a name="FASDirectMessage.FASDirectMessagesCompletionHandler"> FASDirectMessagesCompletionHandler </a>
 Block object used when carrying out the process to receive multiple direct messages
 
-typedef void (^FASDirectMessagesCompletionHandler)(FASDirectMessage *directMessage, FASPagingMeta *meta, NSError *error);
+typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASPagingMeta *meta, NSError *error);
 
 * Parameters
-	* message
-		* [FASDirectMessage](#FASDirectMessage) is stored.
+	* directMessages
+		* Multiple [FASDirectMessage](#FASDirectMessage) are stored in NSArray.
 	* meta
 		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
 	* error

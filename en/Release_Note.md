@@ -2,6 +2,15 @@
 
 ---
 
+### 0.6.0
+- New Feature
+	- Ability to aggregate game/player statistical information.
+		
+- Performance Improvements
+	- Leaderboard now support date and time format.
+	- New layout for matchmaking GUI.
+    - Loading speed of image on Forum and GroupChat.
+
 ### 0.5.1
 - Performance Improvements
 	- Show play count, like count and playback time on the video list.

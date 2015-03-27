@@ -50,6 +50,11 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 |[FASVideo](Specs/Spec-PlayMovie.md#FASVideo)|Class to operate recorded play movie |
 |[FASMovieMaker](Specs/Spec-MovieMaker.md#FASMovieMaker)|Class for function to recored game play movie |
 
+|Play Statistics|Description|
+|------|-----|
+|[FASPlayStats](Specs/Spec-PlayStats.md#FASPlayStats)|Class to get statistical information |
+
+
 |Forum|Description|
 |------|-----|
 |[FASForumNavigationController](Specs/Spec-Forum.md#FASForumNavigationController)|NavigationController for Forum View |

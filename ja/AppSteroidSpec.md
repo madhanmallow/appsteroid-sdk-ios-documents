@@ -50,6 +50,10 @@ AppSteroid for iOSは、iOS用の統合ゲーム用バックエンドサービ�
 |[FASVideo](Specs/Spec-PlayMovie.md#FASVideo)|録画したプレイムービーの操作に関するクラス |
 |[FASMovieMaker](Specs/Spec-MovieMaker.md#FASMovieMaker)|ゲームのプレイムービーを録画する機能に関するクラス |
 
+|Play Statistics|Description|
+|------|-----|
+|[FASPlayStats](Specs/Spec-PlayStats.md#FASPlayStats)|ゲームの統計情報を取得する機能に関するクラス |
+
 |Forum|Description|
 |------|-----|
 |[FASForumNavigationController](Specs/Spec-Forum.md#FASForumNavigationController)|フォーラムビューのベースとなるNavigationController |

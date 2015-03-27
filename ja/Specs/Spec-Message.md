@@ -35,7 +35,7 @@ Fresviiコンソールから送信されるダイレクトメッセージの操�
 typedef void (^FASDirectMessageCompletionHandler)(FASDirectMessage *directMessage, NSError *error);
 
 * Parameters
-	* message
+	* directMessage
 		* [FASDirectMessage](#FASDirectMessage)が格納されています。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
@@ -43,11 +43,11 @@ typedef void (^FASDirectMessageCompletionHandler)(FASDirectMessage *directMessag
 ##### <a name="FASDirectMessage.FASDirectMessagesCompletionHandler"> FASDirectMessagesCompletionHandler </a>
 複数のダイレクトメッセージ取得処理を行った際に利用されるブロックオブジェクト
 
-typedef void (^FASDirectMessagesCompletionHandler)(FASDirectMessage *directMessage, FASPagingMeta *meta, NSError *error);
+typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASPagingMeta *meta, NSError *error);
 
 * Parameters
-	* message
-		* [FASDirectMessage](#FASDirectMessage)が格納されています。
+	* directMessages
+		* 複数の[FASDirectMessage](#FASDirectMessage)がNSArrayに格納されています。
 	* meta
 		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
 	* error
