@@ -2,6 +2,17 @@
 
 ---
 
+### 0.6.1
+- New Feature
+	- Account suspension, to prevent user to use AppSteroid features.
+	- EULA (end user license agreement), for first time AppSteroid GUI user, is now available. This can be setup from the Fresvii Web Console. 
+
+- Performance Improvements
+	- User can now browse other users video list.
+
+- Fixed
+	- Matchmaking feature bug.
+
 ### 0.6.0
 - New Feature
 	- Ability to aggregate game/player statistical information.
