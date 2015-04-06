@@ -1,6 +1,6 @@
 # Matchmaking Specifications
 
-last update at 2014/10/24
+last update at 2015/4/2
 
 ---
 
@@ -348,8 +348,97 @@ If the number of participating players reach the minimum required players, [FASM
 	* completion  
 		* Block object to be executed when the process is completed.
 
+### <a name="FASMatchPlayer"> FASMatchPlayer </a>
+Match player Class. A model class of players who participate in a match.
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASMatchPlayerStatus](#FASMatchPlayer.FASMatchPlayerStatus)|Status of match player |
+
+##### <a name="FASMatchPlayer.FASMatchPlayerStatus"> FASMatchPlayerStatus </a>
+Status of match player
+
+```
+typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
+{
+    FASMatchPlayerStatusInvalid = -1,
+    FASMatchPlayerStatusInvited,
+    FASMatchPlayerStatusAccepted,
+    FASMatchPlayerStatusMatched,
+    FASMatchPlayerStatusDeclined,
+    FASMatchPlayerStatusExpired,
+    FASMatchPlayerStatusMatching
+};
+```
+
+###### Constants
+###### FASMatchPlayerStatusInvalid
+Used when an invalid status was returned.
+
+###### FASMatchPlayerStatusInvited
+Status, received invitation.
+
+###### FASMatchPlayerStatusAccepted
+Status, accepted invitation.
+
+###### FASMatchPlayerStatusMatched
+Status, currently matching.
+
+###### FASMatchPlayerStatusDeclined
+Status, declined invitation.
+
+###### FASMatchPlayerStatusExpired
+Status, match request has expired.
+
+###### FASMatchPlayerStatusMatching
+Status, searching for a match.
+
+#### Properties
+
+|Properties|Description|
+|------|-----|
+|[requestId](#FASMatchRequest.requestId)|Match request ID |
+|[status](#FASMatchPlayer.status)|Status of a matched player |
+|[user](#FASMatchPlayer.user)|Player information |
+|[match](#FASMatchRequest.match)|Match object that can be fetched when a player matches |
+|[createdAt](#FASMatchRequest.createdAt)|Time of when the match request was created |
+|[updatedAt](#FASMatchRequest.updatedAt)|Time of when the match request was updated |
+
+##### <a name="FASMatchRequest.requestId"> requestId </a>
+Match request ID
+
+@property (nonatomic, readonly) NSString *requestId;
+##### <a name="FASMatchPlayer.status"> status </a>
+Status of a matched player
+
+@property (nonatomic, readonly) FASMatchPlayerStatus status;
+
+##### <a name="FASMatchPlayer.user"> user </a>
+Player information
+
+@property (nonatomic, readonly) FASUser *user;
+
+##### <a name="FASMatchRequest.match"> match </a>
+Match object that can be fetched when a player matches
+
+@property (nonatomic, readonly) FASMatch *match;
+
+##### <a name="FASMatchRequest.createdAt"> createdAt </a>
+Time of when the match request was created
+
+@property (nonatomic, readonly) NSDate *createdAt;
+
+##### <a name="FASMatchRequest.updatedAt"> updatedAt </a>
+Time of when the match request was updated
+
+@property (nonatomic, readonly) NSDate *updatedAt;
+
+
 ### <a name="FASMatchRequest"> FASMatchRequest </a>
 Match request model class, which will create a request for a new match.
+[FASMatchPlayer](#FASMatchPlayer) is the parent class.
 
 #### Constants
 
@@ -395,26 +484,9 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 
 |Properties|Description|
 |------|-----|
-|[requestId](#FASMatchRequest.requestId)|Match request ID |
-|[status](#FASMatchRequest.status)|Match requesting status |
 |[segment](#FASMatchRequest.segment)|Match segment. Only match users with a same segment. |
 |[minNumberOfPlayers](#FASMatchRequest.minNumberOfPlayers)|Requested minimum number of players |
 |[maxNumberOfPlayers](#FASMatchRequest.maxNumberOfPlayers)|Requested maximum number of players |
-|[user](#FASMatchRequest.user)|User who created a match request. |
-|[match](#FASMatchRequest.match)|Match object, which could be acquired after a matching is completed. |
-|[invitations](#FASMatchRequest.invitations)|Match invitation |
-|[createdAt](#FASMatchRequest.createdAt)|Date and time of when a match request was created. |
-|[updatedAt](#FASMatchRequest.updatedAt)|Date and time of when a match request was updated. |
-
-##### <a name="FASMatchRequest.requestId"> requestId </a>
-Match request ID
-
-@property (nonatomic, readonly) NSString *requestId;
-
-##### <a name="FASMatchRequest.status"> status </a>
-Match requesting status
-
-@property (nonatomic, readonly) FASMatchRequestStatus status;
 
 ##### <a name="FASMatchRequest.segment"> segment </a>
 Match segment. Only match users with a same segment.
@@ -431,31 +503,6 @@ Requested maximum number of players
 
 @property (nonatomic, readonly) NSUInteger maxNumberOfPlayers;
 
-##### <a name="FASMatchRequest.user"> user </a>
-User who created a match request.
-
-@property (nonatomic, readonly) FASUser *user;
-
-##### <a name="FASMatchRequest.match"> match </a>
-Match object, which could be acquired after a matching is completed.
-
-@property (nonatomic, readonly) FASMatch *match;
-
-##### <a name="FASMatchRequest. invitations"> invitations </a>
-Match invitation. [FASMatchInvitation](#FASMatchInvitation) is stored.
-
-@property (nonatomic, readonly) NSArray *invitations;
-
-##### <a name="FASMatchRequest.createdAt"> createdAt </a>
-Date and time of when a match request was created.
-
-@property (nonatomic, readonly) NSDate *createdAt;
-
-##### <a name="FASMatchRequest.updatedAt"> updatedAt </a>
-Date and time of when a match request was updated.
-
-@property (nonatomic, readonly) NSDate *updatedAt;
-
 #### Class Method
 
 |Method|Description|
@@ -463,8 +510,9 @@ Date and time of when a match request was updated.
 |[createMatchRequestWithCompletion:](#FASMatchRequest.createMatchRequestWithCompletion) |Create a match request. |
 |[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:segment:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayerssegmentcompletion) |Create a match request with specific conditions, minimum/maximum number of players and segment. |
 |[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcompletion) |Create a match request by selecting user to invite with an invitation message, and with specific conditions, minimum/maximum number of players and segment. |
-|[acceptMatchRequestWithRequestId:completion:](#FASMatchRequest.acceptMatchRequestWithRequestIdcompletion) |Accept match invitation. |
-|[cancelMatchRequestWithRequestId:completion:](#FASMatchRequest.cancelMatchRequestWithRequestIdcompletion) |Reject match request. |
+[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:cancelOnDecline:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcancelOnDeclinecompletion) |Create a match request by selecting the Minimum/Maximum number of game players and segmentation, user who invites and invitation message, behavior of when canceling a invitation. |
+|
+|[cancelMatchRequestWithRequestId:completion:](#FASMatchRequest.cancelMatchRequestWithRequestIdcompletion) |Cancel a match request |
 |[fetchMatchingRequestWithCompletion:](#FASMatchRequest.fetchMatchingRequestWithCompletion) |Get own match request. |
 
 ##### <a name="FASMatchRequest.createMatchRequestWithCompletion"> createMatchRequestWithCompletion: </a>
@@ -579,6 +627,35 @@ Sample
 }
 ```
 
+##### <a name="FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcancelOnDeclinecompletion"> createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:cancelOnDecline:completion: </a>
+Create a match request by selecting the Minimum/Maximum number of game players and segmentation, user who invites and invitation message, behavior of when canceling a invitation.
+
+\+ (void)createMatchRequestWithMinNumberOfPlayers:(NSUInteger)minNumber
+                               maxNumberOfPlayers:(NSUInteger)maxNumber
+                                      inviteUsers:(NSArray *)users
+                                   inviteMessages:(NSArray *)messages
+                                          segment:(NSString *)segment
+                                  cancelOnDecline:(BOOL)cancelOnDecline
+                                       completion:(FASMatchRequestCompletionHandler)completion;
+
+* Parameters
+	* minNumber
+		* Minimum number of players. Value between 2 to 16.
+	* maxNumber
+		* Maximum number of players. Value between 2 to 16.
+	* users
+		* Select ID of a user to invite with string.
+	* messages
+		* Select invitation message for a user to invite.
+	* segment
+		* If selected, only match with a player in the same segment.
+	* cancelOnDecline
+		* Behavior of when declining a invitation.  
+		  If `YES`: Cancel the invitation and the match will wait for other player to join. If
+          `NO`: Invitation won't be canceled and a blank player will remain in the match with a declined status. When the number of participants cover the maximum number of player, other player cannot join the match.
+	* completion
+		* Block object to be executed when the process is completed.
+
 ##### <a name="FASMatchRequest.acceptMatchRequestWithRequestIdcompletion"> acceptMatchRequestWithRequestId:completion: </a>
 Accept match invitation.
 
@@ -665,91 +742,17 @@ Sample
 }
 ```
 
-### <a name="FASMatchPlayer"> FASMatchPlayer </a>
-Match player class. Model class for players joining the match.
-
-#### Constants
-
-|Constant|Description|
-|------|-----|
-|[FASMatchPlayerStatus](#FASMatchPlayer.FASMatchPlayerStatus)|Match player status. |
-
-##### <a name="FASMatchPlayer.FASMatchPlayerStatus"> FASMatchPlayerStatus </a>
-Match players status.
-
-```
-typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
-{
-    FASMatchPlayerStatusInvalid = -1,
-    FASMatchPlayerStatusInvited,
-    FASMatchPlayerStatusAccepted,
-    FASMatchPlayerStatusMatched,
-    FASMatchPlayerStatusDeclined,
-    FASMatchPlayerStatusExpired,
-    FASMatchPlayerStatusMatching
-};
-```
-
-###### Constants
-###### FASMatchPlayerStatusInvalid
-Used when a invalid status was returned.
-
-###### FASMatchPlayerStatusInvited
-Status showing a player received a match invitation.
-
-###### FASMatchPlayerStatusAccepted
-Status showing a player accepted a match invitation.
-
-###### FASMatchPlayerStatusMatched
-A status showing it is matched.
-
-###### FASMatchPlayerStatusDeclined
-Status showing a player declined a match invitation.
-
-###### FASMatchPlayerStatusExpired
-Status shows that a match request was expired.
-
-###### FASMatchPlayerStatusMatching
-Status looking for players to match.
-
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[status](#FASMatchPlayer.status)|Match player status. |
-|[user](#FASMatchPlayer.user)|player information. |
-
-##### <a name="FASMatchPlayer.status"> status </a>
-Match player status.
-
-@property (nonatomic, readonly) FASMatchPlayerStatus status;
-
-##### <a name="FASMatchPlayer.user"> user </a>
-Player information.
-
-@property (nonatomic, readonly) FASUser *user;
 
 ### <a name="FASMatchInvitation"> FASMatchInvitation </a>
-Match invitation model class, which is created when a player in invited from a match request.
+Match invitation model class. It will be created when inviting a player using match request.   
+[FASMatchPlayer](#FASMatchPlayer) is the parent class.
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[requestId](#FASMatchInvitation.requestId)|Match request ID |
-|[player](#FASMatchInvitation.player)|Player who received an invitation. |
-|[invitationMessage](#FASMatchInvitation.invitationMessage)|Invitation message. |
-|[invitingUser](#FASMatchInvitation.invitingUser)|Player who send an invitation. |
-
-##### <a name="FASMatchInvitation.requestId"> requestId </a>
-Match request ID
-
-@property (nonatomic, readonly) NSString *requestId;
-
-##### <a name="FASMatchInvitation.player"> player </a>
-Player who received an invitation
-
-@property (nonatomic, readonly) FASMatchPlayer *player;
+|[invitationMessage](#FASMatchInvitation.invitationMessage)|Invitation message |
+|[invitingUser](#FASMatchInvitation.invitingUser)|User who send the invitation |
 
 ##### <a name="FASMatchInvitation.invitationMessage"> invitationMessage </a>
 Invitation message
@@ -757,9 +760,62 @@ Invitation message
 @property (nonatomic, readonly) NSString *invitationMessage;
 
 ##### <a name="FASMatchInvitation.invitingUser"> invitingUser </a>
-Player who send an invitation
+Player who invited
 
 @property (nonatomic, readonly) FASUser *invitingUser;
+
+#### Class Method
+
+|Method|Description|
+|------|-----|
+|[inviteUserWithRequestId:opponentUserId:message:cancelOnDecline:completion:](#FASMatchInvitation.inviteUserWithRequestIdopponentUserIdmessagecancelOnDeclinecompletion) |Add user to a existing request |
+|[acceptMatchRequestWithRequestId:completion:](#FASMatchInvitation.acceptMatchRequestWithRequestIdcompletion) |Accept invitation |
+|[declineMatchRequestWithRequestId:completion:](#FASMatchInvitation.declineMatchRequestWithRequestIdcompletion) |Decline invitation |
+
+\+ (void)inviteUserWithRequestId:(NSString *)requestId
+                 opponentUserId:(NSString *)userId
+                        message:(NSString *)message
+                cancelOnDecline:(BOOL)cancelOnDecline
+                     completion:(FASMatchInvitationCompletionHandler)completion;
+
+* Parameters
+	* requestId
+		* Request ID
+	* userId
+		* User ID to invite
+	* message
+		* Invitation message
+	* cancelOnDecline
+		* Behavior of when declining a invitation.  
+		  If `YES`: Cancel the invitation and the match will wait for other player to join. If
+          `NO`: Invitation won't be canceled and a blank player will remain in the match with a declined status. When the number of participants cover the maximum number of player, other player cannot join the match.
+	* completion
+		* Block object to be executed when the process is completed.
+	
+##### <a name="FASMatchInvitation.acceptMatchRequestWithRequestIdcompletion"> acceptMatchRequestWithRequestId:completion: </a>
+Accept invitation
+
+\+ (void)acceptMatchRequestWithRequestId:(NSString *)requestId
+                             completion:(FASMatchInvitationCompletionHandler)completion;
+
+* Parameters
+	* requestId
+		* Request ID
+	* completion
+		* Block object to be executed when the process is completed.
+
+##### <a name="FASMatchInvitation.declineMatchRequestWithRequestIdcompletion"> declineMatchRequestWithRequestId:completion: </a>
+Decline invitation
+
+\+ (void)acceptMatchRequestWithRequestId:(NSString *)requestId
+                             completion:(FASMatchInvitationCompletionHandler)completion;
+
+* Parameters
+	* requestId
+		* Request ID
+	* completion
+		* Block object to be executed when the process is completed.
+
 
 ### <a name="FASGameContext"> FASGameContext </a>
 Game context model class. An object generated automatically after a matchmake is completed, and used for players to store and share game data.
