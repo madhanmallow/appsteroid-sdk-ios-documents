@@ -2,6 +2,12 @@
 
 ---
 
+### 0.6.2
+- Performance Improvements
+	- Stabilized network and movements for Matchmaking
+- Fixed
+	- Error appears when repeatably reporting a same comment on the forum
+
 ### 0.6.1
 - New Feature
 	- Account suspension, to prevent user to use AppSteroid features.
