@@ -2,6 +2,15 @@
 
 ---
 
+### 1.0.0
+- 追加
+	- AppSteroidのGUIが刷新しました。
+	- 
+
+- 修正
+	- [FASRank](Specs/Spec-Leaderboard.md#FASRank)の`startTime`パラメータが廃止となり、代わりに`period`パラメータを利用するように変更になりました。
+	- `FASSortOptions`の利用は廃止になりました。
+
 ### 0.6.2
 - 改善
 	- マッチメイキングがより安定して動作するようになりました。
