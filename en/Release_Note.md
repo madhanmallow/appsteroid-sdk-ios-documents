@@ -2,7 +2,7 @@
 
 ---
 
-### 0.6.3
+### 0.7.0
 - New Feature
 	- CSR (Customer Service Representative) Chat. Users will be able to initiate a 1 to 1 chat with the CSR on the group chat page.
 
