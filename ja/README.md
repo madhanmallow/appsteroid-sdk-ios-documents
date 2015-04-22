@@ -22,6 +22,7 @@
   * [ボイスチャット仕様書](Specs/Spec-VoiceChat.md)
 * [APNS 証明書の作成](APNSCertificateTutorial.md)
 * [チャンネルの利用方法](ChannelTutorial.md)
+* [プッシュイベントについて](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md)
 * [エラーコード仕様書](ErrorCodes.md)
 * [FAQ](FAQ.md)
 * [リリースノート](ReleaseNotes.md)

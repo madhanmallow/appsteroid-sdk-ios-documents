@@ -20,6 +20,7 @@
 	* [Storage Spec](Specs/Spec-Storage.md)
 	* [User Management Spec](Specs/Spec-User.md)
 	* [VoiceChat Spec](Specs/Spec-VoiceChat.md)
+* [About Push Event](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md)
 * [Error Codes](ErrorCode.md)
 * [FAQ](FAQ.md)
 * [Release Notes](Release_Note.md)
