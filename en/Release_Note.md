@@ -2,11 +2,20 @@
 
 ---
 
+### 0.6.3
+- New Feature
+	- CSR (Customer Service Representative) Chat. Users will be able to initiate a 1 to 1 chat with the CSR on the group chat page.
+
+- Fixed
+	- Score value 0 cannot be submitted to the leaderboard.
+  - Creating a new thread or group cause crash on iOS8.3.
+
+
 ### 0.6.2
 - Performance Improvements
-	- Stabilized network and movements for Matchmaking
+	- Stabilized network and movements for Matchmaking.
 - Fixed
-	- Error appears when repeatably reporting a same comment on the forum
+	- Error appears when repeatably reporting a same comment on the forum.
 
 ### 0.6.1
 - New Feature
