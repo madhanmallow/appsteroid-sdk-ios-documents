@@ -147,7 +147,7 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 
 \- (bool)isRecording;
 
-##### <a name="FASPlayMovieRecorder.presentShareView"> presentShareView </a>
+##### <a name="FASMovieMaker.presentShareView"> presentShareView </a>
 動画をアップロードしてSNSにシェアするためのビューを表示します。[stopRecording](#FASMovieMaker.stopRecording)をして動画を作成した後に利用してください。
 
 \- (void)presentShareView;
