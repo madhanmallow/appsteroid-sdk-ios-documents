@@ -237,7 +237,7 @@ Sample
 [AppSteroid setTabs:FASTabForum | FASTabLeaderboard | FASTabGroup | FASTabProfile];
 ```
 
-#### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
+##### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
 SR機能(カスタマーサポート)を利用するかどうかを決定します。  
 デフォルトは`NO`に設定されています。  
 この機能を`YES`に設定すると、グループメッセージ作成画面の右上に`Live Help`というボタンが表示され、CSRに直接メッセージを送信することができます。
