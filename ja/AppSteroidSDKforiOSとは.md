@@ -3,8 +3,8 @@
 ----------
 
 - [AppSteroidとは](#AboutAppSteroid)
-- [AppSteroid SDK for Unityの利用方法](#HowToUse)
-- [Webコンソールについて法](#WebConsole)
+- [AppSteroid SDK for iOSの利用方法](#HowToUse)
+- [AppSteroid SDKの機能一覧](#Features)
 
 ---
 
