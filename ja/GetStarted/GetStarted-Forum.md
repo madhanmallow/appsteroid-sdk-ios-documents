@@ -60,7 +60,7 @@ Sample
 
 ### <a name="WithTab"> タブにフォーラムを組み込む </a>
 
-[AppSteroidGetStarted](../AppSteroidGetStarted.md)の`タブ画面の表示`という項目を参照してください。
+[AppSteroidGetStarted](../AppSteroidGetStarted.md#ShowTab)を参照してください。
 
 ### <a name="Layout"> レイアウトの変更 </a>
 
