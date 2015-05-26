@@ -17,7 +17,7 @@ SDKを導入することで、AppSteroidが提供するゲームフォーラム�
 AppSteroid SDKを利用するために、下記の２つの手順を行っていただく必要があります。
 
 1. [Webコンソールでアプリの登録](Webコンソールでアプリ登録.md)
-2. [AppSteroidSDKの実装](GettingStarted.md)
+2. [AppSteroidSDKの実装](GetStarted.md)
 
 ## <a name="Features">AppSteroid SDKの機能一覧</a>
 機能一覧は[こちら](機能一覧.md)を参照してください。
