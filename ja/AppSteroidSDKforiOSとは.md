@@ -3,8 +3,8 @@
 ----------
 
 - [AppSteroidとは](#AboutAppSteroid)
-- [AppSteroid SDK for Unityの利用方法](#HowToUse)
-- [Webコンソールについて法](#WebConsole)
+- [AppSteroid SDK for iOSの利用方法](#HowToUse)
+- [AppSteroid SDKの機能一覧](#Features)
 
 ---
 
@@ -16,8 +16,8 @@ SDKを導入することで、AppSteroidが提供するゲームフォーラム�
 ## <a name="HowToUse">AppSteroid SDK for iOSの利用方法</a>
 AppSteroid SDKを利用するために、下記の２つの手順を行っていただく必要があります。
 
-1. [Webコンソールでアプリの登録](Webコンソールでアプリ登録.md)
-2. [AppSteroidSDKの実装](GettingStarted.md)
+1. [Webコンソールでアプリの登録](./Webコンソールでアプリ登録.md)
+2. [AppSteroidSDKの実装](./AppSteroidGetStarted.md)
 
 ## <a name="Features">AppSteroid SDKの機能一覧</a>
 機能一覧は[こちら](機能一覧.md)を参照してください。
