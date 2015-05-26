@@ -1,11 +1,12 @@
 # Getting Started - Group Chat
 
-last update at 2014/10/7
+last update at 2015/5/26
 
 ---
 
 - [グループチャット画面の表示](#HowToDisplayView)
 	- [簡単に表示する](#EasyWay)
+	- [タブにフォーラムを組み込む](#WithTab)
 	- [パラメータを指定して表示する](#SettingParameters)
 	- [レイアウトの変更](#Layout)
 - [グループAPIの利用方法](#HowToUseAPI)
@@ -41,6 +42,10 @@ Sample
                                                 animated:YES];
 }
 ```
+
+### <a name="WithTab"> タブにフォーラムを組み込む </a>
+
+[AppSteroidGetStarted](../AppSteroidGetStarted.md#ShowTab)を参照してください。
 
 ### <a name="SettingParameters"> パラメータを指定して表示する </a>
 
@@ -232,44 +237,88 @@ Sample
 ---
 
 ## <a name="HowToUseInGameChat"> ゲーム内チャットの利用 </a>
+インゲームテキストチャットは、ゲーム中にリアルタイムでグループ間でテキストチャットを行う機能です。
+テキストチャットはグループメッセージを介して行われます。
 
-ゲーム内チャット機能はゲーム内で利用出来るシンプルなテキストチャット機能です。
-テキストメッセージは保存されないので途中から参加したメンバーは過去のメッセージを閲覧することは出来ません。
+### 手順とサンプル
 
-### <a name="ObserveEvent"> チャットイベントの監視 </a>
-利用するにはまず通知を受信出来るようにチャットのイベントを監視する必要があります。
-監視の方法は[プッシュ通知のイベント監視](GetStarted-PushNotification.md#ObserveEvent)を参照してください。
-監視すべきpathとactionは以下です。
+#### 事前準備
+* AppSteroid の機能を利用するには、[GetStarted](./AppSteroidGetStarted.md) に説明する初期設定を行っておく必要があります。
+* グループメッセージはプッシュ通知を介して行われますので [プッシュ通知の設定](GetStarted/GetStarted-PushNotification.md)を行っておく必要があります。
+
+#### グループの作成
+1. グループの作成
+2. グループの作成の完了を処理する
 
 ```
-path : group/message/in_game
-action : created
+#import <AppSteroid/FASGroup.h>
+
+- (IBAction)pushedCreateGroupButton:(id)sender
+{
+	// 1. グループの作成
+	[FASGroup createGroupWithOpponentUserIds:userIds
+                                  completion:^(FASGroup *group, NSError *error)
+	{
+		// 2. グループの作成の完了を処理する
+	}];
+}
 ```
 
-### <a name="HowToSendMessageForInGame"> ゲーム内チャットにメッセージの送信 </a>
+#### グループメッセージの受信
+1. グループメッセージ作成時に発火するイベントを登録
+2. グループメッセージ作成イベントを処理する
+3. ビューから離れる時にイベントを破棄する
 
-指定したグループに対して、ゲーム内チャットとしてメッセージを送信します。
+```
+#import <AppSteroid/FASEvent.h>
 
-Sample
+@implementation InGameChatViewController
+{
+	FASObserver *_inGameObserver;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+	// 1. グループメッセージ作成時に発火するイベントを登録
+    _inGameObserver = [FASEvent observeEventWithPath:@"group/message/in_game"
+                                              action:@"created"
+                                        eventHandler:^(NSDictionary *params)
+    {
+		// 2. グループメッセージ作成イベントを処理する
+		NSLog(@"%@", params);
+    }];
+    
+    [self _registerForKeyboardNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // 3. ビューから離れる時にイベントを破棄する
+    [FASEvent unobserve:_inGameObserver];
+}
+
+```
+
+#### グループメッセージの送信
+1. グループメッセージの送信
+2. メッセージ送信の完了を処理する
 
 ```
 #import <AppSteroid/FASGroupMessage.h>
 
-	…
-	…
-
 - (IBAction)pushedSendButton:(id)sender
 {
-    [FASGroupMessage addMessageForInGameWithGroupId:@"xxxxxxxxxxxxxxxx"
-                                               text:@"text message"
+	// 1. グループメッセージの送信
+	[FASGroupMessage addMessageForInGameWithGroupId:@"xxxxxxgroup_idxxxxxxx"
+                                               text:@"message"
                                          completion:^(FASGroupMessage *message, NSError *error)
     {
-        if (error)
-        {
-            // エラー
-            return;
-        }
-        // 成功
+		// 2. メッセージ送信の完了を処理する
     }];
 }
+
 ```

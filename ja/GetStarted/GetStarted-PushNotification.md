@@ -5,10 +5,12 @@ last update at 2014/10/7
 ---
 
 - [Push Notificationの設定](#HowToSetupPushNotification)
+	- [プッシュ通知用証明書の作成](#CreateCertificates)
 	- [プッシュ通知用証明書の登録](#RegisterCertificates)
 	- [p12ファイルの作成](#CreateFiles)
 	- [p12ファイルのアップロード](#UploadFiles)
 	- [プッシュ通知を利用するための実装](#ImplementCodes)
+- [プッシュ通知の種類](#EventList)
 - [プッシュ通知のイベント監視](#ObserveEvent)
 - [特定のユーザーに対してプッシュ通知を送信](#CustomMessage)
 	- [チャンネルの設定](#SettingChannel)
@@ -19,6 +21,10 @@ last update at 2014/10/7
 ---
 
 ## <a name="HowToSetupPushNotification"> Push Notificationの設定 </a>
+
+### <a name="CreateCertificates"> プッシュ通知用証明書の作成 </a>
+
+[APNSCertificateTutorial](https://github.com/fresvii/appsteroid-documents/blob/master/ja/APNSCertificateTutorial.md)を参照して証明書の作成を行ってください。
 
 ### <a name="RegisterCertificates"> プッシュ通知用証明書の登録 </a>
 
@@ -83,6 +89,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
     LOG(@"Errorinregistration:%@",error);
 }
 ```
+
+## <a name="EventList"> プッシュ通知の種類 </a>
+
+[Push通知のイベントリスト](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md)を参照してください。
 
 ## <a name="ObserveEvent"> プッシュ通知のイベント監視 </a>
 
@@ -165,7 +175,7 @@ Sample
 ```
 
 ## <a name="CustomMessage"> 特定のユーザーに対してプッシュ通知を送信 </a>
-
+** [こちらの資料](../ChannelTutorial.md)も合わせてご覧ください。 **  
 [FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage)を利用します。
 設定したチャンネルに該当するユーザーに対して通知を行います。チャンネルの設定はFresviiのウェブコンソールから行う必要があります。
 
