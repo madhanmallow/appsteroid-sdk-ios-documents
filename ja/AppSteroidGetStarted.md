@@ -1,12 +1,21 @@
-# AppSteroid for iOS Get Started
+# AppSteroid for iOS Getting Started
 
-last update at 2014/10/7
+last update at 2015/5/26
 
 ---
 
-AppSteroid for iOSはiOS6.0以上をサポートしています。
+- [導入](#Installation)
+- [初期設定](#Initialization)
+- [ユーザー作成からログインまで](#SignUp&Login)
+- [簡単にタブ画面を表示する](#ShowTab)
+- [ログインからAppSteroidGUIの表示まで](#Login&ShowTab)
 
-## 導入
+---
+
+AppSteroid for iOSはiOS6.0以上をサポートしています。  
+導入前にWebコンソールでアプリ登録が終わっていることを確認してください。[アプリ登録方法](./Webコンソールでアプリ登録.md)
+
+## <a name="Installation"> 導入 </a>
 
 1. Frameworkのダウンロード
 
@@ -33,11 +42,11 @@ ___ボイスチャットの利用にはこちらの`導入`と合わせて[GetSt
 `Other Linker Flags`に`-ObjC`を記述してください。
 ![flags](GetStarted/Images/ss_fresvii_03.png "Flags")
 
-5. AppSteroidの利用を開始するためには、アプリケーションが起動するタイミングで初期設定をおこなう必要があります。
-`AppDelegate.m`の`application:didFinishLaunchingWithOptions:`に[AppSteroid](AppSteroidSpec.md#AppSteroid)の[startWithAppIdentifier:secretToken:](AppSteroidSpec.md#AppSteroid.startWithAppIdentifiersecretToken)を記述してください。
-このAPIはアプリIDとシークレットトークンを引数に渡す必要があります。
+## <a name="Initialization"> 初期設定 </a>
 
-Sample
+AppSteroidの利用を開始するためには、アプリケーションが起動するタイミングで初期設定をおこなう必要があります。
+`AppDelegate.m`の`application:didFinishLaunchingWithOptions:`に[AppSteroid](AppSteroidSpec.md#AppSteroid)の[startWithAppIdentifier:secretToken:development:](AppSteroidSpec.md#AppSteroid.startWithAppIdentifiersecretTokendevelopment)を記述してください。
+このAPIはアプリIDとシークレットトークンを引数に渡す必要があります。アプリIDとシークレットトークンの取得方法は[アプリ登録方法](./Webコンソールでアプリ登録.md)でご確認ください。
 
 ```
 #import <AppSteroid/AppSteroid.h>
@@ -51,7 +60,14 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     // Start AppSteroid.
     NSString *appId = @"xxxxxxxxxxxxxxxxxxxxxxx";
     NSString *secretToken = @"yyyyyyyyyyyyyyyyyyyyyyyy";
-    [AppSteroid startWithAppIdentifier:appId secretToken:secretToken];
+ #ifdef DEBUG
+    BOOL development = YES;
+ #else
+    BOOL development = NO;
+ #endif
+    [AppSteroid startWithAppIdentifier:appId
+                           secretToken:secretToken
+                           development:development];
 
 	…
 	…
@@ -61,20 +77,36 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 }
 ```
 
-## タブ画面の表示
+## <a name="SignUp&Login"> ユーザー作成からログインまで </a>
 
-### 簡単に表示する
+```obj-c
+#import <AppSteroid/FASAccount.h>
 
-`Forum`,`Leaderboard`,`Profile`の順番にタブビューを表示します。
+- (IBAction)pushedAppSteroidButton:(id)sender
+{
+	FASLoginUser *loginUser = [FASAccount currentLoggedInUser];	
+	// サインアップ済みのユーザーがいない場合
+    if (!loginUser || !loginUser.isSignedUp)
+    {
+		[FASAccount signUpUserCompletion:^(FASLoginUser *loginUser, NSError *error)
+		{
+			if (error)
+			{
+				NSLog(@"%@", error);
+				return;
+			}
+		}];
+	}
+}
+```
+
+## <a name="ShowTab"> 簡単にタブ画面を表示する </a>
+
+`Forum`,`Leaderboard`,`Messages`,`Profile`の順番にタブビューを表示します。
 表示させたいビューを指定したりする場合は、下の`タブに表示するビューを指定する`を参照してください。
 
-Sample
-
-```
+```obj-c
 #import <AppSteroid/FASTabBarController.h>
-
-	…
-	…
 
 - (IBAction)pushedTabButton:(id)sender
 {
@@ -83,53 +115,6 @@ Sample
 }
 ```
 
-### タブに表示するビューを指定する
+## <a name="Login&ShowTab"> ログインからAppSteroidGUIの表示まで </a>
 
-利用したいビューを指定してタブビューを表示します。
-詳しくはサンプルコードを参照してください。
-
-Sample
-
-```
-#import <AppSteroid/FASTabBarController.h>
-
-    …
-    …
-
-- (IBAction)pushedTabButton:(id)sender
-{
-    // Forum
-    FASForumNavigationController *forumNavigationController = [FASForumNavigationController forumNavigationController];
-    forumNavigationController.animated = YES;
-
-    // Leaderboard
-    NSString *leaderboardId = [[NSUserDefaults standardUserDefaults] objectForKey:@"leaderboardId"];
-    FASSortOptions *dailyOption = [FASSortOptions dailyWithMinute:0 hour:0];
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.leaderboardId = leaderboardId;
-    leaderboardNavigationController.onlyFriends = NO;
-    leaderboardNavigationController.animated = YES;
-    leaderboardNavigationController.dailySortOptions = dailyOption;
-
-    // Group
-    FASGroupNavigationController *groupNavigationController = [FASGroupNavigationController groupNavigationController];
-    groupNavigationController.animated = YES;
-
-    // Profile
-    FASProfileNavigationController *profileNavigationController = [FASProfileNavigationController profileNavigationController];
-    profileNavigationController.animated = YES;
-
-    NSArray *controllers = @[
-                             forumNavigationController,
-                             leaderboardNavigationController,
-                             groupNavigationController,
-                             profileNavigationController
-                             ];
-
-    FASTabBarController *tabBarController = [[FASTabBarController alloc] init];
-    tabBarController.viewControllers = controllers;
-    [self presentViewController:tabBarController
-                       animated:YES
-                     completion:nil];
-}
-```
+[ログインからAppSteroidGUIの表示まで](./ログインからAppSteroidGUIの表示まで.md)を参照してください。

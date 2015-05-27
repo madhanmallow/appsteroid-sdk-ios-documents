@@ -148,9 +148,10 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |Method|Description|
 |------|-----|
 |[startWithAppIdentifier:secretToken:](#AppSteroid.startWithAppIdentifiersecretToken)|SDKの利用を開始するために利用します。  |
-|[startWithAppIdentifier:secretToken:development:](#AppSteroid_startWithAppIdentifiersecretTokendevelopment)|SDKの利用を開始するために利用します。 モード指定付き。 |
+|[startWithAppIdentifier:secretToken:development:](#AppSteroid.startWithAppIdentifiersecretTokendevelopment)|SDKの利用を開始するために利用します。 モード指定付き。 |
 |[setTimeout:](#AppSteroid.setTimeout)|ネットワーク通信時のタイムアウト時間を設定します。 |
 |[setTabs:](#AppSteroid.setTabs)|表示するタブを設定します。 |
+|[enableCSRChat:](#AppSteroid.enableCSRChat)|CSR機能(カスタマーサポート)を利用するかどうかを決定します。 |
 |[sdkVersion](#AppSteroid.sdkVersion)|SDKのバージョンを返却します。 |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|SDKのビルドバージョンを返却します。 |
 
@@ -166,7 +167,7 @@ SDKの利用を開始するための初期設定を行います。開発モー�
     * シークレットトークン
 
 
-##### <a name="AppSteroid_startWithAppIdentifiersecretTokendevelopment"> startWithAppIdentifier:secretToken:development: </a>
+##### <a name="AppSteroid.startWithAppIdentifiersecretTokendevelopment"> startWithAppIdentifier:secretToken:development: </a>
 SDKの利用を開始するための初期設定を行います。開発モードを指定して起動する事ができます。詳細は [開発モードについて](./DevelopmentMode.md) を確認ください。
 
 \+ (void)startWithAppIdentifier:(NSString *)appIdentifier
@@ -235,6 +236,17 @@ Sample
 ```
 [AppSteroid setTabs:FASTabForum | FASTabLeaderboard | FASTabGroup | FASTabProfile];
 ```
+
+##### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
+SR機能(カスタマーサポート)を利用するかどうかを決定します。  
+デフォルトは`NO`に設定されています。  
+この機能を`YES`に設定すると、グループメッセージ作成画面の右上に`Live Help`というボタンが表示され、CSRに直接メッセージを送信することができます。
+
+\+ (void)enableCSRChat:(BOOL)enabled;
+
+* Parameters
+  * enabled
+    * `YES`に設定するとCSR機能がオンになります。
 
 ##### <a name="AppSteroid.sdkVersion"> sdkVersion </a>
 SDKのバージョンを`NSString`で返却します。
