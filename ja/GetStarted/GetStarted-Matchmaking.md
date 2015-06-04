@@ -8,6 +8,7 @@ last update at 2015/5/26
 - [マッチメイキング画面の表示](#HowToDisplayView)
 	- [簡単に表示する](#EasyWay)
 	- [パラメータを指定して表示する](#SettingParameters)
+	- [マッチする条件を指定する](#Segment)
 	- [レイアウトを変更する](#Layout)
 - [マッチの成立をハンドリングする](#HandlingMatchCompletion)
 - [ターン制ゲームへの対応](#GameContext)
@@ -56,7 +57,8 @@ Sample
 
 ### <a name="SettingParameters"> パラメータを指定して表示する </a>
 
-パラメータを指定してマッチメイキング画面を表示します。
+パラメータを指定してマッチメイキング画面を表示します。  
+パラメータの種類は[FASMatchmakingViewController](../Specs/Spec-Matchmaking.md#FASMatchmakingNavigationController)を参照してください。
 
 Sample
 
@@ -76,11 +78,23 @@ Sample
 - (IBAction)pushedMatchmakingButton:(id)sender
 {
     FASMatchmakingNavigationController *matchmakingNavigationController = [FASMatchmakingNavigationController matchmakingNavigationController];
-    matchmakingNavigationController.minNumberOfPlayers = 2;
-    matchmakingNavigationController.maxNumberOfPlayers = 4;
+    FASMatchmakingViewController *matchmakingViewController = matchmakingNavigationController.matchmakingViewController;
+    matchmakingViewController.minNumberOfPlayers = 3;
+    matchmakingViewController.maxNumberOfPlayers = 6;
     [self presentViewController:matchmakingNavigationController animated:YES completion:nil];
 }
 ```
+
+### <a name="Segment"> マッチする条件を指定する </a>
+
+マッチメイキングではマッチする条件を指定することができます。例えば同じ国の人同士でマッチングや同じレベルの人とマッチングといった指定をすることができます。利用するパラメータは[FASMatchmakingViewController#segment](../Specs/Spec-Matchmaking.md#FASMatchmakingNavigationController.segment)です。  
+この`segment`に文字列を指定することで、同じ文字列を持っている人同士でマッチングを行います。例えば同じ国の人でマッチングしたい場合は
+
+```
+matchmakingViewController.segment = @"Japan";
+```
+
+と指定することで、同じ`Japan`という`segment`を指定している人とのみマッチングをすることが可能になります。ですので`segment`に`USA`と指定している人とはマッチングすることは出来なくなります。
 
 ### <a name="Layout"> レイアウトの変更 </a>
 

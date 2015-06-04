@@ -964,7 +964,6 @@ typedef void (^FASGameContextCompletionHandler)(FASGameContext *gameContext, NSE
 |[minNumberOfPlayers](#FASMatchmakingNavigationController.minNumberOfPlayers)|マッチに必要な最小プレイヤー数を指定します。 |
 |[maxNumberOfPlayers](#FASMatchmakingNavigationController.maxNumberOfPlayers)|マッチに必要な最大プレイヤー数を指定します。 |
 |[timeout](#FASMatchmakingNavigationController.timeout)|マッチメイキングのタイムアウト時間を指定します。 |
-
 |[segment](#FASMatchmakingNavigationController.segment)|マッチのセグメントを指定します。同様のセグメントが指定されているユーザーとのみマッチします。 |
 
 ##### <a name="FASMatchmakingNavigationController.matchmakingDelegate"> matchmakingDelegate </a>
