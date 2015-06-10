@@ -21,6 +21,7 @@
 	* [User Management Spec](Specs/Spec-User.md)
 	* [VoiceChat Spec](Specs/Spec-VoiceChat.md)
 * [About Push Event](https://github.com/fresvii/appsteroid-documents/blob/master/en/EventList.md)
+* [How to use the WebConsole](https://fresvii.zendesk.com/hc/en-us/articles/204946850)
 * [Error Codes](ErrorCode.md)
 * [FAQ](FAQ.md)
 * [Release Notes](Release_Note.md)

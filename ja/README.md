@@ -23,6 +23,7 @@
   * [ストレージ仕様書](Specs/Spec-Storage.md)
   * [ユーザー作成仕様書](Specs/Spec-User.md)
   * [ボイスチャット仕様書](Specs/Spec-VoiceChat.md)
+* [WebConsoleの使い方](https://fresvii.zendesk.com/hc/en-us/articles/204946850)
 * [APNS証明書の作成](APNSCertificateTutorial.md)
 * [チャンネルの利用方法](ChannelTutorial.md)
 * [開発モード](DevelopmentMode.md)
