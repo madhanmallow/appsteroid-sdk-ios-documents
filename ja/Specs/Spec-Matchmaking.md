@@ -13,6 +13,48 @@ last update at 2015/4/2
 
 ---
 
+## Sequence
+
+#### マッチメイク開始時（一般対戦）
+![](Images/diagram_match_making_start.png "match_making_start")
+
+- 1.1 ユーザによる新規マッチメイクリクエストの作成
+- 1.2 リクエストの作成結果レスポンス Matchのstatus: FASMatchStatusWating
+- 2.1 他のユーザによる新規マッチメイクリクエストの作成
+- 3.1 (参加できるマッチが存在する場合) マッチに参加
+- 3.2 (参加者がマッチの最大人数に達した場合) マッチが完了
+- 2.2 リクエストの作成結果レスポンス Matchのstatus: FASMatchStatusComplete
+- 4 マッチの参加者全員にマッチの完了イベントを通知
+- 5.1 最新のマッチ招待情報を取得
+- 5.2 マッチ詳細のレスポンス
+
+#### マッチメイク開始時（招待による友人対戦）
+![](Images/diagram_match_making_invitation.png "match_making_invitation")
+
+- 1.1 ユーザによる新規マッチメイクリクエストの作成
+- 1.2 リクエストの作成結果レスポンス Matchのstatus: FASMatchStatusInviting
+- 2. 被招待者にマッチメイク招待イベントを通知
+- 3.1 招待の承認
+- 3.2 (参加者がマッチの最大人数に達した場合) マッチが完了
+- 4 マッチの参加者全員にマッチの完了イベントを通知
+- 5.1 最新のマッチ招待情報を取得
+- 5.2 マッチ詳細のレスポンス
+
+
+![](Images/diagram_match_making_end.png "match_making_end")
+
+- 1.1 不要になったマッチの破棄
+- 1.2 マッチ破棄の結果レスポンス Matchのstatus: FASMatchStatusDisposed
+
+マッチのステータスは以下の順に遷移します。
+
+1. FASMatchStatusWating: マッチの最大人数に達していない状態
+2. (FASMatchStatusInviting): マッチの最大人数に達しているが招待の承認を待っている状態
+3. FASMatchStatusComplete: マッチの最大人数に達した、または強制完了を実行した状態。ゲームが開始できる状態
+4. FASMatchStatusDisposed: ゲームが終了し、マッチを破棄した状態
+
+
+
 ## Classes
 
 |Class|Description|
@@ -336,7 +378,7 @@ Sample
 ```
 
 ##### <a name="FASMatch.completeMatchWithMatchIdcompletion"> completeMatchWithMatchId:completion: </a>
-指定したマッチIDのマッチを完了させます。  
+指定したマッチIDのマッチを完了させます。
 必要人数に達していた場合は[FASMatchStatus](#FASMatch.FASMatchStatus)が`FASMatchStatusComplete`の状態になり、達していなかった場合は`FASMatchStatusDisposed`の状態になります。
 
 \+ (void)completeMatchWithMatchId:(NSString *)matchId
@@ -345,7 +387,7 @@ Sample
 * Parameters
 	* matchId
 		* マッチID
-	* completion  
+	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト
 
 ### <a name="FASMatchPlayer"> FASMatchPlayer </a>
@@ -437,7 +479,7 @@ typedef NS_ENUM(NSInteger, FASMatchInvitationStatus)
 
 
 ### <a name="FASMatchRequest"> FASMatchRequest </a>
-マッチリクエストモデルクラス。マッチしたいときにリクエストを作成します。  
+マッチリクエストモデルクラス。マッチしたいときにリクエストを作成します。
 [FASMatchPlayer](#FASMatchPlayer)が親クラスです。
 
 #### Constants
@@ -652,8 +694,8 @@ Sample
 	* segment
 		* 指定した場合、同じセグメントを設定している対象とのみマッチします。
 	* cancelOnDecline
-		* 招待をdeclineした時はの挙動を決定します。  
-		  `YES`の場合: 招待をキャンセルし、マッチは参加者待ち状態になります。この時、他の参加者が参加可能になります。  
+		* 招待をdeclineした時はの挙動を決定します。
+		  `YES`の場合: 招待をキャンセルし、マッチは参加者待ち状態になります。この時、他の参加者が参加可能になります。
           `NO`の場合: 招待はキャンセルされず、declined ステータスのままマッチに残ります。参加者数がマッチの現在の最大参加者数に達している場合は他の参加者は参加できません。
 	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト
@@ -746,7 +788,7 @@ Sample
 
 
 ### <a name="FASMatchInvitation"> FASMatchInvitation </a>
-マッチ招待モデルクラス。マッチリクエストからプレイヤーを招待した際に作成されます。  
+マッチ招待モデルクラス。マッチリクエストからプレイヤーを招待した際に作成されます。
 [FASMatchPlayer](#FASMatchPlayer)が親クラスです。
 
 #### Properties
@@ -791,12 +833,12 @@ Sample
 	* message
 		* 招待のメッセージ
 	* cancelOnDecline
-		* 招待をdeclineした時はの挙動を決定します。  
-		  `YES`の場合: 招待をキャンセルし、マッチは参加者待ち状態になります。この時、他の参加者が参加可能になります。  
+		* 招待をdeclineした時はの挙動を決定します。
+		  `YES`の場合: 招待をキャンセルし、マッチは参加者待ち状態になります。この時、他の参加者が参加可能になります。
           `NO`の場合: 招待はキャンセルされず、declined ステータスのままマッチに残ります。参加者数がマッチの現在の最大参加者数に達している場合は他の参加者は参加できません。
 	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト
-	
+
 ##### <a name="FASMatchInvitation.acceptMatchRequestWithRequestIdcompletion"> acceptMatchRequestWithRequestId:completion: </a>
 招待を承認します。
 

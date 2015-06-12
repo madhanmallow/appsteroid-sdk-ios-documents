@@ -2,6 +2,10 @@
 
 ---
 
+### 0.7.2
+- Performance Improvements
+	- User name cannot be duplicated.
+
 ### 0.7.1
 - Performance Improvements
 	- Device token for development and production have been separated.
