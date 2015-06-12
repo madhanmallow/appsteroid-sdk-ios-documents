@@ -11,6 +11,48 @@ Players can find users who want to play the game together. We also provide a Mat
 
 ---
 
+## Sequence
+
+#### At the Start of Matchmake (Regular Match)
+![](Images/diagram_match_making_start.png "match_making_start")
+
+- 1.1 An user create a new matchmake request.
+- 1.2 Response the result of request creation. Match status: FASMatchStatusWating
+- 2.1 A new matchmake request created by other users.
+- 3.1 (If there is an existing match to join) Join a Match.
+- 3.2 (If participants reach the maximum capacity of the match) Match is completed.
+- 2.2 Response the result of request creation. Match status: FASMatchStatusComplete
+- 4 Notify match completion event to all match participants.
+- 5.1 Get the latest match invitation info.
+- 5.2 Response the match detail.
+
+#### At the Start of Matchmake (Friend Match by Invitation)
+![](Images/diagram_match_making_invitation.png "match_making_invitation")
+
+- 1.1 An user create a new matchmake request.
+- 1.2 Response the result of request creation. Match status: FASMatchStatusInviting
+- 2. Notify matchmake invitation event to joiner.
+- 3.1 Accept invitation.
+- 3.2 (If participants reach the maximum capacity of the match) Match is completed.
+- 4 Notify match completion event to all match participants.
+- 5.1 Get the latest match invitation info.
+- 5.2 Response the match detail.
+
+
+![](Images/diagram_match_making_end.png "match_making_end")
+
+- 1.1 Dispose the needless match.
+- 1.2 Response the result of match disposal. Match status: FASMatchStatusDisposed
+
+Match status will transit in the following order.
+
+1. FASMatchStatusWating: Waiting to reach the maximum capacity of the match.
+2. (FASMatchStatusInviting): Participants reached the maximum capacity but still waiting for joiners to accept the invitation.
+3. FASMatchStatusComplete: Participants reached the maximum capacity of the match, or executed force completion. Game can be started anytime.
+4. FASMatchStatusDisposed: Game is finished and match has been disposed.
+
+
+
 ## Classes
 
 |Class|Description|
