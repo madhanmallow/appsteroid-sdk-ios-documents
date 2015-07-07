@@ -19,8 +19,8 @@ last update at 2014/10/7
 |[FASGroup](#FASGroup)|グループモデルクラス |
 |[FASGroupMember](#FASGroupMember)|グループメンバーモデルクラス |
 |[FASGroupMessage](#FASGroupMessage)|グループメッセージモデルクラス |
-|[FASGroupNavigationController](#FASGroupNavigationController)|グループビューのベースとなるNavigationController |
-|[FASGroupLayout](#FASGroupLayout)|グループビュー関連のレイアウトを変更するためのクラス |
+|[FASSticker](#FASSticker)|グループメッセージ用ステッカーモデルクラス |
+|[FASStickerSet](#FASStickerSet)|グループメッセージ用ステッカーセットモデルクラス |
 
 ---
 
@@ -962,211 +962,177 @@ Sample
 }
 ```
 
-### <a name="FASGroupNavigationController"> FASGroupNavigationController </a>
-グループビューのベースとなるNavigationController
+### <a name="FASSticker"> FASSticker </a>
+ステッカーモデルクラス。
 
-#### Properties
+#### Constants
 
-|Properties|Description|
+|Constant|Description|
 |------|-----|
-|[animated](#FASGroupNavigationController.animated)|ビューを閉じるときのアニメーション有無 |
+|[FASStickerCompletionHandler](#FASSticker.FASStickerCompletionHandler)|ステッカー取得処理を行った際に利用されるブロックオブジェクト。 |
 
-##### <a name="FASGroupNavigationController.animated"> animated </a>
-ビューを閉じるときにアニメーション付きで閉じるかどうかを設定します。デフォルトは`YES`です。
 
-@property (nonatomic, assign) BOOL animated;
+##### <a name="FASSticker.FASStickerCompletionHandler"> (^FASStickerCompletionHandler)(FASSticker *sticker, NSError *error) </a>
+ステッカー取得処理を行った際に利用されるブロックオブジェクト。
 
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[groupNavigationController](#FASGroupNavigationController.groupNavigationController) |グループビューのベースとなる[FASGroupNavigationController](#FASGroupNavigationController)を返却します。 |
-|[presentGroupWithTarget:animated:](#FASGroupNavigationController.presentGroupWithTargetanimated) |グループビューを表示します。 |
-
-##### <a name="FASGroupNavigationController.groupNavigationController"> groupNavigationController </a>
-グループビューのベースとなる[FASGroupNavigationController](#FASGroupNavigationController)を返却します。
-
-\+ (FASGroupNavigationController *)groupNavigationController;
-
-##### <a name="FASGroupNavigationController.presentGroupWithTargetanimated"> presentGroupWithTarget:animated: </a>
-グループビューを表示します。
-
-\+ (void)presentGroupWithTarget:(UIViewController *)target
-                       animated:(BOOL)animated;
+typedef void (^FASStickerCompletionHandler)(FASSticker *sticker, NSError *error);
 
 * Parameters
-	* target
-		* ビューを表示する元となるViewControllerを指定します。
-	* animated
-		* YESならアニメーションさせて遷移します。NOならアニメーションはしません。
-
-Sample
-
-```
-#import <AppSteroid/FASGroupNavigationController.h>
-
-	…
-	…
-
-- (IBAction)pushedGroupButton:(id)sender
-{
-    [FASGroupNavigationController presentGroupWithTarget:self
-                                                animated:YES];
-}
-```
-
-### <a name="FASGroupLayout"> FASGroupLayout </a>
-フォーラムビュー関連のレイアウトを変更します。
+	* sticker
+		* [FASSticker](#FASSticker)が格納されています。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[groupListLayoutBlocks](#FASGroupLayout.groupListLayoutBlocks)|グループリストビューのレイアウトを変更するためのブロックオブジェクト |
-|[groupCreateLayoutBlocks](#FASGroupLayout.groupCreateLayoutBlocks)|グループ作成ビューのレイアウトを変更するためのブロックオブジェクト |
-|[groupChatLayoutBlocks](#FASGroupLayout.groupChatLayoutBlocks)|グループチャットビューのレイアウトを変更するためのブロックオブジェクト |
-|[groupMemberLayoutBlocks](#FASGroupLayout.groupMemberLayoutBlocks)|グループメンバービューのレイアウトを変更するためのブロックオブジェクト |
-|[groupMemberAdditionLayoutBlocks](#FASGroupLayout.groupMemberAdditionLayoutBlocks)|グループメンバー追加ビューのレイアウトを変更するためのブロックオブジェクト |
+|[stickerId](#FASSticker.stickerId)|ステッカーID |
+|[stickerSetId](#FASSticker.stickerSetId)|ステッカーセットID |
+|[stickerName](#FASSticker.stickerName)|ステッカー名 |
+|[url](#FASSticker.url)|ステッカーのURL |
 
-##### <a name="FASGroupLayout.groupListLayoutBlocks"> groupListLayoutBlocks </a>
-グループリストビューのレイアウトを変更するためのブロックオブジェクト
+##### <a name="FASSticker.stickerId"> stickerId </a>
+ステッカーID
 
-@property (nonatomic, copy) FASGroupListViewController *(^groupListLayoutBlocks)(FASGroupListViewController *groupListViewController);
+@property (nonatomic, readonly) NSString *stickerId;
 
-Sample - 背景色とナビゲーションバーを変更するサンプル
+##### <a name="FASSticker.stickerSetId"> stickerSetId </a>
+ステッカーセットID
 
-```
-[FASGroupLayout sharedInstance].groupListLayoutBlocks = ^FASGroupListViewController *(FASGroupListViewController *groupListViewController)
-    {
-        groupListViewController.view.backgroundColor = [UIColor whiteColor];
-        groupListViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        groupListViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-        groupListViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        groupListViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        groupListViewController.groupListCellLayoutBlocks = ^FASGroupListCell *(FASGroupListCell *groupListCell)
-        {
-            groupListCell.backgroundColor = [UIColor whiteColor];
-            groupListCell.userNameLabel.textColor = [UIColor blackColor];
-            groupListCell.userCountLabel.textColor = [UIColor blackColor];
-            groupListCell.elapsedTimeLabel.textColor = [UIColor blackColor];
-            groupListCell.lastMessageLabel.textColor = [UIColor blackColor];
-            groupListCell.contentView.backgroundColor = [UIColor whiteColor];
-            return groupListCell;
-        };
+@property (nonatomic, readonly) NSString *stickerSetId;
 
-        return groupListViewController;
-    };
-```
+##### <a name="FASSticker.stickerName"> stickerName </a>
+ステッカー名
 
-##### <a name="FASGroupLayout.groupCreateLayoutBlocks"> groupCreateLayoutBlocks </a>
-グループ作成ビューのレイアウトを変更するためのブロックオブジェクト
+@property (nonatomic, readonly) NSString *stickerName;
 
-@property (nonatomic, copy) FASGroupCreateViewController *(^groupCreateLayoutBlocks)(FASGroupCreateViewController *groupCreateViewController);
+##### <a name="FASSticker.url"> url </a>
+ステッカーのURL
 
-Sample - 背景色を変更するサンプル
-
-```
-[FASGroupLayout sharedInstance].groupCreateLayoutBlocks = ^FASGroupCreateViewController *(FASGroupCreateViewController *groupCreateViewController)
-    {
-        groupCreateViewController.view.backgroundColor = [UIColor whiteColor];
-        groupCreateViewController.scrollView.backgroundColor = [UIColor whiteColor];
-        groupCreateViewController.toLabel.textColor = [UIColor blackColor];
-        groupCreateViewController.inputView.backgroundColor = [UIColor whiteColor];
-        if ([groupCreateViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            groupCreateViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            groupCreateViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        groupCreateViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        groupCreateViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        groupCreateViewController.groupCreateCellLayoutBlocks = ^FASGroupCreateCell *(FASGroupCreateCell *groupCreateCell)
-        {
-            groupCreateCell.backgroundColor = [UIColor whiteColor];
-            groupCreateCell.baseView.backgroundColor = [UIColor whiteColor];
-            groupCreateCell.userNameLabel.textColor = [UIColor blackColor];
-            groupCreateCell.contentView.backgroundColor = [UIColor whiteColor];
-            return groupCreateCell;
-        };
-
-        return groupCreateViewController;
-    };
-```
-
-##### <a name="FASGroupLayout.groupChatLayoutBlocks"> groupChatLayoutBlocks </a>
-グループチャットビューのレイアウトを変更するためのブロックオブジェクト
-
-@property (nonatomic, copy) FASGroupChatViewController *(^groupChatLayoutBlocks)(FASGroupChatViewController *groupChatViewController);
-
-Sample - 背景色を変更するサンプル
-
-```
-[FASGroupLayout sharedInstance].groupChatLayoutBlocks = ^FASGroupChatViewController *(FASGroupChatViewController *groupChatViewController)
-    {
-        groupChatViewController.view.backgroundColor = [UIColor whiteColor];
-        groupChatViewController.titleLabel.textColor = [UIColor blackColor];
-        groupChatViewController.userCountLabel.textColor = [UIColor blackColor];
-        groupChatViewController.inputView.backgroundColor = [UIColor whiteColor];
-        return groupChatViewController;
-    };
-```
-
-##### <a name="FASGroupLayout.groupMemberLayoutBlocks"> groupMemberLayoutBlocks </a>
-グループメンバービューのレイアウトを変更するためのブロックオブジェクト
-
-@property (nonatomic, copy) FASGroupMemberViewController *(^groupMemberLayoutBlocks)(FASGroupMemberViewController *groupMemberViewController);
-
-Sample - 背景色を変更するサンプル
-
-```
-[FASGroupLayout sharedInstance].groupMemberLayoutBlocks = ^FASGroupMemberViewController *(FASGroupMemberViewController *groupMemberViewController)
-    {
-        groupMemberViewController.view.backgroundColor = [UIColor whiteColor];
-        groupMemberViewController.groupMemberCellLayoutBlocks = ^FASGroupMemberCell *(FASGroupMemberCell *groupMemberCell)
-        {
-            groupMemberCell.userNameLabel.textColor = [UIColor blackColor];
-            groupMemberCell.backgroundColor = [UIColor whiteColor];
-            return groupMemberCell;
-        };
-        return groupMemberViewController;
-    };
-```
-
-##### <a name="FASGroupLayout.groupMemberAdditionLayoutBlocks"> groupMemberAdditionLayoutBlocks </a>
-グループメンバー追加ビューのレイアウトを変更するためのブロックオブジェクト
-
-@property (nonatomic, copy) FASGroupMemberAdditionViewController *(^groupMemberAdditionLayoutBlocks)(FASGroupMemberAdditionViewController *groupMemberAdditionViewController);
-
-Sample - 背景色を変更するサンプル
-
-```
-[FASGroupLayout sharedInstance].groupMemberAdditionLayoutBlocks = ^FASGroupMemberAdditionViewController *(FASGroupMemberAdditionViewController *groupMemberAdditionViewController)
-    {
-        groupMemberAdditionViewController.view.backgroundColor = [UIColor whiteColor];
-        if ([groupMemberAdditionViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            groupMemberAdditionViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            groupMemberAdditionViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        groupMemberAdditionViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        groupMemberAdditionViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        groupMemberAdditionViewController.groupMemberAdditionCellLayoutBlocks = ^FASGroupMemberAdditionCell *(FASGroupMemberAdditionCell *groupMemberAdditionCell)
-        {
-            groupMemberAdditionCell.backgroundColor = [UIColor whiteColor];
-            groupMemberAdditionCell.userNameLabel.textColor = [UIColor blackColor];
-            groupMemberAdditionCell.contentView.backgroundColor = [UIColor whiteColor];
-            return groupMemberAdditionCell;
-        };
-        return groupMemberAdditionViewController;
-    };
-```
+@property (nonatomic, readonly) NSString *url;
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[sharedInstance](#FASGroupLayout.sharedInstance) |唯一のオブジェクトを返却します。 |
+|[fetchStickerWithId:completion:](#FASSticker.fetchStickerWithIdcompletion) |ステッカーを取得します。 |
 
-##### <a name="FASGroupLayout.sharedInstance"> sharedInstance </a>
-唯一のオブジェクトを返却します。
+##### <a name="FASSticker.fetchStickerWithIdcompletion"> fetchStickerWithId:completion: </a>
+ステッカーを取得します。
 
-\+ (instancetype)sharedInstance;
+\+ (void)fetchStickerWithId:(NSString *)stickerId
+                completion:(FASStickerCompletionHandler)completion;
+
+* Parameters
+	* stickerId
+		* ステッカーID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+### <a name="FASStickerSet"> FASStickerSet </a>
+ステッカーセットモデルクラス。
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASStickerSetCompletionHandler](#FASStickerSet.FASStickerSetCompletionHandler)|ステッカーセット取得処理を行った際に利用されるブロックオブジェクト。 |
+|[FASStickerSetsCompletionHandler](#FASStickerSet.FASStickerSetsCompletionHandler)|複数のステッカーセット取得処理を行った際に利用されるブロックオブジェクト。 |
+
+
+##### <a name="FASStickerSet.FASStickerSetCompletionHandler"> (^FASStickerSetCompletionHandler)(FASStickerSet *stickerSet, NSError *error) </a>
+ステッカーセット取得処理を行った際に利用されるブロックオブジェクト。
+
+typedef void (^FASStickerSetCompletionHandler)(FASStickerSet *stickerSet, NSError *error);
+
+* Parameters
+	* stickerSet
+		* [FASStickerSet](#FASStickerSet)が格納されています。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
+		
+##### <a name="FASStickerSet.FASStickerSetsCompletionHandler"> (^FASStickerSetsCompletionHandler)(NSArray *stickerSets, FASPagingMeta *meta, NSError *error) </a>
+ステッカーセット取得処理を行った際に利用されるブロックオブジェクト。
+
+typedef void (^FASStickerSetsCompletionHandler)(NSArray *stickerSets, FASPagingMeta *meta, NSError *error);
+
+* Parameters
+	* stickerSet
+		* [FASStickerSet](#FASStickerSet)が格納されています。
+	* meta
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
+
+#### Properties
+
+|Properties|Description|
+|------|-----|
+|[stickerSetId](#FASStickerSet.stickerSetId)|ステッカーセットID |
+|[stickerSetName](#FASStickerSet.stickerSetName)|ステッカーセット名 |
+|[url](#FASStickerSet.url)|ステッカーセットの画像URL |
+|[stickers](#FASStickerSet.stickers)|ステッカーセットに含まれる[FASSticker](#FASSticker)群が格納されています。 |
+|[createdAt](#FASStickerSet.createdAt)|ステッカーセットが作成された日時 |
+|[updatedAt](#FASStickerSet.updatedAt)|ステッカーセットが更新された日時 |
+
+##### <a name="FASStickerSet.stickerSetId"> stickerSetId </a>
+ステッカーセットID
+
+@property (nonatomic, readonly) NSString *stickerSetId;
+
+##### <a name="FASStickerSet.stickerSetName"> stickerSetName </a>
+ステッカーセット名
+
+@property (nonatomic, readonly) NSString *stickerSetName;
+
+##### <a name="FASStickerSet.url"> url </a>
+ステッカーセットの画像URL
+
+@property (nonatomic, readonly) NSString *url;
+
+##### <a name="FASStickerSet.stickers"> stickers </a>
+ステッカーセットに含まれる[FASSticker](#FASSticker)群が格納されています。
+
+@property (nonatomic, readonly) NSArray *stickers;
+
+##### <a name="FASStickerSet.createdAt"> createdAt </a>
+ステッカーセットが作成された日時
+
+@property (nonatomic, readonly) NSString *url;
+
+##### <a name="FASStickerSet.createdAt"> updatedAt </a>
+ステッカーセットが更新された日
+
+@property (nonatomic, readonly) NSDate *updatedAt;
+
+#### Class Method
+
+|Method|Description|
+|------|-----|
+|[fetchStickerSetsWithPage:completion:](#FASStickerSet.fetchStickerSetsWithPagecompletion) |ステッカーセットの一覧を取得します。 |
+|[fetchStickerSetWithId:completion:](#FASStickerSet.fetchStickerSetWithIdcompletion) |ステッカーセットを取得します。 |
+
+##### <a name="FASStickerSet.fetchStickerSetsWithPagecompletion"> fetchStickerSetsWithPage:completion: </a>
+ステッカーセットの一覧を取得します。
+
+\+ (void)fetchStickerSetsWithPage:(NSUInteger)page
+                      completion:(FASStickerSetsCompletionHandler)completion;
+
+* Parameters
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+##### <a name="FASStickerSet.fetchStickerSetWithIdcompletion"> fetchStickerSetWithId:completion: </a>
+ステッカーセットを取得します。
+
+\+ (void)fetchStickerSetWithId:(NSString *)stickerSetId
+                   completion:(FASStickerSetCompletionHandler)completion;
+
+* Parameters
+	* stickerSetId
+		* ステッカーセットID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
