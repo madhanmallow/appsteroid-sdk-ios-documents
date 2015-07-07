@@ -5,10 +5,14 @@
 ### 1.0.0
 - 追加
 	- AppSteroidのGUIが刷新しました。
+	- 
 
 - 修正
 	- [FASRank](Specs/Spec-Leaderboard.md#FASRank)の`startTime`パラメータが廃止となり、代わりに`period`パラメータを利用するように変更になりました。
 	- `FASSortOptions`の利用は廃止になりました。
+	- `FASEvent`の名前が[FASNotificationEvent](Specs/Spec-Notification.md#FASNotificationEvent)に変更になりました。
+	- `FASEventDelegate`がの名前が[FASNotificationEventDelegate](Specs/Spec-Notification.md#FASNotificationEventDelegate)に変更になりました。
+	- 
 
 ### 0.7.2
 - 改善
