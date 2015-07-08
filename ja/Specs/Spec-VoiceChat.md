@@ -18,7 +18,6 @@ last update at 2014/10/7
 |------|-----|
 |[FASConference](#FASConference)|ボイスチャットの機能に関するモデルクラス |
 |[FASConferenceParticipant](#FASConferenceParticipant)|カンファレンスの参加者に関するモデルクラス |
-|[FASVoiceChatLayout](#FASVoiceChatLayout)|ボイスチャットビュー関連のレイアウトを変更するためのクラス |
 
 ---
 
@@ -310,49 +309,3 @@ typedef void (^FASParticipantsCompletionHandler)(NSArray *participants, NSError 
 参加者の通話状態を取得します。
 
 -(NSString *)humanizedCallStatus;
-
-
-### <a name="FASVoiceChatLayout"> FASVoiceChatLayout </a>
-ボイスチャットビュー関連のレイアウトを変更します。
-
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[voiceChatayoutBlocks](#FASVoiceChatLayout.voiceChatayoutBlocks)|ボイスチャットビューのレイアウトを変更するためのブロックオブジェクト |
-
-##### <a name="FASVoiceChatLayout.voiceChatayoutBlocks"> voiceChatayoutBlocks </a>
-ボイスチャットビューのレイアウトを変更するためのブロックオブジェクト
-
-@property (nonatomic, copy) FASVoiceChatViewController *(^voiceChatayoutBlocks)(FASVoiceChatViewController *voiceChatViewController);
-
-Sample - 背景色を変更するサンプル
-
-```
-    [FASVoiceChatLayout sharedInstance].voiceChatayoutBlocks = ^FASVoiceChatViewController *(FASVoiceChatViewController *voiceChatViewController)
-    {
-        voiceChatViewController.view.backgroundColor = [UIColor whiteColor];
-        voiceChatViewController.endLabel.textColor = [UIColor blackColor];
-        voiceChatViewController.messageLabel.textColor = [UIColor blackColor];
-        voiceChatViewController.timeLabel.textColor = [UIColor blackColor];
-        if ([voiceChatViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            voiceChatViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            voiceChatViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        voiceChatViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        voiceChatViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        return voiceChatViewController;
-    };
-```
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[sharedInstance](#FASVoiceChatLayout.sharedInstance) |唯一のオブジェクトを返却します。 |
-
-##### <a name="FASVoiceChatLayout.sharedInstance"> sharedInstance </a>
-唯一のオブジェクトを返却します。
-
-\+ (instancetype)sharedInstance;

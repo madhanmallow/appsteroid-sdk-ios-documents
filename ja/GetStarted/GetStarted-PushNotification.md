@@ -4,12 +4,8 @@ last update at 2014/10/7
 
 ---
 
-- [Push Notificationの設定](#HowToSetupPushNotification)
-	- [プッシュ通知用証明書の作成](#CreateCertificates)
-	- [プッシュ通知用証明書の登録](#RegisterCertificates)
-	- [p12ファイルの作成](#CreateFiles)
-	- [p12ファイルのアップロード](#UploadFiles)
-	- [プッシュ通知を利用するための実装](#ImplementCodes)
+- [Push通知の設定](#HowToSetupPushNotification)
+- [プッシュ通知を利用するための実装](#ImplementCodes)
 - [プッシュ通知の種類](#EventList)
 - [プッシュ通知のイベント監視](#ObserveEvent)
 - [特定のユーザーに対してプッシュ通知を送信](#CustomMessage)
@@ -21,38 +17,9 @@ last update at 2014/10/7
 ---
 
 ## <a name="HowToSetupPushNotification"> Push Notificationの設定 </a>
+プッシュ通知の設定方法は[こちら](https://github.com/fresvii/appsteroid-documents/blob/master/ja/APNSCertificateTutorial.md)を参照してください。
 
-### <a name="CreateCertificates"> プッシュ通知用証明書の作成 </a>
-
-[APNSCertificateTutorial](https://github.com/fresvii/appsteroid-documents/blob/master/ja/APNSCertificateTutorial.md)を参照して証明書の作成を行ってください。
-
-### <a name="RegisterCertificates"> プッシュ通知用証明書の登録 </a>
-
-iOS Dev Centerで作成したプッシュ通知用の証明書をダウンロードします。
-![pn01](Images/ss_fresvii_pn_01.png "PN01")
-ダウンロードした証明書をKeyChainに登録します。KeyChainには以下の名前で登録されています。
-* 開発用 : Apple Development IOS Push Services: Your.Bundle.ID
-* 製品用 : Apple Production IOS Push Services: Your.Bundle.ID
-
-### <a name="CreateFiles"> p12ファイルの作成 </a>
-
-KeyChainを開き、先ほど登録した証明書を右クリックして"Export"を選択します。
-![pn02](Images/ss_fresvii_pn_02.png "PN02")
-ファイル名を入力し、ファイルフォーマットが"Personal Information Exchange(.p12)"となっていることを確認して"Save"を押します。
-![pn03](Images/ss_fresvii_pn_03.png "PN03")
-パスワードを入力してp12ファイルを作成します。
-![pn04](Images/ss_fresvii_pn_04.png "PN04")
-
-### <a name="UploadFiles"> p12ファイルのアップロード </a>
-
-[Fresvii](https://fresvii.com/)にログインして、`設定->通知設定`より作成したp12ファイルをアップロードします。(1)
-p12ファイルを書き出す際にパスワードを設定した場合は`パスワード`フォームにパスワードを入力してください。(2)
-設定が完了したら`保存`ボタンを押します。(3)
-![pn05](Images/ss_fresvii_pn_05.png "PN05")
-アップロードが完了すると以下の画面になります。
-![pn06](Images/ss_fresvii_pn_06.png "PN06")
-
-### <a name="ImplementCodes"> プッシュ通知を利用するための実装 </a>
+## <a name="ImplementCodes"> プッシュ通知を利用するための実装 </a>
 
 プッシュ通知を利用するために`AppDelegate.h`に以下のような実装が必要になります。
 
@@ -89,7 +56,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
     LOG(@"Errorinregistration:%@",error);
 }
 ```
-
+	
 ## <a name="EventList"> プッシュ通知の種類 </a>
 
 [Push通知のイベントリスト](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md)を参照してください。
@@ -175,25 +142,17 @@ Sample
 ```
 
 ## <a name="CustomMessage"> 特定のユーザーに対してプッシュ通知を送信 </a>
-** [こちらの資料](../ChannelTutorial.md)も合わせてご覧ください。 **  
-[FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage)を利用します。
-設定したチャンネルに該当するユーザーに対して通知を行います。チャンネルの設定はFresviiのウェブコンソールから行う必要があります。
+特定のユーザーに対してプッシュ通知を送信するためには、Webコンソールでの設定と、[FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage)の利用が必要になります。
 
 ### <a name="SettingChannel"> チャンネルの設定 </a>
 
-チャンネルの設定はFresviiのウェブコンソールから行います。
-サンプルとして[Key-Value Storage](../Specs/Spec-Storage.md#FASStorage)を利用したユーザーの絞り込み方法を示します。
-
-まず始めにコンソールからチャンネルを設定します。
-`level`というキーに対して`bind_level`という変数でユーザーの絞り込みを行う設定です。
-
-```
-
-```
+チャンネルの設定はFresviiのウェブコンソールから行います。  
+[こちらの資料](https://github.com/fresvii/appsteroid-documents/blob/master/ja/ChannelTutorial.md)を参照してください。
 
 ### <a name="UseKVS"> ストレージの利用 </a>
 
-次に`level`というキーに対して`10`という値をストレージに保存します。
+サンプルとして[Key-Value Storage](../Specs/Spec-Storage.md#FASStorage)を利用したユーザーの絞り込み方法を示します。  
+`level`というキーに対して`10`という値をストレージに保存します。
 
 Sample
 
