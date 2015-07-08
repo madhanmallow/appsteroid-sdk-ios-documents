@@ -1,6 +1,6 @@
 # Leaderboard Specifications
 
-last update at 2014/010/7
+last update at 2015/7/7
 
 ---
 
@@ -20,10 +20,8 @@ last update at 2014/010/7
 |[FASLeaderboard](#FASLeaderboard)|リーダーボードモデルクラス |
 |[FASScore](#FASScore)|スコアモデルクラス |
 |[FASRank](#FASRank)|ランクモデルクラス |
-|[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)|リーダーボードビューのベースとなるNavigationController |
-|[FASLeaderboardLayout](#FASLeaderboardLayout)|リーダーボードビュー関連のレイアウトを変更するためのクラス |
-
-
+|[FASGameEvent](#FASGameEvent)|ゲームイベントモデルクラス |
+|[FASEventboard](#FASEventboard)|イベントボードモデルクラス |
 
 ---
 
@@ -644,138 +642,252 @@ Sample
 }
 ```
 
+### <a name="FASGameEvent"> FASGameEvent </a>
+ゲームイベントモデルクラス。ゲームイベントの作成はコンソールから行うことができます。
 
+#### Constants
 
-### <a name="FASLeaderboardNavigationController"> FASLeaderboardNavigationController </a>
-リーダーボードビューのベースとなるNavigationController
-
-#### Properties
-
-|Properties|Description|
+|Constant|Description|
 |------|-----|
-|[leaderboardId](#FASLeaderboardNavigationController.leaderboardId)|リーダーボードID |
-|[onlyFriends](#FASLeaderboardNavigationController.onlyFriends)|フレンドのみ表示したい場合は`YES`を指定します。 |
-|[animated](#FASLeaderboardNavigationController.animated)|ビューを閉じるときのアニメーション有無 |
-|[dailySortOptions](#FASLeaderboardNavigationController.todaySortOptions)|リーダーボードの`today`セクションのソート方法を指定します。 |
-|[weeklySortOptions](#FASLeaderboardNavigationController.weeklySortOptions)|リーダーボードの`weekly`セクションのソート方法を指定します。 |
-|[totalSortOptions](#FASLeaderboardNavigationController.totalSortOptions)|リーダーボードの`total`セクションのソート方法を指定します。 |
+|[FASGameEventStatus](#FASGameEvent.FASGameEventStatus)|ゲームイベントの状態に関する定数群。 |
+|[FASGameEventCompletionHandler](#FASGameEvent.FASGameEventCompletionHandler)|ゲームイベント処理を行った際に利用されるブロックオブジェクト。 |
+|[FASGameEventsCompletionHandler](#FASGameEvent.FASGameEventsCompletionHandler)|複数のゲームイベント取得処理を行った際に利用されるブロックオブジェクト。 |
 
-##### <a name="FASLeaderboardNavigationController.leaderboardId"> leaderboardId </a>
-表示したいリーダーボードのIDを指定します。
+##### <a name="FASGameEvent.FASGameEventStatus"> FASGameEventStatus </a>
+ゲームイベントの状態に関する定数が定義されています。  
+ゲームイベントを取得する際に利用します。
 
-@property (nonatomic, copy) NSString *leaderboardId;
+```
+typedef NS_ENUM(NSInteger, FASGameEventStatus)
+{
+    FASGameEventStatusUpcoming,
+    FASGameEventStatusOngoing,
+    FASGameEventStatusPast,
+};
+```
 
-##### <a name="FASLeaderboardNavigationController.onlyFriends"> onlyFriends </a>
-フレンドのみ表示したい場合は`YES`を指定します。デフォルトは`NO`です。
+###### Constants
+###### FASGameEventStatusUpcoming
+まだ開始されていないゲームイベントの状態
 
-@property (nonatomic, assign) BOOL onlyFriends;
+###### FASGameEventStatusOngoing
+現在開催中のゲームイベントの状態
 
-##### <a name="FASLeaderboardNavigationController.animated"> animated </a>
-ビューを閉じるときにアニメーション付きで閉じるかどうかを設定します。デフォルトは`YES`です。
+###### FASGameEventStatusPast
+すでに終了したゲームイベントの状態
 
-@property (nonatomic, assign) BOOL animated;
+##### <a name="FASGameEvent.FASGameEventCompletionHandler"> (^FASGameEventCompletionHandler)(FASGameEvent *event, NSError *error) </a>
+ゲームイベント処理を行った際に利用されるブロックオブジェクト。
 
-##### <a name="FASLeaderboardNavigationController.todaySortOptions"> dailySortOptions </a>
-リーダーボードの`today`セクションのソート方法を指定します。[FASSortOptions](#FASSortOptions)の[dailyWithMinute:hour:](#FASSortOptions.dailyWithMinutehour)の返り値を指定してください。
-
-@property (nonatomic, strong) FASSortOptions *dailySortOptions;
-
-##### <a name="FASLeaderboardNavigationController.weeklySortOptions"> weeklySortOptions </a>
-リーダーボードの`weekly`セクションのソート方法を指定します。[FASSortOptions](#FASSortOptions)の[weeklyWithMinute:hour:weekday:](#FASSortOptions.weeklyWithMinutehourweekday)の返り値を指定してください。
-
-@property (nonatomic, strong) FASSortOptions *weeklySortOptions;
-
-##### <a name="FASLeaderboardNavigationController.totalSortOptions"> totalSortOptions </a>
-リーダーボードの`total`セクションのソート方法を指定します。[FASSortOptions](#FASSortOptions)の[total](#FASSortOptions.total)の返り値を指定してください。
-
-@property (nonatomic, strong) FASSortOptions *totalSortOptions;
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[leaderboardNavigationController](#FASLeaderboardNavigationController.leaderboardNavigationController) |リーダーボードビューのベースとなる[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)を返却します。 |
-|[presentLeaderboardWithTarget:animated:](#FASLeaderboardNavigationController.presentLeaderboardWithTargetanimated) |リーダーボードビューを表示します。 |
-
-##### <a name="FASLeaderboardNavigationController.leaderboardNavigationController"> leaderboardNavigationController </a>
-リーダーボードビューのベースとなる[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)を返却します。
-
-\+ (FASLeaderboardNavigationController *)leaderboardNavigationController;
-
-##### <a name="FASLeaderboardNavigationController.presentLeaderboardWithTargetanimated"> presentLeaderboardWithTarget:animated: </a>
-リーダーボードビューを表示します。直近で作成したリーダーボードを表示します。
-
-\+ (void)presentLeaderboardWithTarget:(UIViewController *)target
-                             animated:(BOOL)animated;
+typedef void (^FASGameEventCompletionHandler)(FASGameEvent *event, NSError *error);
 
 * Parameters
-	* target
-		* ビューを表示する元となるViewControllerを指定します。
-	* animated
-		* YESならアニメーションさせて遷移します。
+	* event
+		* [FASGameEvent](#FASGameEvent)が格納されています。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
-Sample
+##### <a name="FASGameEvent.FASGameEventsCompletionHandler"> (^FASRankingCompletionHandler)(NSArray *ranking, NSError *error) </a>
+複数のゲームイベント取得処理を行った際に利用されるブロックオブジェクト。
 
-```
-#import <AppSteroid/FASLeaderboardNavigationController.h>
+typedef void (^FASGameEventsCompletionHandler)(NSArray *events, FASPagingMeta *meta, NSError *error);
 
-	…
-	…
-
-- (IBAction)pushedLeaderboardButton:(id)sender
-{
-    [FASLeaderboardNavigationController presentLeaderboardWithTarget:self
-                                                            animated:YES];
-}
-```
-
-### <a name="FASLeaderboardLayout"> FASLeaderboardLayout </a>
-リーダーボードビュー関連のレイアウトを変更します。
+* Parameters
+	* events
+		* 複数の[FASGameEvent](#FASGameEvent)がNSArrayに格納されています。
+	* meta
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[leaderboardLayoutBlocks](#FASLeaderboardLayout.leaderboardLayoutBlocks)|リーダーボードビューのレイアウトを変更するためのブロックオブジェクト |
+|[eventId](#FASGameEvent.eventId)|ゲームイベントID |
+|[eventName](#FASGameEvent.eventName)|ゲームイベント名 |
+|[eventDescription](#FASGameEvent.eventDescription)|ゲームイベントの説明 |
+|[imageUrl](#FASGameEvent.imageUrl)|ゲームイベントの画像URL |
+|[webSiteUrl](#FASGameEvent.webSiteUrl)|ゲームイベントのウェブサイトURL |
+|[startAt](#FASGameEvent.startAt)|ゲームイベント開始時刻 |
+|[endAt](#FASGameEvent.endAt)|ゲームイベント終了時刻 |
+|[createdAt](#FASGameEvent.createdAt)|ゲームイベントが作成された時刻 |
 
-##### <a name="FASLeaderboardLayout.leaderboardLayoutBlocks"> leaderboardLayoutBlocks </a>
-リーダーボードビューのレイアウトを変更するためのブロックオブジェクト
+##### <a name="FASGameEvent.eventId"> eventId </a>
+ゲームイベントID
 
-@property (nonatomic, copy) FASLeaderboardViewController *(^leaderboardLayoutBlocks)(FASLeaderboardViewController *leaderboardViewController);
+@property (nonatomic, readonly) NSString *eventId;
 
-Sample - 背景色を変更するサンプル
+##### <a name="FASGameEvent.eventName"> eventName </a>
+ゲームイベント名
 
-```
-[FASLeaderboardLayout sharedInstance].leaderboardLayoutBlocks = ^FASLeaderboardViewController *(FASLeaderboardViewController *leaderboardViewController)
-    {
-        leaderboardViewController.view.backgroundColor = [UIColor whiteColor];
-        leaderboardViewController.tableView.backgroundColor = [UIColor whiteColor];
-        if ([leaderboardViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            leaderboardViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            leaderboardViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        leaderboardViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        leaderboardViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        leaderboardViewController.leaderboardCellLayoutBlocks = ^FASLeaderboardCell *(FASLeaderboardCell *leaderboardCell)
-        {
-            leaderboardCell.contentView.backgroundColor = [UIColor whiteColor];
-            leaderboardCell.userNameLabel.textColor = [UIColor blackColor];
-            leaderboardCell.rankLabel.textColor = [UIColor blackColor];
-            return leaderboardCell;
-        };
-        return leaderboardViewController;
-    };
-}
-```
+@property (nonatomic, readonly) NSString *eventName;
+
+##### <a name="FASGameEvent.eventDescription"> eventDescription </a>
+ゲームイベントの説明
+
+@property (nonatomic, readonly) NSString *eventDescription;
+
+##### <a name="FASGameEvent.imageUrl"> imageUrl </a>
+ゲームイベントの画像URL
+
+@property (nonatomic, readonly) NSString *imageUrl;
+
+##### <a name="FASGameEvent.webSiteUrl"> webSiteUrl </a>
+ゲームイベントのウェブサイトURL
+
+@property (nonatomic, readonly) NSString *webSiteUrl;
+
+##### <a name="FASGameEvent.startAt"> startAt </a>
+ゲームイベント開始時刻
+
+@property (nonatomic, readonly) NSDate *startAt;
+
+##### <a name="FASGameEvent.endAt"> endAt </a>
+ゲームイベント終了時刻
+
+@property (nonatomic, readonly) NSDate *endAt;
+
+##### <a name="FASGameEvent.createdAt"> createdAt </a>
+ゲームイベントが作成された時刻
+
+@property (nonatomic, readonly) NSDate *createdAt;
+
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[sharedInstance](#FASLeaderboardLayout.sharedInstance) |唯一のオブジェクトを返却します。 |
+|[fetchGameEventsWithStatus:page:completion:](#FASGameEvent.fetchGameEventsWithStatuspagecompletion) |ゲームイベントのリストを取得します。 |
+|[fetchGameEventWithEventId:completion:](#FASGameEvent.fetchGameEventWithEventIdcompletion) |ゲームイベントを取得します。 |
 
-##### <a name="FASLeaderboardLayout.sharedInstance"> sharedInstance </a>
-唯一のオブジェクトを返却します。
+##### <a name="FASGameEvent.fetchGameEventsWithStatuspagecompletion"> fetchGameEventsWithStatus:page:completion: </a>
+ゲームイベントのリストを取得します。
 
-\+ (instancetype)sharedInstance;
+\+ (void)fetchGameEventsWithStatus:(FASGameEventStatus)status
+                             page:(NSUInteger)page
+                       completion:(FASGameEventsCompletionHandler)completion;
+
+* Parameters
+	* status
+		* ゲームイベントの状態を指定します。[FASGameEventStatus](#FASGameEvent.FASGameEventStatus)を参照してください。
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+##### <a name="FASGameEvent.fetchGameEventWithEventIdcompletion"> fetchGameEventWithEventId:completion: </a>
+ゲームイベントを取得します。
+
+\+ (void)fetchGameEventWithEventId:(NSString *)eventId
+                       completion:(FASGameEventCompletionHandler)completion;
+
+* Parameters
+	* eventId
+		* ゲームイベントID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+### <a name="FASEventboard"> FASEventboard </a>
+ゲームイベントに登録されているリーダーボードのモデル。
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASEventboardCompletionHandler](#FASEventboard.FASEventboardCompletionHandler)|イベントボード処理を行った際に利用されるブロックオブジェクト。 |
+|[FASEventboardsCompletionHandler](#FASEventboard.FASEventboardsCompletionHandler)|複数のイベントボード取得処理を行った際に利用されるブロックオブジェクト。 |
+
+##### <a name="FASEventboard.FASEventboardCompletionHandler"> (^FASEventboardCompletionHandler)(FASEventboard *eventboard, NSError *error) </a>
+イベントボード処理を行った際に利用されるブロックオブジェクト。
+
+typedef void (^FASEventboardCompletionHandler)(FASEventboard *eventboard, NSError *error);
+
+* Parameters
+	* eventboard
+		* [FASEventboard](#FASEventboard)が格納されています。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
+
+##### <a name="FASEventboard.FASEventboardsCompletionHandler"> (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingMeta *meta, NSError *error) </a>
+複数のイベントボード取得処理を行った際に利用されるブロックオブジェクト。
+
+typedef void (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingMeta *meta, NSError *error);
+
+* Parameters
+	* eventboards
+		* 複数の[FASEventboard](#FASEventboard)がNSArrayに格納されています。
+	* meta
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
+
+#### Properties
+
+|Properties|Description|
+|------|-----|
+|[eventboardId](#FASEventboard.eventboardId)|イベントボードID |
+|[leaderboard](#FASEventboard.leaderboard)|ゲームイベントに登録されているリーダーボード |
+|[gameEvent](#FASEventboard.gameEvent)|ゲームイベント |
+
+##### <a name="FASEventboard.eventboardId"> eventboardId </a>
+イベントボードID
+
+@property (nonatomic, readonly) NSString *eventboardId;
+
+##### <a name="FASEventboard.leaderboard"> leaderboard </a>
+ゲームイベントに登録されている[FASLeaderboard](#FASLeaderboard)オブジェクト。
+
+@property (nonatomic, readonly) FASLeaderboard *leaderboard;
+
+##### <a name="FASEventboard.gameEvent"> gameEvent </a>
+[FASGameEvent](#FASGameEvent)オブジェクト。
+
+@property (nonatomic, readonly) FASGameEvent *gameEvent;
+
+#### Class Method
+
+|Method|Description|
+|------|-----|
+|[fetchEventboardsWithPage:completion:](#FASEventboard.fetchEventboardsWithPagecompletion) |イベントボード一覧を取得します。 |
+|[fetchEventboardsWithEventId:page:completion:](#FASEventboard.fetchEventboardsWithEventIdpagecompletion) |イベントIDを指定してイベントボード一覧を取得します。 |
+|[fetchEventboardWithEventboardId:completion:](#FASEventboard.fetchEventboardWithEventboardIdcompletion) |イベントボードを取得します。 |
+
+##### <a name="FASEventboard.fetchEventboardsWithPagecompletion"> fetchEventboardsWithPage:completion: </a>
+イベントボード一覧を取得します。
+
+\+ (void)fetchEventboardsWithPage:(NSUInteger)page
+                      completion:(FASEventboardsCompletionHandler)completion;
+
+* Parameters
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+##### <a name="FASEventboard.fetchEventboardsWithEventIdpagecompletion"> fetchEventboardsWithEventId:page:completion: </a>
+イベントIDを指定してイベントボード一覧を取得します。
+
+\+ (void)fetchEventboardsWithEventId:(NSString *)eventId
+                               page:(NSUInteger)page
+                         completion:(FASEventboardsCompletionHandler)completion;
+
+* Parameters
+	* eventId
+		* ゲームイベントID
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+##### <a name="FASEventboard.fetchEventboardWithEventboardIdcompletion"> fetchEventboardWithEventboardId:completion: </a>
+イベントボードを取得します。
+
+\+ (void)fetchEventboardWithEventboardId:(NSString *)eventboardId
+                             completion:(FASEventboardCompletionHandler)completion;
+
+* Parameters
+	* eventboardId
+		* イベントボードID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。

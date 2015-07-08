@@ -12,8 +12,8 @@ last update at 2015/5/26
 
 ---
 
-AppSteroid for iOSはiOS6.0以上をサポートしています。  
-導入前にWebコンソールでアプリ登録が終わっていることを確認してください。[アプリ登録方法](./Webコンソールでアプリ登録.md)
+AppSteroid for iOSはiOS7.0以上をサポートしています。  
+導入前にWebコンソールでアプリ登録が終わっていることを確認してください。[アプリ登録方法](./2_Webコンソールでアプリ登録.md)
 
 ## <a name="Installation"> 導入 </a>
 
@@ -46,7 +46,7 @@ ___ボイスチャットの利用にはこちらの`導入`と合わせて[GetSt
 
 AppSteroidの利用を開始するためには、アプリケーションが起動するタイミングで初期設定をおこなう必要があります。
 `AppDelegate.m`の`application:didFinishLaunchingWithOptions:`に[AppSteroid](AppSteroidSpec.md#AppSteroid)の[startWithAppIdentifier:secretToken:development:](AppSteroidSpec.md#AppSteroid.startWithAppIdentifiersecretTokendevelopment)を記述してください。
-このAPIはアプリIDとシークレットトークンを引数に渡す必要があります。アプリIDとシークレットトークンの取得方法は[アプリ登録方法](./Webコンソールでアプリ登録.md)でご確認ください。
+このAPIはアプリIDとシークレットトークンを引数に渡す必要があります。アプリIDとシークレットトークンの取得方法は[アプリ登録方法](./2_Webコンソールでアプリ登録.md)でご確認ください。
 
 ```
 #import <AppSteroid/AppSteroid.h>
@@ -117,4 +117,4 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 ## <a name="Login&ShowTab"> ログインからAppSteroidGUIの表示まで </a>
 
-[ログインからAppSteroidGUIの表示まで](./ログインからAppSteroidGUIの表示まで.md)を参照してください。
+[ログインからAppSteroidGUIの表示まで](./5_ログインからAppSteroidGUIの表示まで.md)を参照してください。
