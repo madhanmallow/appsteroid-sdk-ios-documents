@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK仕様書
 
-last update at 2015/2/26
+last update at 2015/7/7
 
 ---
 
@@ -24,13 +24,12 @@ AppSteroid for iOSは、iOS用の統合ゲーム用バックエンドサービ�
 |[FASSNSAccount](Specs/Spec-User.md#FASSNSAccount)|SNSアカウントの操作に関するクラス |
 |[FASLoginUser](Specs/Spec-User.md#FASLoginUser)|ログインユーザーモデルクラス |
 |[FASUser](Specs/Spec-User.md#FASUser)|ユーザーモデルクラス |
-|[FASProfileNavigationController](Specs/Spec-User.md#FASProfileNavigationController)|プロフィールビューのベースとなるNavigationController |
 
 |Notification|Description|
 |------|-----|
 |[FASNotification](Specs/Spec-Notification.md#FASNotification)|PushNotification用のデバイストークンの操作に関するクラス |
-|[FASEvent](Specs/Spec-Notification.md#FASEvent)|PushNotificationを監視して通知を受け取るためのクラス |
-|[FASObserver](Specs/Spec-Notification.md#FASObserver)|[FASEvent](Specs/Spec-Notification.md#FASEvent)で監視登録した際に作成されるクラス |
+|[FASNotificationEvent](Specs/Spec-Notification.md#FASNotificationEvent)|PushNotificationを監視して通知を受け取るためのクラス |
+|[FASObserver](Specs/Spec-Notification.md#FASObserver)|[FASNotificationEvent](Specs/Spec-Notification.md#FASNotificationEvent)で監視登録した際に作成されるクラス |
 
 |Message|Description|
 |------|-----|
@@ -54,24 +53,22 @@ AppSteroid for iOSは、iOS用の統合ゲーム用バックエンドサービ�
 |------|-----|
 |[FASPlayStats](Specs/Spec-PlayStats.md#FASPlayStats)|ゲームの統計情報を取得する機能に関するクラス |
 
-|Forum|Description|
-|------|-----|
-|[FASForumNavigationController](Specs/Spec-Forum.md#FASForumNavigationController)|フォーラムビューのベースとなるNavigationController |
-
 |Group|Description|
 |------|-----|
 |[FASGroup](Specs/Spec-Group.md#FASGroup)|グループモデルクラス |
 |[FASGroupMember](Specs/Spec-Group.md#FASGroupMember)|グループメンバーモデルクラス |
 |[FASGroupMessage](Specs/Spec-Group.md#FASGroupMessage)|グループメッセージモデルクラス |
-|[FASGroupNavigationController](Specs/Spec-Group.md#FASGroupNavigationController)|グループビューのベースとなるNavigationController |
+|[FASSticker](Specs/Spec-Group.md#FASSticker)|ステッカーモデルクラス |
+|[FASStickerSet](Specs/Spec-Group.md#FASStickerSet)|ステッカーセットモデルクラス |
 
 |Leaderboard|Description|
 |------|-----|
 |[FASLeaderboard](Specs/Spec-Leaderboard.md#FASLeaderboard)|リーダーボードモデルクラス |
 |[FASScore](Specs/Spec-Leaderboard.md#FASScore)|スコアモデルクラス |
 |[FASRank](Specs/Spec-Leaderboard.md#FASRank)|ランクモデルクラス |
-|[FASSortOptions](Specs/Spec-Leaderboard.md#FASSortOptions)|ランキングの集計方法に関するクラス |
-|[FASLeaderboardNavigationController](Specs/Spec-Leaderboard.md#FASLeaderboardNavigationController)|リーダーボードビューのベースとなるNavigationController |
+|[FASGameEvent](Specs/Spec-Leaderboard.md#FASGameEvent)|ゲームイベントモデルクラス |
+|[FASEventboard](Specs/Spec-Leaderboard.md#FASEventboard)|イベントボードモデルクラス |
+
 
 |Matchmaking|Description|
 |------|-----|
@@ -93,7 +90,7 @@ SDK利用のための共通の設定をすることが出来ます。
 
 |Constant|Description|
 |------|-----|
-|[FASTab](#AppSteroid.FASTab)|[FASTabBarController](#FASTabBarController)で表示できるタブが定義されています。 |
+|[FASTab](#AppSteroid.FASTab)|[FASTabBarController](#FASTabBarController)で表示するタブの構成を選択します。 |
 |[FASResponseCompletionHandler](#AppSteroid.FASResponseCompletionHandler)|ネットワーク通信やデータベースへの書き込み、読み込み処理が完了したときに実行されるブロックオブジェクトです。|
 |[FASCompletionHandler](#AppSteroid.FASCompletionHandler)|処理が完了したかどうかのみを通知するために実行されるブロックオブジェクトです。|
 
@@ -103,25 +100,17 @@ SDK利用のための共通の設定をすることが出来ます。
 ```
 typedef NS_ENUM(NSInteger, FASTab)
 {
-    FASTabForum       = (1UL << 0),
-    FASTabLeaderboard = (1UL << 1),
-    FASTabGroup       = (1UL << 2),
-    FASTabProfile     = (1UL << 3)
+    FASTabAll
+    FASTabWithoutLeaderboard
 };
 ```
 
 ###### Constants
-###### FASTabForum
-フォーラムタブ
+###### FASTabAll
+`コミュニティ`,`リーダーボード`,`アプリ`,`メッセージ`,`プロフィール`のタブを表示します。
 
-###### FASTabLeaderboard
-リーダーボードタブ
-
-###### FASTabGroup
-グループタブ
-
-###### FASTabProfile
-プロフィールタブ
+###### FASTabWithoutLeaderboard
+`リーダーボード`を除いた`コミュニティ`,`アプリ`,`メッセージ`,`プロフィール`のタブを表示します。
 
 ##### <a name="AppSteroid.FASResponseCompletionHandler"> (^FASResponseCompletionHandler)(id response, NSError *error) </a>
 ネットワーク通信やデータベースへの書き込み、読み込み処理が完了したときに実行されるブロックオブジェクトです。
@@ -150,7 +139,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[startWithAppIdentifier:secretToken:](#AppSteroid.startWithAppIdentifiersecretToken)|SDKの利用を開始するために利用します。  |
 |[startWithAppIdentifier:secretToken:development:](#AppSteroid.startWithAppIdentifiersecretTokendevelopment)|SDKの利用を開始するために利用します。 モード指定付き。 |
 |[setTimeout:](#AppSteroid.setTimeout)|ネットワーク通信時のタイムアウト時間を設定します。 |
-|[setTabs:](#AppSteroid.setTabs)|表示するタブを設定します。 |
+|[setTabs:](#AppSteroid.setTabs)|表示するタブの構成を設定します。 |
 |[enableCSRChat:](#AppSteroid.enableCSRChat)|CSR機能(カスタマーサポート)を利用するかどうかを決定します。 |
 |[sdkVersion](#AppSteroid.sdkVersion)|SDKのバージョンを返却します。 |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|SDKのビルドバージョンを返却します。 |
@@ -222,20 +211,13 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     * タイムアウトの秒数
 
 ##### <a name="AppSteroid.setTabs"> setTabs: </a>
-表示するタブを設定します。
-デフォルトは`FASTabForum | FASTabLeaderboard | FASTabGroup | FASTabProfile`です。
+表示するタブの構成を設定します。
 
 \+ (void)setTabs:(FASTab)tabs
 
 * Parameters
   * tabs
-    * [FASTab](#AppSteroid.FASTab)で定義されているタブ。`FASTabForum | FASTabProfile`のように指定します。
-
-Sample
-
-```
-[AppSteroid setTabs:FASTabForum | FASTabLeaderboard | FASTabGroup | FASTabProfile];
-```
+    * [FASTab](#AppSteroid.FASTab)で定義されているタブ。
 
 ##### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
 SR機能(カスタマーサポート)を利用するかどうかを決定します。  
@@ -265,10 +247,11 @@ AppSteroidが提供するTabBarControllerにアクセスするためのクラス
 
 |Method|Description|
 |------|-----|
-|[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。未定義の場合は`フォーラム`、`リーダーボード`、`メッセージ`、`プロフィール`のタブを表示します。 |
+|[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。 |
+
 
 ##### <a name="FASTabBarController.presentTabBarControllerWithTargetanimated"> presentTabBarControllerWithTarget: </a>
-`フォーラム`、`リーダーボード`、`プロフィール`のTabBarControllerを表示します。
+[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
                                   animated:(BOOL)animated;

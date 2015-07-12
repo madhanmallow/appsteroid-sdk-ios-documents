@@ -1,14 +1,9 @@
 # Getting Started - Group Chat
 
-last update at 2015/5/26
+last update at 2015/7/8
 
 ---
 
-- [グループチャット画面の表示](#HowToDisplayView)
-	- [簡単に表示する](#EasyWay)
-	- [タブにフォーラムを組み込む](#WithTab)
-	- [パラメータを指定して表示する](#SettingParameters)
-	- [レイアウトの変更](#Layout)
 - [グループAPIの利用方法](#HowToUseAPI)
 	- [グループの作成](#HowToCreateGroup)
 	- [メッセージの送信](#HowToSendMessage)
@@ -16,67 +11,6 @@ last update at 2015/5/26
 - [ゲーム内チャットの利用](#HowToUseInGameChat)
 	- [チャットイベントの監視](#ObserveEvent)
 	- [ゲーム内チャットにメッセージの送信](#HowToSendMessageForInGame)
-
----
-
-## <a name="HowToDisplayGroupChatView"> グループチャット画面の表示 </a>
-
-AppSteroidが提供するグループチャットのGUIを表示する方法を説明します。
-グループチャット画面ではグループの作成、チャット画面からテキストメッセージや画像の送信、メンバーの追加削除などを行うことが出来ます。
-
-### <a name="EasyWay"> 簡単に表示する </a>
-
-デフォルトの設定で簡単にグループチャット画面を表示します。
-
-Sample
-
-```
-#import <AppSteroid/FASGroupNavigationController.h>
-
-	…
-	…
-
-- (IBAction)pushedGroupButton:(id)sender
-{
-    [FASGroupNavigationController presentGroupWithTarget:self
-                                                animated:YES];
-}
-```
-
-### <a name="WithTab"> タブにフォーラムを組み込む </a>
-
-[AppSteroidGetStarted](../AppSteroidGetStarted.md#ShowTab)を参照してください。
-
-### <a name="SettingParameters"> パラメータを指定して表示する </a>
-
-パラメータを指定してグループチャット画面を表示します。
-
-Sample
-
-```
-#import <AppSteroid/FASGroupNavigationController.h>
-
-	…
-	…
-
-- (IBAction)pushedGroupButton:(id)sender
-{
-    FASGroupNavigationController *groupNavigationController = [FASGroupNavigationController groupNavigationController];
-    groupNavigationController.animated = YES;
-    [self presentViewController:groupNavigationController animated:YES completion:nil];
-}
-```
-
-### <a name="Layout"> レイアウトの変更 </a>
-
-[FASGroupLayout](../Specs/Spec-Group.md#FASGroupLayout)クラスを利用することでレイアウトを変更することが出来ます。
-それぞれのビューのレイアウトの変更方法については仕様書のサンプルコードを参照してください。
-
-- [グループリストビュー](../Specs/Spec-Group.md#FASGroupLayout.groupListLayoutBlocks)
-- [グループ作成ビュー](../Specs/Spec-Group.md#FASGroupLayout.groupCreateLayoutBlocks)
-- [グループチャットビュー](../Specs/Spec-Group.md#FASGroupLayout.groupChatLayoutBlocks)
-- [グループメンバービュー](../Specs/Spec-Group.md#FASGroupLayout.groupMemberLayoutBlocks)
-- [グループメンバー追加ビュー](../Specs/Spec-Group.md#FASGroupLayout.groupMemberAdditionLayoutBlocks)
 
 ---
 

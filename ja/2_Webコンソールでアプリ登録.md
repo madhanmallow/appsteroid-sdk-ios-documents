@@ -18,7 +18,7 @@
 ![DLL Duplicate](./Images/console_createapp2.png)
 
 3. 作成が成功した場合、ダッシュボードが表示されます。
-ここで表示される、ID及びシークレットキーは、[GettingStarted](GettingStarted.md)にて使用します。
+ここで表示される、ID及びシークレットキーは、[GetStarted](3_GetStarted.md)にて使用します。
 ![DLL Duplicate](./Images/console_dashboard.png)
 
 4.以上でWeb上での初期設定は完了です。

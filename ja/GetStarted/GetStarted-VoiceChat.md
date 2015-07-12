@@ -6,8 +6,7 @@ last update at 2014/10/7
 
 - [ボイスチャットAPIの利用](#HowToUseAPI)
 - [ボイスチャット画面を表示](#HowToDisplayView)
-- [レイアウトを変更する](#Layout)
-- [注意事項](#ImportantNotes)
+- [バックグラウンドモードでの利用](#BackgroundMode)
 
 ---
 
@@ -107,18 +106,8 @@ AppSteroidが提供するGUIからボイスチャットを利用することが�
 
 ![group](Images/voicechat_03.png "Group")
 
-### <a name="Layout"> レイアウトの変更 </a>
+## <a name="BackgroundMode"> バックグラウンドモードでの利用 </a>
+バックグラウンドに入るとアプリはスリープに入ります。それを防ぐにはアプリのinfo.plistにバックグラウンドでの動作を許すためにの許可を登録する必要があります。  
+`Capabillities`の`Background Modes`で`Voice over IP`の設定をオンにすればバックグラウンド状態でもボイスチャットを利用することが可能になります。
 
-[FASVoiceChatLayout](../Specs/Spec-VoiceChat.md#FASVoiceChatLayout)クラスを利用することでレイアウトを変更することが出来ます。
-それぞれのビューのレイアウトの変更方法については仕様書のサンプルコードを参照してください。
-
-- [ボイスチャットビュー](../Specs/Spec-VoiceChat.md#FASVoiceChatLayout.voiceChatayoutBlocks)
-
-## <a name="ImportantNotes"> 注意事項 </a>
-### ボイスチャットとスリープモードについて
-
-ボイスチャット参加中にデバイスがスリープモード状態になると、一時的にセッションが停止しますが、スリープモードから復旧すると参加していたセッションに戻ります。
-
-ホストデバイスがスリープモード状態になると、参加している全てのデバイスのセッションが停止しますが、ホストデバイスがスリープモードから復旧するとセッションも復旧します。
-
-ボイスチャット中にスリープモード状態にならないようにするためには、個々のアプリ上からスリープモードに移行しないよう設定してください。
+![voice chat setting](Images/voicechat_04.png "VoiceChat Setting")

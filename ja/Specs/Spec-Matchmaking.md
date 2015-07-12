@@ -65,7 +65,6 @@ last update at 2015/4/2
 |[FASMatchInvitation](#FASMatchInvitation)|マッチ招待モデルクラス |
 |[FASGameContext](#FASGameContext)|ゲームコンテキストモデルクラス |
 |[FASMatchmakingNavigationController](#FASMatchmakingNavigationController)|マッチメイキングのベースとなるNavigationController |
-|[FASMatchmakingLayout](#FASMatchmakingLayout)|マッチメイキング関連のレイアウトを変更するためのクラス |
 
 ---
 
@@ -1006,7 +1005,6 @@ typedef void (^FASGameContextCompletionHandler)(FASGameContext *gameContext, NSE
 |[minNumberOfPlayers](#FASMatchmakingNavigationController.minNumberOfPlayers)|マッチに必要な最小プレイヤー数を指定します。 |
 |[maxNumberOfPlayers](#FASMatchmakingNavigationController.maxNumberOfPlayers)|マッチに必要な最大プレイヤー数を指定します。 |
 |[timeout](#FASMatchmakingNavigationController.timeout)|マッチメイキングのタイムアウト時間を指定します。 |
-
 |[segment](#FASMatchmakingNavigationController.segment)|マッチのセグメントを指定します。同様のセグメントが指定されているユーザーとのみマッチします。 |
 
 ##### <a name="FASMatchmakingNavigationController.matchmakingDelegate"> matchmakingDelegate </a>
@@ -1097,58 +1095,3 @@ Sample
 		* [FASMatchmakingNavigationController](#FASMatchmakingNavigationController)が格納されています。
 	* match
 		* `complete`状態になっている[FASMatch](#FASMatch)オブジェクトが格納されています。
-
-
-### <a name="FASMatchmakingLayout"> FASMatchmakingLayout </a>
-マッチメイキングビュー関連のレイアウトを変更します。
-
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[matchmakingLayoutBlocks](#FASMatchmakingLayout.matchmakingLayoutBlocks)|マッチメイキングビューのレイアウトを変更するためのブロックオブジェクト |
-
-##### <a name="FASMatchmakingLayout.matchmakingLayoutBlocks"> matchmakingLayoutBlocks </a>
-マッチメイキングビューのレイアウトを変更するためのブロックオブジェクト
-
-@property (nonatomic, copy) FASMatchmakingViewController *(^matchmakingLayoutBlocks)(FASMatchmakingViewController *matchmakingViewController);
-
-Sample - 背景色を変更するサンプル
-
-```
-    [FASMatchmakingLayout sharedInstance].matchmakingLayoutBlocks = ^FASMatchmakingViewController *(FASMatchmakingViewController *matchmakingViewController)
-    {
-        matchmakingViewController.view.backgroundColor = [UIColor whiteColor];
-        if ([matchmakingViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            matchmakingViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            matchmakingViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        matchmakingViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        matchmakingViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        matchmakingViewController.matchmakingPlayerCellLayoutBlocks = ^FASMatchmakingPlayerCell *(FASMatchmakingPlayerCell *matchmakingPlayerCell)
-        {
-            matchmakingPlayerCell.contentView.backgroundColor = [UIColor whiteColor];
-            matchmakingPlayerCell.userNameLabel.textColor = [UIColor blackColor];
-            return matchmakingPlayerCell;
-        };
-        matchmakingViewController.matchmakingAutoMatchCellLayoutBlocks = ^UITableViewCell *(UITableViewCell *matchmakingAutoMatchCell)
-        {
-            matchmakingAutoMatchCell.contentView.backgroundColor = [UIColor whiteColor];
-            matchmakingAutoMatchCell.textLabel.textColor = [UIColor blackColor];
-            return matchmakingAutoMatchCell;
-        };
-        return matchmakingViewController;
-    };
-```
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[sharedInstance](#FASMatchmakingLayout.sharedInstance) |唯一のオブジェクトを返却します。 |
-
-##### <a name="FASMatchmakingLayout.sharedInstance"> sharedInstance </a>
-唯一のオブジェクトを返却します。
-
-\+ (instancetype)sharedInstance;

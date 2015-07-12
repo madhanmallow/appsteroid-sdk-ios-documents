@@ -18,8 +18,8 @@ last update at 2014/10/7
 |Class|Description|
 |------|-----|
 |[FASNotification](#FASNotification)|PushNotificationを取り扱うためのクラス |
-|[FASEvent](#FASEvent)|PushNotificationを監視して通知を受け取るためのクラス |
-|[FASObserver](#FASObserver)|[FASEvent](#FASEvent)で監視登録した際に作成されるクラス |
+|[FASNotificationEvent](#FASNotificationEvent)|PushNotificationを監視して通知を受け取るためのクラス |
+|[FASObserver](#FASObserver)|[FASNotificationEvent](#FASNotificationEvent)で監視登録した際に作成されるクラス |
 
 ---
 
@@ -185,7 +185,7 @@ Sample
 
 ##### <a name="FASNotification.handleDidReceiveRemoteNotification"> handleDidReceiveRemoteNotification: </a>
 Fresviiサーバー経由のPushNotificateionをハンドリングします。
-特に、[FASEvent](#FASEvent)を利用する際はこのメソッドの実装は必須になります。
+特に、[FASNotificationEvent](#FASNotificationEvent)を利用する際はこのメソッドの実装は必須になります。
 
 \+ (void)handleDidReceiveRemoteNotification:(NSDictionary *)userInfo;
 
@@ -241,20 +241,20 @@ AppSteroidに関するPushNotificationを取り扱うかどうか返却します
 
 \+ (BOOL)isAllowedToHandlePushNotification;
 
-### <a name="FASEvent"> FASEvent </a>
+### <a name="FASNotificationEvent"> FASNotificationEvent </a>
 AppSteroidのPushNotificationを監視し、指定したpathとactionに通知を行うためのクラスです。
 
 #### Constants
 
 |Constant|Description|
 |------|-----|
-|[FASEventHandler](#FASEvent.FASEventHandler) |指定されているpathとactionに対応するPushNotificationを受け取ったときに実行されるブロックオブジェクトです。 |
+|[FASNotificationEventHandler](#FASNotificationEvent.FASNotificationEventHandler) |指定されているpathとactionに対応するPushNotificationを受け取ったときに実行されるブロックオブジェクトです。 |
 
-##### <a name="FASEvent.FASEventHandler"> FASEventHandler </a>
+##### <a name="FASNotificationEvent.FASNotificationEventHandler"> FASNotificationEventHandler </a>
 指定されているpathとactionに対応するPushNotificationを受け取ったときに実行されるブロックオブジェクトです。
 
 
-typedef void (^FASEventHandler)(NSDictionary *params);
+typedef void (^FASNotificationEventHandler)(NSDictionary *params);
 
 * Parameters
 	* params
@@ -264,32 +264,32 @@ typedef void (^FASEventHandler)(NSDictionary *params);
 
 |Method|Description|
 |------|-----|
-|[observeEventWithDelegate:path:action:](#FASEvent.observeEventWithDelegatepathaction) |デリゲートメソッド経由で通知を受け取るために監視登録します。 |
-|[observeEventWithPath:action:eventHandler:](#FASEvent.observeEventWithPathactioneventHandler) |ブロックオブジェクト経由で通知を受け取るために監視登録します。 |
-|[unobserve:](#FASEvent.unobserve)|監視を解除します。 |
+|[observeEventWithDelegate:path:action:](#FASNotificationEvent.observeEventWithDelegatepathaction) |デリゲートメソッド経由で通知を受け取るために監視登録します。 |
+|[observeEventWithPath:action:eventHandler:](#FASNotificationEvent.observeEventWithPathactioneventHandler) |ブロックオブジェクト経由で通知を受け取るために監視登録します。 |
+|[unobserve:](#FASNotificationEvent.unobserve)|監視を解除します。 |
 
-##### <a name="FASEvent.observeEventWithDelegatepathaction"> observeEventWithDelegate:path:action: </a>
+##### <a name="FASNotificationEvent.observeEventWithDelegatepathaction"> observeEventWithDelegate:path:action: </a>
 デリゲートメソッド経由で通知を受け取るために監視登録します。
 
-\+ (FASObserver \*)observeEventWithDelegate:(id<FASEventDelegate>)delegate
+\+ (FASObserver \*)observeEventWithDelegate:(id<FASNotificationEventDelegate>)delegate
                                        path:(NSString \*)path
                                      action:(NSString \*)action
 
 * Parameters
 	* delegate
-		* [FASEventDelegate](#FASEventDelegate)で定義されているデリゲートメソッドを受け取るためのクラスを指定します。
+		* [FASNotificationEventDelegate](#FASNotificationEventDelegate)で定義されているデリゲートメソッドを受け取るためのクラスを指定します。
 	* path
 		* PushNotificationが送られる切っ掛けとなった機能の名前を指定します。`userInfo`の`resource`と対応しています。
 	* action
 		* PushNotificationが送られる切っ掛けとなった機能の動作の名前を指定します。`userInfo`の`action`と対応しています。
 
 * Return Value
-	* [FASObserver](#FASObserver)オブジェクト。[unobserve:](#FASEvent.unobserve)する際に利用します。
+	* [FASObserver](#FASObserver)オブジェクト。[unobserve:](#FASNotificationEvent.unobserve)する際に利用します。
 
 Sample
 
 ```
-#import <AppSteroid/FASEvent.h>
+#import <AppSteroid/FASNotificationEvent.h>
 
 	…
 	…
@@ -304,9 +304,9 @@ Sample
 	…
 	…
 
-	_observer = [FASEvent observeEventWithDelegate:self
-	                                          path:@"user/friendship/request"
-	                                        action:@"created"];
+	_observer = [FASNotificationEvent observeEventWithDelegate:self
+	                                                      path:@"user/friendship/request"
+	                                                    action:@"created"];
 }
 
 - (void)created:(NSDictionary *)params
@@ -315,12 +315,12 @@ Sample
 }
 ```
 
-##### <a name="FASEvent.observeEventWithPathactioneventHandler"> observeEventWithPath:action:eventHandler: </a>
+##### <a name="FASNotificationEvent.observeEventWithPathactioneventHandler"> observeEventWithPath:action:eventHandler: </a>
 ブロックオブジェクト経由で通知を受け取るために監視登録します。
 
 \+ (FASObserver \*)observeEventWithPath:(NSString \*)path
                                  action:(NSString \*)action
-                           eventHandler:(FASEventHandler)handler
+                           eventHandler:(FASNotificationEventtHandler)handler
 
 * Parameters
 	* path
@@ -331,13 +331,13 @@ Sample
 		* PushNotificationが通知を受け取ったときに実行されるブロックオブジェクトです。
 
 * Return Value
-	* [FASObserver](#FASObserver)オブジェクト。[unobserve:](#FASEvent.unobserve)する際に利用します。
+	* [FASObserver](#FASObserver)オブジェクト。[unobserve:](#FASNotificationEvent.unobserve)する際に利用します。
 
 
 Sample
 
 ```
-#import <AppSteroid/FASEvent.h>
+#import <AppSteroid/FASNotificationEvent.h>
 
 	…
 	…
@@ -352,15 +352,15 @@ Sample
 	…
 	…
 
-	_observer = [FASEvent observeEventWithPath:@"user/friendship/request"
-                                        action:@"created"
-                                  eventHandler:^(NSDictionary *params)
+	_observer = [FASNotificationEvent observeEventWithPath:@"user/friendship/request"
+                                                    action:@"created"
+                                              eventHandler:^(NSDictionary *params)
     {
         // 指定したpathとactionのPushNotificationを受け取ったら実行されます。
     }];
 }
 ```
-##### <a name="FASEvent.unobserve"> unobserve: </a>
+##### <a name="FASNotificationEvent.unobserve"> unobserve: </a>
 イベント監視を解除します。
 
 \+ (void)unobserve:(FASObserver \*)observer
@@ -372,7 +372,7 @@ Sample
 Sample
 
 ```
-#import <AppSteroid/FASEvent.h>
+#import <AppSteroid/FASNotificationEvent.h>
 
 	…
 	…
@@ -384,22 +384,22 @@ Sample
 
 - (void)dealloc
 {
-	[FASEvent unobserve:_observer];
+	[FASNotificationEvent unobserve:_observer];
 }
 ```
 
-#### <a name="FASEventDelegate"> FASEventDelegate </a>
+#### <a name="FASNotificationEventDelegate"> FASNotificationEventDelegate </a>
 PushNotificationを受け取った際に呼ばれるデリゲートメソッド。
 `observeEventWithDelegate:path:action:`で監視登録を行った際にこのデリゲートメソッドを利用出来ます。
 
 |Method|Description|
 |------|-----|
-|[created:](#FASEventDelegate.created) |`action`で`created`が指定された際に呼ばれるメソッドです。 |
-|[updated:](#FASEventDelegate.updated) |`action`で`updated`が指定された際に呼ばれるメソッドです。 |
-|[joined:](#FASEventDelegate.joined) |`action`で`joined`が指定された際に呼ばれるメソッドです。 |
-|[accepted:](#FASEventDelegate.accepted) |`action`で`accepted`が指定された際に呼ばれるメソッドです。 |
+|[created:](#FASNotificationEventDelegate.created) |`action`で`created`が指定された際に呼ばれるメソッドです。 |
+|[updated:](#FASNotificationEventDelegate.updated) |`action`で`updated`が指定された際に呼ばれるメソッドです。 |
+|[joined:](#FASNotificationEventDelegate.joined) |`action`で`joined`が指定された際に呼ばれるメソッドです。 |
+|[accepted:](#FASNotificationEventDelegate.accepted) |`action`で`accepted`が指定された際に呼ばれるメソッドです。 |
 
-##### <a name="FASEventDelegate.created"> created: </a>
+##### <a name="FASNotificationEventDelegate.created"> created: </a>
 PushNotificationのパラメータ`userInfo`の`action`で`created`が指定された際に呼ばれるメソッドです。
 
 \- (void)created:(NSDictionary *)params
@@ -408,7 +408,7 @@ PushNotificationのパラメータ`userInfo`の`action`で`created`が指定さ�
 	* params
 		* PushNotificationを受け取った時に得られるuserInfoが格納されています。
 
-##### <a name="FASEventDelegate.updated"> updated: </a>
+##### <a name="FASNotificationEventDelegate.updated"> updated: </a>
 PushNotificationのパラメータ`userInfo`の`action`で`updated`が指定された際に呼ばれるメソッドです。
 
 \- (void)updated:(NSDictionary *)params
@@ -417,7 +417,7 @@ PushNotificationのパラメータ`userInfo`の`action`で`updated`が指定さ�
 	* params
 		* PushNotificationを受け取った時に得られるuserInfoが格納されています。
 
-##### <a name="FASEventDelegate.joined"> joined: </a>
+##### <a name="FASNotificationEventDelegate.joined"> joined: </a>
 PushNotificationのパラメータ`userInfo`の`action`で`joined`が指定された際に呼ばれるメソッドです。
 
 \- (void)joined:(NSDictionary *)params
@@ -426,7 +426,7 @@ PushNotificationのパラメータ`userInfo`の`action`で`joined`が指定さ�
 	* params
 		* PushNotificationを受け取った時に得られるuserInfoが格納されています。
 
-##### <a name="FASEventDelegate.accepted"> accepted: </a>
+##### <a name="FASNotificationEventDelegate.accepted"> accepted: </a>
 PushNotificationのパラメータ`userInfo`の`action`で`accepted`が指定された際に呼ばれるメソッドです。
 
 \- (void)accepted:(NSDictionary *)params
@@ -436,4 +436,4 @@ PushNotificationのパラメータ`userInfo`の`action`で`accepted`が指定さ
 		* PushNotificationを受け取った時に得られるuserInfoが格納されています。
 
 ### <a name="FASObserver"> FASObserver </a>
-[FASEvent](#FASEvent)で監視登録した際に作成されるクラスです。監視を解除するときに利用します。
+[FASNotificationEvent](#FASNotificationEvent)で監視登録した際に作成されるクラスです。監視を解除するときに利用します。

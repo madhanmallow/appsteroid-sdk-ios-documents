@@ -60,6 +60,7 @@ typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASP
 |[directMessageId](#FASDirectMessage.directMessageId)|ダイレクトメッセージID |
 |[subject](#FASDirectMessage.subject)|タイトル |
 |[text](#FASDirectMessage.text)|本文 |
+|[unread](#FASDirectMessage.unread)|未読かどうか |
 |[createdAt](#FASDirectMessage.createdAt)|ダイレクトメッセージが作成された時刻 |
 
 ##### <a name="FASDirectMessage.directMessageId"> directMessageId </a>
@@ -76,6 +77,11 @@ typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASP
 本文
 
 @property (nonatomic, readonly) NSString *text;
+
+##### <a name="FASDirectMessage.unread"> unread </a>
+未読かどうか
+
+@property (nonatomic, readonly) BOOL unread;
 
 ##### <a name="FASDirectMessage.createdAt"> createdAt </a>
 ダイレクトメッセージが作成された時刻

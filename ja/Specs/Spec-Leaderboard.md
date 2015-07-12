@@ -1,6 +1,6 @@
 # Leaderboard Specifications
 
-last update at 2014/010/7
+last update at 2015/7/7
 
 ---
 
@@ -20,11 +20,8 @@ last update at 2014/010/7
 |[FASLeaderboard](#FASLeaderboard)|リーダーボードモデルクラス |
 |[FASScore](#FASScore)|スコアモデルクラス |
 |[FASRank](#FASRank)|ランクモデルクラス |
-|[FASSortOptions](#FASSortOptions)|ランキングの集計方法に関するクラス |
-|[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)|リーダーボードビューのベースとなるNavigationController |
-|[FASLeaderboardLayout](#FASLeaderboardLayout)|リーダーボードビュー関連のレイアウトを変更するためのクラス |
-
-
+|[FASGameEvent](#FASGameEvent)|ゲームイベントモデルクラス |
+|[FASEventboard](#FASEventboard)|イベントボードモデルクラス |
 
 ---
 
@@ -645,335 +642,252 @@ Sample
 }
 ```
 
-### <a name="FASSortOptions"> FASSortOptions </a>
-リーダーボードでランキング集計を行うときに利用します。
+### <a name="FASGameEvent"> FASGameEvent </a>
+ゲームイベントモデルクラス。ゲームイベントの作成はコンソールから行うことができます。
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASGameEventStatus](#FASGameEvent.FASGameEventStatus)|ゲームイベントの状態に関する定数群。 |
+|[FASGameEventCompletionHandler](#FASGameEvent.FASGameEventCompletionHandler)|ゲームイベント処理を行った際に利用されるブロックオブジェクト。 |
+|[FASGameEventsCompletionHandler](#FASGameEvent.FASGameEventsCompletionHandler)|複数のゲームイベント取得処理を行った際に利用されるブロックオブジェクト。 |
+
+##### <a name="FASGameEvent.FASGameEventStatus"> FASGameEventStatus </a>
+ゲームイベントの状態に関する定数が定義されています。  
+ゲームイベントを取得する際に利用します。
+
+```
+typedef NS_ENUM(NSInteger, FASGameEventStatus)
+{
+    FASGameEventStatusUpcoming,
+    FASGameEventStatusOngoing,
+    FASGameEventStatusPast,
+};
+```
+
+###### Constants
+###### FASGameEventStatusUpcoming
+まだ開始されていないゲームイベントの状態
+
+###### FASGameEventStatusOngoing
+現在開催中のゲームイベントの状態
+
+###### FASGameEventStatusPast
+すでに終了したゲームイベントの状態
+
+##### <a name="FASGameEvent.FASGameEventCompletionHandler"> (^FASGameEventCompletionHandler)(FASGameEvent *event, NSError *error) </a>
+ゲームイベント処理を行った際に利用されるブロックオブジェクト。
+
+typedef void (^FASGameEventCompletionHandler)(FASGameEvent *event, NSError *error);
+
+* Parameters
+	* event
+		* [FASGameEvent](#FASGameEvent)が格納されています。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
+
+##### <a name="FASGameEvent.FASGameEventsCompletionHandler"> (^FASRankingCompletionHandler)(NSArray *ranking, NSError *error) </a>
+複数のゲームイベント取得処理を行った際に利用されるブロックオブジェクト。
+
+typedef void (^FASGameEventsCompletionHandler)(NSArray *events, FASPagingMeta *meta, NSError *error);
+
+* Parameters
+	* events
+		* 複数の[FASGameEvent](#FASGameEvent)がNSArrayに格納されています。
+	* meta
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[timeZone](#FASSortOptions.timeZone)|タイムゾーン |
-|[date](#FASSortOptions.date)|時刻 |
+|[eventId](#FASGameEvent.eventId)|ゲームイベントID |
+|[eventName](#FASGameEvent.eventName)|ゲームイベント名 |
+|[eventDescription](#FASGameEvent.eventDescription)|ゲームイベントの説明 |
+|[imageUrl](#FASGameEvent.imageUrl)|ゲームイベントの画像URL |
+|[webSiteUrl](#FASGameEvent.webSiteUrl)|ゲームイベントのウェブサイトURL |
+|[startAt](#FASGameEvent.startAt)|ゲームイベント開始時刻 |
+|[endAt](#FASGameEvent.endAt)|ゲームイベント終了時刻 |
+|[createdAt](#FASGameEvent.createdAt)|ゲームイベントが作成された時刻 |
 
-##### <a name="FASSortOptions.timeZone"> timeZone </a>
-タイムゾーン
+##### <a name="FASGameEvent.eventId"> eventId </a>
+ゲームイベントID
 
-@property (nonatomic, readonly) NSTimeZone *timeZone;
+@property (nonatomic, readonly) NSString *eventId;
 
-##### <a name="FASSortOptions.date"> date </a>
-時刻
+##### <a name="FASGameEvent.eventName"> eventName </a>
+ゲームイベント名
 
-@property (nonatomic, readonly) NSDate *date;
+@property (nonatomic, readonly) NSString *eventName;
+
+##### <a name="FASGameEvent.eventDescription"> eventDescription </a>
+ゲームイベントの説明
+
+@property (nonatomic, readonly) NSString *eventDescription;
+
+##### <a name="FASGameEvent.imageUrl"> imageUrl </a>
+ゲームイベントの画像URL
+
+@property (nonatomic, readonly) NSString *imageUrl;
+
+##### <a name="FASGameEvent.webSiteUrl"> webSiteUrl </a>
+ゲームイベントのウェブサイトURL
+
+@property (nonatomic, readonly) NSString *webSiteUrl;
+
+##### <a name="FASGameEvent.startAt"> startAt </a>
+ゲームイベント開始時刻
+
+@property (nonatomic, readonly) NSDate *startAt;
+
+##### <a name="FASGameEvent.endAt"> endAt </a>
+ゲームイベント終了時刻
+
+@property (nonatomic, readonly) NSDate *endAt;
+
+##### <a name="FASGameEvent.createdAt"> createdAt </a>
+ゲームイベントが作成された時刻
+
+@property (nonatomic, readonly) NSDate *createdAt;
 
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[dailyWithMinute:hour:](#FASSortOptions.dailyWithMinutehour) |デイリー集計用に利用します。 |
-|[dailyWithMinute:hour:timeZone:](#FASSortOptions.dailyWithMinutehourtimeZone) |デイリー集計用に利用します。 |
-|[weeklyWithMinute:hour:weekday:](#FASSortOptions.weeklyWithMinutehourweekday) |ウィークリー集計用に利用します。 |
-|[weeklyWithMinute:hour:weekday:timeZone:](#FASSortOptions.weeklyWithMinutehourweekdaytimeZone) |ウィークリー集計用に利用します。 |
-|[total](#FASSortOptions.total) |全集計用に利用します。 |
+|[fetchGameEventsWithStatus:page:completion:](#FASGameEvent.fetchGameEventsWithStatuspagecompletion) |ゲームイベントのリストを取得します。 |
+|[fetchGameEventWithEventId:completion:](#FASGameEvent.fetchGameEventWithEventIdcompletion) |ゲームイベントを取得します。 |
 
-##### <a name="FASSortOptions.dailyWithMinutehour"> dailyWithMinute:hour: </a>
-デイリー集計用に利用します。集計開始時間と分を指定します。デフォルトのタイムゾーンはシステムタイムゾーンです。
+##### <a name="FASGameEvent.fetchGameEventsWithStatuspagecompletion"> fetchGameEventsWithStatus:page:completion: </a>
+ゲームイベントのリストを取得します。
 
-\+ (instancetype)dailyWithMinute:(NSUInteger)minute
-                            hour:(NSUInteger)hour;
+\+ (void)fetchGameEventsWithStatus:(FASGameEventStatus)status
+                             page:(NSUInteger)page
+                       completion:(FASGameEventsCompletionHandler)completion;
 
 * Parameters
-	* minute
-		* 分を指定します。
-	* hour
-		* 時を指定します。
+	* status
+		* ゲームイベントの状態を指定します。[FASGameEventStatus](#FASGameEvent.FASGameEventStatus)を参照してください。
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
-Sample
+##### <a name="FASGameEvent.fetchGameEventWithEventIdcompletion"> fetchGameEventWithEventId:completion: </a>
+ゲームイベントを取得します。
 
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // 毎日19:00からのランキング情報を集計します。
-    FASSortOptions *dailyOption = [FASSortOptions dailyWithMinute:0 hour:19];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.dailySortOptions = dailyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.dailyWithMinutehourtimeZone"> dailyWithMinute:hour:timeZone: </a>
-デイリー集計用に利用します。集計開始時間と分、タイムゾーンを指定します。
-
-\+ (instancetype)dailyWithMinute:(NSUInteger)minute
-                            hour:(NSUInteger)hour
-                        timeZone:(NSTimeZone *)timeZone;
+\+ (void)fetchGameEventWithEventId:(NSString *)eventId
+                       completion:(FASGameEventCompletionHandler)completion;
 
 * Parameters
-	* minute
-		* 分を指定します。
-	* hour
-		* 時を指定します。
-	* timeZone
-		* タイムゾーンを指定します。
+	* eventId
+		* ゲームイベントID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
-Sample
+### <a name="FASEventboard"> FASEventboard </a>
+ゲームイベントに登録されているリーダーボードのモデル。
 
-```
-#import <AppSteroid/FASLeaderboardNavigationController.h>
-#import <AppSteroid/FASSortOptions.h>
+#### Constants
 
-	…
-	…
+|Constant|Description|
+|------|-----|
+|[FASEventboardCompletionHandler](#FASEventboard.FASEventboardCompletionHandler)|イベントボード処理を行った際に利用されるブロックオブジェクト。 |
+|[FASEventboardsCompletionHandler](#FASEventboard.FASEventboardsCompletionHandler)|複数のイベントボード取得処理を行った際に利用されるブロックオブジェクト。 |
 
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // 毎日GMT時間の19:00からのランキング情報を集計します。
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    FASSortOptions *dailyOption = [FASSortOptions dailyWithMinute:0 hour:19 timeZone:timeZone];
+##### <a name="FASEventboard.FASEventboardCompletionHandler"> (^FASEventboardCompletionHandler)(FASEventboard *eventboard, NSError *error) </a>
+イベントボード処理を行った際に利用されるブロックオブジェクト。
 
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.dailySortOptions = dailyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.weeklyWithMinutehourweekday"> weeklyWithMinute:hour:weekday: </a>
-ウィークリー集計用に利用します。集計開始週と時間、分を指定します。デフォルトのタイムゾーンはシステムタイムゾーンです。
-
-\+ (instancetype)weeklyWithMinute:(NSUInteger)minute
-                             hour:(NSUInteger)hour
-                          weekday:(NSUInteger)weekday;
+typedef void (^FASEventboardCompletionHandler)(FASEventboard *eventboard, NSError *error);
 
 * Parameters
-	* minute
-		* 分を指定します。0~59まで指定出来ます。
-	* hour
-		* 時を指定します。0~23まで指定出来ます。
-	* weekday
-		* 週を指定します。1が日曜日で1~7まで指定出来ます。
+	* eventboard
+		* [FASEventboard](#FASEventboard)が格納されています。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
-Sample
+##### <a name="FASEventboard.FASEventboardsCompletionHandler"> (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingMeta *meta, NSError *error) </a>
+複数のイベントボード取得処理を行った際に利用されるブロックオブジェクト。
 
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // 毎週月曜日の19:00からのランキング情報を集計します。
-    FASSortOptions *weeklyOption = [FASSortOptions weeklyWithMinute:0 hour:19 weekday:2];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.weeklySortOptions = weeklyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.weeklyWithMinutehourweekdaytimeZone"> weeklyWithMinute:hour:weekday:timeZone: </a>
-ウィークリー集計用に利用します。集計開始週と時間、分、タイムゾーンを指定します。
-
-\+ (instancetype)weeklyWithMinute:(NSUInteger)minute
-                             hour:(NSUInteger)hour
-                          weekday:(NSUInteger)weekday
-                         timeZone:(NSTimeZone *)timeZone;;
+typedef void (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingMeta *meta, NSError *error);
 
 * Parameters
-	* minute
-		* 分を指定します。0~59まで指定出来ます。
-	* hour
-		* 時を指定します。0~23まで指定出来ます。
-	* weekday
-		* 週を指定します。1が日曜日で1~7まで指定出来ます。
-	* timeZone
-		* タイムゾーンを指定します。
-
-Sample
-
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // 毎週GMT時間の月曜日19:00からのランキング情報を集計します。
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    FASSortOptions *weeklyOption = [FASSortOptions weeklyWithMinute:0 hour:19 weekday:2 timeZone:timeZone];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.weeklySortOptions = weeklyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.total"> total </a>
-全集計用に利用します。
-
-\+ (instancetype)total;
-
-Sample
-
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // 今までの全てのランキングを集計します。
-    FASSortOptions *totalOption = [FASSortOptions total];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.totalSortOptions = totalOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-### <a name="FASLeaderboardNavigationController"> FASLeaderboardNavigationController </a>
-リーダーボードビューのベースとなるNavigationController
+	* eventboards
+		* 複数の[FASEventboard](#FASEventboard)がNSArrayに格納されています。
+	* meta
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+	* error
+		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[leaderboardId](#FASLeaderboardNavigationController.leaderboardId)|リーダーボードID |
-|[onlyFriends](#FASLeaderboardNavigationController.onlyFriends)|フレンドのみ表示したい場合は`YES`を指定します。 |
-|[animated](#FASLeaderboardNavigationController.animated)|ビューを閉じるときのアニメーション有無 |
-|[dailySortOptions](#FASLeaderboardNavigationController.todaySortOptions)|リーダーボードの`today`セクションのソート方法を指定します。 |
-|[weeklySortOptions](#FASLeaderboardNavigationController.weeklySortOptions)|リーダーボードの`weekly`セクションのソート方法を指定します。 |
-|[totalSortOptions](#FASLeaderboardNavigationController.totalSortOptions)|リーダーボードの`total`セクションのソート方法を指定します。 |
+|[eventboardId](#FASEventboard.eventboardId)|イベントボードID |
+|[leaderboard](#FASEventboard.leaderboard)|ゲームイベントに登録されているリーダーボード |
+|[gameEvent](#FASEventboard.gameEvent)|ゲームイベント |
 
-##### <a name="FASLeaderboardNavigationController.leaderboardId"> leaderboardId </a>
-表示したいリーダーボードのIDを指定します。
+##### <a name="FASEventboard.eventboardId"> eventboardId </a>
+イベントボードID
 
-@property (nonatomic, copy) NSString *leaderboardId;
+@property (nonatomic, readonly) NSString *eventboardId;
 
-##### <a name="FASLeaderboardNavigationController.onlyFriends"> onlyFriends </a>
-フレンドのみ表示したい場合は`YES`を指定します。デフォルトは`NO`です。
+##### <a name="FASEventboard.leaderboard"> leaderboard </a>
+ゲームイベントに登録されている[FASLeaderboard](#FASLeaderboard)オブジェクト。
 
-@property (nonatomic, assign) BOOL onlyFriends;
+@property (nonatomic, readonly) FASLeaderboard *leaderboard;
 
-##### <a name="FASLeaderboardNavigationController.animated"> animated </a>
-ビューを閉じるときにアニメーション付きで閉じるかどうかを設定します。デフォルトは`YES`です。
+##### <a name="FASEventboard.gameEvent"> gameEvent </a>
+[FASGameEvent](#FASGameEvent)オブジェクト。
 
-@property (nonatomic, assign) BOOL animated;
-
-##### <a name="FASLeaderboardNavigationController.todaySortOptions"> dailySortOptions </a>
-リーダーボードの`today`セクションのソート方法を指定します。[FASSortOptions](#FASSortOptions)の[dailyWithMinute:hour:](#FASSortOptions.dailyWithMinutehour)の返り値を指定してください。
-
-@property (nonatomic, strong) FASSortOptions *dailySortOptions;
-
-##### <a name="FASLeaderboardNavigationController.weeklySortOptions"> weeklySortOptions </a>
-リーダーボードの`weekly`セクションのソート方法を指定します。[FASSortOptions](#FASSortOptions)の[weeklyWithMinute:hour:weekday:](#FASSortOptions.weeklyWithMinutehourweekday)の返り値を指定してください。
-
-@property (nonatomic, strong) FASSortOptions *weeklySortOptions;
-
-##### <a name="FASLeaderboardNavigationController.totalSortOptions"> totalSortOptions </a>
-リーダーボードの`total`セクションのソート方法を指定します。[FASSortOptions](#FASSortOptions)の[total](#FASSortOptions.total)の返り値を指定してください。
-
-@property (nonatomic, strong) FASSortOptions *totalSortOptions;
+@property (nonatomic, readonly) FASGameEvent *gameEvent;
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[leaderboardNavigationController](#FASLeaderboardNavigationController.leaderboardNavigationController) |リーダーボードビューのベースとなる[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)を返却します。 |
-|[presentLeaderboardWithTarget:animated:](#FASLeaderboardNavigationController.presentLeaderboardWithTargetanimated) |リーダーボードビューを表示します。 |
+|[fetchEventboardsWithPage:completion:](#FASEventboard.fetchEventboardsWithPagecompletion) |イベントボード一覧を取得します。 |
+|[fetchEventboardsWithEventId:page:completion:](#FASEventboard.fetchEventboardsWithEventIdpagecompletion) |イベントIDを指定してイベントボード一覧を取得します。 |
+|[fetchEventboardWithEventboardId:completion:](#FASEventboard.fetchEventboardWithEventboardIdcompletion) |イベントボードを取得します。 |
 
-##### <a name="FASLeaderboardNavigationController.leaderboardNavigationController"> leaderboardNavigationController </a>
-リーダーボードビューのベースとなる[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)を返却します。
+##### <a name="FASEventboard.fetchEventboardsWithPagecompletion"> fetchEventboardsWithPage:completion: </a>
+イベントボード一覧を取得します。
 
-\+ (FASLeaderboardNavigationController *)leaderboardNavigationController;
-
-##### <a name="FASLeaderboardNavigationController.presentLeaderboardWithTargetanimated"> presentLeaderboardWithTarget:animated: </a>
-リーダーボードビューを表示します。直近で作成したリーダーボードを表示します。
-
-\+ (void)presentLeaderboardWithTarget:(UIViewController *)target
-                             animated:(BOOL)animated;
+\+ (void)fetchEventboardsWithPage:(NSUInteger)page
+                      completion:(FASEventboardsCompletionHandler)completion;
 
 * Parameters
-	* target
-		* ビューを表示する元となるViewControllerを指定します。
-	* animated
-		* YESならアニメーションさせて遷移します。
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
-Sample
+##### <a name="FASEventboard.fetchEventboardsWithEventIdpagecompletion"> fetchEventboardsWithEventId:page:completion: </a>
+イベントIDを指定してイベントボード一覧を取得します。
 
-```
-#import <AppSteroid/FASLeaderboardNavigationController.h>
+\+ (void)fetchEventboardsWithEventId:(NSString *)eventId
+                               page:(NSUInteger)page
+                         completion:(FASEventboardsCompletionHandler)completion;
 
-	…
-	…
+* Parameters
+	* eventId
+		* ゲームイベントID
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
-- (IBAction)pushedLeaderboardButton:(id)sender
-{
-    [FASLeaderboardNavigationController presentLeaderboardWithTarget:self
-                                                            animated:YES];
-}
-```
+##### <a name="FASEventboard.fetchEventboardWithEventboardIdcompletion"> fetchEventboardWithEventboardId:completion: </a>
+イベントボードを取得します。
 
-### <a name="FASLeaderboardLayout"> FASLeaderboardLayout </a>
-リーダーボードビュー関連のレイアウトを変更します。
+\+ (void)fetchEventboardWithEventboardId:(NSString *)eventboardId
+                             completion:(FASEventboardCompletionHandler)completion;
 
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[leaderboardLayoutBlocks](#FASLeaderboardLayout.leaderboardLayoutBlocks)|リーダーボードビューのレイアウトを変更するためのブロックオブジェクト |
-
-##### <a name="FASLeaderboardLayout.leaderboardLayoutBlocks"> leaderboardLayoutBlocks </a>
-リーダーボードビューのレイアウトを変更するためのブロックオブジェクト
-
-@property (nonatomic, copy) FASLeaderboardViewController *(^leaderboardLayoutBlocks)(FASLeaderboardViewController *leaderboardViewController);
-
-Sample - 背景色を変更するサンプル
-
-```
-[FASLeaderboardLayout sharedInstance].leaderboardLayoutBlocks = ^FASLeaderboardViewController *(FASLeaderboardViewController *leaderboardViewController)
-    {
-        leaderboardViewController.view.backgroundColor = [UIColor whiteColor];
-        leaderboardViewController.tableView.backgroundColor = [UIColor whiteColor];
-        if ([leaderboardViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            leaderboardViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            leaderboardViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        leaderboardViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        leaderboardViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        leaderboardViewController.leaderboardCellLayoutBlocks = ^FASLeaderboardCell *(FASLeaderboardCell *leaderboardCell)
-        {
-            leaderboardCell.contentView.backgroundColor = [UIColor whiteColor];
-            leaderboardCell.userNameLabel.textColor = [UIColor blackColor];
-            leaderboardCell.rankLabel.textColor = [UIColor blackColor];
-            return leaderboardCell;
-        };
-        return leaderboardViewController;
-    };
-}
-```
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[sharedInstance](#FASLeaderboardLayout.sharedInstance) |唯一のオブジェクトを返却します。 |
-
-##### <a name="FASLeaderboardLayout.sharedInstance"> sharedInstance </a>
-唯一のオブジェクトを返却します。
-
-\+ (instancetype)sharedInstance;
+* Parameters
+	* eventboardId
+		* イベントボードID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
