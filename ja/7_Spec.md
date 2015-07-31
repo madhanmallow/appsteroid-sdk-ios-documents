@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK仕様書
 
-last update at 2015/7/7
+last update at 2015/7/31
 
 ---
 
@@ -248,9 +248,10 @@ AppSteroidが提供するTabBarControllerにアクセスするためのクラス
 |Method|Description|
 |------|-----|
 |[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。 |
+|[presentTabBarControllerWithTarget:initialTabNumber:animated:](#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) |[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。 |
 
 
-##### <a name="FASTabBarController.presentTabBarControllerWithTargetanimated"> presentTabBarControllerWithTarget: </a>
+##### <a name="FASTabBarController.presentTabBarControllerWithTargetanimated"> presentTabBarControllerWithTarget:animated: </a>
 [AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
@@ -277,6 +278,21 @@ Sample
                                                   animated:YES];
 }
 ```
+
+##### <a name="FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated"> presentTabBarControllerWithTarget:initialTabNumber:animated: </a>
+[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。
+
+\+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
+                         initialTabNumber:(NSInteger)tabNumber
+                                 animated:(BOOL)animated;
+
+* Parameters
+  * target
+    * TabBarControllerを表示する元となるViewControllerを指定します。
+  * initialTabNumber
+    * 初期表示するタブの番号を指定します。
+  * animated
+    * YESならアニメーションさせて遷移します。NOならアニメーションはしません。
 
 ### <a name="FASPagingMeta"> FASPagingMeta </a>
 配列データのメタ情報が格納されているクラス
