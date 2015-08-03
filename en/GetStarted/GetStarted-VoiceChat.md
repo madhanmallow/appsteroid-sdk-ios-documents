@@ -6,8 +6,7 @@ last update at 2014/10/08
 
 - [How to Use Voice Chat API](#HowToUseAPI)
 - [How to display Voice Chat View](#HowToDisplayView)
-- [Change Layout](#Layout)
-- [Important Notes](#ImportantNotes)
+- [Use in Background mode](#BackgroundMode)
 
 ---
 
@@ -107,18 +106,7 @@ Tap the Call button on the top right menu to start a voice chat in a group chat 
 
 ![group](Images/voicechat_03.png "Group")
 
-### <a name="Layout"> Change Layout </a>
+## <a name="BackgroundMode"> Use in Background mode </a>
+Applications goes to sleep mode while it is on background. To avoid the sleep, you need to add permission in info.plist, for the app to be activated on background. To activate voice chat on background mode, switch `Voice over IP` setting to `on` in `Background Modes` of `Capabillities`.
 
-You can change layout using [FASVoiceChatLayout](../Specs/Spec-VoiceChat.md#FASVoiceChatLayout) Class.
-Check the sample code listed on the Specification as an example changing layout for each view.
-
-- [Voice Chat View](../Specs/Spec-VoiceChat.md#FASVoiceChatLayout.voiceChatayoutBlocks)
-
-## <a name="ImportantNotes"> Important Notes </a>
-### Sleep mode and Voice Chat
-
-Going into sleep mode during voice chat session will result loosing communication to that group. However, as long as that particular session exists, any devices that recovers from sleep mode will automatically participate to that group. If the group dose not exist, those device will automatically end the call.
-
-While the host device is in sleep mode during any Voice Chat session, all members in that group will lose connection for the call. If the host recovers from sleep mode, the session will automatically resume.
-
-To avoid sleep mode ending Voice Chat, please turn off sleep mode within your app's settings.
+![voice chat setting](Images/voicechat_04.png "VoiceChat Setting")
