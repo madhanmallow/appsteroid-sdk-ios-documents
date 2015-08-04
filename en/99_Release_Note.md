@@ -2,6 +2,11 @@
 
 ---
 
+### 1.0.1
+- Performance Improvements
+	- Fixed some issues.
+	- Tweaked AppSteroid GUI.
+
 ### 1.0.0
 - New Feature
 	- Renewal AppSteroid GUI
