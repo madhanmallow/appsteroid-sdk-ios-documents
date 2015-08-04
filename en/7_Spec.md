@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK Specification
 
-last update at 2014/7/7
+last update at 2014/7/31
 
 ---
 
@@ -248,10 +248,11 @@ Class to access TabBarController provided by AppSteroid.
 |Method|Description|
 |------|-----|
 |[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs). |
+|[presentTabBarControllerWithTarget:initialTabNumber:animated:](#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) |Show tabs defined in [AppSteroid#setTabs:](AppSteorid.setTabs). |
 
 
-##### <a name="FASTabBarController.presentTabBarControllerWithTargetanimated"> presentTabBarControllerWithTarget: </a>
-Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs).
+##### <a name="FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated"> presentTabBarControllerWithTarget:initialTabNumber:animated: </a>
+Show tabs defined in [AppSteroid#setTabs:](AppSteorid.setTabs)Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs).
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
                                   animated:(BOOL)animated;
@@ -277,6 +278,18 @@ Sample
                                                   animated:YES];
 }
 ```
+
+\+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
+                         initialTabNumber:(NSInteger)tabNumber
+                                 animated:(BOOL)animated;
+
+* Parameters
+  * target
+    * Select a ViewController to show TabBarController.
+  * initialTabNumber
+    * Select tabs to show by number.
+  * animated
+    * Yes will transit with animation. No will transit without animation.
 
 ### <a name="FASPagingMeta"> FASPagingMeta </a>
 Class storing meta information of array data.
