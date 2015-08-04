@@ -1,6 +1,21 @@
 # AppSteroid for iOS Release Notes
 
 ---
+### 1.0.2
+
+- New Feature
+	- App Event is now available on Hot apps description page. 
+	- Tab to show when opening the AppSteroid GUI can now be selected. See [FASTabBarController#presentTabBarControllerWithTarget:initialTabNumber:animated:](7_Spec.md#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) for detailed information.
+	
+- Fixed
+	- Tweaked direct message GUI
+	- Tweaked AppSteroid GUI Layout
+  - Minor bug fix
+
+### 1.0.1
+- Performance Improvements
+	- Fixed some issues.
+	- Tweaked AppSteroid GUI.
 
 ### 1.0.0
 - New Feature
