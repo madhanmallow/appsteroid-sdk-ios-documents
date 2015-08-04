@@ -1,52 +1,25 @@
 # Getting Started - Push Notification
 
-last update at 2014/09/30
+last update at 2015/07/29
 
 ---
 
 - [How To Setup Push Notification](#HowToSetupPushNotification)
-	- [Register Certificate](#RegisterCertificates)
-	- [Create p12 File](#CreateFiles)
-	- [Upload p12 File](#UploadFiles)
-	- [Implement Codes](#ImplementCodes)
+- [Implement Codes](#ImplementCodes)
+- [Push Notification List](#EventList)
 - [Observing Push Notification Event](#ObserveEvent)
 - [Sending Custom Message](#CustomMessage)
-	- [Setting Channel](#SettingChannel)
-	- [Using Storage](#UseKVS)
+	    - [Setting Channel](#SettingChannel)
+	    - [Using Storage](#UseKVS)
     - [Sending Message](#SendMessage)
 - [Directly Show AppSteroid View](#DisplayFresviiGUI)
 
 ---
 
 ## <a name="HowToSetupPushNotification"> How To Setup Push Notification </a>
+Please see the [Setup](https://github.com/fresvii/appsteroid-documents/blob/master/ja/APNSCertificateTutorial.md) for steps to setup Push Notification.
 
-### <a name="RegisterCertificates"> Register Certificate </a>
-
-Download your Push Notification certificate generated on iOS Dev Center.
-![pn01](Images/ss_fresvii_pn_01.png "PN01")
-Register your certificate on KeyChain, which will be registered with the name listed below.
-* For Development : Apple Development IOS Push Services: Your.Bundle.ID
-* For Production : Apple Production IOS Push Services: Your.Bundle.ID
-
-### <a name="CreateFiles"> Create p12 File </a>
-
-Open KeyChain, right click the certificate you've registered and select "Export".
-![pn02](Images/ss_fresvii_pn_02.png "PN02")
-Enter the file name and make sure the file format is "Personal Information Exchange(.p12)" before you "Save" it.
-![pn03](Images/ss_fresvii_pn_03.png "PN03")
-Enter the password and create your p12 file.
-![pn04](Images/ss_fresvii_pn_04.png "PN04")
-
-### <a name="UploadFiles"> Upload p12 File </a>
-
-Login to the console [Fresvii](https://fresvii.com/), go to Settings->Notification and upload your p12 file. (1)
-Enter the password you've setup when exporting the p12 file. (2)
-Do not forget to click the `save` button after you setup. (3)
-![pn05](Images/ss_fresvii_pn_05.png "PN05")
-After a success upload, a screen like below will show up.
-![pn06](Images/ss_fresvii_pn_06.png "PN06")
-
-### <a name="ImplementCodes"> Implement Codes </a>
+## <a name="ImplementCodes"> Implement Codes </a>
 
 Implementation on `AppDelegate.h`, like shown below, is required to use push notification.
 
@@ -83,6 +56,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
     LOG(@"Errorinregistration:%@",error);
 }
 ```
+
+## <a name="EventList"> Push Notification List </a>
+
+Please see the [Push Notification Event List](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md).
 
 ## <a name="ObserveEvent"> Observing Push Notification Event </a>
 
@@ -165,25 +142,17 @@ Sample
 ```
 
 ## <a name="CustomMessage"> Sending Custom Message </a>
-
-[FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage) is used to send custom message to a specific user.
-It will sent notification to users relevant to the channel setting.  Channel need to be setup on Fresvii web console.
+[FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage) is used to send custom message to a specific user.  It will sent notification to users relevant to the channel setting.  Channel need to be setup on Fresvii web console.
 
 ### <a name="SettingChannel"> Setting Channel </a>
 
 Channel can be setup on Fresvii web console.
-The sample shows, how to pin down users who are using [Key-Value Storage](../Specs/Spec-Storage.md#FASStorage).
-
-First setup the channel on the web console.
-Use a variable, `bind_level`, to pin down the user for the key, `level`.
-
-```
-
-```
+Please see [Channel Tutorial](https://github.com/fresvii/appsteroid-documents/blob/master/ja/ChannelTutorial.md) for steps to setup.
 
 ### <a name="UseKVS"> Using Storage </a>
 
-Save a value, `10`, in the storage for the key, `level`.
+Please see [Key-Value Storage](../Specs/Spec-Storage.md#FASStorage) for sample to narrow down a user. 
+Save a value `10` in the storage, for the key `level`.
 
 Sample
 

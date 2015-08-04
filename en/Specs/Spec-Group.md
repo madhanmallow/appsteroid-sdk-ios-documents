@@ -1,6 +1,6 @@
 # Group Specifications
 
-last update at 2014/10/24
+last update at 2014/7/7
 
 ---
 
@@ -19,8 +19,8 @@ You can also implement the Group Chat GUI provided by AppSteroid SDK. Check [Gro
 |[FASGroup](#FASGroup)|Group model class |
 |[FASGroupMember](#FASGroupMember)|GroupMember model class |
 |[FASGroupMessage](#FASGroupMessage)|GroupMessage model class |
-|[FASGroupNavigationController](#FASGroupNavigationController)|NavigationController, which is the base of the group view　|
-|[FASGroupLayout](#FASGroupLayout)|Class to change layout of Group View |
+|[FASSticker](#FASSticker)|Sticker model class for group message |
+|[FASStickerSet](#FASStickerSet)|Sticker set model class for group message |
 
 ---
 
@@ -959,211 +959,176 @@ Sample
 }
 ```
 
-### <a name="FASGroupNavigationController"> FASGroupNavigationController </a>
-NavigationController, which will be a base for Group View
+### <a name="FASSticker"> FASSticker </a>
+Sticker model Class
 
-#### Properties
+#### Constants
 
-|Properties|Description|
+|Constant|Description|
 |------|-----|
-|[animated](#FASGroupNavigationController.animated)|With or without the animation when closing the View |
+|[FASStickerCompletionHandler](#FASSticker.FASStickerCompletionHandler)|Block object used when carrying out the process of getting sticker. |
 
-##### <a name="FASGroupNavigationController.animated"> animated </a>
-A setting to close the view with or without an animation. Default setting is `YES`.
 
-@property (nonatomic, assign) BOOL animated;
+##### <a name="FASSticker.FASStickerCompletionHandler"> (^FASStickerCompletionHandler)(FASSticker *sticker, NSError *error) </a>
+Block object used when carrying out the process of getting sticker.
 
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[groupNavigationController](#FASGroupNavigationController.groupNavigationController) |Return [FASGroupNavigationController](#FASGroupNavigationController), which is a base of Group View |
-|[presentGroupWithTarget:animated:](#FASGroupNavigationController.presentGroupWithTargetanimated) |Show group view |
-
-##### <a name="FASGroupNavigationController.groupNavigationController"> groupNavigationController </a>
-Return [FASGroupNavigationController](#FASGroupNavigationController), which is a base of Group View
-
-\+ (FASGroupNavigationController *)groupNavigationController;
-
-##### <a name="FASGroupNavigationController.presentGroupWithTargetanimated"> presentGroupWithTarget:animated: </a>
-Show group view
-
-\+ (void)presentGroupWithTarget:(UIViewController *)target
-                       animated:(BOOL)animated;
+typedef void (^FASStickerCompletionHandler)(FASSticker *sticker, NSError *error);
 
 * Parameters
-	* target
-		* Select the base ViewController to display view.
-	* animated
-		*
-
-Sample
-
-```
-#import <AppSteroid/FASGroupNavigationController.h>
-
-	…
-	…
-
-- (IBAction)pushedGroupButton:(id)sender
-{
-    [FASGroupNavigationController presentGroupWithTarget:self
-                                                animated:YES];
-}
-```
-
-### <a name="FASGroupLayout"> FASGroupLayout </a>
-You can change layout related to Group View.
+	* sticker
+		* [FASSticker](#FASSticker) is stored
+	* error
+		* Error detail is stored. It will be nil if there is no error.
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[groupListLayoutBlocks](#FASGroupLayout.groupListLayoutBlocks)|Block object used to change layout of group list view |
-|[groupCreateLayoutBlocks](#FASGroupLayout.groupCreateLayoutBlocks)|Block object used to change layout of group creation view |
-|[groupChatLayoutBlocks](#FASGroupLayout.groupChatLayoutBlocks)|Block object used to change layout of group chat view |
-|[groupMemberLayoutBlocks](#FASGroupLayout.groupMemberLayoutBlocks)|Block object used to change layout of group member view |
-|[groupMemberAdditionLayoutBlocks](#FASGroupLayout.groupMemberAdditionLayoutBlocks)|Block object used to change layout of group member addition view |
+|[stickerId](#FASSticker.stickerId)|Sticker ID |
+|[stickerSetId](#FASSticker.stickerSetId)|Sticker set ID |
+|[stickerName](#FASSticker.stickerName)|Sticker name |
+|[url](#FASSticker.url)|Sticker URL |
 
-##### <a name="FASGroupLayout.groupListLayoutBlocks"> groupListLayoutBlocks </a>
-Block object used to change layout of group list view
+##### <a name="FASSticker.stickerId"> stickerId </a>
+Sticker ID
 
-@property (nonatomic, copy) FASGroupListViewController *(^groupListLayoutBlocks)(FASGroupListViewController *groupListViewController);
+@property (nonatomic, readonly) NSString *stickerId;
 
-Sample - Changing Background color and navigation bar
+##### <a name="FASSticker.stickerSetId"> stickerSetId </a>
+Sticker set ID
 
-```
-[FASGroupLayout sharedInstance].groupListLayoutBlocks = ^FASGroupListViewController *(FASGroupListViewController *groupListViewController)
-    {
-        groupListViewController.view.backgroundColor = [UIColor whiteColor];
-        groupListViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        groupListViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-        groupListViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        groupListViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        groupListViewController.groupListCellLayoutBlocks = ^FASGroupListCell *(FASGroupListCell *groupListCell)
-        {
-            groupListCell.backgroundColor = [UIColor whiteColor];
-            groupListCell.userNameLabel.textColor = [UIColor blackColor];
-            groupListCell.userCountLabel.textColor = [UIColor blackColor];
-            groupListCell.elapsedTimeLabel.textColor = [UIColor blackColor];
-            groupListCell.lastMessageLabel.textColor = [UIColor blackColor];
-            groupListCell.contentView.backgroundColor = [UIColor whiteColor];
-            return groupListCell;
-        };
+@property (nonatomic, readonly) NSString *stickerSetId;
 
-        return groupListViewController;
-    };
-```
+##### <a name="FASSticker.stickerName"> stickerName </a>
+Sticker name
 
-##### <a name="FASGroupLayout.groupCreateLayoutBlocks"> groupCreateLayoutBlocks </a>
-Block object used to change layout of group creation view
+@property (nonatomic, readonly) NSString *stickerName;
 
-@property (nonatomic, copy) FASGroupCreateViewController *(^groupCreateLayoutBlocks)(FASGroupCreateViewController *groupCreateViewController);
+##### <a name="FASSticker.url"> url </a>
+Sticker URL
 
-Sample - changing background color
-
-```
-[FASGroupLayout sharedInstance].groupCreateLayoutBlocks = ^FASGroupCreateViewController *(FASGroupCreateViewController *groupCreateViewController)
-    {
-        groupCreateViewController.view.backgroundColor = [UIColor whiteColor];
-        groupCreateViewController.scrollView.backgroundColor = [UIColor whiteColor];
-        groupCreateViewController.toLabel.textColor = [UIColor blackColor];
-        groupCreateViewController.inputView.backgroundColor = [UIColor whiteColor];
-        if ([groupCreateViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            groupCreateViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            groupCreateViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        groupCreateViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        groupCreateViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        groupCreateViewController.groupCreateCellLayoutBlocks = ^FASGroupCreateCell *(FASGroupCreateCell *groupCreateCell)
-        {
-            groupCreateCell.backgroundColor = [UIColor whiteColor];
-            groupCreateCell.baseView.backgroundColor = [UIColor whiteColor];
-            groupCreateCell.userNameLabel.textColor = [UIColor blackColor];
-            groupCreateCell.contentView.backgroundColor = [UIColor whiteColor];
-            return groupCreateCell;
-        };
-
-        return groupCreateViewController;
-    };
-```
-
-##### <a name="FASGroupLayout.groupChatLayoutBlocks"> groupChatLayoutBlocks </a>
-Block object used to change layout of group chat view
-
-@property (nonatomic, copy) FASGroupChatViewController *(^groupChatLayoutBlocks)(FASGroupChatViewController *groupChatViewController);
-
-Sample - changing background color
-
-```
-[FASGroupLayout sharedInstance].groupChatLayoutBlocks = ^FASGroupChatViewController *(FASGroupChatViewController *groupChatViewController)
-    {
-        groupChatViewController.view.backgroundColor = [UIColor whiteColor];
-        groupChatViewController.titleLabel.textColor = [UIColor blackColor];
-        groupChatViewController.userCountLabel.textColor = [UIColor blackColor];
-        groupChatViewController.inputView.backgroundColor = [UIColor whiteColor];
-        return groupChatViewController;
-    };
-```
-
-##### <a name="FASGroupLayout.groupMemberLayoutBlocks"> groupMemberLayoutBlocks </a>
-Block object used to change layout of group member view
-
-@property (nonatomic, copy) FASGroupMemberViewController *(^groupMemberLayoutBlocks)(FASGroupMemberViewController *groupMemberViewController);
-
-Sample - changing background color
-
-```
-[FASGroupLayout sharedInstance].groupMemberLayoutBlocks = ^FASGroupMemberViewController *(FASGroupMemberViewController *groupMemberViewController)
-    {
-        groupMemberViewController.view.backgroundColor = [UIColor whiteColor];
-        groupMemberViewController.groupMemberCellLayoutBlocks = ^FASGroupMemberCell *(FASGroupMemberCell *groupMemberCell)
-        {
-            groupMemberCell.userNameLabel.textColor = [UIColor blackColor];
-            groupMemberCell.backgroundColor = [UIColor whiteColor];
-            return groupMemberCell;
-        };
-        return groupMemberViewController;
-    };
-```
-
-##### <a name="FASGroupLayout.groupMemberAdditionLayoutBlocks"> groupMemberAdditionLayoutBlocks </a>
-Block object used to change layout of group member addition view
-
-@property (nonatomic, copy) FASGroupMemberAdditionViewController *(^groupMemberAdditionLayoutBlocks)(FASGroupMemberAdditionViewController *groupMemberAdditionViewController);
-
-Sample - changing background color
-
-```
-[FASGroupLayout sharedInstance].groupMemberAdditionLayoutBlocks = ^FASGroupMemberAdditionViewController *(FASGroupMemberAdditionViewController *groupMemberAdditionViewController)
-    {
-        groupMemberAdditionViewController.view.backgroundColor = [UIColor whiteColor];
-        if ([groupMemberAdditionViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            groupMemberAdditionViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            groupMemberAdditionViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        groupMemberAdditionViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        groupMemberAdditionViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        groupMemberAdditionViewController.groupMemberAdditionCellLayoutBlocks = ^FASGroupMemberAdditionCell *(FASGroupMemberAdditionCell *groupMemberAdditionCell)
-        {
-            groupMemberAdditionCell.backgroundColor = [UIColor whiteColor];
-            groupMemberAdditionCell.userNameLabel.textColor = [UIColor blackColor];
-            groupMemberAdditionCell.contentView.backgroundColor = [UIColor whiteColor];
-            return groupMemberAdditionCell;
-        };
-        return groupMemberAdditionViewController;
-    };
-```
+@property (nonatomic, readonly) NSString *url;
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[sharedInstance](#FASGroupLayout.sharedInstance) |Return the object |
+|[fetchStickerWithId:completion:](#FASSticker.fetchStickerWithIdcompletion) |Get Sticker |
 
-##### <a name="FASGroupLayout.sharedInstance"> sharedInstance </a>
-Return the object
+##### <a name="FASSticker.fetchStickerWithIdcompletion"> fetchStickerWithId:completion: </a>
+Get Stciker
 
-\+ (instancetype)sharedInstance;
+\+ (void)fetchStickerWithId:(NSString *)stickerId
+                completion:(FASStickerCompletionHandler)completion;
+
+* Parameters
+	* stickerId
+		* Sticker ID
+	* completion
+		* Block object to be executed when the process is completed.
+
+### <a name="FASStickerSet"> FASStickerSet </a>
+Sticker set model class
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASStickerSetCompletionHandler](#FASStickerSet.FASStickerSetCompletionHandler)|Block object used when carrying out the process to get sticker set |
+|[FASStickerSetsCompletionHandler](#FASStickerSet.FASStickerSetsCompletionHandler)|Block object used when carrying out the process to get multiple sticker set |
+
+##### <a name="FASStickerSet.FASStickerSetCompletionHandler"> (^FASStickerSetCompletionHandler)(FASStickerSet *stickerSet, NSError *error) </a>
+Block object used when carrying out the process to get sticker set
+
+typedef void (^FASStickerSetCompletionHandler)(FASStickerSet *stickerSet, NSError *error);
+
+* Parameters
+	* stickerSet
+		* [FASStickerSet](#FASStickerSet) is stored
+	* error
+		* Error detail is stored. It will be nil if there is no error.
+		
+##### <a name="FASStickerSet.FASStickerSetsCompletionHandler"> (^FASStickerSetsCompletionHandler)(NSArray *stickerSets, FASPagingMeta *meta, NSError *error) </a>
+Block object used when carrying out the process to get multiple sticker set
+
+typedef void (^FASStickerSetsCompletionHandler)(NSArray *stickerSets, FASPagingMeta *meta, NSError *error);
+
+* Parameters
+	* stickerSet
+		* [FASStickerSet](#FASStickerSet) is stored
+	* meta
+		* meta info can be checked. See [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for detail.
+	* error
+		* Error detail is stored. It will be nil if there is no error.
+
+#### Properties
+
+|Properties|Description|
+|------|-----|
+|[stickerSetId](#FASStickerSet.stickerSetId)|Sticker set ID |
+|[stickerSetName](#FASStickerSet.stickerSetName)|Sticker set name |
+|[url](#FASStickerSet.url)|Sticker set image URL |
+|[stickers](#FASStickerSet.stickers)|[FASSticker](#FASSticker) groups which are included in sticker set is stored |
+|[createdAt](#FASStickerSet.createdAt)|Date sticker set was created |
+|[updatedAt](#FASStickerSet.updatedAt)|Date Sticker set was updated |
+
+##### <a name="FASStickerSet.stickerSetId"> stickerSetId </a>
+Sticker set ID
+
+@property (nonatomic, readonly) NSString *stickerSetId;
+
+##### <a name="FASStickerSet.stickerSetName"> stickerSetName </a>
+Sticker set name
+
+@property (nonatomic, readonly) NSString *stickerSetName;
+
+##### <a name="FASStickerSet.url"> url </a>
+Sticker set image URL
+
+@property (nonatomic, readonly) NSString *url;
+
+##### <a name="FASStickerSet.stickers"> stickers </a>
+[FASSticker](#FASSticker) groups which are included in sticker set is stored
+
+@property (nonatomic, readonly) NSArray *stickers;
+
+##### <a name="FASStickerSet.createdAt"> createdAt </a>
+Date sticker set was created
+
+@property (nonatomic, readonly) NSString *url;
+
+##### <a name="FASStickerSet.createdAt"> updatedAt </a>
+Date sticker set was updated
+
+@property (nonatomic, readonly) NSDate *updatedAt;
+
+#### Class Method
+
+|Method|Description|
+|------|-----|
+|[fetchStickerSetsWithPage:completion:](#FASStickerSet.fetchStickerSetsWithPagecompletion) |Get list of sticker set |
+|[fetchStickerSetWithId:completion:](#FASStickerSet.fetchStickerSetWithIdcompletion) |Get sticker set |
+
+##### <a name="FASStickerSet.fetchStickerSetsWithPagecompletion"> fetchStickerSetsWithPage:completion: </a>
+Get list of sticker set
+
+\+ (void)fetchStickerSetsWithPage:(NSUInteger)page
+                      completion:(FASStickerSetsCompletionHandler)completion;
+
+* Parameters
+	* page
+		* page number
+	* completion
+		* Block object to be executed when the process is completed.
+
+##### <a name="FASStickerSet.fetchStickerSetWithIdcompletion"> fetchStickerSetWithId:completion: </a>
+Get sticker set
+
+\+ (void)fetchStickerSetWithId:(NSString *)stickerSetId
+                   completion:(FASStickerSetCompletionHandler)completion;
+
+* Parameters
+	* stickerSetId
+		* Sticker set ID
+	* completion
+		* Block object to be executed when the process is completed.

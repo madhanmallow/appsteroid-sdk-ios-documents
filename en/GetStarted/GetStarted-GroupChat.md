@@ -1,13 +1,9 @@
 # Getting Started - Group Chat
 
-last update at 2014/10/07
+last update at 2014/07/08
 
 ---
 
-- [Overview](#HowToDisplayGroupChatView)
-	- [Simple Setup](#EasyWay)
-	- [Setting Parameters](#SettingParameters)
-	- [Change Layout](#Layout)
 - [Using Group API](#HowToUseAPI)
 	- [Creating Croup](#HowToCreateGroup)
 	- [Sending Message](#HowToSendMessage)
@@ -15,63 +11,6 @@ last update at 2014/10/07
 - [Using In-Game Chat](#HowToUseInGameChat)
 	- [Observing Chat Event](#ObserveEvent)
 	- [Sending message to in-game chat](#HowToSendMessageForInGame)
-
----
-
-## <a name="HowToDisplayGroupChatView"> Overview </a>
-
-This document describes the process of configuring and building the GroupChat GUI into your app.  App users can create a group, send text messages and images in the chat screen, add and delete members to manage their group.
-
-
-### <a name="EasyWay"> Simple Setup </a>
-
-This is the simplest way to display the GroupChat Screen with the default settings.
-
-Sample
-
-```
-#import <AppSteroid/FASGroupNavigationController.h>
-
-	…
-	…
-
-- (IBAction)pushedGroupButton:(id)sender
-{
-    [FASGroupNavigationController presentGroupWithTarget:self
-                                                animated:YES];
-}
-```
-
-### <a name="SettingParameters"> Setting Parameters </a>
-
-You can specifically select a parameter to show the GroupChat screen.
-
-Sample
-
-```
-#import <AppSteroid/FASGroupNavigationController.h>
-
-	…
-	…
-
-- (IBAction)pushedGroupButton:(id)sender
-{
-    FASGroupNavigationController *groupNavigationController = [FASGroupNavigationController groupNavigationController];
-    groupNavigationController.animated = YES;
-    [self presentViewController:groupNavigationController animated:YES completion:nil];
-}
-```
-
-### <a name="Layout"> Change Layout </a>
-
-You can change layout using [FASGroupLayout](../Specs/Spec-Group.md#FASGroupLayout) Class.
-Check the sample code listed on the Specification as an example changing layout for each view.
-
-- [Group List View](../Specs/Spec-Group.md#FASGroupLayout.groupListLayoutBlocks)
-- [Group Creation View](../Specs/Spec-Group.md#FASGroupLayout.groupCreateLayoutBlocks)
-- [Group Chat View](../Specs/Spec-Group.md#FASGroupLayout.groupChatLayoutBlocks)
-- [Group Member View](../Specs/Spec-Group.md#FASGroupLayout.groupMemberLayoutBlocks)
-- [Group Member Addition View](../Specs/Spec-Group.md#FASGroupLayout.groupMemberAdditionLayoutBlocks)
 
 ---
 
