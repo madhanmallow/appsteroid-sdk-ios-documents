@@ -1,6 +1,34 @@
 # AppSteroid for iOS Release Notes
 
 ---
+### 1.0.2
+
+- New Feature
+	- App Event is now available on Hot apps description page. 
+	- Tab to show when opening the AppSteroid GUI can now be selected. See [FASTabBarController#presentTabBarControllerWithTarget:initialTabNumber:animated:](7_Spec.md#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) for detailed information.
+	
+- Fixed
+	- Tweaked direct message GUI
+	- Tweaked AppSteroid GUI Layout
+  - Minor bug fix
+
+### 1.0.1
+- Performance Improvements
+	- Fixed some issues.
+	- Tweaked AppSteroid GUI.
+
+### 1.0.0
+- New Feature
+	- Renewal AppSteroid GUI
+	- Stickers available on group chat.  Addition to this feature, [FASSticker](Specs/Spec-Group.md#FASSticker) and [FASStickerSet](Specs/Spec-Group.md#FASStickerSet) API is available.
+	- Ability to get information related to Game Events.  [FASGameEvent](Specs/Spec-Leaderboard.md#FASGameEvent) and [FASEventboard](Specs/Spec-Leaderboard.md#FASEventboard) is also available.
+
+- Performance Improvements
+	- `startTime` parameter on [FASRank](Specs/Spec-Leaderboard.md#FASRank) is replaced to `period` parameter.
+	- `FASSortOptions` is no longer available.
+	- `FASEvent` changed to [FASNotificationEvent](Specs/Spec-Notification.md#FASNotificationEvent).
+	- `FASEventDelegate` changed to [FASNotificationEventDelegate](Specs/Spec-Notification.md#FASNotificationEventDelegate).
+	- Tab Specification has improved.  Please refer to [FASTabs](./7_Spec.md#AppSteroid.FASTab) for details.
 
 ### 0.7.2
 - Performance Improvements

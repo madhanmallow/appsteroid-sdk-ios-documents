@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK Specification
 
-last update at 2014/2/26
+last update at 2014/7/31
 
 ---
 
@@ -24,13 +24,12 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 |[FASSNSAccount](Specs/Spec-User.md#FASSNSAccount)|SNS account operation class |
 |[FASLoginUser](Specs/Spec-User.md#FASLoginUser)|Login User model class |
 |[FASUser](Specs/Spec-User.md#FASUser)|User model class|
-|[FASProfileNavigationController](Specs/Spec-User.md#FASProfileNavigationController)|NavigationController for profile View |
 
 |Notification|Description|
 |------|-----|
 |[FASNotification](Specs/Spec-Notification.md#FASNotification)|Class to operate device token for PushNotification |
-|[FASEvent](Specs/Spec-Notification.md#FASEvent)|Class to observe PushNotification and receive notification |
-|[FASObserver](Specs/Spec-Notification.md#FASObserver)|Class to be generated after adding observation on [FASEvent](Specs/Spec-Notification.md#FASEvent) |
+|[FASNotificationEvent](Specs/Spec-Notification.md#FASNotificationEvent)|Class to observe PushNotification and receive notification |
+|[FASObserver](Specs/Spec-Notification.md#FASObserver)|Class to be generated after adding observation on [FASNotificationEvent](Specs/Spec-Notification.md#FASNotificationEvent) |
 
 |Message|Description|
 |------|-----|
@@ -54,25 +53,22 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 |------|-----|
 |[FASPlayStats](Specs/Spec-PlayStats.md#FASPlayStats)|Class to get statistical information |
 
-
-|Forum|Description|
-|------|-----|
-|[FASForumNavigationController](Specs/Spec-Forum.md#FASForumNavigationController)|NavigationController for Forum View |
-
 |Group|Description|
 |------|-----|
 |[FASGroup](Specs/Spec-Group.md#fASGroup)|Group model Class |
 |[FASGroupMember](Specs/Spec-Group.md#FASGroupMember)|Group Member model Class |
 |[FASGroupMessage](Specs/Spec-Group.md#FASGroupMessage)|Group Message model Class |
-|[FASGroupNavigationController](Specs/Spec-Group.md#FASGroupNavigationController)|NavigationController Group View |
+|[FASSticker](Specs/Spec-Group.md#FASSticker)|Sticker model Class |
+|[FASStickerSet](Specs/Spec-Group.md#FASStickerSet)|Sticker Set model Class |
 
 |Leaderboard|Description|
 |------|-----|
 |[FASLeaderboard](Specs/Spec-Leaderboard.md#FASLeaderboard)|Leaderboard model Class |
 |[FASScore](Specs/Spec-Leaderboard.md#FASScore)|Score model Class |
 |[FASRank](Specs/Spec-Leaderboard.md#FASRank)|Rank model Class |
-|[FASSortOptions](Specs/Spec-Leaderboard.md#FASSortOptions)|Ranking Aggregation Class |
-|[FASLeaderboardNavigationController](Specs/Spec-Leaderboard.md#FASLeaderboardNavigationController)|NavigationController for Leaderboard |
+|[FASGameEvent](Specs/Spec-Leaderboard.md#FASGameEvent)|Game Event model Class |
+|[FASEventboard](Specs/Spec-Leaderboard.md#FASEventboard)|Eventboard model Class |
+
 
 |Matchmaking|Description|
 |------|-----|
@@ -94,7 +90,7 @@ You can also get user data using this Class.
 
 |Constant|Description|
 |------|-----|
-|[FASTab](#AppSteroid.FASTab)|Tabs that can be displayed with [FASTabBarController](#FASTabBarController) are defined |
+|[FASTab](#AppSteroid.FASTab)|Select a tab structure to show with [FASTabBarController](#FASTabBarController)|
 |[FASResponseCompletionHandler](#AppSteroid.FASResponseCompletionHandler)|Block Object to be executed when loading or uploading to the network or to the database is completed. |
 |[FASCompletionHandler](#AppSteroid.FASCompletionHandler)|Block object to be executed only to notify if the process is completed or not.|
 
@@ -104,25 +100,17 @@ Tabs that can be displayed with [FASTabBarController](#FASTabBarController) are 
 ```
 typedef NS_ENUM(NSInteger, FASTab)
 {
-    FASTabForum       = (1UL << 0),
-    FASTabLeaderboard = (1UL << 1),
-    FASTabGroup       = (1UL << 2),
-    FASTabProfile     = (1UL << 3)
+    FASTabAll
+    FASTabWithoutLeaderboard
 };
 ```
 
 ###### Constants
-###### FASTabForum
-Forum Tab
+###### FASTabAll
+Show `Comunity`,`Leaderboard`,`Apps`,`Message` and `Profile` tab
 
-###### FASTabLeaderboard
-Leaderboard Tab
-
-###### FASTabGroup
-Group Tab
-
-###### FASTabProfile
-Profile Tab
+###### FASTabWithoutLeaderboard
+Show Tabs without `Leaderboard` tab.
 
 ##### <a name="AppSteroid.FASResponseCompletionHandler"> (^FASResponseCompletionHandler)(id response, NSError *error) </a>
 Block Object to be executed when loading or uploading to the network or to the database is completed.
@@ -151,7 +139,8 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[startWithAppIdentifier:secretToken:](#AppSteroid.startWithAppIdentifiersecretToken)|Initial setup to start using the SDK. |
 |[startWithAppIdentifier:secretToken:development:](#AppSteroid_startWithAppIdentifiersecretTokendevelopment)|Initial setup to start using the SDK with development mode flag. |
 |[setTimeout:](#AppSteroid.setTimeout)|Setup a timeout for network connection. |
-|[setTabs:](#AppSteroid.setTabs)|Set tabs to display |
+|[setTabs:](#AppSteroid.setTabs)|Set tab structure to display |
+|[enableCSRChat:](#AppSteroid.enableCSRChat)|Decide whether to use CSR (Customer Support) function or not. |
 |[sdkVersion](#AppSteroid.sdkVersion)|Return SDK Version |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|Return SDK build version |
 
@@ -222,21 +211,24 @@ Default value is 30 second.
 
 
 ##### <a name="AppSteroid.setTabs"> setTabs: </a>
-Set tabs to display
-Default tabs are, `FASTabForum | FASTabLeaderboard | FASTabGroup | FASTabProfile`.
+Set tab structure to display.
 
 \+ (void)setTabs:(FASTab)tabs
 
 * Parameters
   * tabs
-    * Tabs defined in [FASTab](#AppSteroid.FASTab). You can select tabs like the example, `FASTabForum | FASTabProfile`.
-
-Sample
-
-```
-[AppSteroid setTabs:FASTabForum | FASTabLeaderboard | FASTabGroup | FASTabProfile];
-```
-
+    * Tabs defined on [FASTab](#AppSteroid.FASTab).
+    
+##### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
+Decide whether to use CSR (Customer Support) function or not. 
+Default is set to `No`. If this function is set to `YES`, `Live Help` button will be displayed on the top right corner of GroupMessage page, where users can directly sent messages to the CSR.
+ 
+\+ (void)enableCSRChat:(BOOL)enabled;
+ 
+* Parameters
+  * enabled
+    * `YES` enable CSR function. 
+ 
 ##### <a name="AppSteroid.sdkVersion"> sdkVersion </a>
 Return SDK version with `NSString`.
 
@@ -247,6 +239,7 @@ Return SDK build version with `NSString`.
 
 \+ (NSString *)sdkBuildVersion
 
+
 ### <a name="FASTabBarController"> FASTabBarController </a>
 Class to access TabBarController provided by AppSteroid.
 
@@ -254,10 +247,12 @@ Class to access TabBarController provided by AppSteroid.
 
 |Method|Description|
 |------|-----|
-|[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |[AppSteroid#setTabs:]Show tabs defined in (AppSteorid.setTabs). When nothing is defined, `Forum`, `Leaderboard`, `Message` and `Profile` will be displayed |
+|[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs). |
+|[presentTabBarControllerWithTarget:initialTabNumber:animated:](#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) |Show tabs defined in [AppSteroid#setTabs:](AppSteorid.setTabs). |
 
-##### <a name="FASTabBarController.presentTabBarControllerWithTargetanimated"> presentTabBarControllerWithTarget: </a>
-Show TabBarController for `Forum`,`Leaderboard` and `Profile`.
+
+##### <a name="FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated"> presentTabBarControllerWithTarget:initialTabNumber:animated: </a>
+Show tabs defined in [AppSteroid#setTabs:](AppSteorid.setTabs)Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs).
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
                                   animated:(BOOL)animated;
@@ -283,6 +278,18 @@ Sample
                                                   animated:YES];
 }
 ```
+
+\+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
+                         initialTabNumber:(NSInteger)tabNumber
+                                 animated:(BOOL)animated;
+
+* Parameters
+  * target
+    * Select a ViewController to show TabBarController.
+  * initialTabNumber
+    * Select tabs to show by number.
+  * animated
+    * Yes will transit with animation. No will transit without animation.
 
 ### <a name="FASPagingMeta"> FASPagingMeta </a>
 Class storing meta information of array data.
