@@ -1,6 +1,16 @@
 # AppSteroid for iOS Release Notes
 
 ---
+### 1.0.3
+
+- New Feature
+	- Ability to hide groups. User can check and edit hidden groups on my profile page. 
+	- Ability to add user to a private 1 to 1 group.
+
+- Performance Improvements
+	- Minor bug fix.
+	- Fix AppSteroid GUI layout.
+  
 ### 1.0.2
 
 - New Feature
@@ -10,7 +20,7 @@
 - Fixed
 	- Tweaked direct message GUI.
 	- Tweaked AppSteroid GUI Layout.
-  	- Minor bug fix.
+  - Minor bug fix.
 
 ### 1.0.1
 - Performance Improvements
