@@ -7,7 +7,7 @@ last update at 2014/09/30
 ## Introduction
 
 Specification for function related to PushNotification and Notification Event.
-Functions such as, API to set device token on AppSteroid server or to observe a specific push notification to receive information are provided.  Also, in [FASCustomMessage](#FASCustomMessage), you can corroborate with [FASStorage](StorageSpec.md#FASStorage) and send push message to a specific user. Check [PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md) for more information.
+Functions such as, API to set device token on AppSteroid server or to observe a specific push notification to receive information are provided.
 
 ---
 
@@ -90,7 +90,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 ```
 
 ##### <a name="FASNotification_addDeviceTokencertificateTypecompletion"> addDeviceToken:certificateType:completion: </a>
-Add a specified device token with APNs type. Please see folloing link for more infomation. [What is Development Mode](./DevelopmentMode.md)
+Add a specified device token with APNs type. Please see folloing link for more infomation. [What is Development Mode](../6_DevelopmentMode.md)
 
 \+ (void)addDeviceToken:(NSData *)deviceToken
 				certificateType:(FASCertificateType)certificateType

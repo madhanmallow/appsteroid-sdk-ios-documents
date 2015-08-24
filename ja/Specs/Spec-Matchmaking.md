@@ -150,7 +150,7 @@ typedef void (^ FASMatchesCompletionHandler)(NSArray *matches, FASPagingMeta *me
 	* matches
 		* 複数の[FASMatch](#FASMatch)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -203,7 +203,7 @@ typedef void (^ FASMatchesCompletionHandler)(NSArray *matches, FASPagingMeta *me
 @property (nonatomic, readonly) NSArray *players;
 
 ##### <a name="FASMatch.groups"> groups </a>
-マッチ完了後の参加中のプレイヤーのグループ。[FASGroup](#FASGroup)が格納されています。
+マッチ完了後の参加中のプレイヤーのグループ。[FASGroup](./Spec-Group.md#FASGroup)が格納されています。
 
 @property (nonatomic, readonly) NSArray *groups;
 

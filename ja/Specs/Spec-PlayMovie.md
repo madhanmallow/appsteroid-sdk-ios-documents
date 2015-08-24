@@ -214,7 +214,7 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 	* videos
 		* 複数の[FASVideo](#FASVideo)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 

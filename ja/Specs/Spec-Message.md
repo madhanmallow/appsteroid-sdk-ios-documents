@@ -8,6 +8,8 @@ last update at 2015/2/26
 
 メッセージに関する機能の仕様書です。
 Fresviiコンソールから送信されるダイレクトメッセージの操作に関するクラスと特定の相手にプッシュ通知を送信する機能に関するクラスが記載されています。
+また、[FASCustomMessage](#FASCustomMessage)では、[FASStorage](./Spec-Storage.md#FASStorage)と連携して、特定のユーザーにプッシュ通知を送ることが出来ます。
+詳しくは[PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md)を参照してください。
 
 ---
 
@@ -49,7 +51,7 @@ typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASP
 	* directMessages
 		* 複数の[FASDirectMessage](#FASDirectMessage)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -166,7 +168,7 @@ typedef void (^FASCustomMessagesCompletionHandler)(NSArray *messages, FASPagingM
 	* message
 		* [FASCustomMessage](#FASCustomMessage)が格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 

@@ -140,11 +140,11 @@ First, register the notification by using `NSNotificationCenter` to setup abilit
 ```
 
 ## <a name="GameContext"> Support turn based game </a>
-[FASGameContext](Specs/Spec-Matchmaking.md#FASGameContext) must be used to start a turn based game after match completion.  
- **Game Context** is an object ([FASGameContext](Specs/Spec-Matchmaking.md#FASGameContext)) that can be send to participants (opponents) in a match.
+[FASGameContext](../Specs/Spec-Matchmaking.md#FASGameContext) must be used to start a turn based game after match completion.  
+ **Game Context** is an object ([FASGameContext](../Specs/Spec-Matchmaking.md#FASGameContext)) that can be send to participants (opponents) in a match.
 
 ### <a name="GameContextEvent"> Add and delete Event </a>
- Notification of path:`match_making/context`action:`created` will be sent to the opponent when sending the game context. Please check the following sample code, or refer to the [GetStarted-PushNotification](./GetStarted/GetStarted-PushNotification#ObserveEvent) to see steps to register game context.
+ Notification of path:`match_making/context`action:`created` will be sent to the opponent when sending the game context. Please check the following sample code, or refer to the [GetStarted-PushNotification](./GetStarted-PushNotification.md#ObserveEvent) to see steps to register game context.
 
 1. Register the event of receiving context.
 2. Delete the event when leaving the view.

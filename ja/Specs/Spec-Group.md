@@ -56,7 +56,7 @@ typedef void (^FASGroupsCompletionHandler)(NSArray *groups, FASPagingMeta *meta,
 	* groups
 		* 複数の[FASGroup](#FASGroup)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -490,7 +490,7 @@ typedef void (^FASGroupMembersCompletionHandler)(NSArray *members, FASPagingMeta
 @property (nonatomic, readonly) NSString *groupId;
 
 ##### <a name="FASGroupMember.user"> user </a>
-グループに参加しているユーザー。[FASUser](#FASUser)オブジェクト。
+グループに参加しているユーザー。[FASUser](./Spec-User.md#FASUser)オブジェクト。
 
 @property (nonatomic, readonly) FASUser *user;
 
@@ -635,7 +635,7 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 	* messages
 		* 複数の[FASGroupMessage](#FASGroupMessage)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -691,7 +691,7 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 @property (nonatomic, readonly) NSDate *updatedAt;
 
 ##### <a name="FASGroupMessage.user"> user </a>
-メッセージを送信したユーザー。[FASUser](Spec-User.md#FASUser)オブジェクト。
+メッセージを送信したユーザー。[FASUser](./Spec-User.md#FASUser)オブジェクト。
 
 @property (nonatomic, readonly) FASUser *user;
 
@@ -1061,7 +1061,7 @@ typedef void (^FASStickerSetsCompletionHandler)(NSArray *stickerSets, FASPagingM
 	* stickerSet
 		* [FASStickerSet](#FASStickerSet)が格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 

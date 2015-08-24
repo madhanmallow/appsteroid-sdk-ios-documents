@@ -233,7 +233,7 @@ typedef void (^FASSNSAccountsCompletionHandler)(NSArray *snsAccounts, NSError *e
   * snsAccounts
     * `FASSNSAccount`のオブジェクトが格納されたNSArrayです。各SNSアカウント情報にはプロパティ経由で参照できます。
   * meta
-    * リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+    * リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
   * error
     * エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -555,7 +555,7 @@ typedef void (^FASUsersCompletionHandler)(NSArray *users, FASPagingMeta *meta, N
   * users
     * 複数のユーザーの情報がNSArrayに格納されています。
   * meta
-    * リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+    * リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
   * error
     * エラーの詳細が格納されています。エラーがない場合はnilになります。
 

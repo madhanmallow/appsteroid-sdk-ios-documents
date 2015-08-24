@@ -42,15 +42,15 @@ Add `AppSteroid.bundle` to `Copy Bundle Resources` under `Build Phases`.
 Please define the `-ObjC` under `Other Linker Flags`.
 ![flags](GetStarted/Images/ss_fresvii_03.png "Flags")
 
-## <a name="Initialization"> 初期設定 </a>
+## <a name="Initialization"> Initialization </a>
 
 In order to start using AppSteroid, you will need to perform a initial setup when starting up the application.
-Please define [startWithAppIdentifier:secretToken:](AppSteroidSpec.md#AppSteroid.startWithAppIdentifiersecretToken) under [AppSteroid](AppSteroidSpec.md#AppSteroid) for `application:didFinishLaunchingWithOptions:` under `AppDelegate.m`.
+Please define [startWithAppIdentifier:secretToken:](7_Spec.md#AppSteroid.startWithAppIdentifiersecretToken) under [AppSteroid](7_Spec.md#AppSteroid) for `application:didFinishLaunchingWithOptions:` under `AppDelegate.m`.
 This API needs to pass the app ID and secret token as an argument. Check [How to register your app](./2_AppRegistration.md) for steps to get your App ID and secret token.
 
-```
+```obj-c
 #import <AppSteroid/AppSteroid.h>
-
+                           
     …
     …
 
@@ -68,11 +68,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [AppSteroid startWithAppIdentifier:appId
                            secretToken:secretToken
                            development:development];
-
+	
 	…
 	…
 	…
-
+	
 	return YES;
 }
 ```

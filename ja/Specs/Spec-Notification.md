@@ -8,8 +8,6 @@ last update at 2014/10/7
 
 プッシュ通知の設定や、通知イベントを取り扱うための機能に関する仕様書です。
 デバイストークンをFresviiサーバーに設定するAPIや、特定のプッシュ通知を監視して通知を受けるようにする機能などが提供されています。
-また、[FASCustomMessage](#FASCustomMessage)では、[FASStorage](Spec-Storage.md#FASStorage)と連携して、特定のユーザーにプッシュ通知を送ることが出来ます。
-詳しくは[PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md)を参照してください。
 
 ---
 
@@ -90,7 +88,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 ```
 
 ##### <a name="FASNotification_addDeviceTokencertificateTypecompletion"> addDeviceToken:certificateType:completion: </a>
-証明書の種類を指定でデバイストークンを登録します。証明書の種類については [開発モードについて](./DevelopmentMode.md) も合わせてご確認ください。
+証明書の種類を指定でデバイストークンを登録します。証明書の種類については [開発モードについて](../6_開発モードについて.md) も合わせてご確認ください。
 
 \+ (void)addDeviceToken:(NSData *)deviceToken
 				certificateType:(FASCertificateType)certificateType

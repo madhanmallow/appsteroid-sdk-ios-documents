@@ -130,11 +130,11 @@ matchmakingViewController.segment = @"Japan";
 ```
 
 ## <a name="GameContext"> ターン制ゲームへの対応 </a>
-マッチ成立後にターン制ゲームを開始する場合は、[FASGameContext](Specs/Spec-Matchmaking.md#FASGameContext)を利用します。  
-**ゲームコンテキスト**とは、マッチに参加しているプレイヤーに送信可能なオブジェクト（[FASGameContext](Specs/Spec-Matchmaking.md#FASGameContext)）です。
+マッチ成立後にターン制ゲームを開始する場合は、[FASGameContext](../Specs/Spec-Matchmaking.md#FASGameContext)を利用します。  
+**ゲームコンテキスト**とは、マッチに参加しているプレイヤーに送信可能なオブジェクト（[FASGameContext](../Specs/Spec-Matchmaking.md#FASGameContext)）です。
 
 ### <a name="GameContextEvent"> イベントの登録と削除 </a>
-ゲームコンテキストを送信すると、相手プレイヤーにpath:`match_making/context`action:`created`の通知が送信されます。通知の登録方法は以下のサンプルコードを参照するか、[GetStarted-PushNotification](./GetStarted/GetStarted-PushNotification#ObserveEvent)を参照してください。
+ゲームコンテキストを送信すると、相手プレイヤーにpath:`match_making/context`action:`created`の通知が送信されます。通知の登録方法は以下のサンプルコードを参照するか、[GetStarted-PushNotification](./GetStarted-PushNotification.md#ObserveEvent)を参照してください。
 
 1. コンテキスト受信時のイベントを登録
 2. ビューから離れた時にイベントの削除を行う

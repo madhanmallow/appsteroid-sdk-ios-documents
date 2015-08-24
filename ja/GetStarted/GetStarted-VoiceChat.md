@@ -14,7 +14,7 @@ last update at 2014/10/7
 
 ### 導入
 Fresviiのウェブサイトから`ボイスチャット機能ありのフレームワーク`をダウンロードしてください。
-フレームワークの導入方法は[AppSteroid Get Started](../AppSteroidGetStarted.md)を参照してください。
+フレームワークの導入方法は[AppSteroid Get Started](../3_GetStarted.md)を参照してください。
 
 また、`libc++.dylib`も下図の様にライブラリに追加してください。
 

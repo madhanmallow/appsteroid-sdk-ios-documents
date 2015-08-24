@@ -49,7 +49,7 @@ typedef void (^FASPlayStatsCompletionHandler)(NSArray *stats, FASPagingMeta *met
 	* stats
 		* 複数の[FASPlayStat](#FASPlayStat)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 

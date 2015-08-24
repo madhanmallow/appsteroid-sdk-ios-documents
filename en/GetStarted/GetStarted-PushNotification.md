@@ -9,8 +9,8 @@ last update at 2015/07/29
 - [Push Notification List](#EventList)
 - [Observing Push Notification Event](#ObserveEvent)
 - [Sending Custom Message](#CustomMessage)
-	    - [Setting Channel](#SettingChannel)
-	    - [Using Storage](#UseKVS)
+	- [Setting Channel](#SettingChannel)
+	- [Using Storage](#UseKVS)
     - [Sending Message](#SendMessage)
 - [Directly Show AppSteroid View](#DisplayFresviiGUI)
 

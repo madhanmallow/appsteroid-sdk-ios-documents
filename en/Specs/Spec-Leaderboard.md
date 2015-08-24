@@ -18,9 +18,8 @@ You can submit scores to a specific leaderboard or get ranking info from a speci
 |[FASLeaderboard](#FASLeaderboard)|Leaderboard model class |
 |[FASScore](#FASScore)|Score model class |
 |[FASRank](#FASRank)|Rank model class |
-|[FASSortOptions](#FASSortOptions)|Class for sorting ranking |
-|[FASLeaderboardNavigationController](#FASLeaderboardNavigationController)|NavigationController, which is a base of Leaderboard view |
-|[FASLeaderboardLayout](#FASLeaderboardLayout)|Class to change layout of Leaderboard View |
+|[FASGameEvent](#FASGameEvent)|Game event model class |
+|[FASEventboard](#FASEventboard)|Eventboard model class |
 
 
 ---
@@ -79,7 +78,7 @@ typedef void (^FASLeaderboardsCompletionHandler)(NSArray *leaderboards, FASPagin
 	* leaderboards
 		* Multiple [FASLeaderboard](#FASLeaderboard) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -224,7 +223,7 @@ typedef void (^FASScoresCompletionHandler)(NSArray *scores, FASPagingMeta *meta,
 	* scores
 		* Multiple [FASScore](#FASScore) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -253,7 +252,7 @@ Leaderboard information. [FASLeaderboard](#FASLeaderboard) Object.
 
 @property (nonatomic, readonly) FASLeaderboard *leaderboard;
 ##### <a name="FASScore.user"> user </a>
-User information. [FASUser](#FASUser) Object.
+User information. [FASUser](Spec-User.md#FASUser) Object.
 
 @property (nonatomic, readonly) FASUser *user;
 
@@ -529,7 +528,7 @@ typedef void (^FASRankingCompletionHandler)(NSArray *ranking, FASPagingMeta *met
 	* ranking
 		* Multiple [FASRank](#FASRank) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -641,336 +640,251 @@ Sample
     }];
 }
 ```
+### <a name="FASGameEvent"> FASGameEvent </a>
+Game event model class. Game event can be created from Web Console.
 
-### <a name="FASSortOptions"> FASSortOptions </a>
-Used when aggregating ranking on leaderboard.
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASGameEventStatus](#FASGameEvent.FASGameEventStatus)|Constants of game event state is defined. |
+|[FASGameEventCompletionHandler](#FASGameEvent.FASGameEventCompletionHandler)|Block object used when carrying out the process to get game event |
+|[FASGameEventsCompletionHandler](#FASGameEvent.FASGameEventsCompletionHandler)|Block object used when carrying out the process to get multiple game events |
+
+##### <a name="FASGameEvent.FASGameEventStatus"> FASGameEventStatus </a>
+Constant of game event state is defined. This constant is used to get game event.
+
+```
+typedef NS_ENUM(NSInteger, FASGameEventStatus)
+{
+    FASGameEventStatusUpcoming,
+    FASGameEventStatusOngoing,
+    FASGameEventStatusPast,
+};
+```
+
+###### Constants
+###### FASGameEventStatusUpcoming
+Not started state of game event.
+
+###### FASGameEventStatusOngoing
+Ongoing state of game event.
+
+###### FASGameEventStatusPast
+Ended state of game event.
+
+##### <a name="FASGameEvent.FASGameEventCompletionHandler"> (^FASGameEventCompletionHandler)(FASGameEvent *event, NSError *error) </a>
+Block object used when carrying out the process to get game event.
+
+typedef void (^FASGameEventCompletionHandler)(FASGameEvent *event, NSError *error);
+
+* Parameters
+	* event
+		* [FASGameEvent](#FASGameEvent) is stored.
+	* error
+		* Error detail is stored. It will be nil if there is no error.
+
+##### <a name="FASGameEvent.FASGameEventsCompletionHandler"> (^FASRankingCompletionHandler)(NSArray *ranking, NSError *error) </a>
+Block object used when carrying out the process to get multiple game events.
+
+typedef void (^FASGameEventsCompletionHandler)(NSArray *events, FASPagingMeta *meta, NSError *error);
+
+* Parameters
+	* events
+		* Multiple [FASGameEvent](#FASGameEvent) are stored in NSArray.
+	* meta
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
+	* error
+		* Error detail is stored. It will be nil if there is no error.
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[timeZone](#FASSortOptions.timeZone)|Timezone |
-|[date](#FASSortOptions.date)|Date/time |
+|[eventId](#FASGameEvent.eventId)|game event ID |
+|[eventName](#FASGameEvent.eventName)|Game event name |
+|[eventDescription](#FASGameEvent.eventDescription)|Description of game event |
+|[imageUrl](#FASGameEvent.imageUrl)|Image URL of game event |
+|[webSiteUrl](#FASGameEvent.webSiteUrl)|Web site URL of game event |
+|[startAt](#FASGameEvent.startAt)|Game event start date & time |
+|[endAt](#FASGameEvent.endAt)|Game event end date & time |
+|[createdAt](#FASGameEvent.createdAt)|Game event creation date & time |
 
-##### <a name="FASSortOptions.timeZone"> timeZone </a>
-Timezone
+##### <a name="FASGameEvent.eventId"> eventId </a>
+game event ID.
 
-@property (nonatomic, readonly) NSTimeZone *timeZone;
+@property (nonatomic, readonly) NSString *eventId;
 
-##### <a name="FASSortOptions.date"> date </a>
-Date/time
+##### <a name="FASGameEvent.eventName"> eventName </a>
+Game event name.
 
-@property (nonatomic, readonly) NSDate *date;
+@property (nonatomic, readonly) NSString *eventName;
+
+##### <a name="FASGameEvent.eventDescription"> eventDescription </a>
+Description of game event.
+
+@property (nonatomic, readonly) NSString *eventDescription;
+
+##### <a name="FASGameEvent.imageUrl"> imageUrl </a>
+Image URL of game event.
+
+@property (nonatomic, readonly) NSString *imageUrl;
+
+##### <a name="FASGameEvent.webSiteUrl"> webSiteUrl </a>
+Web site URL of game event.
+
+@property (nonatomic, readonly) NSString *webSiteUrl;
+
+##### <a name="FASGameEvent.startAt"> startAt </a>
+Game event start date & time.
+
+@property (nonatomic, readonly) NSDate *startAt;
+
+##### <a name="FASGameEvent.endAt"> endAt </a>
+Game event end date & time.
+
+@property (nonatomic, readonly) NSDate *endAt;
+
+##### <a name="FASGameEvent.createdAt"> createdAt </a>
+Game event creation date & time.
+
+@property (nonatomic, readonly) NSDate *createdAt;
 
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[dailyWithMinute:hour:](#FASSortOptions.dailyWithMinutehour) |Used for daily aggregation. |
-|[dailyWithMinute:hour:timeZone:](#FASSortOptions.dailyWithMinutehourtimeZone) |Used for daily aggregation. |
-|[weeklyWithMinute:hour:weekday:](#FASSortOptions.weeklyWithMinutehourweekday) |Used for weekly aggregation. |
-|[weeklyWithMinute:hour:weekday:timeZone:](#FASSortOptions.weeklyWithMinutehourweekdaytimeZone) |Used for weekly aggregation. |
-|[total](#FASSortOptions.total) |Used for total aggregation. |
+|[fetchGameEventsWithStatus:page:completion:](#FASGameEvent.fetchGameEventsWithStatuspagecompletion) |Get list of game event |
+|[fetchGameEventWithEventId:completion:](#FASGameEvent.fetchGameEventWithEventIdcompletion) |Get a game event |
 
-##### <a name="FASSortOptions.dailyWithMinutehour"> dailyWithMinute:hour: </a>
-Used for daily aggregation. Set a starting time (hour and minute) for aggregation. System timezone will be the default setting for timezone.
+##### <a name="FASGameEvent.fetchGameEventsWithStatuspagecompletion"> fetchGameEventsWithStatus:page:completion: </a>
+Get list of game event.
 
-\+ (instancetype)dailyWithMinute:(NSUInteger)minute
-                            hour:(NSUInteger)hour;
+\+ (void)fetchGameEventsWithStatus:(FASGameEventStatus)status
+                             page:(NSUInteger)page
+                       completion:(FASGameEventsCompletionHandler)completion;
 
 * Parameters
-	* minute
-		* Select minute
-	* hour
-		* Select hour
+	* status
+		* Status of game event. Please refer to [FASGameEventStatus](#FASGameEvent.FASGameEventStatus).
+	* page
+		* Page number.
+	* completion
+		* Block object to be executed when the process is completed.
 
-Sample
+##### <a name="FASGameEvent.fetchGameEventWithEventIdcompletion"> fetchGameEventWithEventId:completion: </a>
+Get a game event.
 
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // Aggregate ranking data everyday at 19:00.
-    FASSortOptions *dailyOption = [FASSortOptions dailyWithMinute:0 hour:19];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.dailySortOptions = dailyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.dailyWithMinutehourtimeZone"> dailyWithMinute:hour:timeZone: </a>
-Used for daily aggregation. Set a starting time (hour and minute) and timezone.
-
-\+ (instancetype)dailyWithMinute:(NSUInteger)minute
-                            hour:(NSUInteger)hour
-                        timeZone:(NSTimeZone *)timeZone;
+\+ (void)fetchGameEventWithEventId:(NSString *)eventId
+                       completion:(FASGameEventCompletionHandler)completion;
 
 * Parameters
-	* minute
-		* Select minute
-	* hour
-		* Select hour
-	* timeZone
-		* Select timezone
+	* eventId
+		* Game event id
+	* completion
+		* Block object to be executed when the process is completed.
 
-Sample
+### <a name="FASEventboard"> FASEventboard </a>
+Leaderboard model registered to a game event.
 
-```
-#import <AppSteroid/FASLeaderboardNavigationController.h>
-#import <AppSteroid/FASSortOptions.h>
+#### Constants
 
-	…
-	…
+|Constant|Description|
+|------|-----|
+|[FASEventboardCompletionHandler](#FASEventboard.FASEventboardCompletionHandler)|Block object used when carrying out the process to get Eventboard |
+|[FASEventboardsCompletionHandler](#FASEventboard.FASEventboardsCompletionHandler)|Block object used when carrying out the process to get multiple Eventboards |
 
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // Aggregate ranking data everyday at GMT 19:00.
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    FASSortOptions *dailyOption = [FASSortOptions dailyWithMinute:0 hour:19 timeZone:timeZone];
+##### <a name="FASEventboard.FASEventboardCompletionHandler"> (^FASEventboardCompletionHandler)(FASEventboard *eventboard, NSError *error) </a>
+Block object used when carrying out the process to get Eventboard.
 
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.dailySortOptions = dailyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.weeklyWithMinutehourweekday"> weeklyWithMinute:hour:weekday: </a>
-Used for weekly aggregation. Set a starting week, hour and minute for aggregation. System timezone will be the default setting for timezone.
-
-\+ (instancetype)weeklyWithMinute:(NSUInteger)minute
-                             hour:(NSUInteger)hour
-                          weekday:(NSUInteger)weekday;
+typedef void (^FASEventboardCompletionHandler)(FASEventboard *eventboard, NSError *error);
 
 * Parameters
-	* minute
-		* Select minute between 0 to 59.
-	* hour
-		* Select hour between 0 to 23.
-	* weekday
-		* Select week between 1 to 7. 1:Sunday, 2:Monday, 3:Tuesday, 4:Wednesday, 5:Thursday, 6:Friday, 7:Saturday.
+	* eventboard
+		* [FASEventboard](#FASEventboard) is stored.
+	* error
+		* Error detail is stored. It will be nil if there is no error.
 
-Sample
+##### <a name="FASEventboard.FASEventboardsCompletionHandler"> (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingMeta *meta, NSError *error) </a>
+Block object used when carrying out the process to get multiple Eventboards.
 
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // Aggregate ranking data every Monday at 19:00.
-    FASSortOptions *weeklyOption = [FASSortOptions weeklyWithMinute:0 hour:19 weekday:2];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.weeklySortOptions = weeklyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.weeklyWithMinutehourweekdaytimeZone"> weeklyWithMinute:hour:weekday:timeZone: </a>
-Used for weekly aggregation. Set a starting week, hour, minute and timezone for aggregation.
-
-\+ (instancetype)weeklyWithMinute:(NSUInteger)minute
-                             hour:(NSUInteger)hour
-                          weekday:(NSUInteger)weekday
-                         timeZone:(NSTimeZone *)timeZone;;
+typedef void (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingMeta *meta, NSError *error);
 
 * Parameters
-	* minute
-		* Select minute between 0 to 59.
-	* hour
-		* Select hour between 0 to 23.
-	* weekday
-		* Select week between 1 to 7. 1:Sunday, 2:Monday, 3:Tuesday, 4:Wednesday, 5:Thursday, 6:Friday, 7:Saturday.
-	* timeZone
-		* Select timezone.
-
-Sample
-
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // Aggregate ranking data every Monday at GMT 19:00.
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    FASSortOptions *weeklyOption = [FASSortOptions weeklyWithMinute:0 hour:19 weekday:2 timeZone:timeZone];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.weeklySortOptions = weeklyOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-##### <a name="FASSortOptions.total"> total </a>
-Used for total aggregation
-
-\+ (instancetype)total;
-
-Sample
-
-```
-#import <AppSteroid/FASSortOptions.h>
-
-	…
-	…
-
-- (IBAction)pushedShowLeaderboardButton:(id)sender
-{
-    // Aggregate all the ranking data up to
-    FASSortOptions *totalOption = [FASSortOptions total];
-
-    FASLeaderboardNavigationController *leaderboardNavigationController = [FASLeaderboardNavigationController leaderboardNavigationController];
-    leaderboardNavigationController.totalSortOptions = totalOption;
-
-    [self presentViewController:leaderboardNavigationController animated:YES completion:nil];
-}
-```
-
-### <a name="FASLeaderboardNavigationController"> FASLeaderboardNavigationController </a>
-NavigationController, which is a base of leaderboard view.
+	* eventboards
+		* Multiple [FASEventboard](#FASEventboard) are stored inNSArray.
+	* meta
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
+	* error
+		* Error detail is stored. It will be nil if there is no error.
 
 #### Properties
 
 |Properties|Description|
 |------|-----|
-|[leaderboardId](#FASLeaderboardNavigationController.leaderboardId)|Leaderboard ID |
-|[onlyFriends](#FASLeaderboardNavigationController.onlyFriends)|Select `YES` to only display friends on leaderboard. |
-|[animated](#FASLeaderboardNavigationController.animated)|With or without animation when closing he view. |
-|[dailySortOptions](#FASLeaderboardNavigationController.todaySortOptions)|Choose sort option for `today` section on leaderboard. |
-|[weeklySortOptions](#FASLeaderboardNavigationController.weeklySortOptions)|Choose sort option for `weekly` section on leaderboard. |
-|[totalSortOptions](#FASLeaderboardNavigationController.totalSortOptions)|Choose sort option for `total` section on leaderboard. |
+|[eventboardId](#FASEventboard.eventboardId)|Eventboard id |
+|[leaderboard](#FASEventboard.leaderboard)|Game object registered to a game event |
+|[gameEvent](#FASEventboard.gameEvent)|Game event |
 
-##### <a name="FASLeaderboardNavigationController.leaderboardId"> leaderboardId </a>
-Specify the ID of the leaderboard you want to display.
+##### <a name="FASEventboard.eventboardId"> eventboardId </a>
+Eventboard id.
 
-@property (nonatomic, copy) NSString *leaderboardId;
+@property (nonatomic, readonly) NSString *eventboardId;
 
-##### <a name="FASLeaderboardNavigationController.onlyFriends"> onlyFriends </a>
-Select `YES` to only display friends on leaderboard. Default setting is `NO`.
+##### <a name="FASEventboard.leaderboard"> leaderboard </a>
+[FASLeaderboard](#FASLeaderboard) object registered to a game event.
 
-@property (nonatomic, assign) BOOL onlyFriends;
+@property (nonatomic, readonly) FASLeaderboard *leaderboard;
 
-##### <a name="FASLeaderboardNavigationController.animated"> animated </a>
-A setting to close the view with or without an animation. Default setting is `YES`.
+##### <a name="FASEventboard.gameEvent"> gameEvent </a>
+[FASGameEvent](#FASGameEvent) object.
 
-@property (nonatomic, assign) BOOL animated;
-
-##### <a name="FASLeaderboardNavigationController.todaySortOptions"> dailySortOptions </a>
-Select sort option for `today` section on leaderboard. Specify the return value for [dailyWithMinute:hour:](#FASSortOptions.dailyWithMinutehour) under [FASSortOptions](#FASSortOptions).
-
-@property (nonatomic, strong) FASSortOptions *dailySortOptions;
-
-##### <a name="FASLeaderboardNavigationController.weeklySortOptions"> weeklySortOptions </a>
-Select sort option for `weekly` section on leaderboard. Specify the return value for [weeklyWithMinute:hour:weekday:](#FASSortOptions.weeklyWithMinutehourweekday) under [FASSortOptions](#FASSortOptions).
-
-@property (nonatomic, strong) FASSortOptions *weeklySortOptions;
-
-##### <a name="FASLeaderboardNavigationController.totalSortOptions"> totalSortOptions </a>
-Select sort option for `total` section on leaderboard. Specify the return value for [total](#FASSortOptions.total) under [FASSortOptions](#FASSortOptions).
-
-@property (nonatomic, strong) FASSortOptions *totalSortOptions;
+@property (nonatomic, readonly) FASGameEvent *gameEvent;
 
 #### Class Method
 
 |Method|Description|
 |------|-----|
-|[leaderboardNavigationController](#FASLeaderboardNavigationController.leaderboardNavigationController) |Return [FASLeaderboardNavigationController](#FASLeaderboardNavigationController), which is a base of leaderboard view |
-|[presentLeaderboardWithTarget:animated:](#FASLeaderboardNavigationController.presentLeaderboardWithTargetanimated) |Display leaderboard view |
+|[fetchEventboardsWithPage:completion:](#FASEventboard.fetchEventboardsWithPagecompletion) |Get eventboard list |
+|[fetchEventboardsWithEventId:page:completion:](#FASEventboard.fetchEventboardsWithEventIdpagecompletion) |Get eventboard list of an event id |
+|[fetchEventboardWithEventboardId:completion:](#FASEventboard.fetchEventboardWithEventboardIdcompletion) |Get an eventboard |
 
-##### <a name="FASLeaderboardNavigationController.leaderboardNavigationController"> leaderboardNavigationController </a>
-Return [FASLeaderboardNavigationController](#FASLeaderboardNavigationController), which is a base of leaderboard view.
+##### <a name="FASEventboard.fetchEventboardsWithPagecompletion"> fetchEventboardsWithPage:completion: </a>
+Get eventboard list.
 
-\+ (FASLeaderboardNavigationController *)leaderboardNavigationController;
-
-##### <a name="FASLeaderboardNavigationController.presentLeaderboardWithTargetanimated"> presentLeaderboardWithTarget:animated: </a>
-Display the latest leaderboard view.
-
-\+ (void)presentLeaderboardWithTarget:(UIViewController *)target
-                             animated:(BOOL)animated;
+\+ (void)fetchEventboardsWithPage:(NSUInteger)page
+                      completion:(FASEventboardsCompletionHandler)completion;
 
 * Parameters
-	* target
-		* Select the base ViewController to display the view.
-	* animated
-		* Yes will transit with animation.
+	* page
+		* Page number.
+	* completion
+		* Block object to be executed when the process is completed.
 
-Sample
+##### <a name="FASEventboard.fetchEventboardsWithEventIdpagecompletion"> fetchEventboardsWithEventId:page:completion: </a>
+Get eventboard list of an event id.
 
-```
-#import <AppSteroid/FASLeaderboardNavigationController.h>
+\+ (void)fetchEventboardsWithEventId:(NSString *)eventId
+                               page:(NSUInteger)page
+                         completion:(FASEventboardsCompletionHandler)completion;
 
-	…
-	…
+* Parameters
+	* eventId
+		* Game event id
+	* page
+		* Page number
+	* completion
+		* Block object to be executed when the process is completed.
 
-- (IBAction)pushedLeaderboardButton:(id)sender
-{
-    [FASLeaderboardNavigationController presentLeaderboardWithTarget:self
-                                                            animated:YES];
-}
-```
+##### <a name="FASEventboard.fetchEventboardWithEventboardIdcompletion"> fetchEventboardWithEventboardId:completion: </a>
+Get an eventboard.
 
-### <a name="FASLeaderboardLayout"> FASLeaderboardLayout </a>
-You can change layout related to Group View
+\+ (void)fetchEventboardWithEventboardId:(NSString *)eventboardId
+                             completion:(FASEventboardCompletionHandler)completion;
 
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[leaderboardLayoutBlocks](#FASLeaderboardLayout.leaderboardLayoutBlocks)|Block object used to change layout of leaderboard view |
-
-##### <a name="FASLeaderboardLayout.leaderboardLayoutBlocks"> leaderboardLayoutBlocks </a>
-Block object used to change layout of leaderboard view
-
-@property (nonatomic, copy) FASLeaderboardViewController *(^leaderboardLayoutBlocks)(FASLeaderboardViewController *leaderboardViewController);
-
-Sample - Changing background color
-
-```
-[FASLeaderboardLayout sharedInstance].leaderboardLayoutBlocks = ^FASLeaderboardViewController *(FASLeaderboardViewController *leaderboardViewController)
-    {
-        leaderboardViewController.view.backgroundColor = [UIColor whiteColor];
-        leaderboardViewController.tableView.backgroundColor = [UIColor whiteColor];
-        if ([leaderboardViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            leaderboardViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            leaderboardViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        leaderboardViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        leaderboardViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        leaderboardViewController.leaderboardCellLayoutBlocks = ^FASLeaderboardCell *(FASLeaderboardCell *leaderboardCell)
-        {
-            leaderboardCell.contentView.backgroundColor = [UIColor whiteColor];
-            leaderboardCell.userNameLabel.textColor = [UIColor blackColor];
-            leaderboardCell.rankLabel.textColor = [UIColor blackColor];
-            return leaderboardCell;
-        };
-        return leaderboardViewController;
-    };
-}
-```
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[sharedInstance](#FASLeaderboardLayout.sharedInstance) |Return the object |
-
-##### <a name="FASLeaderboardLayout.sharedInstance"> sharedInstance </a>
-Return the object
-
-\+ (instancetype)sharedInstance;
+* Parameters
+	* eventboardId
+		* Eventboard Id
+	* completion
+		* Block object to be executed when the process is completed.

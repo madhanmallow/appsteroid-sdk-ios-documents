@@ -205,16 +205,16 @@ typedef void (^FASVideoCompletionHandler)(FASVideo *video, NSError *error);
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
-##### <a name="FASVideo.FASVideosCompletionHandler"> (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPagingMeta *meta, NSError *error) </a>
+##### <a name="FASVideo.FASVideosCompletionHandler"> (^FASVideosCompletionHandler)(NSArray *videos, FASPagingMeta *meta, NSError *error) </a>
 Block object used when carrying out the process to get multiple videos.
 
-typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPagingMeta *meta, NSError *error);
+typedef void (^FASVideosCompletionHandler)(NSArray *videos, FASPagingMeta *meta, NSError *error);
 
 * Parameters
 	* videos
 		* Multiple [FASVideo](#FASVideo) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 

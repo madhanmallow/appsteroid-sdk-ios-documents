@@ -233,7 +233,7 @@ typedef void (^FASSNSAccountsCompletionHandler)(NSArray *snsAccounts, NSError *e
   * snsAccounts
     * NSArray that stores object of `FASSNSAccount`. You can check the SNS account info by through property.
   * meta
-    * You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+    * You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
   * error
     * Error detail is stored. It will be nil when there is no error.
 
@@ -548,7 +548,7 @@ typedef void (^FASUsersCompletionHandler)(NSArray *users, FASPagingMeta *meta, N
   * users
     * Multiple user information is stored in NSArray.
   * meta
-    * You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+    * You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
   * error
     * Error details are stored here. When there is no error, it will be nil.
 

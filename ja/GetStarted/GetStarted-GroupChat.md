@@ -177,8 +177,8 @@ Sample
 ### 手順とサンプル
 
 #### 事前準備
-* AppSteroid の機能を利用するには、[GetStarted](./AppSteroidGetStarted.md) に説明する初期設定を行っておく必要があります。
-* グループメッセージはプッシュ通知を介して行われますので [プッシュ通知の設定](GetStarted/GetStarted-PushNotification.md)を行っておく必要があります。
+* AppSteroid の機能を利用するには、[GetStarted](../3_GetStarted.md) に説明する初期設定を行っておく必要があります。
+* グループメッセージはプッシュ通知を介して行われますので [プッシュ通知の設定](./GetStarted-PushNotification.md)を行っておく必要があります。
 
 #### グループの作成
 1. グループの作成

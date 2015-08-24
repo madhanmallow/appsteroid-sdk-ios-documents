@@ -145,7 +145,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|SDKのビルドバージョンを返却します。 |
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretToken"> startWithAppIdentifier:secretToken: </a>
-SDKの利用を開始するための初期設定を行います。開発モードは配布用となります。開発モードとして起動する場合、[モード引数を指定できるバージョン](#AppSteroid_startWithAppIdentifiersecretTokendevelopment)を実行していください。
+SDKの利用を開始するための初期設定を行います。開発モードは配布用となります。開発モードとして起動する場合、[モード引数を指定できるバージョン](#AppSteroid.startWithAppIdentifiersecretTokendevelopment)を実行していください。
 
 \+ (void)startWithAppIdentifier:(NSString *)appIdentifier secretToken:(NSString *)secretToken
 
@@ -157,7 +157,7 @@ SDKの利用を開始するための初期設定を行います。開発モー�
 
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretTokendevelopment"> startWithAppIdentifier:secretToken:development: </a>
-SDKの利用を開始するための初期設定を行います。開発モードを指定して起動する事ができます。詳細は [開発モードについて](./DevelopmentMode.md) を確認ください。
+SDKの利用を開始するための初期設定を行います。開発モードを指定して起動する事ができます。詳細は [開発モードについて](./6_開発モードについて.md) を確認ください。
 
 \+ (void)startWithAppIdentifier:(NSString *)appIdentifier
                     secretToken:(NSString *)secretToken
@@ -252,7 +252,7 @@ AppSteroidが提供するTabBarControllerにアクセスするためのクラス
 
 
 ##### <a name="FASTabBarController.presentTabBarControllerWithTargetanimated"> presentTabBarControllerWithTarget:animated: </a>
-[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。
+[AppSteroid#setTabs:](#AppSteroid.setTabs)で定義されたタブを表示します。
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
                                   animated:(BOOL)animated;
@@ -280,7 +280,7 @@ Sample
 ```
 
 ##### <a name="FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated"> presentTabBarControllerWithTarget:initialTabNumber:animated: </a>
-[AppSteroid#setTabs:](AppSteorid.setTabs)で定義されたタブを表示します。
+[AppSteroid#setTabs:](#AppSteroid.setTabs)で定義されたタブを表示します。
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
                          initialTabNumber:(NSInteger)tabNumber

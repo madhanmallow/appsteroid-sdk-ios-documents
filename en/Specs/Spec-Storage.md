@@ -8,7 +8,6 @@ last update at 2014/09/30
 
 Data will be stored in JSON format. Save data will be stored on both AppSteroid server and iOS device.
 Check [KeyValueStorageGetStarted](../GetStarted/GetStarted-KeyValueStorage.md) to see. how to use.
-Also, you can send push message to users with a specific value by corroborating with [FASCustomMessage](NotificationSpec.md#FASCustomMessage). Check [PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md) for more information.
 
 ---
 

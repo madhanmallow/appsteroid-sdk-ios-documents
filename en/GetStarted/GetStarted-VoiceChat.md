@@ -14,7 +14,7 @@ last update at 2014/10/08
 
 ### Introduction
 Download `flamework with voice chat feature` from Fresvii's website.
-Check [AppSteroid Get Started](../AppSteroidGetStarted.md) for instructions to implement the flamework.
+Check [AppSteroid Get Started](../3_GetStarted.md) for instructions to implement the flamework.
 
 Also, add `libc++.dylib` to the library like the sample below.
 

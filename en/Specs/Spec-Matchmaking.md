@@ -149,7 +149,7 @@ typedef void (^ FASMatchesCompletionHandler)(NSArray *matches, FASPagingMeta *me
 	* matches
 		* Multiple [FASMatch](#FASMatch) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -202,7 +202,7 @@ Players who are joining or currently invited to the match. [FASMatchPlayer](#FAS
 @property (nonatomic, readonly) NSArray *players;
 
 ##### <a name="FASMatch.groups"> groups </a>
-Group of players who are in the match after matching was completed. [FASGroup](#FASGroup) is stored.
+Group of players who are in the match after matching was completed. [FASGroup](./Spec-Group.md#FASGroup) is stored.
 
 @property (nonatomic, readonly) NSArray *groups;
 
@@ -552,8 +552,7 @@ Requested maximum number of players
 |[createMatchRequestWithCompletion:](#FASMatchRequest.createMatchRequestWithCompletion) |Create a match request. |
 |[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:segment:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayerssegmentcompletion) |Create a match request with specific conditions, minimum/maximum number of players and segment. |
 |[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcompletion) |Create a match request by selecting user to invite with an invitation message, and with specific conditions, minimum/maximum number of players and segment. |
-[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:cancelOnDecline:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcancelOnDeclinecompletion) |Create a match request by selecting the Minimum/Maximum number of game players and segmentation, user who invites and invitation message, behavior of when canceling a invitation. |
-|
+|[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:cancelOnDecline:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcancelOnDeclinecompletion) |Create a match request by selecting the Minimum/Maximum number of game players and segmentation, user who invites and invitation message, behavior of when canceling a invitation. |
 |[cancelMatchRequestWithRequestId:completion:](#FASMatchRequest.cancelMatchRequestWithRequestIdcompletion) |Cancel a match request |
 |[fetchMatchingRequestWithCompletion:](#FASMatchRequest.fetchMatchingRequestWithCompletion) |Get own match request. |
 

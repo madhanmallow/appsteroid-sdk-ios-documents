@@ -156,7 +156,7 @@ Initial setup to start using the SDK.
     * SecretToken
 
 ##### <a name="AppSteroid_startWithAppIdentifiersecretTokendevelopment"> startWithAppIdentifier:secretToken:development: </a>
-Initial setup to start using the SDK. app can work for development mode. Please see following link. [What is Development Mode](./DevelopmentMode.md)
+Initial setup to start using the SDK. app can work for development mode. Please see following link. [What is Development Mode](./6_DevelopmentMode.md)
 
 \+ (void)startWithAppIdentifier:(NSString *)appIdentifier
                     secretToken:(NSString *)secretToken
@@ -247,12 +247,12 @@ Class to access TabBarController provided by AppSteroid.
 
 |Method|Description|
 |------|-----|
-|[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs). |
-|[presentTabBarControllerWithTarget:initialTabNumber:animated:](#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) |Show tabs defined in [AppSteroid#setTabs:](AppSteorid.setTabs). |
+|[presentTabBarControllerWithTarget:animated:](#FASTabBarController.presentTabBarControllerWithTargetanimated) |Show tabs defined on [AppSteroid#setTabs:](#AppSteroid.setTabs). |
+|[presentTabBarControllerWithTarget:initialTabNumber:animated:](#FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated) |Show tabs defined in [AppSteroid#setTabs:](#AppSteroid.setTabs). |
 
 
 ##### <a name="FASTabBarController.presentTabBarControllerWithTargetinitialTabNumberanimated"> presentTabBarControllerWithTarget:initialTabNumber:animated: </a>
-Show tabs defined in [AppSteroid#setTabs:](AppSteorid.setTabs)Show tabs defined on [AppSteroid#setTabs:](AppSteorid.setTabs).
+Show tabs defined in [AppSteroid#setTabs:](#AppSteroid.setTabs)Show tabs defined on [AppSteroid#setTabs:](#AppSteroid.setTabs).
 
 \+ (void)presentTabBarControllerWithTarget:(UIViewController *)target
                                   animated:(BOOL)animated;

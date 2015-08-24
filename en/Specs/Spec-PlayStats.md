@@ -47,9 +47,9 @@ typedef void (^FASPlayStatsCompletionHandler)(NSArray *stats, FASPagingMeta *met
 
 * Parameters
 	* stats
-		* Multiple [FASScore](#FASScore) are stored in NSArray.
+		* Multiple [FASScore](./Spec-Leaderboard.md#FASScore) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 

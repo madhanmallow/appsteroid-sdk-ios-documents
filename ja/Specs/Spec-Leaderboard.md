@@ -79,7 +79,7 @@ typedef void (^FASLeaderboardsCompletionHandler)(NSArray *leaderboards, FASPagin
 	* leaderboards
 		* 複数の[FASLeaderboard](#FASLeaderboard)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -224,7 +224,7 @@ typedef void (^FASScoresCompletionHandler)(NSArray *scores, FASPagingMeta *meta,
 	* scores
 		* 複数の[FASScore](#FASScore)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -253,7 +253,7 @@ typedef void (^FASScoresCompletionHandler)(NSArray *scores, FASPagingMeta *meta,
 
 @property (nonatomic, readonly) FASLeaderboard *leaderboard;
 ##### <a name="FASScore.user"> user </a>
-ユーザー情報。[FASUser](#FASUser)オブジェクト。
+ユーザー情報。[FASUser](./Spec-User.md#FASUser)オブジェクト。
 
 @property (nonatomic, readonly) FASUser *user;
 
@@ -529,7 +529,7 @@ typedef void (^FASRankingCompletionHandler)(NSArray *ranking, FASPagingMeta *met
 	* ranking
 		* 複数の[FASRank](#FASRank)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -696,7 +696,7 @@ typedef void (^FASGameEventsCompletionHandler)(NSArray *events, FASPagingMeta *m
 	* events
 		* 複数の[FASGameEvent](#FASGameEvent)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 
@@ -818,7 +818,7 @@ typedef void (^FASEventboardsCompletionHandler)(NSArray *eventboards, FASPagingM
 	* eventboards
 		* 複数の[FASEventboard](#FASEventboard)がNSArrayに格納されています。
 	* meta
-		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta)を参照して下さい。
+		* リストの総数や、現在のページ番号等のメタ情報を参照することが出来ます。詳しくは[FASPagingMeta](../7_Spec.md#FASPagingMeta)を参照して下さい。
 	* error
 		* エラーの詳細が格納されています。エラーがない場合はnilになります。
 

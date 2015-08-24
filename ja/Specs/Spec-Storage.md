@@ -8,7 +8,7 @@ last update at 2014/10/7
 
 JSON形式でデータを保存します。保存されたデータはiOSの端末とFresviiのサーバーに保存されます。
 利用方法は[KeyValueStorageGetStarted](../GetStarted/GetStarted-KeyValueStorage.md)を参照してください。
-また、[FASCustomMessage](NotificationSpec.md#FASCustomMessage)と連携して特定の値を持っているユーザーを絞り込んでプッシュ通知を送ることも可能です。詳しくは[PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md)を参照してください。
+また、[FASCustomMessage](./Spec-Message.md#FASCustomMessage)と連携して特定の値を持っているユーザーを絞り込んでプッシュ通知を送ることも可能です。詳しくは[PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md)を参照してください。
 
 ---
 

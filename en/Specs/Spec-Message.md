@@ -1,7 +1,14 @@
+# Matchmaking Specifications
+
+last update at 2015/8/25
+
+---
+
 ## Introduction
 
-メッセージに関する機能の仕様書です。
-Fresviiコンソールから送信されるダイレクトメッセージの操作に関するクラスと特定の相手にプッシュ通知を送信する機能に関するクラスが記載されています。
+Specification for functions related to Message.  
+Fresviiコンソールから送信されるダイレクトメッセージの操作に関するクラスと特定の相手にプッシュ通知を送信する機能に関するクラスが記載されています。  
+Also, in [FASCustomMessage](#FASCustomMessage), you can corroborate with [FASStorage](./Spec-Storage.md#FASStorage) and send push message to a specific user. Check [PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md) for more information.
 
 ---
 
@@ -43,7 +50,7 @@ typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASP
 	* directMessages
 		* Multiple [FASDirectMessage](#FASDirectMessage) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -153,7 +160,7 @@ typedef void (^FASCustomMessagesCompletionHandler)(NSArray *messages, FASPagingM
 	* message
 		* [FASCustomMessage](#FASCustomMessage) is stored.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 

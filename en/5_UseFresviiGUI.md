@@ -9,56 +9,30 @@
 - **Step 3.** Show GUI
 
 ### Sample code
+```obj-c
+#import <AppSteroid/FASAccount.h>
+#import <AppSteroid/FASTabBarController.h>
 
-```
-using Fresvii.AppSteroid;
-using Fresvii.AppSteroid.Models;
-```
-
-    //  Get signed up users list
-    List<User> users = FAS.LoadSignedUpUsers();
-
-    //  If signed up user already exists
-    if (users.Count > 0) // Step 2 - Case 2
+- (IBAction)pushedAppSteroidButton:(id)sender
+{
+	FASLoginUser *loginUser = [FASAccount currentLoggedInUser];	
+    if (!loginUser || !loginUser.isSignedUp)
     {
-        User user = users[users.Count - 1]; //  In this case, we use latest signed up user account.
-
-        FAS.LogIn(user.Id, user.Token, delegate(Error error)
-        {
-            if (error == null)
-            {
-                FASGui.ShowGUI(FASGui.Mode.Forum | FASGui.Mode.MyProfile); // Step 3
-            }
-            else
-            {
-                Debug.LogError(error.ToString());
-            }
-        });
-
-        return;
-    }
-    //  If signed up user does not exist
-    else // Step 2 - Case 1
-    {
-        FAS.SignUp(delegate(User user, Error error)
-        {
-            if (error == null)
-            {
-                FAS.LogIn(user.Id, user.Token, delegate(Error error2)
-                {
-                    if (error2 == null)
-                    {
-                            FASGui.ShowGUI(FASGui.Mode.Forum | FASGui.Mode.MyProfile); // Step 3
-                    }
-                    else
-                    {
-                            Debug.LogError(error2.ToString()); // Log in error
-                    }
-                });
-            }
-            else
-            {
-                Debug.LogError(error.ToString()); // Sign up error
-            }
-        });
-    }
+		[FASAccount signUpUserCompletion:^(FASLoginUser *loginUser, NSError *error)
+		{
+			if (error)
+			{
+				NSLog(@"%@", error);
+				return;
+			}
+			[FASTabBarController presentTabBarControllerWithTarget:self
+												           animated:YES];
+		}];
+	}
+	else
+	{
+		[FASTabBarController presentTabBarControllerWithTarget:self
+									           	   animated:YES];
+	}
+}
+```

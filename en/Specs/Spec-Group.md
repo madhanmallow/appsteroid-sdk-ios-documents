@@ -56,7 +56,7 @@ typedef void (^FASGroupsCompletionHandler)(NSArray *groups, FASPagingMeta *meta,
 	* groups
 		* Multiple [FASGroup](#FASGroup) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -487,7 +487,7 @@ Group ID
 @property (nonatomic, readonly) NSString *groupId;
 
 ##### <a name="FASGroupMember.user"> user </a>
-User who's in the group. [FASUser](#FASUser) Object.
+User who's in the group. [FASUser](Spec-User.md#FASUser) Object.
 
 @property (nonatomic, readonly) FASUser *user;
 
@@ -632,7 +632,7 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 	* messages
 		* Multiple [FASGroupMessage](#FASGroupMessage) are stored in NSArray.
 	* meta
-		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for more information.
+		* You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 
@@ -689,12 +689,12 @@ Group message updated date and time
 @property (nonatomic, readonly) NSDate *updatedAt;
 
 ##### <a name="FASGroupMessage.user"> user </a>
-User who send a message.[FASUser](Spec-User.md#FASUser)Object.
+User who send a message.[FASUser](./Spec-User.md#FASUser)Object.
 
 @property (nonatomic, readonly) FASUser *user;
 
 ##### <a name="FASGroupMessage.video"> video </a>
-[FASVideo](Spec-PlayMovie.md#FASVideo)Object.
+[FASVideo](./Spec-PlayMovie.md#FASVideo)Object.
 
 @property (nonatomic, readonly) FASVideo *video;
 
@@ -1057,7 +1057,7 @@ typedef void (^FASStickerSetsCompletionHandler)(NSArray *stickerSets, FASPagingM
 	* stickerSet
 		* [FASStickerSet](#FASStickerSet) is stored
 	* meta
-		* meta info can be checked. See [FASPagingMeta](../AppSteroidSpec.md#FASPagingMeta) for detail.
+		* meta info can be checked. See [FASPagingMeta](../7_Spec.md#FASPagingMeta) for detail.
 	* error
 		* Error detail is stored. It will be nil if there is no error.
 

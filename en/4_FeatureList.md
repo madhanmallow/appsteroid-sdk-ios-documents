@@ -76,7 +76,7 @@ Chat system which works inside the game.
 Fresvii voice chat will support up to 4 players to have a conversation at the same time. Players can talk with friends within the game, during their game play. (Useful for FPS games, Board games, MMO games, and more.)
 Players can also start a voice session from the user profile inside AppSteroid GUI.
 
-- [ボイスチャットの利用方法](./GetStarted/GetStarted-VoiceChat.md)
+- [How to use voice chat](./GetStarted/GetStarted-VoiceChat.md)
 - Related API
 	- [FASConference](./Specs/Spec-VoiceChat.md)
 	- [FASNotification](./Specs/Spec-Notification.md)
@@ -154,7 +154,7 @@ Matchmaker will automatically find the perfect opponents online with up to 16 pl
 Feature to communicate/support app users through text. You can send messages to any users from the Web Console. All message logs between users and CSR can be checked on the Web Console as well.  
 Once this feature is implemented into your app, Live Help button will appear on the top right corner of AppSteroid GUI in the message page. Users will be able to send message to the CSR through this Live Help button.
 
-- [Use Customer Support](./Spec.md#AppSteroid.enableCSRChat)
+- [Use Customer Support](./7_Spec.md#AppSteroid.enableCSRChat)
 
 #### <a name="Turn-BasedGame">Turn Based Game Support</a>
 Support turn-based game such as chess, poker, monopoly and more. Ability to integrate with event for social use. Users can automatically send push message to opponents to notify their turn is coming up.
