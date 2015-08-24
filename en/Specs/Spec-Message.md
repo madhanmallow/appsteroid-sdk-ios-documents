@@ -1,7 +1,7 @@
 ## Introduction
 
-メッセージに関する機能の仕様書です。
-Fresviiコンソールから送信されるダイレクトメッセージの操作に関するクラスと特定の相手にプッシュ通知を送信する機能に関するクラスが記載されています。
+This document is a specification for function related to Messages.
+Classes used to operate direct and push messages send from the Fresvii web console are described on this page.
 
 ---
 
