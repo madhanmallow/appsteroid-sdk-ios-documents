@@ -6,9 +6,8 @@ last update at 2015/8/25
 
 ## Introduction
 
-Specification for functions related to Message.  
-Fresviiコンソールから送信されるダイレクトメッセージの操作に関するクラスと特定の相手にプッシュ通知を送信する機能に関するクラスが記載されています。  
-Also, in [FASCustomMessage](#FASCustomMessage), you can corroborate with [FASStorage](./Spec-Storage.md#FASStorage) and send push message to a specific user. Check [PushNotificationGetStarted](../GetStarted/GetStarted-PushNotification.md) for more information.
+This document is a specification for function related to Messages.
+Classes used to operate direct and push messages send from the Fresvii web console are described on this page.
 
 ---
 
