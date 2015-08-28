@@ -1,6 +1,15 @@
 # AppSteroid for iOS Release Notes
 
 ---
+### 1.0.4
+
+- Fixed
+	- Badge count does not change after hiding a group
+	- Player stats resets in certain condition
+  - Display glitch on bad network connection
+	- Minor bug fix
+	- Layout fix
+
 ### 1.0.3
 
 - New Feature
