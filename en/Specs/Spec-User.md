@@ -45,6 +45,7 @@ A user name, profile text, and a profile image can be edited on signup. Also, `F
 
 ##### <a name="FASAccount.signUpUserWithCompletion">　signUpUserWithCompletion: </a>
 Signup without any setup.
+For behavior on user name duplication, please see [this](../8_DuplicatedUserName.md) document.
 
 \+ (void)signUpUserWithCompletion:(FASLoginUserHandler)completion
 
@@ -72,6 +73,7 @@ Sample
 
 ##### <a name="FASAccount.signUpUserWithNamecompletion"> signUpUserWithName:completion: </a>
 Signup with user name.
+For behavior on user name duplication, please see [this](../8_DuplicatedUserName.md) document.
 
 \+ (void)signUpUserWithName:(NSString *)userName
                   completion:(FASLoginUserHandler)completion
@@ -102,6 +104,7 @@ Signup with user name.
 
 ##### <a name="FASAccount.signUpUserWithNamedescriptionprofileImagecompletion"> signUpUserWithName:description:profileImage:completion: </a>
 Signup with user name, profile text, and profile image.
+For behavior on user name duplication, please see [this](../8_DuplicatedUserName.md) document.
 
 \+ (void)signUpUserWithName:(NSString *)userName
                 description:(NSString *)description
@@ -472,6 +475,7 @@ Checks whether a user's login status has expired or not.
 
 ##### <a name="FASLoginUser.saveWithCompletion"> saveWithCompletion: </a>
 Saves profile changes to the server.
+For behavior on user name duplication, please see [this](../8_DuplicatedUserName.md) document.
 
 \- (void)saveWithCompletion:(FASCompletionHandler)completion
 

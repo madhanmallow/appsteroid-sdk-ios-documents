@@ -1,6 +1,16 @@
 # AppSteroid for iOS Release Notes
 
 ---
+
+### 1.0.5
+
+- New Feature
+	- AppSteroid SDK now support Japanese
+	- Add documentation for handling name duplication behavior
+	
+- Fixed
+	- Layout fix
+
 ### 1.0.4
 
 - Fixed
