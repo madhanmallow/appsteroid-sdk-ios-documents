@@ -127,7 +127,7 @@ Handle the notification for ending recording.
 |[presentShareView](#FASMovieMaker.presentShareView) |Show share view for uploading videos to SNS |
 
 ##### <a name="FASMovieMaker.initWithCaptureViewwithAudio"> initWithCaptureView:withAudio: </a>
-Initialize `FASMovieMaker` Class and return the object
+Initialize `FASMovieMaker` Class and return the object. If you allow the screen to rotate during game play, you must initialize the function before the video recording is done. If the user rotate the device after initialization, the recording will not work properly. To avoid this problem, please initialize the video recording function every time after screen rotation is done. Also, make sure you do not allow the screen to rotate during video recording. 
 
 \- (instancetype)initWithCaptureView:(UIView*)view
                            withAudio:(bool)withAudio;

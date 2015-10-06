@@ -2,6 +2,14 @@
 
 ---
 
+### 1.0.6
+- New Feature
+	- AppStore URL will be included when sharing video to SNS
+	
+- Performance Improvements
+	- Smoother behavior on group message
+	- Add document "how to handle screen rotation during video recording" on [FASMovieMaker](Specs/Spec-PlayMovie.md#FASMovieMaker.initWithCaptureViewwithAudio)
+
 ### 1.0.5
 
 - New Feature
