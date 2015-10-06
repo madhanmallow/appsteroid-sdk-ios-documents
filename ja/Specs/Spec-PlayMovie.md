@@ -39,7 +39,6 @@ last update at 2015/2/2
 
 ##### <a name="FASMovieMaker.FASMovieMakerDelegate.recordingWillFinish"> recordingWillFinish </a>
 レコーディングが終了した直前に呼ばれます。  
-また、レコーディング中
 
 \- (void)recordingWillFinish;
 
