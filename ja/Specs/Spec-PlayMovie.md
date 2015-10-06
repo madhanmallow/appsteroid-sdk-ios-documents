@@ -38,7 +38,8 @@ last update at 2015/2/2
 |[recordingDidFinish:](#FASMovieMaker.FASMovieMakerDelegate.recordingDidFinish)|レコーディングが完全に終了し、ビデオデータが作成された時に呼ばれます。 |
 
 ##### <a name="FASMovieMaker.FASMovieMakerDelegate.recordingWillFinish"> recordingWillFinish </a>
-レコーディングが終了した直前に呼ばれます。
+レコーディングが終了した直前に呼ばれます。  
+また、レコーディング中
 
 \- (void)recordingWillFinish;
 
@@ -127,7 +128,7 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 |[presentShareView](#FASMovieMaker.presentShareView) |動画をアップロードしてSNSにシェアするためのビューを表示します。 |
 
 ##### <a name="FASMovieMaker.initWithCaptureViewwithAudio"> initWithCaptureView:withAudio: </a>
-`FASMovieMaker`クラスを初期化してオブジェクトを返却します。
+`FASMovieMaker`クラスを初期化してオブジェクトを返却します。初期化後、端末を回転した場合、録画が正常に行われなくなります。端末の回転を許可している場合は、端末の回転後の適切なタイミングで録画開始前に初期化を行ってください。また、ビデオ録画中は端末の回転を行わないように設定してください。 初期化処理には多少時間がかかります。そのため、ゲームプレイ中などに初期化を行うと遅延が発生します。適切なタイミングで初期化を行うようにご注意ください。
 
 \- (instancetype)initWithCaptureView:(UIView*)view
                            withAudio:(bool)withAudio;
