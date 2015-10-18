@@ -55,9 +55,9 @@ GCM Keyの取得、設定方法については[こちら](https://github.com/fre
 
 
 ###アプリ情報
-ここでは、設定ページで設定したアプリ名やアプリ説明の表示の他、App IDやシークレットキー、ユーザー数、その他アプリに関連する簡略な情報が確認できます。AppSteroid SDKを正しく機能させるためには、このページに表示されているIDやシークレットキーをクライアント側に設定する必要があります。
+ここでは、設定ページで設定したアプリ名やアプリ説明の表示の他、App IDやシークレットキー、ユーザー数、その他アプリに関連する簡略な情報が確認できます。AppSteroid SDKを正しく機能させるためには、このページに表示されているIDやシークレットキーをクライアント側に設定する必要があります。  
 関連項目：AppSteroidの始め方
-[iOS](3_GetStarted.md)
+[iOS](3_GetStarted.md) [Unity](https://github.com/fresvii/appsteroid-sdk-unity-documents/blob/master/ja/GettingStarted.md)
 
 
 ###フォーラム
