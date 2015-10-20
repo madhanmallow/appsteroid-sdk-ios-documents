@@ -29,16 +29,18 @@ Fresviiのウェブサイトから以下のどちらかのフレームワーク�
 ```
 ___ボイスチャットの利用にはこちらの`導入`と合わせて[GetStarted-VoiceChat.md](GetStarted/GetStarted-VoiceChat.md#HowToUseAPI)も参照してください。___
 
+2. ダウンロードしたFrameworkとBundleをプロジェクトファイルに移動させてください。
+![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")
 
-2. Frameworkの追加
+3. Frameworkの追加
 `Build Phases`の`Link Binary With Libraries`に`AppSteroid.framework`以下を追加してください。
 ![framework](GetStarted/Images/ss_fresvii_01.png "AppSteroid.framework")
 
-3. Bundleの追加
+4. Bundleの追加
 `Build Phases`の`Copy Bundle Resourves`に`AppSteroid.bundle`を追加してください。
 ![bundle](GetStarted/Images/ss_fresvii_02.png "AppSteroid.bundle")
 
-4. Build Settings
+5. Build Settings
 `Other Linker Flags`に`-ObjC`を記述してください。
 ![flags](GetStarted/Images/ss_fresvii_03.png "Flags")
 
