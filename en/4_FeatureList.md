@@ -142,13 +142,9 @@ Open a new thread operated by the developer, and distribute app information to t
 #### <a name="SocialShare">- Social Share</a>
 End-users can share the following contents to major social medias. URL to the store will automatically be attached when an user shares a content. Default sharing message can be modified on the Web Console by the developer.
 
-- Contents that can be shared
-  - App Info
-  - Event
-  - Videos
+- Contents that can be shared<br>- App Info<br>- Event<br>- Videos
 
-- What can be done on the Web Console
-  - Localization setting can be done in `Localization` tab.
+- What can be done on the Web Console<br>- Localization setting can be done in `Localization` tab.
 
 #### <a name="EventManagement">- Event Promotion</a>
 Developers can promote an ongoing Event or upcoming Events to the community.
