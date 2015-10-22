@@ -140,12 +140,11 @@ Open a new thread operated by the developer, and distribute app information to t
 	- You can create the official forum from the `Forum` tab.
 
 #### <a name="SocialShare">- Social Share</a>
- End-users can share the following contents to major social medias. URL to the store will automatically be attached when an user shares a content. Default sharing message can be modified on the Web Console by the developer.
+End-users can share the following contents to major social medias. URL to the store will automatically be attached when an user shares a content. Default sharing message can be modified on the Web Console by the developer.
  
 Contents that can be shared:	 
 - App Info<br>
-- Event<br>
-- Videos
+- Event<br>- Videos
 
 - What can be done on the Web Console
   - Localization setting can be done in `Localization` tab.
