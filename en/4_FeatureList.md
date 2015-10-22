@@ -141,10 +141,11 @@ Open a new thread operated by the developer, and distribute app information to t
 
 #### <a name="SocialShare">- Social Share</a>
 End-users can share the following contents to major social medias. URL to the store will automatically be attached when an user shares a content. Default sharing message can be modified on the Web Console by the developer.
- 
-Contents that can be shared:	 
-- App Info<br>
-- Event<br>- Videos
+
+- Contents that can be shared
+  - App Info
+  - Event
+  - Videos
 
 - What can be done on the Web Console
   - Localization setting can be done in `Localization` tab.
@@ -167,9 +168,9 @@ Developers can either target a specific player, segment players or address to th
 
 #### <a name="AppGallery">- AppGallery</a>
 App Gallery is a space to either promote your apps in an enclosed (Private) community, or share with others in an open (Public) community to earn advertising revenue. App Gallery is an opportunity for everyone to earn additional revenue and user.
- 		 
-Public: Earn additional revenue by placing other developers application info.
-Private: Do not place any ads, instead use it for cross promoting own applications.
+
+- Public: Earn additional revenue by placing other developers application info.
+- Private: Do not place any ads, instead use it for cross promoting own applications.
 
 AppSteroid features user generated contents to draw more user intrest towards the App. Promotion will be done seamlessly within the user community, with user generated contents. Thus, we highly recommend developers placing Ad in AppGallery to implement AppSteroid to maximize their profit.
 
