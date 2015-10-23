@@ -97,8 +97,10 @@ Please check the related API for method to use video recording GUI or video shar
 	- [FASPlayMovie](./Specs/Spec-PlayMovie.md)
 
 #### <a name="PushNotificationForSetting">- Push Notification</a>
+To ensure a wide use of Push Notification, the following functions are provided on the Web Console.
+
 - Direct Message
-This can be used to announce event and important game information to the entire user community from the Web Console.
+This can be used to announce event and important game information to the entire user community from the Web Console.  It can either be sent immediately or scheduled for a specific date and time.
 
 - Automated Messages
 Works similarly to Direct Messages, only it will keep sending these messages as the users move into the new User Group.
@@ -109,9 +111,11 @@ Channels are way to get code to respond to a SNS push notification, and act acco
 
 Push message will also be distributed at the following conditions.
 
+* Notify users when the CSR creates a new thread.
 * Notify users when there is an update on a subscribed thread.
 * Notify users when there is a new Group Message.
 * Notify users with a new friend request/accept.
+* Notify users when there is a voice call invitation.
 * Notify users when their friend is requesting a match.
 
 Related information: [About Push Event](https://github.com/fresvii/appsteroid-documents/blob/master/en/EventList.md)
