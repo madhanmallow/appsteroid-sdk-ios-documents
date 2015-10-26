@@ -125,6 +125,8 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 |[stopRecording](#FASMovieMaker.stopRecording) |レコーディングを終了します。 |
 |[isRecording](#FASMovieMaker.isRecording) |レコーディング中かどうかを返却します。 |
 |[presentShareView](#FASMovieMaker.presentShareView) |動画をアップロードしてSNSにシェアするためのビューを表示します。 |
+|[presentShareView:](#FASMovieMaker.presentShareView:) |動画をアップロードしてSNSにシェアするためのビューを表示します。 |
+|[presentShareView:skipCompleteView:](#FASMovieMaker.presentShareViewskipCompleteView)|動画をアップロードしてSNSにシェアするためのビューを表示します。完了画面を表示するかどうかを選択することができます。|
 
 ##### <a name="FASMovieMaker.initWithCaptureViewwithAudio"> initWithCaptureView:withAudio: </a>
 `FASMovieMaker`クラスを初期化してオブジェクトを返却します。初期化後、端末を回転した場合、録画が正常に行われなくなります。端末の回転を許可している場合は、端末の回転後の適切なタイミングで録画開始前に初期化を行ってください。また、ビデオ録画中は端末の回転を行わないように設定してください。 初期化処理には多少時間がかかります。そのため、ゲームプレイ中などに初期化を行うと遅延が発生します。適切なタイミングで初期化を行うようにご注意ください。
@@ -151,6 +153,28 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 動画をアップロードしてSNSにシェアするためのビューを表示します。[stopRecording](#FASMovieMaker.stopRecording)をして動画を作成した後に利用してください。
 
 \- (void)presentShareView;
+
+##### <a name="FASMovieMaker.presentShareView"> presentShareView: </a>
+動画をアップロードしてSNSにシェアするためのビューを表示します。  
+
+\- (void)presentShareView:(UIViewController *)target;
+
+* Parameters
+	* target
+		* 表示するための親のビューを設定します。
+		
+##### <a name="FASMovieMaker.presentShareViewskipCompleteView"> presentShareView:skipCompleteView: </a>
+動画をアップロードしてSNSにシェアするためのビューを表示します。  
+完了画面を表示するかどうかを選択することができます。デフォルトでは`NO`が設定されています。
+
+\- (void)presentShareView:(UIViewController *)target
+         skipCompleteView:(BOOL)skip;
+
+* Parameters
+	* target
+		* 表示するための親のビューを設定します。
+	* skip
+		* `YES`を設定すると完了画面をスキップすることができます。
 
 ### <a name="FASVideo"> FASVideo </a>
 録画したプレイムービーの操作に関するクラス
