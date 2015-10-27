@@ -50,7 +50,7 @@ A space for app user to freely share information with the community. User can po
 
 
 #### <a name="UserProfile">- User Profile</a>
-Manage users profile  
+Manage users profile and game-play records.
 
 - [Use profile GUI](./GetStarted/GetStarted-User.md)
 - What can be done on the web console
@@ -62,7 +62,8 @@ Manage users profile
 Allow users to create their own community by inviting friends, and form their own groups to communicate/play together inside the app. Users will have ability to invite others to start a online match.  Also, users can add or remove friends in their profile page.
 
 #### <a name="GroupMessage">- Group Message</a>
-A chat space for app users to talk/chat with other users. App users can post text, images, play-video and stickers.
+A chat space for app users to talk/chat with other users. App users can post text, images, play-video and stickers.  
+User will be notified by Push Notification whenever there is an update on the group.
 
 - [Use group message GUI](./GetStarted/GetStarted-GroupChat.md)
 - Related API
@@ -261,4 +262,3 @@ For more information, please see [About WebConsole](./9_WebConsole.md).
 
 ## <a name="Install">How to Implement AppSteroid SDK</a>
 Please refer to [GetStarted](./3_GetStarted.md) for details.
-

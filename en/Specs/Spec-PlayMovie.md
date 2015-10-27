@@ -125,6 +125,8 @@ Handle the notification for ending recording.
 |[stopRecording](#FASMovieMaker.stopRecording) |Stop recording |
 |[isRecording](#FASMovieMaker.isRecording) |Return whether if it is recording or not |
 |[presentShareView](#FASMovieMaker.presentShareView) |Show share view for uploading videos to SNS |
+|[presentShareView:](#FASMovieMaker.presentShareView:) |Display the view to upload and share videos |
+|[presentShareView:skipCompleteView:](#FASMovieMaker.presentShareViewskipCompleteView)|Display the view to upload and share videos. Select whether to show the complete screen or not. |
 
 ##### <a name="FASMovieMaker.initWithCaptureViewwithAudio"> initWithCaptureView:withAudio: </a>
 Initialize `FASMovieMaker` Class and return the object. If you allow the screen to rotate during game play, you must initialize the function before the video recording is done. If the user rotate the device after initialization, the recording will not work properly. To avoid this problem, please initialize the video recording function every time after screen rotation is done. Also, make sure you do not allow the screen to rotate during video recording. 
@@ -151,6 +153,29 @@ Return whether if it is recording or not
 Show share view for uploading videos to SNS. Process [stopRecording](#FASMovieMaker.stopRecording) and use it after completing recording a video.
 
 \- (void)presentShareView;
+
+##### <a name="FASMovieMaker.presentShareView"> presentShareView: </a>
+Display the view to upload and share videos.
+
+\- (void)presentShareView:(UIViewController *)target;
+
+* Parameters
+	* target
+		* Set the parant view for display
+		
+##### <a name="FASMovieMaker.presentShareViewskipCompleteView"> presentShareView:skipCompleteView: </a>
+Display the view to upload and share videos.
+Select whether to show the complete screen or not. Default is set to "No"
+
+\- (void)presentShareView:(UIViewController *)target
+         skipCompleteView:(BOOL)skip;
+
+* Parameters
+	* target
+		* Set the parant view for display
+	* skip
+		* Skip the completion screen by selecting `YES`.
+
 
 ### <a name="FASVideo"> FASVideo </a>
 Class to operate recorded play movie.

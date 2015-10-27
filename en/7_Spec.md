@@ -141,6 +141,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[setTimeout:](#AppSteroid.setTimeout)|Setup a timeout for network connection. |
 |[setTabs:](#AppSteroid.setTabs)|Set tab structure to display |
 |[enableCSRChat:](#AppSteroid.enableCSRChat)|Decide whether to use CSR (Customer Support) function or not. |
+|[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|Whether to display match request alert on GUIs not provided by AppSteroidSDK or not |
 |[sdkVersion](#AppSteroid.sdkVersion)|Return SDK Version |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|Return SDK build version |
 
@@ -228,6 +229,17 @@ Default is set to `No`. If this function is set to `YES`, `Live Help` button wil
 * Parameters
   * enabled
     * `YES` enable CSR function. 
+
+##### <a name="AppSteroid.allowsToShowMatchmakingDialog"> allowsToShowMatchmakingDialog: </a>
+Whether to display match request alert on GUIs not provided by AppSteroidSDK 
+Default is set to `YES` 
+
+\+ (void)allowsToShowMatchmakingDialog:(BOOL)allow;
+
+* Parameters
+	* allow
+		* If this is set to `NO`, alerts related to matchmaking will never be shown on GUIs not provided by AppSteroidSDK.
+
  
 ##### <a name="AppSteroid.sdkVersion"> sdkVersion </a>
 Return SDK version with `NSString`.

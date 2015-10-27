@@ -2,6 +2,17 @@
 
 ---
 
+### 1.0.7
+- New Feature
+	- Replaced like button with "Follow". Users will be able to receive push notification whenever there is un update on a following thread.
+	- Mathmake request alart can be shown on during game play. It can also set to be OFF. For more information, please see [AppSteroid.allowsToShowMatchmakingDialog:](7_Spec.md#AppSteroid.allowsToShowMatchmakingDialog).
+	- Option to stay on the game screen after sharing recorded video. Please see [FASMovieMaker.presentShareView:skipCompleteView:](Specs/Spec-PlayMovie.md#FASMovieMaker.presentShareViewskipCompleteView) for more information.
+
+- Performance Improvements
+    - Matchmake behavior
+    - Contents position in GUI
+    - Do not allow post with more then 10 return in a row in Form and Group Chat 
+
 ### 1.0.6
 - New Feature
 	- AppStore URL will be included when sharing video to SNS	

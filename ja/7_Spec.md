@@ -141,6 +141,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[setTimeout:](#AppSteroid.setTimeout)|ネットワーク通信時のタイムアウト時間を設定します。 |
 |[setTabs:](#AppSteroid.setTabs)|表示するタブの構成を設定します。 |
 |[enableCSRChat:](#AppSteroid.enableCSRChat)|CSR機能(カスタマーサポート)を利用するかどうかを決定します。 |
+|[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|AppSteroidSDKが提供するGUI以外でもマッチメイキングのリクエストが来た際にアラートを表示するかどうかを設定します。 |
 |[sdkVersion](#AppSteroid.sdkVersion)|SDKのバージョンを返却します。 |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|SDKのビルドバージョンを返却します。 |
 
@@ -229,6 +230,16 @@ SR機能(カスタマーサポート)を利用するかどうかを決定しま�
 * Parameters
   * enabled
     * `YES`に設定するとCSR機能がオンになります。
+
+##### <a name="AppSteroid.allowsToShowMatchmakingDialog"> allowsToShowMatchmakingDialog: </a>
+AppSteroidSDKが提供するGUI以外でもマッチメイキングのリクエストが来た際にアラートを表示するかどうかを設定します。  
+デフォルトは`YES`に設定されています。  
+
+\+ (void)allowsToShowMatchmakingDialog:(BOOL)allow;
+
+* Parameters
+	* allow
+		* `NO`に設定するとAppSteroidSDKが提供するGUI以外ではマッチメイキングに関するアラートは表示されなくなります。
 
 ##### <a name="AppSteroid.sdkVersion"> sdkVersion </a>
 SDKのバージョンを`NSString`で返却します。
