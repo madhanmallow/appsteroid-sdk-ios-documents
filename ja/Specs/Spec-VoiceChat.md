@@ -31,6 +31,7 @@ last update at 2014/10/7
 |Constant|Description|
 |------|-----|
 |[FASConferenceIncomingBehavior](#FASConference.FASConferenceIncomingBehavior)|ボイスチャットの着信時の振る舞い |
+|[FASConferenceProfile](#FASConference.FASConferenceProfile)|ボイスチャットの音質 |
 |[FASConferenceViewVisibility](#FASConference.FASConferenceViewVisibility)|ボイスチャットの着信時の通話画面表示 |
 |[FASConferenceIncomingHandler](#FASConference.FASConferenceIncomingHandler)|着信があった時に呼ばれるブロックオブジェクト |
 |[FASParticipantsCompletionHandler](#FASConference.FASParticipantsCompletionHandler)|ボイスチャットの参加者を取得する際に利用されるブロックオブジェクト |
@@ -44,6 +45,17 @@ typedef NS_ENUM(NSInteger, FASConferenceIncomingBehavior)
     FASConferenceIncomingBehaviorAsk        = 0,
     FASConferenceIncomingBehaviorAutoAccept = 1,
     FASConferenceIncomingBehaviorCallback   = 2
+};
+```
+
+##### <a name="FASConference.FASConferenceProfile"> FASConferenceProfile </a>
+ボイスチャットの音質。音質はLowかHighを指定できます。デフォルトでは`FASConferenceProfileHighBandwidth`が設定されています。
+
+```obj-c
+typedef NS_ENUM(NSInteger, FASConferenceProfile)
+{
+    FASConferenceProfileLowBandwidth  = 0,
+    FASConferenceProfileHighBandwidth = 2,
 };
 ```
 
@@ -78,11 +90,31 @@ typedef void (^FASParticipantsCompletionHandler)(NSArray *participants, NSError 
 
 |Properties|Description|
 |------|-----|
-|[callStates](#FASConference.callStates)| |
+|[callStates](#FASConference.callStates)|通話の状態を返却します。 |
+|[callStates](#FASConference.profile)|通話の音質を指定します。 |
+|[callStates](#FASConference.conferenceViewVisibility)|ボイスチャットの着信時の画面表示を指定します。 |
+|[host](#FASConference.host)|現在の通話のホストかどうかを返却します。 |
 
 ##### <a name="FASConference.callStates"> callStates </a>
+通話の状態を返却します。ユーザーIDをキーにすることでそのユーザーの通話状態を取得することができます。  
+キーがない場合はユーザーは参加していない状態です。
 
 @property (readonly) NSDictionary *callStates;
+
+##### <a name="FASConference.profile"> profile </a>
+通話の音質を指定します。詳しくは[FASConferenceProfile](FASConference.FASConferenceProfile)を参照してください。
+
+@property (readwrite) FASConferenceProfile profile;
+
+##### <a name="FASConference.conferenceViewVisibility"> conferenceViewVisibility </a>
+ボイスチャットの着信時の画面表示を指定します。詳しくは[FASConferenceViewVisibility](#FASConference.FASConferenceViewVisibility)を参照してください。
+
+@property (readwrite) FASConferenceViewVisibility conferenceViewVisibility;
+
+##### <a name="FASConference.host"> host </a>
+現在の通話のホストかどうかを返却します。
+
+@property (atomic, readonly) BOOL host;
 
 #### Class Methods
 
