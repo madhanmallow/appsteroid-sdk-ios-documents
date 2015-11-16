@@ -24,7 +24,7 @@
 	* [User Management Spec](Specs/Spec-User.md)
 	* [VoiceChat Spec](Specs/Spec-VoiceChat.md)
 * [Duplicated User Name](8_DuplicatedUserName.md)
-* [How to use the Fresvii WebConsole](https://fresvii.zendesk.com/hc/en-us/articles/204946850)
+* [How to use the Fresvii WebConsole](9_WebConsole.md)
 * [APNS Certificate Tutorial](https://fresvii.zendesk.com/hc/en-us/articles/203512810-APNS-Certificate-Tutorial)
 * [Channel Tutorial](https://fresvii.zendesk.com/hc/en-us/articles/203866590-What-is-Channel-and-How-to-Use-It-) 
 * [Error Code](97_ErrorCodes.md)

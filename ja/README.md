@@ -24,7 +24,7 @@
   * [ユーザー仕様書](Specs/Spec-User.md)
   * [ボイスチャット仕様書](Specs/Spec-VoiceChat.md)
 * [名前重複時の挙動](8_ユーザー名重複時の挙動に関して.md)
-* [WebConsoleの使い方](https://fresvii.zendesk.com/hc/en-us/articles/204946850)
+* [WebConsoleの使い方](9_WebConsole.md)
 * [APNS証明書の作成](https://github.com/fresvii/appsteroid-documents/blob/master/ja/APNSCertificateTutorial.md)
 * [チャンネルの利用方法](https://github.com/fresvii/appsteroid-documents/blob/master/ja/ChannelTutorial.md)
 * [エラーコード仕様書](97_ErrorCodes.md)

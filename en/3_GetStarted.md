@@ -5,7 +5,7 @@ last update at 2015/05/26
 ---
 
 - [Installation](#Installation)
-- [Initial Settings]](#Initialization)
+- [Initial Settings](#Initialization)
 - [SignUp & Login](#SignUp&Login)
 - [Show AppSteroid Tab](#ShowTab)
 - [Login and Show AppSteroidGUI](#Login&ShowTab)
@@ -29,16 +29,18 @@ Download one of the Framework from Fresvii Website.
 ```
 ___To use Voice Chat, please also check [GetStarted-VoiceChat.md](GetStarted/GetStarted-VoiceChat.md#HowToUseAPI) for direction for implementation.___
 
+2. Move the Framework and Bundle into your project directory.
+![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")
 
-2. Add Framework
+3. Add Framework
 Add `AppSteroid.framework` to `Link Binary With Libraries` under `Build Phases`.
 ![framework](GetStarted/Images/ss_fresvii_01.png "AppSteroid.framework")
 
-3. Bundle Addition
+4. Bundle Addition
 Add `AppSteroid.bundle` to `Copy Bundle Resources` under `Build Phases`.
 ![bundle](GetStarted/Images/ss_fresvii_02.png "AppSteroid.bundle")
 
-4. Build Settings
+5. Build Settings
 Please define the `-ObjC` under `Other Linker Flags`.
 ![flags](GetStarted/Images/ss_fresvii_03.png "Flags")
 
