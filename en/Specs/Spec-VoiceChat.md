@@ -32,6 +32,7 @@ You can create a conference group for voice chat or participate to a existing co
 |Constant|Description|
 |------|-----|
 |[FASConferenceIncomingBehavior](#FASConference.FASConferenceIncomingBehavior)|Behavior of when receiving an incoming voice chat call. |
+|[FASConferenceProfile](#FASConference.FASConferenceProfile)|Adjust voice chat quality |
 |[FASConferenceViewVisibility](#FASConference.FASConferenceViewVisibility)|Show call screen when receiving an incoming voice chat call. |
 |[FASConferenceIncomingHandler](#FASConference.FASConferenceIncomingHandler)|Black object called when receiving a call.|
 |[FASParticipantsCompletionHandler](#FASConference.FASParticipantsCompletionHandler)|Block object used when carrying out the process to get participants for voice chat. |
@@ -45,6 +46,17 @@ typedef NS_ENUM(NSInteger, FASConferenceIncomingBehavior)
     FASConferenceIncomingBehaviorAsk        = 0,
     FASConferenceIncomingBehaviorAutoAccept = 1,
     FASConferenceIncomingBehaviorCallback   = 2
+};
+```
+
+##### <a name="FASConference.FASConferenceProfile"> FASConferenceProfile </a>
+Adjust the quality of voice chat by either selecting High or Low. `FASConferenceProfileHighBandwidth`, (High) is the default.
+
+```obj-c
+typedef NS_ENUM(NSInteger, FASConferenceProfile)
+{
+    FASConferenceProfileLowBandwidth  = 0,
+    FASConferenceProfileHighBandwidth = 2,
 };
 ```
 
@@ -79,11 +91,31 @@ typedef void (^FASParticipantsCompletionHandler)(NSArray *participants, NSError 
 
 |Properties|Description|
 |------|-----|
-|[callStates](#FASConference.callStates)| |
+|[callStates](#FASConference.callStates)|Return call status |
+|[callStates](#FASConference.profile)|Specify voice chat quality |
+|[callStates](#FASConference.conferenceViewVisibility)|Select whether to show the conference page when receiving a call. |
+|[host](#FASConference.host)|Determine and return whether the user is the host of the call or not. |
 
 ##### <a name="FASConference.callStates"> callStates </a>
+Return call status.  Get call status by using the user ID as a key.
+If there is no key, the user is not in the call.
 
 @property (readonly) NSDictionary *callStates;
+
+##### <a name="FASConference.profile"> profile </a>
+Specify voice chat quality. See [FASConferenceProfile](FASConference.FASConferenceProfile) for detail.
+
+@property (readwrite) FASConferenceProfile profile;
+
+##### <a name="FASConference.conferenceViewVisibility"> conferenceViewVisibility </a>
+elect whether to show the conference page when receiving a call. See [FASConferenceViewVisibility](#FASConference.FASConferenceViewVisibility) for detail.
+
+@property (readwrite) FASConferenceViewVisibility conferenceViewVisibility;
+
+##### <a name="FASConference.host"> host </a>
+Determine and return whether the user is the host of the call or not.
+
+@property (atomic, readonly) BOOL host;
 
 #### Class Methods
 

@@ -2,6 +2,18 @@
 
 ---
 
+### 1.0.8
+- New Feature
+	- Show blue statusbar on top of the screen during voice chat. User's can jump to the group call page by tapping on the statusbar.
+	- iCloud Backup is available
+
+- Fixed
+    - GUI layout fix
+    - Minor bugs in voice chat
+
+- Performance Improvements
+    - Ability to reload the screen after network error.
+
 ### 1.0.7
 - New Feature
 	- Replaced like button with "Follow". Users will be able to receive push notification whenever there is un update on a following thread.
