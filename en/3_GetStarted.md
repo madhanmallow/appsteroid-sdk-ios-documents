@@ -33,11 +33,11 @@ ___To use Voice Chat, please also check [GetStarted-VoiceChat.md](GetStarted/Get
 ![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")
 
 3. Add Framework
-Add `AppSteroid.framework` to `Link Binary With Libraries` under `Build Phases`.
+Add `AppSteroid.framework` to `Link Binary With Libraries` under `Build Phases`.(Please ignore this step if the framework is already added.)
 ![framework](GetStarted/Images/ss_fresvii_01.png "AppSteroid.framework")
 
 4. Bundle Addition
-Add `AppSteroid.bundle` to `Copy Bundle Resources` under `Build Phases`.
+Add `AppSteroid.bundle` to `Copy Bundle Resources` under `Build Phases`.(Please ignore this step if the bundle is already added.)
 ![bundle](GetStarted/Images/ss_fresvii_02.png "AppSteroid.bundle")
 
 5. Build Settings
@@ -90,7 +90,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	// When no sing upped user
     if (!loginUser || !loginUser.isSignedUp)
     {
-		[FASAccount signUpUserCompletion:^(FASLoginUser *loginUser, NSError *error)
+		[FASAccount signUpUserWithCompletion:^(FASLoginUser *loginUser, NSError *error)
 		{
 			if (error)
 			{

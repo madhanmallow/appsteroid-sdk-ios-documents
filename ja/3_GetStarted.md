@@ -33,11 +33,11 @@ ___ボイスチャットの利用にはこちらの`導入`と合わせて[GetSt
 ![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")
 
 3. Frameworkの追加
-`Build Phases`の`Link Binary With Libraries`に`AppSteroid.framework`以下を追加してください。
+`Build Phases`の`Link Binary With Libraries`に`AppSteroid.framework`以下を追加してください。(既に追加されている場合は無視してください。)
 ![framework](GetStarted/Images/ss_fresvii_01.png "AppSteroid.framework")
 
 4. Bundleの追加
-`Build Phases`の`Copy Bundle Resourves`に`AppSteroid.bundle`を追加してください。
+`Build Phases`の`Copy Bundle Resourves`に`AppSteroid.bundle`を追加してください。(既に追加されている場合は無視してください。)
 ![bundle](GetStarted/Images/ss_fresvii_02.png "AppSteroid.bundle")
 
 5. Build Settings
@@ -90,7 +90,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	// サインアップ済みのユーザーがいない場合
     if (!loginUser || !loginUser.isSignedUp)
     {
-		[FASAccount signUpUserCompletion:^(FASLoginUser *loginUser, NSError *error)
+		[FASAccount signUpUserWithCompletion:^(FASLoginUser *loginUser, NSError *error)
 		{
 			if (error)
 			{
