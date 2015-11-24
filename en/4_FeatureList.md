@@ -125,6 +125,7 @@ To use push notification, you must set it up specifically for iOS and Android.
 
 - Settings
 	- [Push Notification Settings](https://fresvii.zendesk.com/hc/en-us/articles/203512810-APNS-Certifiate-Tutorial)
+	- [Push Notification Implementations](./GetStarted/GetStarted-PushNotification.md)
 - Send out push notification from the web console
 - Send push message to a specific user
 	- [Use API](./Specs/Spec-Message.md#FASCustomMessage)

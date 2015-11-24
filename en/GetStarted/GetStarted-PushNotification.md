@@ -21,6 +21,9 @@ Please see the [Setup](https://github.com/fresvii/appsteroid-documents/blob/mast
 
 ## <a name="ImplementCodes"> Implement Codes </a>
 
+Please turn on the access of `Capabilities->Push Notifications`.
+![capabilities](./Images/pn_fresvii_01.png "capabilities")
+
 Implementation on `AppDelegate.h`, like shown below, is required to use push notification.
 
 ```
@@ -35,9 +38,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	…
 	…
 
-   [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|
-                                                     UIRemoteNotificationTypeSound|
-                                                     UIRemoteNotificationTypeAlert)];
+       float iOSVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if(iOSVersion >= 8.0)
+    {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+                                                                                             |UIRemoteNotificationTypeSound
+                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    else
+    {
+        UIRemoteNotificationType types = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:types];
+    }
 
     return YES;
 }

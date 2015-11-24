@@ -21,6 +21,9 @@ last update at 2014/10/7
 
 ## <a name="ImplementCodes"> プッシュ通知を利用するための実装 </a>
 
+Capabilities->Push NotificationsをONにしてください。
+![capabilities](./Images/pn_fresvii_01.png "capabilities")
+
 プッシュ通知を利用するために`AppDelegate.h`に以下のような実装が必要になります。
 
 ```
@@ -35,9 +38,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 	…
 	…
 
-   [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|
-                                                     UIRemoteNotificationTypeSound|
-                                                     UIRemoteNotificationTypeAlert)];
+    float iOSVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    if(iOSVersion >= 8.0)
+    {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+                                                                                             |UIRemoteNotificationTypeSound
+                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    else
+    {
+        UIRemoteNotificationType types = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:types];
+    }
 
     return YES;
 }
