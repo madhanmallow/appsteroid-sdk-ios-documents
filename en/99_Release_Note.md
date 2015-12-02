@@ -2,6 +2,13 @@
 
 ---
 
+### 1.0.9
+- Fixed
+	- Sort order bug of a leaderboard ranking.
+
+- Performance Improvements
+	- Pulibc header files have been organized.
+	
 ### 1.0.8
 - New Feature
 	- Show blue statusbar on top of the screen during voice chat. User's can jump to the group call page by tapping on the statusbar.
