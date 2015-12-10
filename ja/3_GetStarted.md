@@ -9,6 +9,7 @@ last update at 2015/5/26
 - [ユーザー作成からログインまで](#SignUp&Login)
 - [簡単にタブ画面を表示する](#ShowTab)
 - [ログインからAppSteroidGUIの表示まで](#Login&ShowTab)
+- [SDKのアップデート方法](#HowToUpdate)
 
 ---
 
@@ -120,3 +121,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 ## <a name="Login&ShowTab"> ログインからAppSteroidGUIの表示まで </a>
 
 [ログインからAppSteroidGUIの表示まで](./5_ログインからAppSteroidGUIの表示まで.md)を参照してください。
+
+## <a name="HowToUpdate"> SDKのアップデート方法 </a>
+
+特に特別な操作は必要ありません。  
+古いSDKを削除して新しいSDKを再度インストールしてください。
