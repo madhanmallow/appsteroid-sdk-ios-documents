@@ -9,7 +9,6 @@
 		- [Friend Management](#FriendManagement)
 		- [Group Message](#GroupMessage)
 		- [In Game Chat](#InGameChat)
-		- [Voice Chat/In Game Voice Chat](#VoiceChat)
 		- [Play Video](#PlayVideo)
 		- [Push Notification](#PushNotificationForSetting)
 	- [App Promotion Service](#PromotionService)
@@ -77,16 +76,6 @@ Chat system which works inside the game.
 	- [FASNotification](./Specs/Spec-Notification.md#FASNotification)
 	- [FASGroup](./Specs/Spec-Group.md)
 
-#### <a name="VoiceChat">- Voice Chat/In Game Voice Chat</a>
-Fresvii voice chat will support up to 4 players to have a conversation at the same time. Players can talk with friends within the game, during their game play. (Useful for FPS games, Board games, MMO games, and more.)
-Players can also start a voice session from the user profile inside AppSteroid GUI.
-
-- [How to use voice chat](./GetStarted/GetStarted-VoiceChat.md)
-- Related API
-	- [FASConference](./Specs/Spec-VoiceChat.md)
-	- [FASNotification](./Specs/Spec-Notification.md)
-	- [FASGroup](./Specs/Spec-Group.md)
-
 #### <a name="PlayVideo">- Play Video</a>
 Users can record their game play and share it with the AppSteroid community or other major social media (Facebook, Twitter, email). Users who watched the video can also share it with the community or other major social medias. Keep track of playback count and like count. 
  
@@ -116,7 +105,6 @@ Push message will also be distributed at the following conditions.
 * Notify users when there is an update on a subscribed thread.
 * Notify users when there is a new Group Message.
 * Notify users with a new friend request/accept.
-* Notify users when there is a voice call invitation.
 * Notify users when their friend is requesting a match.
 
 Related information: [About Push Event](https://github.com/fresvii/appsteroid-documents/blob/master/en/EventList.md)

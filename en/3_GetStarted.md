@@ -1,6 +1,6 @@
 # Get Started with AppSteroid for iOS 
 
-last update at 2015/05/26
+last update at 2015/12/10
 
 ---
 
@@ -21,12 +21,6 @@ Please make sure you have completed registering your App on the Web Console befo
 
 Download one of the Framework from Fresvii Website.
 
-```
-- Framework without Voice Chat
-	- appsteroid-ios-X.X.X.zip
-- Framework with Voice Chat
-	- appsteroid-ios-with-voicechat-X.X.X.zip
-```
 ___To use Voice Chat, please also check [GetStarted-VoiceChat.md](GetStarted/GetStarted-VoiceChat.md#HowToUseAPI) for direction for implementation.___
 
 2. Move the Framework and Bundle into your project directory.

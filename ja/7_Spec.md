@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK仕様書
 
-last update at 2015/7/31
+last update at 2015/12/10
 
 ---
 
@@ -39,10 +39,6 @@ AppSteroid for iOSは、iOS用の統合ゲーム用バックエンドサービ�
 |Key-Value Storage|Description|
 |------|-----|
 |[FASStorage](Specs/Spec-Storage.md#FASStorage)|AppSteroidが提供するKey-Value Storageの操作に関するクラス |
-
-|Voice Chat|Description|
-|------|-----|
-|[FASConference](Specs/Spec-VoiceChat.md#FASConference)|ボイスチャット機能に関するクラス |
 
 |Play Movie|Description|
 |------|-----|

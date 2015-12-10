@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK Specification
 
-last update at 2014/7/31
+last update at 2015/12/10
 
 ---
 
@@ -39,10 +39,6 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 |Key-Value Storage|Description|
 |------|-----|
 |[FASStorage](Specs/Spec-Storage.md#FASStorage)|Class to operate Key-Value Storage provided by AppSteroid |
-
-|Voice Chat|Description|
-|------|-----|
-|[FASConference](Specs/Spec-VoiceChat.md#FASConference)|Class for function related to Voice Chat |
 
 |Play Movie|Description|
 |------|-----|

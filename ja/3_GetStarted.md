@@ -1,6 +1,6 @@
 # AppSteroid for iOS Getting Started
 
-last update at 2015/5/26
+last update at 2015/12/10
 
 ---
 
@@ -20,15 +20,7 @@ AppSteroid for iOSはiOS7.0以上をサポートしています。
 
 1. Frameworkのダウンロード
 
-Fresviiのウェブサイトから以下のどちらかのフレームワークをダウンロードしてください。
-
-```
-- ボイスチャット無しのバージョン
-	- appsteroid-ios-X.X.X.zip
-- ボイスチャット機能ありのバージョン
-	- appsteroid-ios-with-voicechat-X.X.X.zip
-```
-___ボイスチャットの利用にはこちらの`導入`と合わせて[GetStarted-VoiceChat.md](GetStarted/GetStarted-VoiceChat.md#HowToUseAPI)も参照してください。___
+Fresviiの[ウェブサイト](https://fresvii.com/downloads)からiOS SDK用のフレームワークをダウンロードしてください。
 
 2. ダウンロードしたFrameworkとBundleをプロジェクトファイルに移動させてください。
 ![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")

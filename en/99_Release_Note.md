@@ -2,6 +2,14 @@
 
 ---
 
+### 1.0.10
+- New Feature
+	- The SDK have been allowed to use on the Cocos2d-x. See this for detailed information.
+	- Allows to use the GUI with landscape.
+	
+- Performance Improvements
+	- Removed all of voice chat features.
+	
 ### 1.0.9
 - Fixed
 	- Sort order bug of a leaderboard ranking.
