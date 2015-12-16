@@ -20,7 +20,7 @@
 	// サインアップ済みのユーザーがいない場合
     if (!loginUser || !loginUser.isSignedUp)
     {
-		[FASAccount signUpUserCompletion:^(FASLoginUser *loginUser, NSError *error)
+		[FASAccount signUpUserWithCompletion:^(FASLoginUser *loginUser, NSError *error)
 		{
 			if (error)
 			{
