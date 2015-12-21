@@ -140,6 +140,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|AppSteroidSDKが提供するGUI以外でもマッチメイキングのリクエストが来た際にアラートを表示するかどうかを設定します。 |
 |[sdkVersion](#AppSteroid.sdkVersion)|SDKのバージョンを返却します。 |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|SDKのビルドバージョンを返却します。 |
+|[isAppSteroidGUI](#AppSteroid.isAppSteroidGUI)|現在開いているビューがAppSteroidが提供しているGUIかどうかを判別します。 |
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretToken"> startWithAppIdentifier:secretToken: </a>
 SDKの利用を開始するための初期設定を行います。開発モードは配布用となります。開発モードとして起動する場合、[モード引数を指定できるバージョン](#AppSteroid.startWithAppIdentifiersecretTokendevelopment)を実行していください。
@@ -246,6 +247,11 @@ SDKのバージョンを`NSString`で返却します。
 SDKのビルドバージョンを`NSString`で返却します。
 
 \+ (NSString *)sdkBuildVersion
+
+##### <a name="AppSteroid.isAppSteroidGUI"> isAppSteroidGUI </a>
+現在開いているビューがAppSteroidが提供しているGUIかどうかを判別します。
+
+\+ (BOOL)isAppSteroidGUI;
 
 ### <a name="FASTabBarController"> FASTabBarController </a>
 AppSteroidが提供するTabBarControllerにアクセスするためのクラス

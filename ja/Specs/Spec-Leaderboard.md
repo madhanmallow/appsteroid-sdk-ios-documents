@@ -1,6 +1,6 @@
 # Leaderboard Specifications
 
-last update at 2015/7/7
+last update at 2015/12/19
 
 ---
 
@@ -88,7 +88,9 @@ typedef void (^FASLeaderboardsCompletionHandler)(NSArray *leaderboards, FASPagin
 |Properties|Description|
 |------|-----|
 |[leaderboardId](#FASLeaderboard.leaderboardId)|リーダーボードID |
-|[name](#FASLeaderboard.name)|リーダーボード名 |
+|[leaderboardName](#FASLeaderboard.leaderboardName)|リーダーボード名 |
+|[leaderboardDescription](#FASLeaderboard.leaderboardDescription)|リーダーボードの説明 |
+|[iconUrl](#FASLeaderboard.iconUrl)|アイコン画像のURL |
 |[submissionType](#FASLeaderboard.submissionType)|`best_score`もしくは`recent_score`  |
 |[ascend](#FASLeaderboard.ascend)|昇順か否か |
 |[createdAt](#FASLeaderboard.createdAt)|リーダーボード作成時刻 |
@@ -99,10 +101,20 @@ typedef void (^FASLeaderboardsCompletionHandler)(NSArray *leaderboards, FASPagin
 
 @property (nonatomic, readonly) NSString *leaderboardId;
 
-##### <a name="FASLeaderboard.name"> name </a>
+##### <a name="FASLeaderboard.leaderboardName"> leaderboardName </a>
 リーダーボード名
 
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *leaderboardName;
+
+##### <a name="FASLeaderboard.leaderboardDescription"> leaderboardDescription </a>
+リーダーボードの説明
+
+@property (nonatomic, readonly) NSString *leaderboardDescription;
+
+##### <a name="FASLeaderboard.iconUrl"> iconUrl </a>
+アイコン画像のURL
+
+@property (nonatomic, readonly) NSString *iconUrl;
 
 ##### <a name="FASLeaderboard.usedScoreType"> usedScoreType </a>
 `best_score`もしくは`recent_score`
@@ -234,6 +246,7 @@ typedef void (^FASScoresCompletionHandler)(NSArray *scores, FASPagingMeta *meta,
 |------|-----|
 |[scoreId](#FASScore.scoreId)|スコアID |
 |[value](#FASScore.value)|スコアの値 |
+|[formattedValue](#FASScore.formattedValue)|フォーマットされたスコアの値 |
 |[leaderboard](#FASScore.leaderboard)|リーダーボード情報 |
 |[user](#FASScore.user)|ユーザー情報 |
 |[createdAt](#FASScore.createdAt)|スコア作成時刻 |
@@ -247,6 +260,11 @@ typedef void (^FASScoresCompletionHandler)(NSArray *scores, FASPagingMeta *meta,
 スコアの値
 
 @property (nonatomic, readonly) long long int value;
+
+##### <a name="FASScore.formattedValue"> formattedValue </a>
+フォーマットされたスコアの値
+
+@property (nonatomic, readonly) NSString *formattedValue;
 
 ##### <a name="FASScore.leaderboard"> leaderboard </a>
 リーダーボード情報。[FASLeaderboard](#FASLeaderboard)オブジェクト。
@@ -505,9 +523,30 @@ Sample
 
 |Constant|Description|
 |------|-----|
+|[FASRankPeriod](#FASRank.FASRankPeriod)|集計するランキングの期間 |
 |[FASRankCompletionHandler](#FASRank.FASRankCompletionHandler)|ランク取得処理を行った際に利用されるブロックオブジェクト。 |
 |[FASRankingCompletionHandler](#FASRank.FASRankingCompletionHandler)|ランキング取得処理を行った際に利用されるブロックオブジェクト。 |
 
+##### <a name="FASRank.FASRankPeriod"> FASRankPeriod </a>
+集計するランキングの期間
+
+```
+typedef NS_ENUM(NSInteger, FASRankPeriod)
+{
+    FASRankPeriodDaily,
+    FASRankPeriodWeekly,
+    FASRankPeriodAll,
+};
+```
+###### Constants
+###### FASRankPeriodDaily
+日間
+
+###### FASRankPeriodWeekly
+週間
+
+###### FASRankPeriodAll
+全ての期間
 
 ##### <a name="FASRank.FASRankCompletionHandler"> (^FASRankCompletionHandler)(FASRank *rank, NSError *error) </a>
 ランク取得処理を行った際に利用されるブロックオブジェクト。
@@ -555,14 +594,16 @@ typedef void (^FASRankingCompletionHandler)(NSArray *ranking, FASPagingMeta *met
 
 |Method|Description|
 |------|-----|
-|[fetchRankingWithLeaderboardId:startTime:onlyFriends:page:completion:](#FASRank.fetchRankingWithLeaderboardIdstartTimeonlyFriendspagecompletion) |ランキングを取得します。 |
-|[fetchRankWithLeaderboardId:userId:startTime:onlyFriends:completion:](#FASRank.fetchRankWithLeaderboardIduserIdstartTimeonlyFriendscompletion) |特定ユーザーのランク情報を取得します。 |
+|[fetchRankingWithLeaderboardId:period:onlyFriends:page:completion:](#FASRank.fetchRankingWithLeaderboardIdperiodonlyFriendspagecompletion) |期間を指定してランキングを取得します。 |
+|[fetchRankWithLeaderboardId:userId:period:onlyFriends:completion:](#FASRank.fetchRankWithLeaderboardIduserIdperiodonlyFriendscompletion) |特定ユーザーのランク情報を取得します。 |
+|[fetchRankingWithEventboardId:onlyFriends:page:completion:](#FASRank.fetchRankingWithEventboardIdonlyFriendspagecompletion)|イベントに関するランキングを取得します。 |
+|[fetchRankWithEventboardId:userId:onlyFriends:completion:](#FASRank.fetchRankWithEventboardIduserIdonlyFriendscompletion)|特定ユーザーのイベントに関するランク情報を取得します。 |
 
-##### <a name="FASRank.fetchRankingWithLeaderboardIdstartTimeonlyFriendspagecompletion"> fetchRankingWithLeaderboardId:startTime:onlyFriends:page:completion: </a>
+##### <a name="FASRank.fetchRankingWithLeaderboardIdperiodonlyFriendspagecompletion"> fetchRankingWithLeaderboardId:period:onlyFriends:page:completion: </a>
 ランキングを取得します。
 
 \+ (void)fetchRankingWithLeaderboardId:(NSString *)leaderboardId
-                             startTime:(NSDate *)startTime
+                                period:(FASRankPeriod)period
                            onlyFriends:(BOOL)isOnlyFriends
                                   page:(NSUInteger)page
                             completion:(FASRankingCompletionHandler)completion;
@@ -570,8 +611,8 @@ typedef void (^FASRankingCompletionHandler)(NSArray *ranking, FASPagingMeta *met
 * Parameters
 	* leaderboardId
 		* リーダーボードID
-	* startTime
-		* 取得を開始する時刻
+	* period
+		* 集計期間
 	* onlyFriends
 		* フレンドのみ表示したい場合は`YES`を指定。
 	* page
@@ -579,68 +620,62 @@ typedef void (^FASRankingCompletionHandler)(NSArray *ranking, FASPagingMeta *met
 	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト。
 
-Sample
-
-```
-#import <AppSteroid/FASRank.h>
-
-	…
-	…
-
-- (IBAction)pushedFetchButton:(id)sender
-{
-    [FASRank fetchRankingWithLeaderboardId:@"xxxxxxxxxxxxxx"
-                                 startTime:[NSDate date]
-                               onlyFriends:NO
-                                      page:1
-                                completion:(NSArray *ranking, FASPagingMeta *meta, NSError *error)
-    {
-        // 処理が完了したら呼ばれます。
-    }];
-}
-```
-
-##### <a name="FASRank.fetchRankWithLeaderboardIduserIdstartTimeonlyFriendscompletion"> fetchRankWithLeaderboardId:userId:startTime:onlyFriends:completion: </a>
+##### <a name="FASRank.fetchRankWithLeaderboardIduserIdperiodonlyFriendscompletion"> fetchRankWithLeaderboardId:userId:period:onlyFriends:completion: </a>
 特定ユーザーのランク情報を取得します。
 
-\+ (void)fetchRankWithLeaderboardId:(NSString *)leaderboardId
-                             userId:(NSString *)userId
-                          startTime:(NSDate *)startTime
-                        onlyFriends:(BOOL)isOnlyFriends
-                         completion:(FASRankCompletionHandler)completion;
++ (void)fetchRankWithLeaderboardId:(NSString *)leaderboardId
+                            userId:(NSString *)userId
+                            period:(FASRankPeriod)period
+                       onlyFriends:(BOOL)isOnlyFriends
+                        completion:(FASRankCompletionHandler)completion;
 
 * Parameters
 	* leaderboardId
 		* リーダーボードID
 	* userId
 		* ユーザーID
-	* startTime
-		* 取得を開始する時刻
+	* period
+		* 集計期間
 	* onlyFriends
 		* フレンドのみ表示したい場合は`YES`を指定。
 	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト。
 
-Sample
+##### <a name="FASRank.fetchRankingWithEventboardIdonlyFriendspagecompletion"> fetchRankingWithLeaderboardId:onlyFriends:page:completion: </a>
+ランキングを取得します。
 
-```
-#import <AppSteroid/FASRank.h>
+\+ (void)fetchRankingWithEventboardId:(NSString *)eventboardId
+                          onlyFriends:(BOOL)isOnlyFriends
+                                 page:(NSUInteger)page
+                           completion:(FASRankingCompletionHandler)completion;
 
-	…
-	…
+* Parameters
+	* eventboardId
+		* イベントボードID
+	* onlyFriends
+		* フレンドのみ表示したい場合は`YES`を指定。
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
-- (IBAction)pushedFetchButton:(id)sender
-{
-    [FASRank fetchRankWithLeaderboardId:@"xxxxxxxxxxxxxx"
-                                 userId:@"yyyyyyyyyyyyyy"
-                              startTime:[NSDate date]
-                            onlyFriends:NO
-                             completion:(FASRank *rank, NSError *error)
-    {
-        // 処理が完了したら呼ばれます。
-    }];
-}
-```
+##### <a name="FASRank.fetchRankWithEventboardIduserIdonlyFriendscompletion"> fetchRankWithLeaderboardId:userId:onlyFriends:completion: </a>
+特定ユーザーのランク情報を取得します。
+
++ (void)fetchRankWithEventboardId:(NSString *)eventboardId
+	                       userId:(NSString *)userId
+                      onlyFriends:(BOOL)isOnlyFriends
+                       completion:(FASRankCompletionHandler)completion;
+
+* Parameters
+	* eventboardId
+		* イベントボードID
+	* userId
+		* ユーザーID
+	* onlyFriends
+		* フレンドのみ表示したい場合は`YES`を指定。
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
 ### <a name="FASGameEvent"> FASGameEvent </a>
 ゲームイベントモデルクラス。ゲームイベントの作成はコンソールから行うことができます。

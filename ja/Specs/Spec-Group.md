@@ -69,6 +69,7 @@ typedef void (^FASGroupsCompletionHandler)(NSArray *groups, FASPagingMeta *meta,
 |[name](#FASGroup.name)|グループ名 |
 |[membersCount](#FASGroup.membersCount)|グループに参加しているメンバー数 |
 |[subscribed](#FASGroup.subscribed)|購読状態 |
+|[hidden](#FASGroup.hidden)|グループが隠されているかどうか |
 |[pair](#FASGroup.pair)|ペアグループかどうかの状態 |
 |[createdAt](#FASGroup.createdAt)|グループ作成時刻 |
 |[updatedAt](#FASGroup.updatedAt)|グループ更新時刻 |
@@ -98,6 +99,11 @@ typedef void (^FASGroupsCompletionHandler)(NSArray *groups, FASPagingMeta *meta,
 
 @property (nonatomic, readonly) BOOL subscribed;
 
+##### <a name="FASGroup.hidden"> hidden </a>
+グループが隠されているかどうか
+
+@property (nonatomic, readonly) BOOL hidden;
+
 ##### <a name="FASGroup.pair"> pair </a>
 ペアグループかどうかの状態
 
@@ -120,16 +126,16 @@ typedef void (^FASGroupsCompletionHandler)(NSArray *groups, FASPagingMeta *meta,
 |------|-----|
 |[createGroupWithCompletion:](#FASGroup.createGroupWithCompletion) |グループを作成します。 |
 |[createGroupWithGroupName:completion:](#FASGroup.createGroupWithGroupNamecompletion) |グループ名を指定してグループを作成します。 |
-|[createGroupWithUserIds:completion:](#FASGroup.createGroupWithOpponentUserIdscompletion) |__`Deprecated`[createGroupWithOpponentUserIds:completion:](#FASGroup.createGroupWithOpponentUserIdscompletion)を利用してください。__ ユーザーIDを配列で指定してグループを作成します。 |
 |[createGroupWithOpponentUserIds:completion:](#FASGroup.createGroupWithOpponentUserIdscompletion) |ユーザーIDを配列で指定してグループを作成します。 |
-|[createGroupWithGroupName:userIds:completion:](#FASGroup.createGroupWithGroupNameopponentUserIdscompletion) |__`Deprecated`[createGroupWithGroupName:opponentUserIds:completion:](#FASGroup.createGroupWithGroupNameOpponentUserIdscompletion)を利用してください。__ グループ名、グループメンバーを指定してグループを作成します。 |
 |[createGroupWithGroupName:opponentUserIds:completion:](#FASGroup.createGroupWithGroupNameopponentUserIdscompletion) |グループ名、グループメンバーを指定してグループを作成します。 |
 |[updateGroupWithGroupId:groupName:completion:](#FASGroup.updateGroupWithGroupIdgroupNamecompletion) |グループ名を変更します。 |
 |[deleteGroupWithGroupId:completion:](#FASGroup.deleteGroupWithGroupIdcompletion) |グループを削除します。 |
+|[fetchGroupWithGroupId:completion:](#FASGroup.fetchGroupWithGroupIdcompletion) |グループIdを指定してグループを取得します。 |
 |[fetchGroupsWithPage:completion:](#FASGroup.fetchGroupsWithPagecompletion) |グループを取得します。 |
 |[subscribeGroupWithGroupId:completion:](#FASGroup.subscribeGroupWithGroupIdcompletion) |グループを購読状態にします。 |
 |[unsubscribeGroupWithGroupId:completion:](#FASGroup.unsubscribeGroupWithGroupIdcompletion) |グループを未購読状態にします。 |
-|[createPairWithUserId:completion:](#FASGroup.createPairWithOpponentUserIdcompletion) |__`Deprecated`[createPairWithOpponentUserId:completion:](#FASGroup.createPairWithOpponentUserIdcompletion)を利用してください。__ ペアグループを作成します。 |
+|[hideGroupWithGroupId:completion:](#FASGroup.hideGroupWithGroupIdcompletion) |グループをグループリストに表示させないようにします。 |
+|[unhideGroupWithGroupId:completion:](#FASGroup.hideGroupWithGroupIdcompletion) |グループをグループリストに表示させるようにします。 |
 |[createPairWithOpponentUserId:completion:](#FASGroup.createPairWithOpponentUserIdcompletion) |ペアグループを作成します。 |
 
 ##### <a name="FASGroup.createGroupWithCompletion"> createGroupWithCompletion: </a>
@@ -414,6 +420,30 @@ Sample
 }
 ```
 
+##### <a name="FASGroup.hideGroupWithGroupIdcompletion"> hideGroupWithGroupId:completion: </a>
+グループを非購読状態にします。
+
+\+ (void)hideGroupWithGroupId:(NSString *)groupId
+                  completion:(FASGroupCompletionHandler)completion;
+
+* Parameters
+	* groupId
+		* グループID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
+##### <a name="FASGroup.unhideGroupWithGroupIdcompletion"> unhideGroupWithGroupId:completion: </a>
+グループを非購読状態にします。
+
+\+ (void)unhideGroupWithGroupId:(NSString *)groupId
+                     completion:(FASGroupCompletionHandler)completion;
+
+* Parameters
+	* groupId
+		* グループID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
 ##### <a name="FASGroup.createPairWithOpponentUserIdcompletion"> createPairWithOpponentUserId:completion: </a>
 ペアグループを作成します。既にペアグループが作成されている場合は既存のグループが返却されます。
 
@@ -654,6 +684,7 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 |[video](#FASGroupMessage.video)|ビデオオブジェクト |
 |[videoStatus](#FASGroupMessage.videoStatus)|ビデオの状態 |
 |[image](#FASGroupMessage.image)|画像メッセージのデータ。送信時のみ格納されています。 |
+|[sticker](#FASGroupMessage.sticker)|ステッカーオブジェクト |
 
 ##### <a name="FASGroupMessage.groupMessageId"> groupMessageId </a>
 グループメッセージID
@@ -710,6 +741,11 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 
 @property (nonatomic, readonly) UIImage *image;
 
+##### <a name="FASGroupMessage.sticker"> sticker </a>
+[FASSticker](#FASSticker)オブジェクト
+
+@property (nonatomic, readonly) FASSticker *sticker;
+
 #### Class Method
 
 |Method|Description|
@@ -717,8 +753,11 @@ typedef void (^FASGroupMessagesCompletionHandler)(NSArray *message, FASPagingMet
 |[addMessageWithGroupId:text:completion:](#FASGroupMessage.addMessageWithGroupIdtextcompletion) |テキストメッセージを送信します。 |
 |[addMessageWithGroupId:image:completion:](#FASGroupMessage.addMessageWithGroupIdimagecompletion) |画像メッセージを送信します。 |
 |[addMessageWithGroupId:videoId:completion:](#FASGroupMessage.addMessageWithGroupIdimagecompletion) |ビデオメッセージをVideoIdを利用して送信します。 |
+|[addMessageWithGroupId:stickerId:completion:](#FASGroupMessage.addMessageWithGroupIdstickerIdcompletion) |ステッカーメッセージをStickerIdを利用して送信します。 |
 |[addMessageForInGameWithGroupId:text:completion:](#FASGroupMessage.addMessageForInGameWithGroupIdtextcompletion) |テキストメッセージを送信します。ゲーム中のチャット用に利用します。 |
+|[markAsReadMessageWithGroupId:messageId:completion:](#FASGroupMessage.markAsReadMessageWithGroupIdmessageIdcompletion) |メッセージを既読にします。 |
 |[deleteMessageWithGroupId:messageId:completion:](#FASGroupMessage.deleteMessageWithGroupIdmessageIdcompletion) |指定したグループIDとグループメッセージIDのメッセージを削除します。 |
+|[deleteAllMessagesWithGroupId:completion:](#FASGroupMessage.deleteAllMessagesWithGroupIdcompletion) |指定したグループIDのメッセージ全てを削除します。 |
 |[fetchMessageWithGroupId:messageId:completion:](#FASGroupMessage.fetchMessageWithGroupIdmessageIdcompletion) |指定したグループIDとグループメッセージIDのメッセージを取得します。 |
 |[fetchMessagesWithGroupId:page:completion:](#FASGroupMessage.fetchMessagesWithGroupIdpagecompletion) |指定したグループIDのメッセージ一覧を取得します。 |
 
@@ -826,6 +865,21 @@ Sample
 }
 ```
 
+##### <a name="FASGroupMessage.addMessageWithGroupIdstickerIdcompletion"> addMessageWithGroupId:stickerId:completion: </a>
+ステッカーメッセージをStickerIdを利用して送信します。
+
+\+ (void)addMessageWithGroupId:(NSString *)groupId
+                     stickerId:(NSString *)stickerId
+                    completion:(FASGroupMessageCompletionHandler)completion;
+
+* Parameters
+	* groupId
+		* グループID
+	* stickerId
+		* ステッカーID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
 ##### <a name="FASGroupMessage.addMessageForInGameWithGroupIdtextcompletion"> addMessageForInGameWithGroupId:text:completion: </a>
 テキストメッセージを送信します。ゲーム中のチャット用に利用します。
 
@@ -860,6 +914,21 @@ Sample
 }
 ```
 
+##### <a name="FASGroupMessage.markAsReadMessageWithGroupIdmessageIdcompletion"> markAsReadMessageWithGroupId:messageId:completion: </a>
+メッセージを既読にします。
+
+\+ (void)markAsReadMessageWithGroupId:(NSString *)groupId
+                            messageId:(NSString *)messageId
+                           completion:(FASGroupMessageCompletionHandler)completion;
+
+* Parameters
+	* groupId
+		* グループID
+	* messageId
+		* メッセージID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
+
 ##### <a name="FASGroupMessage.deleteMessageWithGroupIdmessageIdcompletion"> deleteMessageWithGroupId:messageId:completion: </a>
 指定したグループIDとグループメッセージIDのメッセージを削除します。
 
@@ -893,6 +962,18 @@ Sample
     }];
 }
 ```
+
+##### <a name="FASGroupMessage.deleteAllMessagesWithGroupIdcompletion"> deleteAllMessagesWithGroupId:completion: </a>
+指定したグループIDとグループメッセージIDのメッセージを削除します。
+
+\+ (void)deleteAllMessagesWithGroupId:(NSString *)groupId
+	                       completion:(FASGroupMessageCompletionHandler)completion;
+
+* Parameters
+	* groupId
+		* グループID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト。
 
 ##### <a name="FASGroupMessage.fetchMessageWithGroupIdmessageIdcompletion"> fetchMessageWithGroupId:messageId:completion: </a>
 指定したグループIDとグループメッセージIDのメッセージを取得します。

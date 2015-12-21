@@ -528,6 +528,7 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 |[segment](#FASMatchRequest.segment)|マッチのセグメント。同じセグメントを持っているユーザーとのみマッチします。 |
 |[minNumberOfPlayers](#FASMatchRequest.minNumberOfPlayers)|リクエストした最小プレイヤー数 |
 |[maxNumberOfPlayers](#FASMatchRequest.maxNumberOfPlayers)|リクエストした最大プレイヤー数 |
+|[invitations](#FASMatchRequest.invitations)|招待を送ったユーザーの配列 |
 
 
 ##### <a name="FASMatchRequest.segment"> segment </a>
@@ -545,6 +546,10 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 
 @property (nonatomic, readonly) NSUInteger maxNumberOfPlayers;
 
+##### <a name="FASMatchRequest.invitations"> invitations </a>
+招待を送ったユーザーの配列
+
+@property (nonatomic, readonly) NSArray/*<FASMatchInvitation>*/ *invitations;
 
 #### Class Method
 
@@ -1000,42 +1005,18 @@ typedef void (^FASGameContextCompletionHandler)(FASGameContext *gameContext, NSE
 
 |Properties|Description|
 |------|-----|
-|[matchmakingDelegate](#FASMatchmakingNavigationController.matchmakingDelegate)|[FASMatchmakingNavigationControllerDelegate](#FASMatchmakingNavigationControllerDelegate)の通知を受けるクラスを指定します。 |
 |[animated](#FASMatchmakingNavigationController.animated)|ビューを閉じるときのアニメーション有無 |
-|[minNumberOfPlayers](#FASMatchmakingNavigationController.minNumberOfPlayers)|マッチに必要な最小プレイヤー数を指定します。 |
-|[maxNumberOfPlayers](#FASMatchmakingNavigationController.maxNumberOfPlayers)|マッチに必要な最大プレイヤー数を指定します。 |
-|[timeout](#FASMatchmakingNavigationController.timeout)|マッチメイキングのタイムアウト時間を指定します。 |
-|[segment](#FASMatchmakingNavigationController.segment)|マッチのセグメントを指定します。同様のセグメントが指定されているユーザーとのみマッチします。 |
-
-##### <a name="FASMatchmakingNavigationController.matchmakingDelegate"> matchmakingDelegate </a>
-[FASMatchmakingNavigationControllerDelegate](#FASMatchmakingNavigationControllerDelegate)の通知を受けるクラスを指定します。
-
-@property (nonatomic, weak) id<FASMatchmakingNavigationControllerDelegate> matchmakingDelegate;
+|[matchmakingViewController](#FASMatchmakingNavigationController.matchmakingViewController)|[FASMatchmakingViewController](#FASMatchmakingViewController)を返却します。 |
 
 ##### <a name="FASMatchmakingNavigationController.animated"> animated </a>
 ビューを閉じるときのアニメーション有無
 
 @property (nonatomic, assign) BOOL animated;
 
-##### <a name="FASMatchmakingNavigationController.minNumberOfPlayers"> minNumberOfPlayers </a>
-マッチに必要な最小プレイヤー数を指定します。デフォルトは２です。
+##### <a name="FASMatchmakingNavigationController.matchmakingViewController"> matchmakingViewController </a>
+[FASMatchmakingViewController](#FASMatchmakingViewController)を返却します。
 
-@property (nonatomic, assign) NSUInteger minNumberOfPlayers;
-
-##### <a name="FASMatchmakingNavigationController.maxNumberOfPlayers"> maxNumberOfPlayers </a>
-マッチに必要な最大プレイヤー数を指定します。デフォルトは２です。
-
-@property (nonatomic, assign) NSUInteger maxNumberOfPlayers;
-
-##### <a name="FASMatchmakingNavigationController.timeout"> timeout </a>
-マッチメイキングのタイムアウト時間を指定します。デフォルトは30秒です。
-
-@property (nonatomic, assign) NSUInteger timeout;
-
-##### <a name="FASMatchmakingNavigationController.segment"> segment </a>
-マッチのセグメントを指定します。同様のセグメントが指定されているユーザーとのみマッチします。
-
-@property (nonatomic, strong) NSString *segment;
+@property (nonatomic, readonly) FASMatchmakingViewController *matchmakingViewController;
 
 #### Class Method
 
@@ -1076,22 +1057,56 @@ Sample
 }
 ```
 
+### <a name="FASMatchmakingViewController"> FASMatchmakingViewController </a>
+マッチメイキングを実際に行うViewController
 
-#### <a name="FASMatchmakingNavigationControllerDelegate"> FASMatchmakingNavigationControllerDelegate </a>
+#### Properties
+
+|Properties|Description|
+|------|-----|
+|[matchmakingDelegate](#FASMatchmakingNavigationController.matchmakingDelegate)|[FASMatchmakingNavigationControllerDelegate](#FASMatchmakingNavigationControllerDelegate)の通知を受けるクラスを指定します。 |
+|[minNumberOfPlayers](#FASMatchmakingNavigationController.minNumberOfPlayers)|マッチに必要な最小プレイヤー数を指定します。 |
+|[maxNumberOfPlayers](#FASMatchmakingNavigationController.maxNumberOfPlayers)|マッチに必要な最大プレイヤー数を指定します。 |
+|[timeout](#FASMatchmakingNavigationController.timeout)|マッチメイキングのタイムアウト時間を指定します。 |
+|[segment](#FASMatchmakingNavigationController.segment)|マッチのセグメントを指定します。同様のセグメントが指定されているユーザーとのみマッチします。 |
+
+##### <a name="FASMatchmakingViewController.matchmakingDelegate"> matchmakingDelegate </a>
+[FASMatchmakingViewControllerDelegate](#FASMatchmakingViewControllerDelegate)の通知を受けるクラスを指定します。
+
+@property (nonatomic, weak) id<FASMatchmakingNavigationControllerDelegate> matchmakingDelegate;
+
+##### <a name="FASMatchmakingViewController.minNumberOfPlayers"> minNumberOfPlayers </a>
+マッチに必要な最小プレイヤー数を指定します。デフォルトは２です。
+
+@property (nonatomic, assign) NSUInteger minNumberOfPlayers;
+
+##### <a name="FASMatchmakingViewController.maxNumberOfPlayers"> maxNumberOfPlayers </a>
+マッチに必要な最大プレイヤー数を指定します。デフォルトは２です。
+
+@property (nonatomic, assign) NSUInteger maxNumberOfPlayers;
+
+##### <a name="FASMatchmakingViewController.timeout"> timeout </a>
+マッチメイキングのタイムアウト時間を指定します。デフォルトは30秒です。
+
+@property (nonatomic, assign) NSUInteger timeout;
+
+##### <a name="FASMatchmakingViewController.segment"> segment </a>
+マッチのセグメントを指定します。同様のセグメントが指定されているユーザーとのみマッチします。
+
+@property (nonatomic, strong) NSString *segment;
+
+#### <a name="FASMatchmakingViewControllerDelegate"> FASMatchmakingViewControllerDelegate </a>
 [FASMatch](#FASMatch)オブジェクトの状態を監視して変更された際に呼ばれるデリゲートメソッド。
 
 |Method|Description|
 |------|-----|
-|[FASMatchmakingNavigationController:matchingWasCompleted:](#FASMatchmakingNavigationControllerDelegate.FASMatchmakingNavigationControllermatchingWasCompleted) |[FASMatch](#FASMatch)オブジェクトの状態が`FASMatchStatusComplete`になった際に呼ばれる関数 |
+|[FASMatchmakingViewController:matchingWasCompleted:](#FASMatchmakingViewControllerDelegate.FASMatchmakingViewControllermatchingWasCompleted) |[FASMatch](#FASMatch)オブジェクトの状態が`FASMatchStatusComplete`になった際に呼ばれる関数 |
 
-##### <a name="FASMatchmakingNavigationControllerDelegate.FASMatchmakingNavigationControllermatchingWasCompleted"> FASMatchmakingNavigationController:matchingWasCompleted: </a>
+##### <a name="FASMatchmakingViewControllerDelegate.FASMatchmakingViewControllermatchingWasCompleted"> FASMatchmakingViewController:matchingWasCompleted: </a>
 [FASMatch](#FASMatch)オブジェクトの状態が`FASMatchStatusComplete`になった際に呼ばれる関数
 
-\- (void)FASMatchmakingNavigationController:(FASMatchmakingNavigationController *)FASMatchmakingNavigationController
-                      matchingWasCompleted:(FASMatch *)match;
+\- (void)matchingWasCompleted:(FASMatch *)match;
 
 * Parameters
-	* FASMatchmakingNavigationController
-		* [FASMatchmakingNavigationController](#FASMatchmakingNavigationController)が格納されています。
 	* match
 		* `complete`状態になっている[FASMatch](#FASMatch)オブジェクトが格納されています。

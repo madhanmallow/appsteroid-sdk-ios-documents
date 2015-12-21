@@ -1,6 +1,6 @@
 # Getting Started - Push Notification
 
-last update at 2014/10/7
+last update at 2015/12/19
 
 ---
 
@@ -72,7 +72,9 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 	
 ## <a name="EventList"> プッシュ通知の種類 </a>
 
-[Push通知のイベントリスト](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md)を参照してください。
+[Push通知のイベントリスト](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md)を参照してください。  
+今回利用する例では以下の様な設定になります。`bind_level`はAPIで指定できる変数です。
+![CustomMessage](./Images/ss_fresvii_custom_message.png "CustomMessage")
 
 ## <a name="ObserveEvent"> プッシュ通知のイベント監視 </a>
 

@@ -97,6 +97,7 @@ typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASP
 |[fetchDirectMessagesWithPage:completion:](#FASDirectMessage.fetchDirectMessagesWithPage) |指定したページのダイレクトメッセージを一覧で取得します。 |
 |[fetchDirectMessagesWithPage:onlyUnread:completion:](#FASDirectMessage.fetchDirectMessagesWithPage) |指定したページのダイレクトメッセージを一覧で取得します。`unread`を`YES`にした場合は未読メッセージのみを取得します。 |
 |[fetchDirectMessageWithId:completion:](#FASDirectMessage.fetchDirectMessagesWithPage) |指定したidのダイレクトメッセージを取得します。 |
+|[markAsReadAllMessagesWithCompletion:](#FASDirectMessage.markAsReadAllMessagesWithCompletion) |全てのメッセージを既読にします。 |
 
 ##### <a name="FASDirectMessage.fetchDirectMessagesWithPage"> fetchDirectMessagesWithPage:completion: </a>
 指定したページのダイレクトメッセージを一覧で取得します。
@@ -135,6 +136,15 @@ typedef void (^FASDirectMessagesCompletionHandler)(NSArray *directMessages, FASP
 * Parameters
 	* messageId
 		* ダイレクトメッセージのID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト
+
+##### <a name="FASDirectMessage.markAsReadAllMessagesWithCompletion"> markAsReadAllMessagesWithCompletion: </a>
+全てのメッセージを既読にします。
+
+\+ (void)markAsReadAllMessagesWithCompletion:(FASCompletionHandler)completion;
+
+* Parameters
 	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト
 

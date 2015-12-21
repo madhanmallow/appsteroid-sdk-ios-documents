@@ -574,6 +574,11 @@ typedef void (^FASUsersCompletionHandler)(NSArray *users, FASPagingMeta *meta, N
 |[profileImageURL](#FASUser.profileImageURL)|ユーザーのプロフィール画像URL |
 |[profileImage](#FASUser.profileImage)|ユーザーのプロフィール画像 |
 |[friendStatus](#FASUser.friendStatus)|ユーザーのフレンドステータス |
+|[launchCount](#FASUserBridge.launchCount)|起動回数 |
+|[launchTime](#FASUserBridge.launchTime)|トータルの起動時間 |
+|[friendRequestsCount](#FASUserBridge.friendRequestsCount)|フレンドリクエストの数 |
+|[friendsCount](#FASUserBridge.friendsCount)|フレンドの数 |
+|[videosCount](#FASUserBridge.videosCount)|ビデオの数 |
 |[createdAt](#FASUser.createdAt)|ユーザーが作成された時刻 |
 |[updatedAt](#FASUser.updatedAt)|ユーザー情報が更新された時刻 |
 |[official](#FASUser.official)|オフィシャルユーザーかどうか |
@@ -613,6 +618,31 @@ typedef void (^FASUsersCompletionHandler)(NSArray *users, FASPagingMeta *meta, N
 
 @property (nonatomic, readonly) NSString *friendStatus;
 
+##### <a name="FASUser.launchCount"> launchCount </a>
+起動回数
+
+@property (nonatomic, readonly) NSUInteger launchCount;
+
+##### <a name="FASUser.launchTime"> launchTime </a>
+トータルの起動時間
+
+@property (nonatomic, readonly) NSUInteger launchTime;
+
+##### <a name="FASUser.friendRequestsCount"> friendRequestsCount </a>
+フレンドリクエストの数
+
+@property (nonatomic, readonly) NSUInteger friendRequestsCount;
+
+##### <a name="FASUser.friendsCount"> friendsCount </a>
+フレンドの数
+
+@property (nonatomic, readonly) NSUInteger friendsCount;
+
+##### <a name="FASUser.videosCount"> videosCount </a>
+ビデオの数
+
+@property (nonatomic, readonly) NSUInteger videosCount;
+
 ##### <a name="FASUser.createdAt"> createdAt </a>
 ユーザーが作成された時刻
 
@@ -635,6 +665,7 @@ typedef void (^FASUsersCompletionHandler)(NSArray *users, FASPagingMeta *meta, N
 |[fetchUserWithUserId:completion:](#FASUser.fetchUserWithUserIdcompletion) |ユーザーIDにマッチするユーザーを取得します。 |
 |[fetchUserWithUserCode:completion:](#FASUser.fetchUserWithUserCodecompletion) |ユーザーコードにマッチするユーザーを取得します。 |
 |[fetchUsersWithProvider:uid:completion:](#FASUser.fetchUsersWithProvideruidcompletion) |プロバイダ名とUIDにマッチするユーザーのリストを取得します。 |
+|[fetchCSRUserWithCompletion:](#FASUser.fetchCSRUserWithCompletion) |CSRユーザーを取得します。 |
 
 ##### <a name="FASUser.fetchUserWithUserIdcompletion"> fetchUserWithUserId:completion: </a>
 ユーザーIDにマッチするユーザーを取得します。
@@ -733,3 +764,13 @@ Sample
     }];
 }
 ```
+
+##### <a name="FASUser.fetchCSRUserWithCompletion"> fetchCSRUserWithCompletion: </a>
+プロバイダ名とUIDにマッチするユーザーのリストを取得します。
+
+\+ (void)fetchCSRUserWithCompletion:(FASUserCompletionHandler)completion;
+
+* Parameters
+  * completion
+    * 処理が完了した時に実行されるブロックオブジェクト。
+    

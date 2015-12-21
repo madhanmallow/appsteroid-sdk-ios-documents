@@ -51,6 +51,7 @@ typedef NS_ENUM(NSInteger, FASCertificateType)
 |[addDeviceToken:completion:](#FASNotification.addDeviceTokencompletion) |指定したデバイストークンを登録します。 |
 |[deleteDeviceToken:completion:](#FASNotification.deleteDeviceTokencompletion) |指定したデバイストークンを削除します。 |
 |[fetchNotificationMessageWithId:completion:](#FASNotification.fetchNotificationMessageWithIdcompletion) |PushNotificateionの詳細情報を取得してきます。 |
+|[handleDidFinishLaunchingWithOptions:](#FASNotification.handleDidFinishLaunchingWithOptions) |AppSteroidに関するPushNotificateionを取り扱います。|
 |[handleDidReceiveRemoteNotification:](#FASNotification.handleDidReceiveRemoteNotification) |AppSteroidに関するPushNotificateionを取り扱います。|
 |[allowsToHandlePushNotification:](#FASNotification.allowsToHandlePushNotification) |AppSteroidのPushNotificationからアプリを起動した際、自動でその通知に関する機能を取り扱うかどうかを設定します。 |
 |[isAllowedToHandlePushNotification](#FASNotification.isAllowedToHandlePushNotification) |AppSteroidに関するPushNotificationを取り扱うかどうか返却します。 |
@@ -143,6 +144,31 @@ Sample
     {
         // 処理が完了したら呼ばれます。
     }];
+}
+```
+
+##### <a name="FASNotification.handleDidFinishLaunchingWithOptions"> handleDidFinishLaunchingWithOptions: </a>
+Fresviiサーバー経由のPushNotificateionをハンドリングします。
+特に、[FASNotificationEvent](#FASNotificationEvent)を利用する際はこのメソッドの実装は必須になります。
+
+\+ (void)handleDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
+* Parameters
+	* launchOptions
+		* `AppDelegate.m`の`application:didFinishLaunchingWithOptions:`で受け取れるパラメータをそのまま利用します。
+
+Sample
+
+```
+#import <AppSteroid/FASNotification.h>
+
+	…
+	…
+
+- (BOOL)application:(UIApplication *)application
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [FASNotification handleDidFinishLaunchingWithOptions:launchOptions];
 }
 ```
 

@@ -52,6 +52,7 @@ last update at 2015/2/2
 |Constant|Description|
 |------|-----|
 |[FASMovieMakerFPS](#FASMovieMaker.FASMovieMakerFPS)|利用可能なFPS一覧です。 |
+|[FASMovieMakerViewType](#FASMovieMaker.FASMovieMakerViewType)|描画エンジンの一覧です。 |
 
 ##### <a name="FASMovieMaker.FASMovieMakerFPS"> FASMovieMakerFPS </a>
 利用可能なFPS一覧です。
@@ -87,6 +88,25 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 ###### FASMovieMaker10FPS
 10fps
 
+```
+typedef NS_ENUM(NSInteger, FASMovieMakerViewType)
+{
+    FASMovieMakerViewTypeNormal = 1,
+    FASMovieMakerViewTypeGL,
+    FASMovieMakerViewTypeMetal
+};
+```
+
+###### Constants
+###### FASMovieMakerViewTypeNormal
+通常のビュー
+
+###### FASMovieMakerViewTypeGL
+OpenGL
+
+###### FASMovieMakerViewTypeMetal
+Metal
+
 #### Properties
 
 |Properties|Description|
@@ -120,7 +140,8 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 
 |Method|Description|
 |------|-----|
-|[initWithCaptureView:withAudio:](#FASMovieMaker.initWithCaptureViewwithAudio) |`FASMovieMaker`クラスを初期化してオブジェクトを返却します。 |
+|[initWithCaptureView:viewType:withAudio:](#FASMovieMaker.initWithCaptureViewviewTypewithAudio) |`FASMovieMaker`クラスを初期化してオブジェクトを返却します。 |
+|[prepareForRecording](#FASMovieMaker.prepareForRecording) |レコーディングの準備をします。 |
 |[startRecording](#FASMovieMaker.startRecording) |レコーディングを開始します。 |
 |[stopRecording](#FASMovieMaker.stopRecording) |レコーディングを終了します。 |
 |[isRecording](#FASMovieMaker.isRecording) |レコーディング中かどうかを返却します。 |
@@ -128,11 +149,23 @@ typedef NS_ENUM(NSInteger, FASMovieMakerFPS)
 |[presentShareView:](#FASMovieMaker.presentShareView:) |動画をアップロードしてSNSにシェアするためのビューを表示します。 |
 |[presentShareView:skipCompleteView:](#FASMovieMaker.presentShareViewskipCompleteView)|動画をアップロードしてSNSにシェアするためのビューを表示します。完了画面を表示するかどうかを選択することができます。|
 
-##### <a name="FASMovieMaker.initWithCaptureViewwithAudio"> initWithCaptureView:withAudio: </a>
+##### <a name="FASMovieMaker.initWithCaptureViewviewTypewithAudio"> initWithCaptureView:viewType:withAudio: </a>
 `FASMovieMaker`クラスを初期化してオブジェクトを返却します。初期化後、端末を回転した場合、録画が正常に行われなくなります。端末の回転を許可している場合は、端末の回転後の適切なタイミングで録画開始前に初期化を行ってください。また、ビデオ録画中は端末の回転を行わないように設定してください。 初期化処理には多少時間がかかります。そのため、ゲームプレイ中などに初期化を行うと遅延が発生します。適切なタイミングで初期化を行うようにご注意ください。
 
 \- (instancetype)initWithCaptureView:(UIView*)view
-                           withAudio:(bool)withAudio;
+                           viewType:(FASMovieMakerViewType)type
+                          withAudio:(bool)withAudio;
+
+* Parameters
+	* type
+		* [FASMovieMakerViewType](#FASMovieMaker.FASMovieMakerViewType)で指定します。
+	* withAudio
+		* 音声と一緒にログ化する場合は`YES`を指定します。
+
+##### <a name="FASMovieMaker.prepareForRecording"> prepareForRecording </a>
+レコーディングの準備をします。
+
+\- (bool)prepareForRecording;
 
 ##### <a name="FASMovieMaker.startRecording"> startRecording </a>
 レコーディングを開始します。
@@ -325,7 +358,8 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 |------|-----|
 |[uploadVideoWithData:completion:](#FASVideo.uploadVideoWithDatacompletion)|ビデオをアップロードして[FASVideo](#FASVideo)を返却します。 |
 |[uploadVideoWithData:title:completion:](#FASVideo.uploadVideoWithDatatitlecompletion)|ビデオとタイトルをアップロードして[FASVideo](#FASVideo)を返却します。 |
-|[fetchAllVideosWithPage:completion:](#FASVideo.fetchAllVideosWithPagecompletion)|全ユーザーがアップロードしたビデオを取得します。 |
+|[fetchVideosWithPage:completion:](#FASVideo.fetchVideosWithPagecompletion)|全ユーザーがアップロードしたビデオを取得します。 |
+|[fetchVideosWithPage:usreId:completion:](#FASVideo.fetchVideosWithPageusreIdcompletion)|指定したユーザーがアップロードしたビデオを取得します。 |
 |[fetchMyVideosWithPage:completion:](#FASVideo.fetchMyVideosWithPagecompletion)|ログインユーザーがアップロードしたビデオを取得します。 |
 |[deleteVideoWithVideoId:completion:](#FASVideo.deleteVideoWithVideoIdcompletion)|ビデオを削除します。 |
 |[likeVideoWithVideoId:completion:](#FASVideo.likeVideoWithVideoIdcompletion)|ビデオをお気に入りします。 |
@@ -337,6 +371,12 @@ typedef void (^FASVideosCompletionHandler)(NSArray/*<FASVideo>*/ *videos, FASPag
 
 \+ (void)uploadoVideWithData:(NSData *)videoData
                   completion:(FASVideoCompletionHandler)completion;
+
+* Parameters
+	* videoData
+		* ビデオデータ
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト
 
 Sample
 
@@ -363,6 +403,14 @@ Sample
                        title:(NSString *)title
                   completion:(FASVideoCompletionHandler)completion;
 
+* Parameters
+	* videoData
+		* ビデオデータ
+	* title
+		* ビデオタイトル
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト
+
 Sample
 
 ```
@@ -381,11 +429,18 @@ Sample
     }];
 }
 ```
-##### <a name="FASVideo.fetchAllVideosWithPagecompletion"> fetchAllVideosWithPage:completion: </a>
+
+##### <a name="FASVideo.fetchVideosWithPagecompletion"> fetchVideosWithPage:completion: </a>
 全ユーザーがアップロードしたビデオを取得します。
 
-\+ (void)fetchAllVideosWithPage:(NSUInteger)page
-                     completion:(FASVideosCompletionHandler)completion;
+\+ (void)fetchVideosWithPage:(NSUInteger)page
+                  completion:(FASVideosCompletionHandler)completion;
+
+* Parameters
+	* page
+		* ページ番号
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト
 
 Sample
 
@@ -397,13 +452,28 @@ Sample
 
 - (IBAction)pushedFetchButton:(id)sender
 {
-    [FASVideo fetchAllVideosWithPage:_page
-                          completion:^(NSArray *videos, FASPagingMeta *meta, NSError *error)
+    [FASVideo fetchVideosWithPage:_page
+                       completion:^(NSArray *videos, FASPagingMeta *meta, NSError *error)
     {
         // 処理が完了したら呼ばれます。
     }];
 }
 ```
+
+##### <a name="FASVideo.fetchVideosWithPageuserIdcompletion"> fetchVideosWithPage:userId:completion: </a>
+全ユーザーがアップロードしたビデオを取得します。
+
+\+ (void)fetchVideosWithPage:(NSUInteger)page
+                      userId:(NSString *)userId
+                  completion:(FASVideosCompletionHandler)completion;
+
+* Parameters
+	* page
+		* ページ番号
+	* userId
+		* ユーザーID
+	* completion
+		* 処理が完了した時に実行されるブロックオブジェクト
 
 ##### <a name="FASVideo.fetchMyVideosWithPagecompletion"> fetchMyVideosWithPage:completion: </a>
 ログインユーザーがアップロードしたビデオを取得します。

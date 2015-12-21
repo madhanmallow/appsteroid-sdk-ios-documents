@@ -11,56 +11,9 @@ last update at 2014/10/7
 ## <a name="SignupAndLogin"> ユーザーの作成とログイン </a>
 
 AppSteroidのほとんどの機能を利用するにはユーザーを作成してログインする必要があります。
-ユーザー作成は以下のサンプルのように実装することが出来ます。
+[AppSteroid#start](../7_Spec.md#AppSteroid.startWithAppIdentifiersecretToken)関数を利用することで自動的にユーザー作成からログインまで行うことができるので、特別に実装が必要なことはありません。
 
-Sample
-
-```
-#import <AppSteroid/FASAccount.h>
-
-	…
-	…
-
-- (IBAction)pushedUserCreateButton:(id)sender
-{
-	[FASAccount signUpUserWithName:@"UserName"
-						 completion:^(FASLoginUser *loginUser, NSError *error)
-    {
-        if (error)
-        {
-            // エラー
-            NSLog(@"%@", error);
-            return;
-        }
-    }];
-}
-```
-
-ユーザーの作成が完了したら以下のサンプルのようにログインします。
-
-Sample
-
-```
-#import <AppSteroid/FASAccount.h>
-
-	…
-	…
-
-- (IBAction)pushedLoginButton:(id)sender
-{
-    [FASAccount loginUserWithCompletion:^(FASLoginUser *loginUser, NSError *error)
-    {
-        if (error)
-        {
-            // エラー
-            NSLog(@"%@", error);
-            return;
-        }
-    }];
-}
-```
-
-また、既にユーザーが作成されているかどうか、ログイン状態が切れていないかどうかは以下の関数で知ることが出来ます。
+既にユーザーが作成されているかどうか、ログイン状態が切れていないかどうかは以下の関数で知ることが出来ます。
 
 ```
 // ユーザーが作成されているかどうか
