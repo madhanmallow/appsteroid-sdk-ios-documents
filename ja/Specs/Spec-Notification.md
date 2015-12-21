@@ -49,7 +49,6 @@ typedef NS_ENUM(NSInteger, FASCertificateType)
 |Method|Description|
 |------|-----|
 |[addDeviceToken:completion:](#FASNotification.addDeviceTokencompletion) |指定したデバイストークンを登録します。 |
-|[addDeviceToken:certificateType:completion:](#FASNotification_addDeviceTokencertificateTypecompletion) |証明書の種類を指定でデバイストークンを登録します。 |
 |[deleteDeviceToken:completion:](#FASNotification.deleteDeviceTokencompletion) |指定したデバイストークンを削除します。 |
 |[fetchNotificationMessageWithId:completion:](#FASNotification.fetchNotificationMessageWithIdcompletion) |PushNotificateionの詳細情報を取得してきます。 |
 |[handleDidReceiveRemoteNotification:](#FASNotification.handleDidReceiveRemoteNotification) |AppSteroidに関するPushNotificateionを取り扱います。|
@@ -65,40 +64,6 @@ typedef NS_ENUM(NSInteger, FASCertificateType)
 * Parameters
 	* deviceToken
 		* PushNotificationを受け取るために必要なデバイストークン。
-	* completion
-		* 処理が完了した時に実行されるブロックオブジェクト。
-
-Sample
-
-```
-#import <AppSteroid/FASNotification.h>
-
-	…
-	…
-
-- (void)application:(UIApplication *)application
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-	[FASNotification addDeviceToken:deviceToken
-	                     completion:^(NSError *error)
-    {
-        // 処理が完了したら呼ばれます。
-    }];
-}
-```
-
-##### <a name="FASNotification_addDeviceTokencertificateTypecompletion"> addDeviceToken:certificateType:completion: </a>
-証明書の種類を指定でデバイストークンを登録します。証明書の種類については [開発モードについて](../6_開発モードについて.md) も合わせてご確認ください。
-
-\+ (void)addDeviceToken:(NSData *)deviceToken
-				certificateType:(FASCertificateType)certificateType
-             completion:(FASCompletionHandler)completion;
-
-* Parameters
-	* deviceToken
-		* PushNotificationを受け取るために必要なデバイストークン。
-	* certificateType
-		* ビルド環境でのAPNs証明書の種類
 	* completion
 		* 処理が完了した時に実行されるブロックオブジェクト。
 

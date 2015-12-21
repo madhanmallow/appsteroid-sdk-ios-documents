@@ -6,9 +6,7 @@ last update at 2015/12/10
 
 - [導入](#Installation)
 - [初期設定](#Initialization)
-- [ユーザー作成からログインまで](#SignUp&Login)
-- [簡単にタブ画面を表示する](#ShowTab)
-- [ログインからAppSteroidGUIの表示まで](#Login&ShowTab)
+- [AppSteroidGUIの表示](#ShowGUI)
 - [SDKのアップデート方法](#HowToUpdate)
 
 ---
@@ -72,47 +70,18 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 }
 ```
 
-## <a name="SignUp&Login"> ユーザー作成からログインまで </a>
+## <a name="ShowGUI"> AppSteroidGUIの表示 </a>
+
+アプリを起動すると自動でユーザーが作成されます。そのためユーザー作成やログインといった実装は不要です。  
+以下の様なコードを記述するだけでAppSteroidが提供するGUIをすぐに表示することができます。
 
 ```obj-c
-#import <AppSteroid/FASAccount.h>
-
-- (IBAction)pushedAppSteroidButton:(id)sender
-{
-	FASLoginUser *loginUser = [FASAccount currentLoggedInUser];	
-	// サインアップ済みのユーザーがいない場合
-    if (!loginUser || !loginUser.isSignedUp)
-    {
-		[FASAccount signUpUserWithCompletion:^(FASLoginUser *loginUser, NSError *error)
-		{
-			if (error)
-			{
-				NSLog(@"%@", error);
-				return;
-			}
-		}];
-	}
-}
-```
-
-## <a name="ShowTab"> 簡単にタブ画面を表示する </a>
-
-`Forum`,`Leaderboard`,`Messages`,`Profile`の順番にタブビューを表示します。
-表示させたいビューを指定したりする場合は、下の`タブに表示するビューを指定する`を参照してください。
-
-```obj-c
-#import <AppSteroid/FASTabBarController.h>
-
 - (IBAction)pushedTabButton:(id)sender
 {
     [FASTabBarController presentTabBarControllerWithTarget:self
                                                   animated:YES];
 }
 ```
-
-## <a name="Login&ShowTab"> ログインからAppSteroidGUIの表示まで </a>
-
-[ログインからAppSteroidGUIの表示まで](./5_ログインからAppSteroidGUIの表示まで.md)を参照してください。
 
 ## <a name="HowToUpdate"> SDKのアップデート方法 </a>
 

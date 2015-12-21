@@ -21,5 +21,7 @@
 ここで表示される、ID及びシークレットキーは、[GetStarted](3_GetStarted.md)にて使用します。
 ![DLL Duplicate](./Images/console_dashboard.png)
 
-4.以上でWeb上での初期設定は完了です。
+4. 以上でWeb上での初期設定は完了です。
 ユーザーの情報はダッシュボード上から随時確認することができます。
+
+5. AppSteroidで最低限必要になる設定については、[こちら](https://github.com/fresvii/appsteroid-documents/blob/master/ja/WebConsole.md)を参照してください。
