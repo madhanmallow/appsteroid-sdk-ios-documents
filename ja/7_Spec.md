@@ -136,6 +136,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[startWithAppIdentifier:secretToken:development:](#AppSteroid.startWithAppIdentifiersecretTokendevelopment)|SDKの利用を開始するために利用します。 モード指定付き。 |
 |[setTimeout:](#AppSteroid.setTimeout)|ネットワーク通信時のタイムアウト時間を設定します。 |
 |[setTabs:](#AppSteroid.setTabs)|表示するタブの構成を設定します。 |
+|[enableVideoRecording:](#AppSteroid.enableVideoRecording)|ビデオ機能を利用するかどうかを決定します。 |
 |[enableCSRChat:](#AppSteroid.enableCSRChat)|CSR機能(カスタマーサポート)を利用するかどうかを決定します。 |
 |[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|AppSteroidSDKが提供するGUI以外でもマッチメイキングのリクエストが来た際にアラートを表示するかどうかを設定します。 |
 |[sdkVersion](#AppSteroid.sdkVersion)|SDKのバージョンを返却します。 |
@@ -217,8 +218,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
   * tabs
     * [FASTab](#AppSteroid.FASTab)で定義されているタブ。
 
+##### <a name="AppSteroid.enableVideoRecording"> enableVideoRecording: </a>
+ビデオ録画機能を利用するかどうかを決定します。  
+`NO`を設定すると、フォーラムやグループチャットでビデオを投稿する選択肢が消えます。また、プロフィールからもユーザーが録画したビデオ一覧へのボタンは消えます。  
+デフォルトでは`YES`になっています。
+
+\+ (void)enableVideoRecording:(BOOL)enabled;
+
+* Parameters
+  * enabled
+    * `NO`に設定するとビデオ機能が利用できなくなります。
+
 ##### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
-SR機能(カスタマーサポート)を利用するかどうかを決定します。  
+CSR機能(カスタマーサポート)を利用するかどうかを決定します。  
 デフォルトは`NO`に設定されています。  
 この機能を`YES`に設定すると、グループメッセージ作成画面の右上に`Live Help`というボタンが表示され、CSRに直接メッセージを送信することができます。
 
