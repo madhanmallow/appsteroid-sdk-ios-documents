@@ -40,7 +40,7 @@ Please define the `-ObjC` under `Other Linker Flags`.
 
 ## <a name="Initialization"> Initialization </a>
 
-In order to start using AppSteroid, you will need to perform a initial setup when starting up the application.
+In order to start using AppSteroid, you will need to perform a initial setup when the app launch.
 Please define [startWithAppIdentifier:secretToken:](7_Spec.md#AppSteroid.startWithAppIdentifiersecretToken) under [AppSteroid](7_Spec.md#AppSteroid) for `application:didFinishLaunchingWithOptions:` under `AppDelegate.m`.
 This API needs to pass the app ID and secret token as an argument. Check [How to register your app](./2_AppRegistration.md) for steps to get your App ID and secret token.
 

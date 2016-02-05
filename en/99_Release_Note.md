@@ -2,6 +2,17 @@
 
 ---
 
+### 1.1.1
+- New Feature
+	- Add choice, whether to use the video recording feature or not. [AppSteroid#enableVideoRecording](7_Spec.md#AppSteroid.enableVideoRecording)
+	
+- Fixed
+	- Minor bug on Skin color modifier.
+
+### 1.1.0
+- New Feature
+	- Ability to customize GUI skin color from the WebConsole. Access settings on the WebConsole for modification.
+
 ### 1.0.10
 - New Feature
 	- The SDK have been allowed to use on the Cocos2d-x. See this for detailed information.
