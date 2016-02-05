@@ -1,6 +1,6 @@
 # Error Code Specifications
 
-Last updated at 2014/10/07
+Last updated at 2015/10/07
 
 ---
 ### Error Domain
@@ -37,8 +37,3 @@ com.fresvii.fresvii-sdk-ios.error
 | Error Code  | Error Details |
 |:-----------:|:---------|
 | 4001        | JSON analysis failed. |
-
-### VoiceChat Errors
-| Error Code  | Error Details |
-|:-----------:|:---------|
-| 5001        | Error occurred on Voice Chat. |
