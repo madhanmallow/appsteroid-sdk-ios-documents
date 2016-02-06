@@ -2,6 +2,21 @@
 
 ---
 
+### 1.1.2
+- New Feature
+	- App name editor. Ability to update app name shown on the AppSteroid GUI anytime from the Web Console.
+  
+### 1.1.1
+- New Feature
+	- Add choice, whether to use the video recording feature or not. [AppSteroid#enableVideoRecording](7_Spec.md#AppSteroid.enableVideoRecording)
+	
+- Fixed
+	- Minor bug on Skin color modifier.
+
+### 1.1.0
+- New Feature
+	- Ability to customize GUI skin color from the WebConsole. Access settings on the WebConsole for modification.
+  
 ### 1.0.10
 - New Feature
 	- The SDK have been allowed to use on the Cocos2d-x. See this for detailed information.
@@ -15,7 +30,7 @@
 	- Sort order bug of a leaderboard ranking.
 
 - Performance Improvements
-	- Pulibc header files have been organized.
+	- Public header files have been organized.
 	
 ### 1.0.8
 - New Feature
