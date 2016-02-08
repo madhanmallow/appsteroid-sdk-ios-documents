@@ -2,6 +2,10 @@
 
 ---
 
+### 1.1.2
+- New Feature
+	- App name editor. Ability to update app name shown on the AppSteroid GUI anytime from the Web Console.
+  
 ### 1.1.1
 - New Feature
 	- Add choice, whether to use the video recording feature or not. [AppSteroid#enableVideoRecording](7_Spec.md#AppSteroid.enableVideoRecording)
@@ -26,7 +30,7 @@
 	- Sort order bug of a leaderboard ranking.
 
 - Performance Improvements
-	- Pulibc header files have been organized.
+	- Public header files have been organized.
 	
 ### 1.0.8
 - New Feature

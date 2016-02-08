@@ -1,9 +1,9 @@
-# Landscapeモードのみのアプリに必要な追加実装
+# Additional Implementation Required for Landscape Mode Games
 
-AppSteroidSDKが提供するGUI内ではテキストの入力などが必要な画面があり、Portraitモードにも対応させる必要があります。  
-以下の手順を実装することにより、ゲーム自体はLandscapeモードになりますが、AppSteroidSDKが提供するGUI内ではLandscapeとPorrait両方をサポートすることが可能になります。
+It is highly recommended to support Portrait mode to get the best result for AppSteroid GUI.
+Please follow the steps described below to support both Landscape and Portrait mode. Your game will remain Landscape.
 
-1. `ios`ディレクトリ以下にある`AppController.mm`に以下を実装します。  
+1. Implement the following code under `AppController.mm` in `ios` directory.  
 
 ```
 #import <AppSteroid/AppSteroid.h>
@@ -37,7 +37,7 @@ supportedInterfaceOrientationsForWindow:(UIWindow *)window
 }
 ```
 
-2. `RootViewController.mm`に以下を実装します。
+2. Implement the following under `RootViewController.mm`.
 
 ```
 -(void)viewWillAppear:(BOOL)animated {

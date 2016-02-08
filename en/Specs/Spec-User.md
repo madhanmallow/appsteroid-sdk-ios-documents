@@ -567,6 +567,11 @@ typedef void (^FASUsersCompletionHandler)(NSArray *users, FASPagingMeta *meta, N
 |[profileImageURL](#FASUser.profileImageURL)|User profile image URL |
 |[profileImage](#FASUser.profileImage)|User profile image |
 |[friendStatus](#FASUser.friendStatus)|User friend status |
+|[launchCount](#FASUserBridge.launchCount)|Launch Count |
+|[launchTime](#FASUserBridge.launchTime)|Total activated time |
+|[friendRequestsCount](#FASUserBridge.friendRequestsCount)|Friend request count |
+|[friendsCount](#FASUserBridge.friendsCount)|Friend count |
+|[videosCount](#FASUserBridge.videosCount)|Video count |
 |[createdAt](#FASUser.createdAt)|Date and time of when a user was created. |
 |[updatedAt](#FASUser.updatedAt)|Date and time of when a user information was update. |
 |[official](#FASUser.official)|Whether it is an official user or not. |
@@ -606,6 +611,31 @@ User friend status
 
 @property (nonatomic, readonly) NSString *friendStatus;
 
+##### <a name="FASUser.launchCount"> launchCount </a>
+Launch Count
+
+@property (nonatomic, readonly) NSUInteger launchCount;
+
+##### <a name="FASUser.launchTime"> launchTime </a>
+Total activated time
+
+@property (nonatomic, readonly) NSUInteger launchTime;
+
+##### <a name="FASUser.friendRequestsCount"> friendRequestsCount </a>
+Friend request count
+
+@property (nonatomic, readonly) NSUInteger friendRequestsCount;
+
+##### <a name="FASUser.friendsCount"> friendsCount </a>
+Friend count
+
+@property (nonatomic, readonly) NSUInteger friendsCount;
+
+##### <a name="FASUser.videosCount"> videosCount </a>
+Video count
+
+@property (nonatomic, readonly) NSUInteger videosCount;
+
 ##### <a name="FASUser.createdAt"> createdAt </a>
 Date and time of when a user was created.
 
@@ -628,6 +658,7 @@ Whether it is an official user or not.
 |[fetchUserWithUserId:completion:](#FASUser.fetchUserWithUserIdcompletion) |Get user that match the user ID. |
 |[fetchUserWithUserCode:completion:](#FASUser.fetchUserWithUserCodecompletion) |Get user that match the user code. |
 |[fetchUsersWithProvider:uid:completion:](#FASUser.fetchUsersWithProvideruidcompletion) |Get list of users that match the provider name and UID name. |
+|[fetchCSRUserWithCompletion:](#FASUser.fetchCSRUserWithCompletion) |Get CSR User. |
 
 ##### <a name="FASUser.fetchUserWithUserIdcompletion"> fetchUserWithUserId:completion: </a>
 Get user that match the user ID.
@@ -727,185 +758,11 @@ Sample
 }
 ```
 
-### <a name="FASProfileNavigationController"> FASProfileNavigationController </a>
-NavigationController for Profile View
+##### <a name="FASUser.fetchCSRUserWithCompletion"> fetchCSRUserWithCompletion: </a>
+Get user list　matching with the provider name and UID
 
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[animated](#FASProfileNavigationController.animated)|With or without the animation when closing the View. |
-|[userId](#FASProfileNavigationController.userId)|User ID to display that user's profile. |
-
-##### <a name="FASProfileNavigationController.animated"> animated </a>
-With or without the animation when closing the View. Default is set to `YES`.
-
-@property (nonatomic, assign) BOOL animated;
-
-##### <a name="FASProfileNavigationController.userId"> userId </a>
-Select a user ID to display that user's profile. It will display the current logged in user's profile when no ID was selected.
-
-@property (nonatomic, copy) NSString *userId;
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[profileNavigationController](#FASProfileNavigationController.profileNavigationController) |Return [FASProfileNavigationController](#FASProfileNavigationController), which is a base of profile view. |
-|[presentProfileWithTarget:animated:](#FASProfileNavigationController.presentProfileWithTargetanimated) |Show Profile View. |
-
-##### <a name="FASProfileNavigationController.profileNavigationController"> profileNavigationController </a>
-Return [FASProfileNavigationController](#FASProfileNavigationController), which is a base of profile view.
-
-\+ (FASProfileNavigationController *)profileNavigationController;
-
-##### <a name="FASProfileNavigationController.presentProfileWithTargetanimated"> presentProfileWithTarget:animated: </a>
-Show profile View.
-
-\+ (void)presentProfileWithTarget:(UIViewController *)target
-                         animated:(BOOL)animated;
+\+ (void)fetchCSRUserWithCompletion:(FASUserCompletionHandler)completion;
 
 * Parameters
-  * target
-    * Select a ViewController, which is a base to display the View.
-  * animated
-    * Yes will transit with animation. No will transit without animation.
-
-Sample
-
-```
-#import <AppSteroid/FASProfileNavigationController.h>
-
-  …
-  …
-
-- (IBAction)pushedProfileButton:(id)sender
-{
-    [FASProfileNavigationController presentProfileWithTarget:self
-                                                    animated:YES];
-}
-```
-
-### <a name="FASProfileLayout"> FASProfileLayout </a>
-You can change layout related to Profile View.
-
-#### Properties
-
-|Properties|Description|
-|------|-----|
-|[profileLayoutBlocks](#FASProfileLayout.profileLayoutBlocks)|Block object used to change layout of profile view |
-|[friendListLayoutBlocks](#FASProfileLayout.friendListLayoutBlocks)|Block object used to change layout of friend list view |
-|[friendRequestLayoutBlocks](#FASProfileLayout.friendRequestLayoutBlocks)|Block object used to change layout of friend request view |
-|[editProfileLayoutBlocks](#FASProfileLayout.editProfileLayoutBlocks)|Block object used to change layout of profile editor view |
-
-##### <a name="FASProfileLayout.profileLayoutBlocks"> profileLayoutBlocks </a>
-Block object used to change layout of profile view
-
-@property (nonatomic, copy) FASProfileViewController *(^profileLayoutBlocks)(FASProfileViewController *profileViewController);
-
-Sample - changing background color and navigation bar
-
-```
-[FASProfileLayout sharedInstance].profileLayoutBlocks = ^FASProfileViewController *(FASProfileViewController *profileViewController)
-    {
-        profileViewController.view.backgroundColor = [UIColor whiteColor];
-        profileViewController.userNameLabel.textColor = [UIColor blackColor];
-        profileViewController.userCodeLabel.textColor = [UIColor blackColor];
-        profileViewController.userDescriptionLabel.textColor = [UIColor blackColor];
-        profileViewController.requestedButton.backgroundColor = [UIColor greenColor];
-        [profileViewController.requestedButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        profileViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        if ([profileViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            profileViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            profileViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        profileViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        profileViewController.profileCellLayoutBlocks = ^UITableViewCell *(UITableViewCell *profileCell)
-        {
-            profileCell.backgroundColor = [UIColor whiteColor];
-            profileCell.textLabel.textColor = [UIColor blackColor];
-            return profileCell;
-        };
-        return profileViewController;
-    };
-```
-
-##### <a name="FASProfileLayout.friendListLayoutBlocks"> friendListLayoutBlocks </a>
-Block object used to change layout of friend list view
-
-@property (nonatomic, copy) FASFriendListViewController *(^friendListLayoutBlocks)(FASFriendListViewController *friendListViewController);
-
-Sample - changing background color and navigation bar
-
-```
-[FASProfileLayout sharedInstance].friendListLayoutBlocks = ^FASFriendListViewController *(FASFriendListViewController *friendListViewController)
-    {
-        friendListViewController.view.backgroundColor = [UIColor whiteColor];
-        friendListViewController.userNameLabel.textColor = [UIColor blackColor];
-        friendListViewController.friendCountLabel.textColor = [UIColor blackColor];
-        friendListViewController.friendLabel.textColor = [UIColor blackColor];
-        friendListViewController.friendListCellLayoutBlocks = ^FASFriendListCell *(FASFriendListCell *friendListCell)
-        {
-            friendListCell.backgroundColor = [UIColor whiteColor];
-            friendListCell.contentView.backgroundColor = [UIColor whiteColor];
-            friendListCell.userNameLabel.textColor = [UIColor blackColor];
-            friendListCell.tagLabel.textColor = [UIColor blackColor];
-            return friendListCell;
-        };
-        return friendListViewController;
-    };
-```
-
-##### <a name="FASProfileLayout.friendRequestLayoutBlocks"> friendRequestLayoutBlocks </a>
-Block object used to change layout of friend request view
-
-@property (nonatomic, copy) FASFriendRequestViewController *(^friendRequestLayoutBlocks)(FASFriendRequestViewController *friendRequestViewController);
-
-Sample - changing background color and navigation bar
-
-```
-[FASProfileLayout sharedInstance].friendRequestLayoutBlocks = ^FASFriendRequestViewController *(FASFriendRequestViewController *friendRequestViewController)
-    {
-        friendRequestViewController.view.backgroundColor = [UIColor whiteColor];
-        friendRequestViewController.requestTableView.friendRequestCellLayoutBlocks = ^FASFriendRequestCell *(FASFriendRequestCell *friendRequestCell)
-        {
-            friendRequestCell.contentView.backgroundColor = [UIColor whiteColor];
-            return friendRequestCell;
-        };
-        return friendRequestViewController;
-    };
-```
-
-##### <a name="FASProfileLayout.editProfileLayoutBlocks"> editProfileLayoutBlocks </a>
-Block object used to change layout of profile editor view
-
-@property (nonatomic, copy) FASEditProfileViewController *(^editProfileLayoutBlocks)(FASEditProfileViewController *editProfileViewController);
-
-Sample - changing background color and navigation bar
-
-```
-[FASProfileLayout sharedInstance].editProfileLayoutBlocks = ^FASEditProfileViewController *(FASEditProfileViewController *editProfileViewController)
-    {
-        editProfileViewController.view.backgroundColor = [UIColor whiteColor];
-        editProfileViewController.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        if ([editProfileViewController.navigationController.navigationBar respondsToSelector:@selector(barTintColor)])
-        {
-            editProfileViewController.navigationController.navigationBar.tintColor = [UIColor greenColor];
-            editProfileViewController.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-        }
-        editProfileViewController.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor blackColor]};
-        return editProfileViewController;
-    };
-```
-
-#### Class Method
-
-|Method|Description|
-|------|-----|
-|[sharedInstance](#FASProfileLayout.sharedInstance) |Return the object |
-
-##### <a name="FASProfileLayout.sharedInstance"> sharedInstance </a>
-Return the object
-
-\+ (instancetype)sharedInstance;
+  * completion
+    * Block object to be executed when the process is completed.
