@@ -45,32 +45,18 @@ APNs Certificate also have two different types, Development and Production. (Ple
 
 You can register either type of certificate, development or production, on the Web Console.  The certificate type registered on the web console and the Provisioning Profile type used on build **Must Match** to make it work.  (e.g. if the APNs on console is development, Provisioning Profile used for build must be development.)
 
-Use the fowling method when registering the device token to check which Provisioning Profile you used on build.
-
-```obj-c
-// FASNotification.h
-+ (void)addDeviceToken:(NSData *)deviceToken
-       certificateType:(FASCertificateType)certificateType
-            completion:(FASCompletionHandler)completion;
-```
-
+AppSteroid SDK can detect the kind of provisioning profiles, Development or Production. So developer can just use the fowling method when registering the device token in the `AppDelegate.m`.
 
 ```obj-c
 // AppDelegate.m
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-  …
     [FASNotification addDeviceToken:deviceToken
-                    certificateType:FASCertificateTypeDevelopment
                          completion:nil];
-  …
 }
 
 ```
-
-If you call the method without the certificate type argument, it will consider "development" on development mode and "production" on production mode.  If the certificate type does not match, an error will be returned.
-
 
 ### Notes on Certificate Registration
 
@@ -81,8 +67,8 @@ You can avoid this error by selecting and calling FASCertificateTypeProduction o
 #### Simplest way for setup
 
 1. Setup APNs Certificate for both Production and Development on the Web Console.
-2. On development, build with Provisioning Profile(Development) and process as [Development Mode](#development_mode).
-3. On production, build with Provisioning Profile(Distribution) and process as [Production Mode](#development_mode).
+2. On development, build with Provisioning Profile(Development) and use `[AppSteroid startWithAppIdentifier:appId secretToken:secretToken development:YES];`.
+3. On production, build with Provisioning Profile(Distribution) and use `[AppSteroid startWithAppIdentifier:appId secretToken:secretToken development:NO];`.
 
 In this case, you can process the method on device token registration without the certificate type argument.
 We highly recommend to use the settings above.
