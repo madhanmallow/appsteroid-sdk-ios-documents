@@ -1,17 +1,11 @@
 
-#　Behavior on User Name Duplication
+# Behavior on User Name Duplication
 
 You can change the behavior of when an user name is duplicated.   
 1. Automatically add a serial number at the end of the duplicated name. 
 2. Return an error when an user enter an existing name.  
 
 ![duplication_settings](./Images/console_name_duplication.png "On Name Duplication")
-
-Following is the API  
-- [FASUser#signUpUserWithCompletion:](./Specs/Spec-User.md#FASAccount.signUpUserWithCompletion)  
-- [FASUser#signUpUserWithName:completion:](./Specs/Spec-User.md#FASAccount.signUpUserWithNamecompletion)  
-- [FASUser#signUpUserWithName:description:profileImage:completion:](./Specs/Spec-User.md#FASAccount.signUpUserWithNamedescriptionprofileImagecompletion)  
-- [FASUser#saveWithCompletion:](./Specs/Spec-User.md#FASLoginUser.saveWithCompletion)
 
 ### Behavior on 1
 API would not return an error, but automatically add a serial number at the end of the name.  

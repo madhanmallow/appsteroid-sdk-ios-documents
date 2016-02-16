@@ -146,10 +146,10 @@ First, register the notification by using `NSNotificationCenter` to setup abilit
 ### <a name="GameContextEvent"> Add and delete Event </a>
  Notification of path:`match_making/context`action:`created` will be sent to the opponent when sending the game context. Please check the following sample code, or refer to the [GetStarted-PushNotification](./GetStarted-PushNotification.md#ObserveEvent) to see steps to register game context.
 
-1. Register the event of receiving context.
+1. Add event to receive context.
 2. Delete the event when leaving the view.
 3. Get game context
-4. Process the receive of game context.
+4. Process receiving the game context.
 
 ```
 #import <AppSteroid/FASGameContext.h>

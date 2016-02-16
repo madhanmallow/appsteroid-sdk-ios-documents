@@ -140,6 +140,7 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|Whether to display match request alert on GUIs not provided by AppSteroidSDK or not |
 |[sdkVersion](#AppSteroid.sdkVersion)|Return SDK Version |
 |[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|Return SDK build version |
+|[isAppSteroidGUI](#AppSteroid.isAppSteroidGUI)|Identify if the current view is the GUI provided by AppSteroid or not |
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretToken"> startWithAppIdentifier:secretToken: </a>
 Initial setup to start using the SDK.
@@ -247,6 +248,10 @@ Return SDK build version with `NSString`.
 
 \+ (NSString *)sdkBuildVersion
 
+##### <a name="AppSteroid.isAppSteroidGUI"> isAppSteroidGUI </a>
+Identify if the current view is the GUI provided by AppSteroid or not
+
+\+ (BOOL)isAppSteroidGUI;
 
 ### <a name="FASTabBarController"> FASTabBarController </a>
 Class to access TabBarController provided by AppSteroid.
@@ -309,7 +314,7 @@ Class storing meta information of array data.
 |[currentPage](#FASPagingMeta.currentPage)|Current page |
 |[nextPage](#FASPagingMeta.nextPage)|Next page |
 |[perPage](#FASPagingMeta.perPage)|Number of contents per page |
-|[totalCount](#FASPagingMeta.totalCount)|Total count of content. |
+|[totalCount](#FASPagingMeta.totalCount)|Total count of content |
 |[totalPages](#FASPagingMeta.totalPages)|Total pages |
 
 ##### <a name="FASPagingMeta.currentPage"> currentPage </a>

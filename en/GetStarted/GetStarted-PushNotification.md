@@ -72,11 +72,11 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 
 ## <a name="EventList"> Push Notification List </a>
 
-Please see the [Push Notification Event List](https://github.com/fresvii/appsteroid-documents/blob/master/ja/EventList.md).
+Please see the [Push Notification Event List](https://github.com/fresvii/appsteroid-documents/blob/master/en/EventList.md).
 
 ## <a name="ObserveEvent"> Observing Push Notification Event </a>
 
-Implementation on `AppDelegate.h`, like shown below, is required to observe push notification event related to AppSteroid.
+To observe push notification event related to AppSteroid, you must implement the following code under `AppDelegate.h`.
 
 
 ```
@@ -111,7 +111,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 }
 ```
 
-If the settings shown above is completed, using [FASEvent](../Specs/Spec-Notification.md#FASEvent) enables to observe the event.
+If the settings shown above is completed, use [FASEvent](../Specs/Spec-Notification.md#FASEvent) to enable observing the event.
 The code listed below is a sample code to observe friend request event.
 
 Sample
@@ -155,11 +155,12 @@ Sample
 ```
 
 ## <a name="CustomMessage"> Sending Custom Message </a>
-[FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage) is used to send custom message to a specific user.  It will sent notification to users relevant to the channel setting.  Channel need to be setup on Fresvii web console.
+[FASCustomMessage](../Specs/Spec-Notification.md#FASCustomMessage) is used to send custom message to a specific user.  It will sent notification to users relevant to the channel setting.  Channel needs to be setup on Fresvii web console.
 
 ### <a name="SettingChannel"> Setting Channel </a>
 
 Channel can be setup on Fresvii web console.
+Please check out [This Document](https://github.com/fresvii/appsteroid-documents/blob/master/ja/ChannelTutorial.md). 
 Please see [Channel Tutorial](https://github.com/fresvii/appsteroid-documents/blob/master/ja/ChannelTutorial.md) for steps to setup.
 
 ### <a name="UseKVS"> Using Storage </a>
