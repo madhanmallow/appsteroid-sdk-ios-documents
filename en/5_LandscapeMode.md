@@ -36,21 +36,3 @@ supportedInterfaceOrientationsForWindow:(UIWindow *)window
     }
 }
 ```
-
-2. Implement the following under `RootViewController.mm`.
-
-```
--(void)viewWillAppear:(BOOL)animated {
-    cocos2d::Director::getInstance()->resume();
-    cocos2d::Director::getInstance()->startAnimation();
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    cocos2d::Director::getInstance()->pause();
-    cocos2d::Director::getInstance()->stopAnimation();
-}
-
-- (NSUInteger) supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
-}
-```
