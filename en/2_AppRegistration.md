@@ -27,3 +27,5 @@ The ID and secret key indicated on this page is used on [GetStarted](3_GetStarte
 
 4. You have completed your initial setup.
 You can check the user information at the top of the dashboard anytime.
+
+5. Please check [this document](https://github.com/fresvii/appsteroid-documents/blob/master/en/WebConsole.md) for settings to maximize the profit from AppSteroid.
