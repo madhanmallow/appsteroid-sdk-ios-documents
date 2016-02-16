@@ -19,7 +19,7 @@
   * [プレイムービー仕様書](Specs/Spec-PlayMovie.md)
   * [ストレージ仕様書](Specs/Spec-Storage.md)
   * [ユーザー仕様書](Specs/Spec-User.md)
-* [開発モード](6_開発モードについて.md)
+* [開発モード](6_DevelopmentMode.md)
 * [名前重複時の挙動](8_ユーザー名重複時の挙動に関して.md)
 * [Landscapeモードのみのアプリに必要な追加実装](5_LandscapeMode.md)
 * [AppSteroidで最低限必要な設定について](https://github.com/fresvii/appsteroid-documents/blob/master/ja/WebConsole.md)

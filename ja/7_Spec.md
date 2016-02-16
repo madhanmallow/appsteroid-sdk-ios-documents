@@ -156,7 +156,7 @@ SDKの利用を開始するための初期設定を行います。開発モー�
 
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretTokendevelopment"> startWithAppIdentifier:secretToken:development: </a>
-SDKの利用を開始するための初期設定を行います。開発モードを指定して起動する事ができます。詳細は [開発モードについて](./6_開発モードについて.md) を確認ください。
+SDKの利用を開始するための初期設定を行います。開発モードを指定して起動する事ができます。詳細は [開発モードについて](./6_DevelopmentMode.md) を確認ください。
 
 \+ (void)startWithAppIdentifier:(NSString *)appIdentifier
                     secretToken:(NSString *)secretToken
