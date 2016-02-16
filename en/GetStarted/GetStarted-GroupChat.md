@@ -175,6 +175,37 @@ Sample
 In-Game Chat is a simple text chat you can use within your app.
 Members who joined half way through the conversation can not see the past message, since the text message logs wont be saved.
 
+### Steps and Sample
+
+#### Preparation
+* To use AppSteroid functions, you first must setup the initial settings. [GetStarted](../3_GetStarted.md).
+* Since group message function through push notification, you also need to setup [Push Notification Settings](./GetStarted-PushNotification.md).
+
+#### Create Group
+1. Create Group
+2. Process the completion of `create group`
+
+```
+#import <AppSteroid/FASGroup.h>
+
+- (IBAction)pushedCreateGroupButton:(id)sender
+{
+	// 1. Create Group
+	[FASGroup createGroupWithOpponentUserIds:userIds
+                                  completion:^(FASGroup *group, NSError *error)
+	{
+		// 2. Process the completion of `create group`
+	}];
+}
+```
+
+#### Receive Group Message
+1. Add an event which is triggered on group message creation.
+2. Process group message creation event
+3. Destroy event when leaving the view
+
+```
+
 ### <a name="ObserveEvent"> Observing Chat Event </a>
 It is required to observe the chat event to receive the notification, and to use this function.
 Please check [Observing Push Notification Event](GetStarted-PushNotification.md#ObserveEvent) for setting up observation.
