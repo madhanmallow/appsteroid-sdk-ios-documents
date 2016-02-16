@@ -1,7 +1,7 @@
 # Fresvii AppSteroid SDK for iOS
 
 * [AppSteroidSDKとは](1_AppSteroidSDKforiOSとは.md)
-* [AppSteroidSDKを利用するための準備](2_Webコンソールでアプリ登録.md)
+* [AppSteroidSDKを利用するための準備](2_AppRegistration.md)
 * [AppSteroidSDKの組み込み方法](3_GetStarted.md)
 * [AppSteroidSDKの機能一覧](4_機能一覧.md)
   * [グループチャット](GetStarted/GetStarted-GroupChat.md)
@@ -20,7 +20,7 @@
   * [ストレージ仕様書](Specs/Spec-Storage.md)
   * [ユーザー仕様書](Specs/Spec-User.md)
 * [開発モード](6_DevelopmentMode.md)
-* [名前重複時の挙動](8_ユーザー名重複時の挙動に関して.md)
+* [名前重複時の挙動](8_DuplicatedUserName.md)
 * [Landscapeモードのみのアプリに必要な追加実装](5_LandscapeMode.md)
 * [AppSteroidで最低限必要な設定について](https://github.com/fresvii/appsteroid-documents/blob/master/ja/WebConsole.md)
 * [WebConsoleの使い方](9_WebConsole.md)

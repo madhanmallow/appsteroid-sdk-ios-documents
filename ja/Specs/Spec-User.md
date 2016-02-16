@@ -43,7 +43,7 @@ last update at 2014/10/8
 
 ##### <a name="FASAccount.signUpUserWithCompletion">　signUpUserWithCompletion: </a>
 何も指定せずにサインアップをします。  
-ユーザー重複時の挙動に関しては[こちら](../8_ユーザー名重複時の挙動に関して.md)を参照してください。
+ユーザー重複時の挙動に関しては[こちら](../8_DuplicatedUserName.md)を参照してください。
 
 \+ (void)signUpUserWithCompletion:(FASLoginUserHandler)completion
 
@@ -71,7 +71,7 @@ Sample
 
 ##### <a name="FASAccount.signUpUserWithNamecompletion"> signUpUserWithName:completion: </a>
 ユーザー名を指定してサインアップをします。  
-ユーザー重複時の挙動に関しては[こちら](../8_ユーザー名重複時の挙動に関して.md)を参照してください。
+ユーザー重複時の挙動に関しては[こちら](../8_DuplicatedUserName.md)を参照してください。
 
 \+ (void)signUpUserWithName:(NSString *)userName
                   completion:(FASLoginUserHandler)completion
@@ -102,7 +102,7 @@ Sample
 
 ##### <a name="FASAccount.signUpUserWithNamedescriptionprofileImagecompletion"> signUpUserWithName:description:profileImage:completion: </a>
 指定したユーザー名、プロフィール文、プロフィール画像でサインアップをします。  
-ユーザー重複時の挙動に関しては[こちら](../8_ユーザー名重複時の挙動に関して.md)を参照してください。
+ユーザー重複時の挙動に関しては[こちら](../8_DuplicatedUserName.md)を参照してください。
 
 \+ (void)signUpUserWithName:(NSString *)userName
                 description:(NSString *)description
@@ -480,7 +480,7 @@ typedef void (^FASLoginUserCompletionHandler)(FASLoginUser *loginUser, NSError *
 
 ##### <a name="FASLoginUser.saveWithCompletion"> saveWithCompletion: </a>
 プロフィールの変更をサーバーに保存します。  
-ユーザー重複時の挙動に関しては[こちら](../8_ユーザー名重複時の挙動に関して.md)を参照してください。
+ユーザー重複時の挙動に関しては[こちら](../8_DuplicatedUserName.md)を参照してください。
 
 \- (void)saveWithCompletion:(FASCompletionHandler)completion
 

@@ -12,7 +12,7 @@ last update at 2015/12/10
 ---
 
 AppSteroid for iOSはiOS7.0以上をサポートしています。  
-導入前にWebコンソールでアプリ登録が終わっていることを確認してください。[アプリ登録方法](./2_Webコンソールでアプリ登録.md)
+導入前にWebコンソールでアプリ登録が終わっていることを確認してください。[アプリ登録方法](./2_AppRegistration.md)
 
 ## <a name="Installation"> 導入 </a>
 
@@ -39,7 +39,7 @@ Fresviiの[ウェブサイト](https://fresvii.com/downloads)からiOS SDK用の
 
 AppSteroidの利用を開始するためには、アプリケーションが起動するタイミングで初期設定をおこなう必要があります。
 `AppDelegate.m`の`application:didFinishLaunchingWithOptions:`に[AppSteroid](7_Spec.md#AppSteroid)の[startWithAppIdentifier:secretToken:development:](7_Spec.md#AppSteroid.startWithAppIdentifiersecretTokendevelopment)を記述してください。
-このAPIはアプリIDとシークレットトークンを引数に渡す必要があります。アプリIDとシークレットトークンの取得方法は[アプリ登録方法](./2_Webコンソールでアプリ登録.md)でご確認ください。
+このAPIはアプリIDとシークレットトークンを引数に渡す必要があります。アプリIDとシークレットトークンの取得方法は[アプリ登録方法](./2_AppRegistration.md)でご確認ください。
 
 ```obj-c
 #import <AppSteroid/AppSteroid.h>
