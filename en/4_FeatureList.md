@@ -14,8 +14,8 @@
 	- [App Promotion Service](#PromotionService)
 		- [App Info](#AppsInfo)
 		- [Forum](#OfficialForum)
-    	- [Social Share](#SocialShare)
-    	- [Event Promotion](#EventManagement)
+    - [Social Share](#SocialShare)
+    - [Event Promotion](#EventManagement)
 		- [Push Notification](#PushNotificationForPromotion)
 		- [App Gallery](#AppGallery)
 	- [Game Management Support Service](#SupportService)
@@ -27,7 +27,7 @@
 	- [Basic Backend as a Service](#BackendService)
 		- [User Authentication](#UserCertification)
 		- [Social Integration](#SocialIntegration)
-		- [Cloud Storage](#CloudStrage)
+		- [Cloud Storage](#CloudStorage)
 		- [Game Data Migration](#DataTransfer)
 	- [WEB Console Service](#WebConsole)
 - [How to Implement AppSteroid SDK](#Install)
@@ -43,13 +43,12 @@ Features to boost user retention and engagement. We have a result of big raise i
 #### <a name="GameForum">- Game Forum</a>
 A space for app user to freely share information with the community. User can post text, images and share their play-videos on the thread.  End-users will always be updated by push notification when there is action made on the thread they are following.
 
-
 - What can be done on the web console
 	- Create, edit and modify the forum as a official user, or modify an inappropriate comment on the forum. These operation can be done on the `forum` tab on the web console.
 
-
 #### <a name="UserProfile">- User Profile</a>
 Manage users profile and game-play records.
+Players can check friends, friend requests, stored video and game stats on their profile page. Players can send out messages and friend requests from other player's profile page.
 
 - [Use profile GUI](./GetStarted/GetStarted-User.md)
 - What can be done on the web console
@@ -105,7 +104,9 @@ Push message will also be distributed at the following conditions.
 * Notify users when there is an update on a subscribed thread.
 * Notify users when there is a new Group Message.
 * Notify users with a new friend request/accept.
+* Notify users when direct messages are distributed from developer.
 * Notify users when their friend is requesting a match.
+* Notify users when a game event is triggered.
 
 Related information: [About Push Event](https://github.com/fresvii/appsteroid-documents/blob/master/en/EventList.md)
 
@@ -116,8 +117,10 @@ To use push notification, you must set it up specifically for iOS and Android.
 	- [Push Notification Implementations](./GetStarted/GetStarted-PushNotification.md)
 - Send out push notification from the web console
 - Send push message to a specific user
+  - [Custom message and Tutorial](https://fresvii.zendesk.com/hc/en-us/articles/203866590-What-is-Channel-and-How-to-Use-It-)
 	- [Use API](./Specs/Spec-Message.md#FASCustomMessage)
-
+- プッシュメッセージ仕様
+	- [About Push Event](https://github.com/fresvii/appsteroid-documents/blob/master/en/EventList.md)
 
 ### <a name="PromotionService">- App Promotion Service</a>
 Features to promote applications. It helps increase user retention and user traffic between multiple apps.
@@ -136,9 +139,13 @@ Open a new thread operated by the developer, and distribute app information to t
 #### <a name="SocialShare">- Social Share</a>
 End-users can share the following contents to major social medias. URL to the store will automatically be attached when an user shares a content. Default sharing message can be modified on the Web Console by the developer.
 
-- Contents that can be shared<br>- App Info<br>- Event<br>- Videos
+- Contents that can be shared
+  - App Info
+  - Event Info
+  - Play Videos
 
-- What can be done on the Web Console<br>- Localization setting can be done in `Localization` tab.
+- What can be done on the Web Console
+  - Localization setting can be done in `Localization` tab.
 
 #### <a name="EventManagement">- Event Promotion</a>
 Developers can promote an ongoing Event or upcoming Events to the community.
@@ -154,7 +161,6 @@ Developers can either target a specific player, segment players or address to th
 
 - What can be done on the web Console
 	- Shoot messages from the `Message` tab.
-
 
 #### <a name="AppGallery">- AppGallery</a>
 App Gallery is a space to either promote your apps in an enclosed (Private) community, or share with others in an open (Public) community to earn advertising revenue. App Gallery is an opportunity for everyone to earn additional revenue and user.
@@ -241,8 +247,6 @@ Check the related API for "how to use".
 Enable data migration between devices with the same OS.
 
 - Enable user data migration by using the same Apple account
-
-
 
 ### <a name="WebConsole">WEB Console Service</a>
 Ability for your entire team to access and manage users, push message, app analytics, leaderboard, forum and many other data.

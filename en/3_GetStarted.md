@@ -6,9 +6,8 @@ last update at 2015/12/10
 
 - [Installation](#Installation)
 - [Initial Settings](#Initialization)
-- [SignUp & Login](#SignUp&Login)
 - [Show AppSteroid Tab](#ShowTab)
-- [Login and Show AppSteroidGUI](#Login&ShowTab)
+- [How to update SDK](#HowToUpdate)
 
 ---
 
@@ -19,9 +18,7 @@ Please make sure you have completed registering your App on the Web Console befo
 
 1. Download Framework
 
-Download one of the Framework from Fresvii Website.
-
-___To use Voice Chat, please also check [GetStarted-VoiceChat.md](GetStarted/GetStarted-VoiceChat.md#HowToUseAPI) for direction for implementation.___
+Download the Framework for iOS SDK from [Fresvii Website](https://fresvii.com/downloads)
 
 2. Move the Framework and Bundle into your project directory.
 ![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")
@@ -73,36 +70,11 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 }
 ```
 
-## <a name="SignUp&Login"> SignUp to Login </a>
+## <a name="ShowGUI"> Show AppSteroidGUI </a>
+
+You don't have to develop any function for user signup or login. AppSteroid will generating/login users automatically when the app is launched. Add the code below to instantly show GUI provided by AppSteroid.
 
 ```obj-c
-#import <AppSteroid/FASAccount.h>
-
-- (IBAction)pushedAppSteroidButton:(id)sender
-{
-	FASLoginUser *loginUser = [FASAccount currentLoggedInUser];	
-	// When no sing upped user
-    if (!loginUser || !loginUser.isSignedUp)
-    {
-		[FASAccount signUpUserWithCompletion:^(FASLoginUser *loginUser, NSError *error)
-		{
-			if (error)
-			{
-				NSLog(@"%@", error);
-				return;
-			}
-		}];
-	}
-}
-```
-
-## <a name="ShowTab"> Easily show the Tab </a>
-
-Show tabs in order of `Forum`,`Leaderboard`,`Messages`,`Profile`.
-
-```obj-c
-#import <AppSteroid/FASTabBarController.h>
-
 - (IBAction)pushedTabButton:(id)sender
 {
     [FASTabBarController presentTabBarControllerWithTarget:self
@@ -110,6 +82,7 @@ Show tabs in order of `Forum`,`Leaderboard`,`Messages`,`Profile`.
 }
 ```
 
-## <a name="Login&ShowTab"> Login and show AppSteroid GUI </a>
+## <a name="HowToUpdate"> How to Update SDK </a>
 
-Please check [Login and show AppSteroid GUI](./5_UseFresviiGUI.md).
+Noting special required. 
+Delete the old SDK and install the latest version.

@@ -5,6 +5,7 @@
 - [What is AppSteroid](#AboutAppSteroid)
 - [How to use AppSteroid SDK for iOS](#HowToUse)
 - [AppSteroid SDK Feature List](#Features)
+- [Highly Recommended Settings for AppSteroid](#Settings)
 
 ---
 
@@ -21,6 +22,7 @@ To use the AppSteroid SDK, you must follow the 2 steps indicated below.
 ## <a name="Features">AppSteroid SDK Feature List</a>
 Check the feature list provide by AppSteroid [here](4_FeatureList.md).
 
-
+## <a name="Settings">Highly Recommended Settings for AppSteroid</a>
+Please check [this document](https://github.com/fresvii/appsteroid-documents/blob/master/en/WebConsole.md) for settings to maximize the profit from AppSteroid.
 
 
