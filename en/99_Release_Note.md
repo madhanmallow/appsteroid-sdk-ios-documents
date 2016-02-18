@@ -2,6 +2,18 @@
 
 ---
 
+### 1.1.3
+- New Feature
+	- URL posted on a thread and group chat turns into link.
+	- Youtube URL and image URL posted on a thread and group chat will now show an thumbnail image. 
+	- Limited Forum can be setup from the Web console. (limit end users to create new threads and/or post comment to a thread created by the CSR.)
+	
+- Fixed
+	- GUI layout fix
+
+- Performance Improvements
+	- Upcoming events is now added to be shown on community tab.
+ 
 ### 1.1.2
 - New Feature
 	- App name editor. Ability to update app name shown on the AppSteroid GUI anytime from the Web Console.
