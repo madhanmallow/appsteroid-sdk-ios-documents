@@ -2,6 +2,10 @@
 
 ---
 
+### 1.1.4
+- Fixed
+	- GUI layout fix
+
 ### 1.1.3
 - New Feature
 	- URL posted on a thread and group chat turns into link.
