@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK仕様書
 
-last update at 2015/12/10
+last update at 2016/2/25
 
 ---
 
@@ -15,6 +15,7 @@ AppSteroid for iOSは、iOS用の統合ゲーム用バックエンドサービ�
 |Common Classes|Description|
 |------|-----|
 |[AppSteroid](#AppSteroid)|AppSteroid初期設定クラス |
+|[FASConstraint](#FASConstraint)|共通の設定がまとまっているクラス |
 |[FASTabBarController](#FASTabBarController)|AppSteroidが提供するTabBarControllerにアクセスするためのクラス |
 |[FASPagingMeta](#FASPagingMeta)|配列データのメタ情報が格納されているクラス |
 
@@ -79,54 +80,8 @@ AppSteroid for iOSは、iOS用の統合ゲーム用バックエンドサービ�
 
 ## APIs
 ### <a name="AppSteroid"> AppSteroid </a>
-SDK利用のための共通の設定をすることが出来ます。
-また、ユーザーデータの取得もこのクラスで可能です。
-
-#### Constants
-
-|Constant|Description|
-|------|-----|
-|[FASTab](#AppSteroid.FASTab)|[FASTabBarController](#FASTabBarController)で表示するタブの構成を選択します。 |
-|[FASResponseCompletionHandler](#AppSteroid.FASResponseCompletionHandler)|ネットワーク通信やデータベースへの書き込み、読み込み処理が完了したときに実行されるブロックオブジェクトです。|
-|[FASCompletionHandler](#AppSteroid.FASCompletionHandler)|処理が完了したかどうかのみを通知するために実行されるブロックオブジェクトです。|
-
-##### <a name="AppSteroid.FASTab"> FASTab </a>
-[FASTabBarController](#FASTabBarController)で表示できるタブが定義されています。
-
-```
-typedef NS_ENUM(NSInteger, FASTab)
-{
-    FASTabAll
-    FASTabWithoutLeaderboard
-};
-```
-
-###### Constants
-###### FASTabAll
-`コミュニティ`,`リーダーボード`,`アプリ`,`メッセージ`,`プロフィール`のタブを表示します。
-
-###### FASTabWithoutLeaderboard
-`リーダーボード`を除いた`コミュニティ`,`アプリ`,`メッセージ`,`プロフィール`のタブを表示します。
-
-##### <a name="AppSteroid.FASResponseCompletionHandler"> (^FASResponseCompletionHandler)(id response, NSError *error) </a>
-ネットワーク通信やデータベースへの書き込み、読み込み処理が完了したときに実行されるブロックオブジェクトです。
-
-typedef void (^FASResponseCompletionHandler)(id response, NSError *error)
-
-* Parameters
-  * response
-    * 実行結果が格納されています。
-  * error
-    * エラーの詳細が格納されています。エラーがない場合はnilになります。
-
-##### <a name="AppSteroid.FASCompletionHandler"> (^FASCompletionHandler)(NSError *error) </a>
-処理が完了したかどうかのみを通知するために実行されるブロックオブジェクトです。
-
-typedef void (^FASCompletionHandler)(NSError *error)
-
-* Parameters
-  * error
-    * エラーの詳細が格納されています。エラーがない場合はnilになります。
+SDK利用のための共通の設定をすることが出来ます。  
+アンブレラヘッダーとしての役割を果たすため、`AppSteroid.h`をインポートすることで全てのヘッダーファイルをインポートすることができます。
 
 #### Class Methods
 
@@ -140,7 +95,6 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[enableCSRChat:](#AppSteroid.enableCSRChat)|CSR機能(カスタマーサポート)を利用するかどうかを決定します。 |
 |[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|AppSteroidSDKが提供するGUI以外でもマッチメイキングのリクエストが来た際にアラートを表示するかどうかを設定します。 |
 |[sdkVersion](#AppSteroid.sdkVersion)|SDKのバージョンを返却します。 |
-|[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|SDKのビルドバージョンを返却します。 |
 |[isAppSteroidGUI](#AppSteroid.isAppSteroidGUI)|現在開いているビューがAppSteroidが提供しているGUIかどうかを判別します。 |
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretToken"> startWithAppIdentifier:secretToken: </a>
@@ -216,7 +170,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 * Parameters
   * tabs
-    * [FASTab](#AppSteroid.FASTab)で定義されているタブ。
+    * [FASTab](#FASConstraint.FASTab)で定義されているタブ。
 
 ##### <a name="AppSteroid.enableVideoRecording"> enableVideoRecording: </a>
 ビデオ録画機能を利用するかどうかを決定します。  
@@ -255,15 +209,61 @@ SDKのバージョンを`NSString`で返却します。
 
 \+ (NSString *)sdkVersion
 
-##### <a name="AppSteroid.sdkBuildVersion"> sdkBuildVersion </a>
-SDKのビルドバージョンを`NSString`で返却します。
-
-\+ (NSString *)sdkBuildVersion
-
 ##### <a name="AppSteroid.isAppSteroidGUI"> isAppSteroidGUI </a>
 現在開いているビューがAppSteroidが提供しているGUIかどうかを判別します。
 
 \+ (BOOL)isAppSteroidGUI;
+
+
+### <a name="FASConstraint"> FASConstraint </a>
+共通の設定がまとまっているクラス
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASTab](#FASConstraint.FASTab)|[FASTabBarController](#FASTabBarController)で表示するタブの構成を選択します。 |
+|[FASResponseCompletionHandler](#FASConstraint.FASResponseCompletionHandler)|ネットワーク通信やデータベースへの書き込み、読み込み処理が完了したときに実行されるブロックオブジェクトです。|
+|[FASCompletionHandler](#FASConstraint.FASCompletionHandler)|処理が完了したかどうかのみを通知するために実行されるブロックオブジェクトです。|
+
+##### <a name="FASConstraint.FASTab"> FASTab </a>
+[FASTabBarController](#FASTabBarController)で表示できるタブが定義されています。
+
+```
+typedef NS_ENUM(NSInteger, FASTab)
+{
+    FASTabAll
+    FASTabWithoutLeaderboard
+};
+```
+
+###### Constants
+###### FASTabAll
+`コミュニティ`,`リーダーボード`,`アプリ`,`メッセージ`,`プロフィール`のタブを表示します。
+
+###### FASTabWithoutLeaderboard
+`リーダーボード`を除いた`コミュニティ`,`アプリ`,`メッセージ`,`プロフィール`のタブを表示します。
+
+##### <a name="FASConstraint.FASResponseCompletionHandler"> (^FASResponseCompletionHandler)(id response, NSError *error) </a>
+ネットワーク通信やデータベースへの書き込み、読み込み処理が完了したときに実行されるブロックオブジェクトです。
+
+typedef void (^FASResponseCompletionHandler)(id response, NSError *error)
+
+* Parameters
+  * response
+    * 実行結果が格納されています。
+  * error
+    * エラーの詳細が格納されています。エラーがない場合はnilになります。
+
+##### <a name="FASConstraint.FASCompletionHandler"> (^FASCompletionHandler)(NSError *error) </a>
+処理が完了したかどうかのみを通知するために実行されるブロックオブジェクトです。
+
+typedef void (^FASCompletionHandler)(NSError *error)
+
+* Parameters
+  * error
+    * エラーの詳細が格納されています。エラーがない場合はnilになります。
+
 
 ### <a name="FASTabBarController"> FASTabBarController </a>
 AppSteroidが提供するTabBarControllerにアクセスするためのクラス

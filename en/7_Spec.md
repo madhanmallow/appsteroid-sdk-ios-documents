@@ -1,6 +1,6 @@
 # AppSteroid for iOS SDK Specification
 
-last update at 2015/12/10
+last update at 2016/2/25
 
 ---
 
@@ -15,6 +15,7 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 |Common Classes|Description|
 |------|-----|
 |[AppSteroid](#AppSteroid)|AppSteroid Initially Set Class |
+|[FASConstraint](#FASConstraint)|Common definition class |
 |[FASTabBarController](#FASTabBarController)|Class to access TabBarController provided by AppSteroid |
 |[FASPagingMeta](#FASPagingMeta)|Class storing meta information of array data. |
 
@@ -79,54 +80,8 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 
 ## APIs
 ### <a name="AppSteroid"> AppSteroid </a>
-A common setup is available to use the SDK.
-You can also get user data using this Class.
-
-#### Constants
-
-|Constant|Description|
-|------|-----|
-|[FASTab](#AppSteroid.FASTab)|Select a tab structure to show with [FASTabBarController](#FASTabBarController)|
-|[FASResponseCompletionHandler](#AppSteroid.FASResponseCompletionHandler)|Block Object to be executed when loading or uploading to the network or to the database is completed. |
-|[FASCompletionHandler](#AppSteroid.FASCompletionHandler)|Block object to be executed only to notify if the process is completed or not.|
-
-##### <a name="AppSteroid.FASTab"> FASTab </a>
-Tabs that can be displayed with [FASTabBarController](#FASTabBarController) are defined
-
-```
-typedef NS_ENUM(NSInteger, FASTab)
-{
-    FASTabAll
-    FASTabWithoutLeaderboard
-};
-```
-
-###### Constants
-###### FASTabAll
-Show `Comunity`,`Leaderboard`,`Apps`,`Message` and `Profile` tab
-
-###### FASTabWithoutLeaderboard
-Show Tabs without `Leaderboard` tab.
-
-##### <a name="AppSteroid.FASResponseCompletionHandler"> (^FASResponseCompletionHandler)(id response, NSError *error) </a>
-Block Object to be executed when loading or uploading to the network or to the database is completed.
-
-typedef void (^FASResponseCompletionHandler)(id response, NSError *error)
-
-* Parameters
-  * response
-    * Process result is stored.
-  * error
-    * Error detail is stored. It will be nil if there is no error.
-
-##### <a name="AppSteroid.FASCompletionHandler"> (^FASCompletionHandler)(NSError *error) </a>
-Block object to be executed only to notify if the process is completed or not.
-
-typedef void (^FASCompletionHandler)(NSError *error)
-
-* Parameters
-  * error
-    * Error detail is stored. It will be nil if there is no error.
+A common setup is available to use the SDK.  
+This class is _Umbrella Header_ for AppSteroid SDK. You can import the all header files from `AppSteroid.h`.
 
 #### Class Methods
 
@@ -139,7 +94,6 @@ typedef void (^FASCompletionHandler)(NSError *error)
 |[enableCSRChat:](#AppSteroid.enableCSRChat)|Decide whether to use CSR (Customer Support) function or not. |
 |[allowsToShowMatchmakingDialog:](#AppSteroid.allowsToShowMatchmakingDialog)|Whether to display match request alert on GUIs not provided by AppSteroidSDK or not |
 |[sdkVersion](#AppSteroid.sdkVersion)|Return SDK Version |
-|[sdkBuildVersion](#AppSteroid.sdkBuildVersion)|Return SDK build version |
 |[isAppSteroidGUI](#AppSteroid.isAppSteroidGUI)|Identify if the current view is the GUI provided by AppSteroid or not |
 
 ##### <a name="AppSteroid.startWithAppIdentifiersecretToken"> startWithAppIdentifier:secretToken: </a>
@@ -215,7 +169,7 @@ Set tab structure to display.
 
 * Parameters
   * tabs
-    * Tabs defined on [FASTab](#AppSteroid.FASTab).
+    * Tabs defined on [FASTab](#AppConstraint.FASTab).
     
 ##### <a name="AppSteroid.enableCSRChat"> enableCSRChat: </a>
 Decide whether to use CSR (Customer Support) function or not. 
@@ -243,15 +197,61 @@ Return SDK version with `NSString`.
 
 \+ (NSString *)sdkVersion
 
-##### <a name="AppSteroid.sdkBuildVersion"> sdkBuildVersion </a>
-Return SDK build version with `NSString`.
-
-\+ (NSString *)sdkBuildVersion
-
 ##### <a name="AppSteroid.isAppSteroidGUI"> isAppSteroidGUI </a>
 Identify if the current view is the GUI provided by AppSteroid or not
 
 \+ (BOOL)isAppSteroidGUI;
+
+
+### <a name="FASConstraint"> FASConstraint </a>
+Common definition class
+
+#### Constants
+
+|Constant|Description|
+|------|-----|
+|[FASTab](#AppConstraint.FASTab)|Select a tab structure to show with [FASTabBarController](#FASTabBarController)|
+|[FASResponseCompletionHandler](#AppConstraint.FASResponseCompletionHandler)|Block Object to be executed when loading or uploading to the network or to the database is completed. |
+|[FASCompletionHandler](#AppConstraint.FASCompletionHandler)|Block object to be executed only to notify if the process is completed or not.|
+
+##### <a name="AppConstraint.FASTab"> FASTab </a>
+Tabs that can be displayed with [FASTabBarController](#FASTabBarController) are defined
+
+```
+typedef NS_ENUM(NSInteger, FASTab)
+{
+    FASTabAll
+    FASTabWithoutLeaderboard
+};
+```
+
+###### Constants
+###### FASTabAll
+Show `Comunity`,`Leaderboard`,`Apps`,`Message` and `Profile` tab
+
+###### FASTabWithoutLeaderboard
+Show Tabs without `Leaderboard` tab.
+
+##### <a name="AppConstraint.FASResponseCompletionHandler"> (^FASResponseCompletionHandler)(id response, NSError *error) </a>
+Block Object to be executed when loading or uploading to the network or to the database is completed.
+
+typedef void (^FASResponseCompletionHandler)(id response, NSError *error)
+
+* Parameters
+  * response
+    * Process result is stored.
+  * error
+    * Error detail is stored. It will be nil if there is no error.
+
+##### <a name="AppConstraint.FASCompletionHandler"> (^FASCompletionHandler)(NSError *error) </a>
+Block object to be executed only to notify if the process is completed or not.
+
+typedef void (^FASCompletionHandler)(NSError *error)
+
+* Parameters
+  * error
+    * Error detail is stored. It will be nil if there is no error.
+
 
 ### <a name="FASTabBarController"> FASTabBarController </a>
 Class to access TabBarController provided by AppSteroid.

@@ -3,6 +3,9 @@
 ---
 
 ### 1.1.4
+- New Feature
+	- The SDK have been allowed to use on the Swift code.
+	 
 - Fixed
 	- GUI layout fix
 
