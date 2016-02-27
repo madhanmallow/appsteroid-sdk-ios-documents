@@ -81,7 +81,7 @@ With AppSteroid, you can easily incorporate various backend services refined to 
 ## APIs
 ### <a name="AppSteroid"> AppSteroid </a>
 A common setup is available to use the SDK.  
-This class is _Umbrella Header_ for AppSteroid SDK. You can import the all header files from `AppSteroid.h`.
+This class is _Umbrella Header_ for AppSteroid SDK. You can import all the header files from `AppSteroid.h`.
 
 #### Class Methods
 
