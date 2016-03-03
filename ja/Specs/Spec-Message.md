@@ -197,14 +197,17 @@ typedef void (^FASCustomMessagesCompletionHandler)(NSArray *messages, FASPagingM
 @property (nonatomic, readonly) NSString *messageId;
 
 ##### <a name="FASCustomMessage.action"> action </a>
+メッセージのアクション名
 
 @property (nonatomic, readonly) NSString *action;
 
 ##### <a name="FASCustomMessage.params"> params </a>
+メッセージのパラメータ
 
 @property (nonatomic, readonly) NSDictionary *params;
 
 ##### <a name="FASCustomMessage.createdAt"> createdAt </a>
+メッセージが作成された時刻
 
 @property (nonatomic, readonly) NSDate *createdAt;
 

@@ -461,7 +461,7 @@ Sample
 ```
 
 ##### <a name="FASVideo.fetchVideosWithPageuserIdcompletion"> fetchVideosWithPage:userId:completion: </a>
-全ユーザーがアップロードしたビデオを取得します。
+指定したユーザーがアップロードしたビデオを取得します。
 
 \+ (void)fetchVideosWithPage:(NSUInteger)page
                       userId:(NSString *)userId
