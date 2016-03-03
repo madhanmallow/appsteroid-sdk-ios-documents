@@ -54,7 +54,6 @@ last update at 2015/4/2
 4. FASMatchStatusDisposed: ゲームが終了し、マッチを破棄した状態
 
 
-
 ## Classes
 
 |Class|Description|
@@ -530,7 +529,6 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 |[maxNumberOfPlayers](#FASMatchRequest.maxNumberOfPlayers)|リクエストした最大プレイヤー数 |
 |[invitations](#FASMatchRequest.invitations)|招待を送ったユーザーの配列 |
 
-
 ##### <a name="FASMatchRequest.segment"> segment </a>
 マッチのセグメント。同じセグメントを持っているユーザーとのみマッチします。
 
@@ -559,7 +557,6 @@ typedef void (^FASMatchRequestCompletionHandler)(FASMatchRequest *matchRequest, 
 |[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:segment:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayerssegmentcompletion) |最小と最大のゲームプレイヤー数とセグメントを指定してマッチリクエストを作成します。 |
 |[createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcompletion) |最小と最大のゲームプレイヤー数とセグメント、招待するユーザーと招待メッセージを指定してマッチリクエストを作成します。 |
 [createMatchRequestWithMinNumberOfPlayers:maxNumberOfPlayers:inviteUsers:inviteMessages:segment:cancelOnDecline:completion:](#FASMatchRequest.createMatchRequestWithMinNumberOfPlayersmaxNumberOfPlayersinviteUsersinviteMessagessegmentcancelOnDeclinecompletion) |最小と最大のゲームプレイヤー数とセグメント、招待するユーザーと招待メッセージ、招待キャンセル時の挙動を指定してマッチリクエストを作成します。 |
-|
 |[cancelMatchRequestWithRequestId:completion:](#FASMatchRequest.cancelMatchRequestWithRequestIdcompletion) |マッチリクエストを破棄します。 |
 |[fetchMatchingRequestWithCompletion:](#FASMatchRequest.fetchMatchingRequestWithCompletion) |自分のマッチリクエストを取得します。 |
 

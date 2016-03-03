@@ -50,9 +50,9 @@ typedef NS_ENUM(NSInteger, FASCertificateType)
 |------|-----|
 |[addDeviceToken:completion:](#FASNotification.addDeviceTokencompletion) |指定したデバイストークンを登録します。 |
 |[deleteDeviceToken:completion:](#FASNotification.deleteDeviceTokencompletion) |指定したデバイストークンを削除します。 |
-|[fetchNotificationMessageWithId:completion:](#FASNotification.fetchNotificationMessageWithIdcompletion) |PushNotificateionの詳細情報を取得してきます。 |
-|[handleDidFinishLaunchingWithOptions:](#FASNotification.handleDidFinishLaunchingWithOptions) |AppSteroidに関するPushNotificateionを取り扱います。|
-|[handleDidReceiveRemoteNotification:](#FASNotification.handleDidReceiveRemoteNotification) |AppSteroidに関するPushNotificateionを取り扱います。|
+|[fetchNotificationMessageWithId:completion:](#FASNotification.fetchNotificationMessageWithIdcompletion) |PushNotificationの詳細情報を取得してきます。 |
+|[handleDidFinishLaunchingWithOptions:](#FASNotification.handleDidFinishLaunchingWithOptions) |AppSteroidに関するPushNotificationを取り扱います。|
+|[handleDidReceiveRemoteNotification:](#FASNotification.handleDidReceiveRemoteNotification) |AppSteroidに関するPushNotificationを取り扱います。|
 |[allowsToHandlePushNotification:](#FASNotification.allowsToHandlePushNotification) |AppSteroidのPushNotificationからアプリを起動した際、自動でその通知に関する機能を取り扱うかどうかを設定します。 |
 |[isAllowedToHandlePushNotification](#FASNotification.isAllowedToHandlePushNotification) |AppSteroidに関するPushNotificationを取り扱うかどうか返却します。 |
 
@@ -118,7 +118,7 @@ Sample
 ```
 
 ##### <a name="FASNotification.fetchNotificationMessageWithIdcompletion"> fetchNotificationMessageWithId:completion: </a>
-Fresviiサーバー経由のPushNotificateionのuserInfoに格納されているidの値から詳細情報を取得してきます。
+Fresviiサーバー経由のPushNotificationのuserInfoに格納されているidの値から詳細情報を取得してきます。
 
 \+ (void)fetchNotificationMessageWithId:(NSString *)messageId
                              completion:(FASResponseCompletionHandler)completion;
