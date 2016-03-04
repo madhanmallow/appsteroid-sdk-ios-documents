@@ -8,7 +8,7 @@
 	- iPad problem fix.
 
 - Performance Improvements
-	- AppSteroid GUI is shown more faster before.
+	- AppSteroid GUI appears faster than before.
 	
 ### 1.1.4
 - New Feature
