@@ -24,8 +24,20 @@ Fresviiの[ウェブサイト](https://fresvii.com/downloads)からiOS SDK用の
 ![directory](GetStarted/Images/ss_fresvii_04.png "Framework and Bundle")
 
 3. Frameworkの追加
-`Build Phases`の`Link Binary With Libraries`に`AppSteroid.framework`以下を追加してください。(既に追加されている場合は無視してください。)
+`Build Phases`の`Link Binary With Libraries`に`AppSteroid.framework`を追加してください。(既に追加されている場合は無視してください。)  
 ![framework](GetStarted/Images/ss_fresvii_01.png "AppSteroid.framework")
+また以下のFrameworksも同様に追加してください。  
+
+```
+Accounts.framework
+AdSupport.framework
+AVFoundation.framework
+CoreData.framework
+CoreMedia.framework
+MessageUI.framework
+Social.framework
+SystemConfiguration.framework
+```
 
 4. Bundleの追加
 `Build Phases`の`Copy Bundle Resourves`に`AppSteroid.bundle`を追加してください。(既に追加されている場合は無視してください。)
