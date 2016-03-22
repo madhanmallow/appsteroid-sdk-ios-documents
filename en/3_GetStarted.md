@@ -26,6 +26,18 @@ Download the Framework for iOS SDK from [Fresvii Website](https://fresvii.com/do
 3. Add Framework
 Add `AppSteroid.framework` to `Link Binary With Libraries` under `Build Phases`.(Please ignore this step if the framework is already added.)
 ![framework](GetStarted/Images/ss_fresvii_01.png "AppSteroid.framework")
+Please add the following framewroks as well.
+
+```
+Accounts.framework
+AdSupport.framework
+AVFoundation.framework
+CoreData.framework
+CoreMedia.framework
+MessageUI.framework
+Social.framework
+SystemConfiguration.framework
+```
 
 4. Bundle Addition
 Add `AppSteroid.bundle` to `Copy Bundle Resources` under `Build Phases`.(Please ignore this step if the bundle is already added.)

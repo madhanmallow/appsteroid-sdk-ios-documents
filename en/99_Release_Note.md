@@ -2,6 +2,14 @@
 
 ---
 
+### 1.1.5
+- Fixed
+	- GUI layout fix.
+	- iPad problem fix.
+
+- Performance Improvements
+	- AppSteroid GUI appears faster than before.
+	
 ### 1.1.4
 - New Feature
 	- The SDK have been allowed to use on the Swift code.
