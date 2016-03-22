@@ -7,7 +7,7 @@ last update at 2014/10/24
 ## Introduction
 
 Specification for functions related to User.
-Functions such as creating user, logging in, editing profile are provided. You can also use a prepared profile GUI provided by AppSteroid. Check [UserGetStarted](../GetStarted/GetStarted-User.md) for detail usage.
+Functions such as creating user, logging in, editing profile are provided. You can also use a profile GUI provided by AppSteroid. Check [UserGetStarted](../GetStarted/GetStarted-User.md) for detail usage.
 
 
 ---
@@ -17,8 +17,8 @@ Functions such as creating user, logging in, editing profile are provided. You c
 
 |Class|Description|
 |------|-----|
-|[FASAccount](#FASAccount)|Class regarding Login User Account Operation |
-|[FASSNSAccount](#FASSNSAccount)|Class regarding SNS Account Operation |
+|[FASAccount](#FASAccount)|Class related to Login User Account Operation |
+|[FASSNSAccount](#FASSNSAccount)|Class related to SNS Account Operation |
 |[FASLoginUser](#FASLoginUser)|Login User Model Class |
 |[FASUser](#FASUser)|User Model Class |
 |[FASProfileNavigationController](#FASProfileNavigationController)|NavigationController for Profile View |
@@ -29,7 +29,7 @@ Functions such as creating user, logging in, editing profile are provided. You c
 ## APIs
 ### <a name="FASAccount"> FASAccount </a>
 This is a class for signing up and logging in.
-A user name, profile text, and a profile image can be edited on signup. Also, `FASLoginUser` will be returned when the process succeeds.
+A user name, profile text, and a profile image can be specified at signup. Also, `FASLoginUser` will be returned when the process succeeds.
 
 
 #### Class Methods
@@ -39,9 +39,9 @@ A user name, profile text, and a profile image can be edited on signup. Also, `F
 |[signUpUserWithCompletion:](#FASAccount.signUpUserWithCompletion)|Signup without any setup. |
 |[signUpUserWithName:completion:](#FASAccount.signUpUserWithNamecompletion)|Signup with user name. |
 |[signUpUserWithName:description:profileImage:completion:](#FASAccount.signUpUserWithNamedescriptionprofileImagecompletion)|Signup with user name, profile text, and profile image. |
-|[loginUserWithCompletion:](#FASAccount.loginUserWithCompletion) |Preform Login |
+|[loginUserWithCompletion:](#FASAccount.loginUserWithCompletion) |Preform Login. |
 |[loginUserWithLifeTime:completion:](#FASAccount.loginUserWithLifeTimecompletion) |Select a login expiration time and preform login. |
-|[currentLoggedInUser](#FASAccount.currentLoggedInUser) |Return currently logged in user. |
+|[currentLoggedInUser](#FASAccount.currentLoggedInUser) |Return users currently logged in. |
 
 ##### <a name="FASAccount.signUpUserWithCompletion">　signUpUserWithCompletion: </a>
 Signup without any setup.
@@ -202,18 +202,19 @@ Sample
 ```
 
 ##### <a name="FASAccount.currentLoggedInUser"> currentLoggedInUser </a>
-Return currently logged in user.
+Return users currently logged in.
+
 
 \+ (FASLoginUser *)currentLoggedInUser;
 
 ### <a name="FASSNSAccount"> FASSNSAccount </a>
-Class for registering, deleting, and referencing login user SNS account.
+Class for registering, deleting, and referencing login user's SNS account.
 
 #### Constants
 
 |Constant|Description|
 |------|-----|
-|[FASSNSAccountCompletionHandler](#FASSNSAccount.FASSNSAccountCompletionHandler)|Block object is used when adding SNS accounts. |
+|[FASSNSAccountCompletionHandler](#FASSNSAccount.FASSNSAccountCompletionHandler)|Block object used when adding SNS accounts. |
 |[FASSNSAccountsCompletionHandler](#FASSNSAccount.FASSNSAccountsCompletionHandler)|Block object is used when getting SNS account information. |
 
 #####　<a name="FASSNSAccount.FASSNSAccountCompletionHandler"> (^FASSNSAccountCompletionHandler)(FASSNSAccount *snsAccount, NSError *error) </a>
@@ -223,7 +224,7 @@ typedef void (^FASSNSAccountCompletionHandler)(FASSNSAccount *snsAccount, NSErro
 
 * Parameters
   * snsAccount
-    * Object of `FASSNSAccount`. You can check the SNS account info by through property.
+    * Object of `FASSNSAccount`. Check the SNS account info through property.
   * error
     * Error detail is stored. It will be nil when there is no error.
 
@@ -234,7 +235,7 @@ typedef void (^FASSNSAccountsCompletionHandler)(NSArray *snsAccounts, NSError *e
 
 * Parameters
   * snsAccounts
-    * NSArray that stores object of `FASSNSAccount`. You can check the SNS account info by through property.
+    * NSArray that stores object of `FASSNSAccount`. You can check the SNS account info through property.
   * meta
     * You can refer meta-information such as total number of list or current page number. Check [FASPagingMeta](../7_Spec.md#FASPagingMeta) for more information.
   * error

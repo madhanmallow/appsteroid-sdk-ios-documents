@@ -81,7 +81,7 @@ Match model class, which will be generated when a matching happens from a reques
 |[FASMatchesCompletionHandler](#FASMatch.FASMatchesCompletionHandler)|Block object used when carrying out the process to get multiple Matches. |
 
 ##### <a name="FASMatch.FASMatchSearchingStatus"> FASMatchSearchingStatus </a>
-Parameter to narrow down search result when getting multiple matches. [fetchMatchesWithPage:status:completion:](#FASMatch.fetchMatchesWithPagestatuscompletion)の`status`の引数で利用します。
+Parameter to narrow down search result when getting multiple matches. Use in the `status` argument under  [fetchMatchesWithPage:status:completion:](#FASMatchBridge.fetchMatchesWithPagestatuscompletion).
 
 ```
 typedef NS_ENUM(NSInteger, FASMatchSearchingStatus)
@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, FASMatchStatus)
 
 ###### Constants
 ###### FASMatchStatusInvalid
-Used when a invalid status was returned.
+Used when an invalid status was returned.
 
 ###### FASMatchStatusWating
 A status waiting for other players to join.
@@ -124,10 +124,10 @@ A status waiting for other players to join.
 A status showing that all players needed for the match are invited.
 
 ###### FASMatchStatusComplete
-A Status showing that the matching is completed with players and ready to start the game.
+A status showing that the matching is completed with players and ready to start the game.
 
 ###### FASMatchStatusDisposed
-A Status showing it is ready to dispose the match, after the game is finish.
+A status showing it is ready to dispose the match, after the game is finish.
 
 ##### <a name="FASMatch.FASMatchCompletionHandler"> FASMatchCompletionHandler </a>
 Block object used when carrying out the process to get a specific Match.
@@ -210,9 +210,9 @@ Group of players who are in the match after matching was completed. [FASGroup](.
 
 |Method|Description|
 |------|-----|
-|[fetchMatchWithMatchId:completion:](#FASMatch.fetchMatchWithMatchIdcompletion) |Get Match with a specified match ID. |
+|[fetchMatchWithMatchId:completion:](#FASMatch.fetchMatchWithMatchIdcompletion) |Get match with a specified match ID. |
 |[fetchMatchesWithPage:completion:](#FASMatch.fetchMatchesWithPagecompletion) |Get all matches. |
-|[fetchMatchesWithPage:status:completion:](#FASMatch.fetchMatchesWithPagestatuscompletion) |Get Match with a specified status. |
+|[fetchMatchesWithPage:status:completion:](#FASMatch.fetchMatchesWithPagestatuscompletion) |Get match with a specified status. |
 |[joinMatchWithMatchId:completion:](#FASMatch.joinMatchWithMatchIdcompletion) |Join Match with a specified match ID. |
 |[desposeMatchWithMatchId:completion:](#FASMatch.desposeMatchWithMatchIdcompletion) |Dispose Match with a specified match ID. |
 |[completeMatchWithMatchId:completion:](#FASMatch.completeMatchWithMatchIdcompletion) |Complete the selected match ID's match. |
